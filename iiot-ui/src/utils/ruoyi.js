@@ -38,11 +38,11 @@ export function parseTime(time, pattern) {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
-    if (result.length > 0 && value < 10) {
-      value = '0' + value
-    }
-    return value || 0
-  })
+  if (result.length > 0 && value < 10) {
+    value = '0' + value
+  }
+  return value || 0
+})
   return time_str
 }
 
@@ -76,10 +76,10 @@ export function selectDictLabel(datas, value) {
   var actions = [];
   Object.keys(datas).some((key) => {
     if (datas[key].value == ('' + value)) {
-      actions.push(datas[key].label);
-      return true;
-    }
-  })
+    actions.push(datas[key].label);
+    return true;
+  }
+})
   if (actions.length === 0) {
     actions.push(value);
   }
@@ -99,16 +99,16 @@ export function selectDictLabels(datas, value, separator) {
   var temp = value.split(currentSeparator);
   Object.keys(value.split(currentSeparator)).some((val) => {
     var match = false;
-    Object.keys(datas).some((key) => {
-      if (datas[key].value == ('' + temp[val])) {
-        actions.push(datas[key].label + currentSeparator);
-        match = true;
-      }
-    })
-    if (!match) {
-      actions.push(temp[val] + currentSeparator);
-    }
-  })
+  Object.keys(datas).some((key) => {
+    if (datas[key].value == ('' + temp[val])) {
+    actions.push(datas[key].label + currentSeparator);
+    match = true;
+  }
+})
+  if (!match) {
+    actions.push(temp[val] + currentSeparator);
+  }
+})
   return actions.join('').substring(0, actions.join('').length - 1);
 }
 
@@ -202,9 +202,9 @@ export function handleTree(data, id, parentId, children) {
 }
 
 /**
-* 参数处理
-* @param {*} params  参数
-*/
+ * 参数处理
+ * @param {*} params  参数
+ */
 export function tansParams(params) {
   let result = ''
   for (const propName of Object.keys(params)) {
@@ -228,12 +228,6 @@ export function tansParams(params) {
 }
 
 // 验证是否为blob格式
-export async function blobValidate(data) {
-  try {
-    const text = await data.text();
-    JSON.parse(text);
-    return false;
-  } catch (error) {
-    return true;
-  }
+export function blobValidate(data) {
+  return data.type !== 'application/json'
 }

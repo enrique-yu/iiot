@@ -15,15 +15,15 @@ export default {
       url: url,
       responseType: 'blob',
       headers: { 'Authorization': 'Bearer ' + getToken() }
-    }).then(async (res) => {
-      const isLogin = await blobValidate(res.data);
-      if (isLogin) {
-        const blob = new Blob([res.data])
-        this.saveAs(blob, decodeURIComponent(res.headers['download-filename']))
-      } else {
-        this.printErrMsg(res.data);
-      }
-    })
+    }).then((res) => {
+      const isBlob = blobValidate(res.data);
+    if (isBlob) {
+      const blob = new Blob([res.data])
+      this.saveAs(blob, decodeURIComponent(res.headers['download-filename']))
+    } else {
+      this.printErrMsg(res.data);
+    }
+  })
   },
   resource(resource) {
     var url = baseURL + "/common/download/resource?resource=" + encodeURIComponent(resource);
@@ -32,15 +32,15 @@ export default {
       url: url,
       responseType: 'blob',
       headers: { 'Authorization': 'Bearer ' + getToken() }
-    }).then(async (res) => {
-      const isLogin = await blobValidate(res.data);
-      if (isLogin) {
-        const blob = new Blob([res.data])
-        this.saveAs(blob, decodeURIComponent(res.headers['download-filename']))
-      } else {
-        this.printErrMsg(res.data);
-      }
-    })
+    }).then((res) => {
+      const isBlob = blobValidate(res.data);
+    if (isBlob) {
+      const blob = new Blob([res.data])
+      this.saveAs(blob, decodeURIComponent(res.headers['download-filename']))
+    } else {
+      this.printErrMsg(res.data);
+    }
+  })
   },
   zip(url, name) {
     var url = baseURL + url
@@ -49,24 +49,24 @@ export default {
       url: url,
       responseType: 'blob',
       headers: { 'Authorization': 'Bearer ' + getToken() }
-    }).then(async (res) => {
-      const isLogin = await blobValidate(res.data);
-      if (isLogin) {
-        const blob = new Blob([res.data], { type: 'application/zip' })
-        this.saveAs(blob, name)
-      } else {
-        this.printErrMsg(res.data);
-      }
-    })
+    }).then((res) => {
+      const isBlob = blobValidate(res.data);
+    if (isBlob) {
+      const blob = new Blob([res.data], { type: 'application/zip' })
+      this.saveAs(blob, name)
+    } else {
+      this.printErrMsg(res.data);
+    }
+  })
   },
   saveAs(text, name, opts) {
     saveAs(text, name, opts);
   },
   async printErrMsg(data) {
-    const resText = await data.text();
-    const rspObj = JSON.parse(resText);
-    const errMsg = errorCode[rspObj.code] || rspObj.msg || errorCode['default']
-    Message.error(errMsg);
-  }
+  const resText = await data.text();
+  const rspObj = JSON.parse(resText);
+  const errMsg = errorCode[rspObj.code] || rspObj.msg || errorCode['default']
+  Message.error(errMsg);
+}
 }
 
