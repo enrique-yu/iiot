@@ -1,6 +1,8 @@
 package com.icoolkj.system.service.impl;
 
 import java.util.List;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.domain.SysOperLog;
@@ -26,6 +28,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService
     @Override
     public void insertOperlog(SysOperLog operLog)
     {
+        operLog.setOperId(IdWorker.nextId().toString());
         operLogMapper.insertOperlog(operLog);
     }
 

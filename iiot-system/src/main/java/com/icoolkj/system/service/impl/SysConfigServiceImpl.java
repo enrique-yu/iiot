@@ -3,6 +3,8 @@ package com.icoolkj.system.service.impl;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.common.annotation.DataSource;
@@ -117,6 +119,7 @@ public class SysConfigServiceImpl implements ISysConfigService
     @Override
     public int insertConfig(SysConfig config)
     {
+        config.setConfigId(IdWorker.nextId().toString());
         int row = configMapper.insertConfig(config);
         if (row > 0)
         {

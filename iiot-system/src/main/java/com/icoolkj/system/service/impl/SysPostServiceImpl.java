@@ -1,6 +1,8 @@
 package com.icoolkj.system.service.impl;
 
 import java.util.List;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.common.constant.UserConstants;
@@ -161,6 +163,7 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public int insertPost(SysPost post)
     {
+        post.setPostId(IdWorker.nextId().toString());
         return postMapper.insertPost(post);
     }
 

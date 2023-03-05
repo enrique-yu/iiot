@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.icoolkj.common.constant.SysConstants;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.common.constant.Constants;
@@ -303,6 +304,7 @@ public class SysMenuServiceImpl implements ISysMenuService
     @Override
     public int insertMenu(SysMenu menu)
     {
+        menu.setMenuId(IdWorker.nextId().toString());
         return menuMapper.insertMenu(menu);
     }
 

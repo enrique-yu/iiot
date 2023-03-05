@@ -1,6 +1,8 @@
 package com.icoolkj.system.service.impl;
 
 import java.util.List;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.domain.SysNotice;
@@ -51,6 +53,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     @Override
     public int insertNotice(SysNotice notice)
     {
+        notice.setNoticeId(IdWorker.nextId().toString());
         return noticeMapper.insertNotice(notice);
     }
 

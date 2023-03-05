@@ -1,6 +1,8 @@
 package com.icoolkj.system.service.impl;
 
 import java.util.List;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.domain.SysLogininfor;
@@ -27,6 +29,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService
     @Override
     public void insertLogininfor(SysLogininfor logininfor)
     {
+        logininfor.setInfoId(IdWorker.nextId().toString());
         logininforMapper.insertLogininfor(logininfor);
     }
 
