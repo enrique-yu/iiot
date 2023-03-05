@@ -9,110 +9,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="企业统一社会信用代码" prop="compCreditCode">
-        <el-input
-          v-model="queryParams.compCreditCode"
-          placeholder="请输入企业统一社会信用代码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="企业法人" prop="compFr">
-        <el-input
-          v-model="queryParams.compFr"
-          placeholder="请输入企业法人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="行政区划" prop="compArea">
-        <el-input
-          v-model="queryParams.compArea"
-          placeholder="请输入行政区划"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="注册地址" prop="compAddr">
-        <el-input
-          v-model="queryParams.compAddr"
-          placeholder="请输入注册地址"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="经度" prop="compLng">
-        <el-input
-          v-model="queryParams.compLng"
-          placeholder="请输入经度"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="维度" prop="compLat">
-        <el-input
-          v-model="queryParams.compLat"
-          placeholder="请输入维度"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="成立日期" prop="compRegDate">
-        <el-date-picker clearable
-          v-model="queryParams.compRegDate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择成立日期">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="营业期限" prop="compBusinessTerm">
-        <el-input
-          v-model="queryParams.compBusinessTerm"
-          placeholder="请输入营业期限"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="核准日期" prop="compApproveDate">
-        <el-date-picker clearable
-          v-model="queryParams.compApproveDate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择核准日期">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="登记机关" prop="compApproveOffice">
-        <el-input
-          v-model="queryParams.compApproveOffice"
-          placeholder="请输入登记机关"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="注册资本" prop="compRegCapital">
-        <el-input
-          v-model="queryParams.compRegCapital"
-          placeholder="请输入注册资本"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="实缴资本" prop="compPaidCapital">
-        <el-input
-          v-model="queryParams.compPaidCapital"
-          placeholder="请输入实缴资本"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="经营范围" prop="compManageScope">
-        <el-input
-          v-model="queryParams.compManageScope"
-          placeholder="请输入经营范围"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -127,7 +24,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:basic:add']"
+          v-hasPermi="['company:basic:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -138,7 +35,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:basic:edit']"
+          v-hasPermi="['company:basic:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -149,7 +46,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:basic:remove']"
+          v-hasPermi="['company:basic:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -159,7 +56,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:basic:export']"
+          v-hasPermi="['company:basic:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -167,31 +64,13 @@
 
     <el-table v-loading="loading" :data="basicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="comp_basic_id" align="center" prop="compBasicId" />
       <el-table-column label="企业名称" align="center" prop="compName" />
-      <el-table-column label="企业统一社会信用代码" align="center" prop="compCreditCode" />
       <el-table-column label="企业类型" align="center" prop="compType" />
       <el-table-column label="企业法人" align="center" prop="compFr" />
       <el-table-column label="行政区划" align="center" prop="compArea" />
       <el-table-column label="注册地址" align="center" prop="compAddr" />
-      <el-table-column label="经度" align="center" prop="compLng" />
-      <el-table-column label="维度" align="center" prop="compLat" />
-      <el-table-column label="成立日期" align="center" prop="compRegDate" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.compRegDate, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="营业期限" align="center" prop="compBusinessTerm" />
       <el-table-column label="经营状态" align="center" prop="compManageStatus" />
-      <el-table-column label="核准日期" align="center" prop="compApproveDate" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.compApproveDate, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="登记机关" align="center" prop="compApproveOffice" />
-      <el-table-column label="注册资本" align="center" prop="compRegCapital" />
-      <el-table-column label="实缴资本" align="center" prop="compPaidCapital" />
-      <el-table-column label="经营范围" align="center" prop="compManageScope" />
       <el-table-column label="状态【0停用，1正常】" align="center" prop="compStatus" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -200,14 +79,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:basic:edit']"
+            v-hasPermi="['company:basic:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:basic:remove']"
+            v-hasPermi="['company:basic:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -222,11 +101,22 @@
     />
 
     <!-- 添加或修改企业基本信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="企业名称" prop="compName">
-          <el-input v-model="form.compName" placeholder="请输入企业名称" />
-        </el-form-item>
+        <el-row>
+          <el-col >
+            <el-form-item label="企业名称" prop="compName">
+              <el-input v-model="form.compName"  placeholder="请输入企业名称" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col >
+            <el-form-item :span="12" label="统一社会信用代码" prop="compCreditCode">
+              <el-input v-model="form.compCreditCode"  placeholder="请输入企业统一社会信用代码" />
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item label="企业统一社会信用代码" prop="compCreditCode">
           <el-input v-model="form.compCreditCode" placeholder="请输入企业统一社会信用代码" />
         </el-form-item>
