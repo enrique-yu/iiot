@@ -60,7 +60,7 @@ public class GenTableServiceImpl implements IGenTableService
      * @return 业务信息
      */
     @Override
-    public GenTable selectGenTableById(Long id)
+    public GenTable selectGenTableById(String id)
     {
         GenTable genTable = genTableMapper.selectGenTableById(id);
         setTableFromOptions(genTable);
@@ -144,7 +144,7 @@ public class GenTableServiceImpl implements IGenTableService
      */
     @Override
     @Transactional
-    public void deleteGenTableByIds(Long[] tableIds)
+    public void deleteGenTableByIds(String[] tableIds)
     {
         genTableMapper.deleteGenTableByIds(tableIds);
         genTableColumnMapper.deleteGenTableColumnByIds(tableIds);
@@ -192,7 +192,7 @@ public class GenTableServiceImpl implements IGenTableService
      * @return 预览数据列表
      */
     @Override
-    public Map<String, String> previewCode(Long tableId)
+    public Map<String, String> previewCode(String tableId)
     {
         Map<String, String> dataMap = new LinkedHashMap<>();
         // 查询表信息

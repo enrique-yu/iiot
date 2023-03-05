@@ -18,7 +18,7 @@ public class GenTable extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
-    private Long tableId;
+    private String tableId;
 
     /** 表名称 */
     @NotBlank(message = "表名称不能为空")
@@ -95,12 +95,12 @@ public class GenTable extends BaseEntity
     /** 上级菜单名称字段 */
     private String parentMenuName;
 
-    public Long getTableId()
+    public String getTableId()
     {
         return tableId;
     }
 
-    public void setTableId(Long tableId)
+    public void setTableId(String tableId)
     {
         this.tableId = tableId;
     }

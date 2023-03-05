@@ -60,7 +60,7 @@ public class GenController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:query')")
     @GetMapping(value = "/{tableId}")
-    public AjaxResult getInfo(@PathVariable Long tableId)
+    public AjaxResult getInfo(@PathVariable String tableId)
     {
         GenTable table = genTableService.selectGenTableById(tableId);
         List<GenTable> tables = genTableService.selectGenTableAll();
@@ -89,7 +89,7 @@ public class GenController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:list')")
     @GetMapping(value = "/column/{tableId}")
-    public TableDataInfo columnList(Long tableId)
+    public TableDataInfo columnList(String tableId)
     {
         TableDataInfo dataInfo = new TableDataInfo();
         List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
@@ -132,7 +132,7 @@ public class GenController extends BaseController
     @PreAuthorize("@ss.hasPermi('tool:gen:remove')")
     @Log(title = "代码生成", businessType = BusinessType.DELETE)
     @DeleteMapping("/{tableIds}")
-    public AjaxResult remove(@PathVariable Long[] tableIds)
+    public AjaxResult remove(@PathVariable String[] tableIds)
     {
         genTableService.deleteGenTableByIds(tableIds);
         return success();
@@ -143,7 +143,7 @@ public class GenController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('tool:gen:preview')")
     @GetMapping("/preview/{tableId}")
-    public AjaxResult preview(@PathVariable("tableId") Long tableId) throws IOException
+    public AjaxResult preview(@PathVariable("tableId") String tableId) throws IOException
     {
         Map<String, String> dataMap = genTableService.previewCode(tableId);
         return success(dataMap);
