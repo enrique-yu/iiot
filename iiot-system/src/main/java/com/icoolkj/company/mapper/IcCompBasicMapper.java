@@ -1,0 +1,62 @@
+package com.icoolkj.company.mapper;
+
+import com.icoolkj.company.domain.IcCompBasic;
+
+import java.util.List;
+
+/**
+ * 企业基本信息Mapper接口
+ * 
+ * @author icoolkj
+ * @date 2023-03-05
+ */
+public interface IcCompBasicMapper 
+{
+    /**
+     * 查询企业基本信息
+     * 
+     * @param compBasicId 企业基本信息主键
+     * @return 企业基本信息
+     */
+    public IcCompBasic selectIcCompBasicByCompBasicId(String compBasicId);
+
+    /**
+     * 查询企业基本信息列表
+     * 
+     * @param icCompBasic 企业基本信息
+     * @return 企业基本信息集合
+     */
+    public List<IcCompBasic> selectIcCompBasicList(IcCompBasic icCompBasic);
+
+    /**
+     * 新增企业基本信息
+     * 
+     * @param icCompBasic 企业基本信息
+     * @return 结果
+     */
+    public int insertIcCompBasic(IcCompBasic icCompBasic);
+
+    /**
+     * 修改企业基本信息
+     * 
+     * @param icCompBasic 企业基本信息
+     * @return 结果
+     */
+    public int updateIcCompBasic(IcCompBasic icCompBasic);
+
+    /**
+     * 删除企业基本信息
+     * 
+     * @param compBasicId 企业基本信息主键
+     * @return 结果
+     */
+    public int deleteIcCompBasicByCompBasicId(String compBasicId);
+
+    /**
+     * 批量删除企业基本信息
+     * 
+     * @param compBasicIds 需要删除的数据主键集合
+     * @return 结果
+     */
+    public int deleteIcCompBasicByCompBasicIds(String[] compBasicIds);
+}
