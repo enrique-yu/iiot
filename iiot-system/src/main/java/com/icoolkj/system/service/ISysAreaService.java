@@ -14,10 +14,10 @@ public interface ISysAreaService
     /**
      * 查询系统区域配置
      * 
-     * @param areaCode 系统区域配置主键
+     * @param areaId 系统区域配置主键
      * @return 系统区域配置
      */
-    public SysArea selectSysAreaByAreaCode(String areaCode);
+    public SysArea selectSysAreaByAreaId(String areaId);
 
     /**
      * 查询系统区域配置列表
@@ -44,18 +44,11 @@ public interface ISysAreaService
     public int updateSysArea(SysArea sysArea);
 
     /**
-     * 批量删除系统区域配置
-     * 
-     * @param areaCodes 需要删除的系统区域配置主键集合
+     * 校验区域编码是否唯一
+     *
+     * @param sysArea
      * @return 结果
      */
-    public int deleteSysAreaByAreaCodes(String[] areaCodes);
+    boolean checkAreaIdUnique(SysArea sysArea);
 
-    /**
-     * 删除系统区域配置信息
-     * 
-     * @param areaCode 系统区域配置主键
-     * @return 结果
-     */
-    public int deleteSysAreaByAreaCode(String areaCode);
 }

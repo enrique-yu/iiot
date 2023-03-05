@@ -16,8 +16,7 @@ public class SysArea extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 区域编码 */
-    @Excel(name = "区域编码")
-    private String areaCode;
+    private String areaId;
 
     /** 区域名称 */
     @Excel(name = "区域名称")
@@ -25,7 +24,7 @@ public class SysArea extends BaseEntity
 
     /** 区域父级编码 */
     @Excel(name = "区域父级编码")
-    private String areaPcode;
+    private String parentId;
 
     /** 区域描述 */
     @Excel(name = "区域描述")
@@ -38,14 +37,14 @@ public class SysArea extends BaseEntity
     /** 删除标志（0删除 1存在） */
     private String delFlag;
 
-    public void setAreaCode(String areaCode) 
+    public void setAreaId(String areaId) 
     {
-        this.areaCode = areaCode;
+        this.areaId = areaId;
     }
 
-    public String getAreaCode() 
+    public String getAreaId() 
     {
-        return areaCode;
+        return areaId;
     }
     public void setAreaName(String areaName) 
     {
@@ -56,14 +55,14 @@ public class SysArea extends BaseEntity
     {
         return areaName;
     }
-    public void setAreaPcode(String areaPcode) 
+    public void setParentId(String parentId) 
     {
-        this.areaPcode = areaPcode;
+        this.parentId = parentId;
     }
 
-    public String getAreaPcode() 
+    public String getParentId() 
     {
-        return areaPcode;
+        return parentId;
     }
     public void setAreaDesc(String areaDesc) 
     {
@@ -96,9 +95,9 @@ public class SysArea extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("areaCode", getAreaCode())
+            .append("areaId", getAreaId())
             .append("areaName", getAreaName())
-            .append("areaPcode", getAreaPcode())
+            .append("parentId", getParentId())
             .append("areaDesc", getAreaDesc())
             .append("areaStatus", getAreaStatus())
             .append("delFlag", getDelFlag())

@@ -5,48 +5,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.icoolkj.system.mapper.SysAreaMapper">
     
     <resultMap type="SysArea" id="SysAreaResult">
-        <result property="areaCode"    column="area_code"    />
+        <result property="areaId"    column="area_id"    />
         <result property="areaName"    column="area_name"    />
-        <result property="areaPcode"    column="area_pcode"    />
+        <result property="parentId"    column="parent_id"    />
         <result property="areaDesc"    column="area_desc"    />
         <result property="areaStatus"    column="area_status"    />
         <result property="delFlag"    column="del_flag"    />
     </resultMap>
 
     <sql id="selectSysAreaVo">
-        select area_code, area_name, area_pcode, area_desc, area_status, del_flag from sys_area
+        select area_id, area_name, parent_id, area_desc, area_status, del_flag from sys_area
     </sql>
 
     <select id="selectSysAreaList" parameterType="SysArea" resultMap="SysAreaResult">
         <include refid="selectSysAreaVo"/>
         <where>  
-            <if test="areaCode != null  and areaCode != ''"> and area_code = #{areaCode}</if>
             <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
-            <if test="areaPcode != null  and areaPcode != ''"> and area_pcode = #{areaPcode}</if>
+            <if test="parentId != null  and parentId != ''"> and parent_id = #{parentId}</if>
             <if test="areaDesc != null  and areaDesc != ''"> and area_desc = #{areaDesc}</if>
             <if test="areaStatus != null  and areaStatus != ''"> and area_status = #{areaStatus}</if>
         </where>
     </select>
     
-    <select id="selectSysAreaByAreaCode" parameterType="String" resultMap="SysAreaResult">
+    <select id="selectSysAreaByAreaId" parameterType="String" resultMap="SysAreaResult">
         <include refid="selectSysAreaVo"/>
-        where area_code = #{areaCode}
+        where area_id = #{areaId}
     </select>
         
     <insert id="insertSysArea" parameterType="SysArea">
         insert into sys_area
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="areaCode != null">area_code,</if>
+            <if test="areaId != null">area_id,</if>
             <if test="areaName != null">area_name,</if>
-            <if test="areaPcode != null">area_pcode,</if>
+            <if test="parentId != null">parent_id,</if>
             <if test="areaDesc != null">area_desc,</if>
             <if test="areaStatus != null">area_status,</if>
             <if test="delFlag != null">del_flag,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="areaCode != null">#{areaCode},</if>
+            <if test="areaId != null">#{areaId},</if>
             <if test="areaName != null">#{areaName},</if>
-            <if test="areaPcode != null">#{areaPcode},</if>
+            <if test="parentId != null">#{parentId},</if>
             <if test="areaDesc != null">#{areaDesc},</if>
             <if test="areaStatus != null">#{areaStatus},</if>
             <if test="delFlag != null">#{delFlag},</if>
@@ -57,22 +56,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update sys_area
         <trim prefix="SET" suffixOverrides=",">
             <if test="areaName != null">area_name = #{areaName},</if>
-            <if test="areaPcode != null">area_pcode = #{areaPcode},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="areaDesc != null">area_desc = #{areaDesc},</if>
             <if test="areaStatus != null">area_status = #{areaStatus},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
         </trim>
-        where area_code = #{areaCode}
+        where area_id = #{areaId}
     </update>
 
-    <delete id="deleteSysAreaByAreaCode" parameterType="String">
-        delete from sys_area where area_code = #{areaCode}
-    </delete>
+    <select id="checkAreaIdUnique" resultMap="SysAreaResult">
+        <include refid="selectSysAreaVo"/>
+        where area_id=#{areaId} limit 1
+    </select>
 
-    <delete id="deleteSysAreaByAreaCodes" parameterType="String">
-        delete from sys_area where area_code in 
-        <foreach item="areaCode" collection="array" open="(" separator="," close=")">
-            #{areaCode}
-        </foreach>
-    </delete>
 </mapper>

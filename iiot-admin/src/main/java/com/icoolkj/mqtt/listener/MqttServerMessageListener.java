@@ -18,7 +18,7 @@ import org.tio.core.ChannelContext;
  *
  * @author icoolkj
  */
-@Service
+//@Service
 public class MqttServerMessageListener implements IMqttMessageListener , SmartInitializingSingleton {
 
     private static final Logger logger = LoggerFactory.getLogger(MqttServerMessageListener.class);

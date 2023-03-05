@@ -1,11 +1,14 @@
 package com.icoolkj.system.service.impl;
 
-import java.util.List;
+import com.icoolkj.common.constant.UserConstants;
+import com.icoolkj.common.utils.StringUtils;
+import com.icoolkj.system.domain.SysArea;
+import com.icoolkj.system.mapper.SysAreaMapper;
+import com.icoolkj.system.service.ISysAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.icoolkj.system.mapper.SysAreaMapper;
-import com.icoolkj.system.domain.SysArea;
-import com.icoolkj.system.service.ISysAreaService;
+
+import java.util.List;
 
 /**
  * 系统区域配置Service业务层处理
@@ -22,13 +25,13 @@ public class SysAreaServiceImpl implements ISysAreaService
     /**
      * 查询系统区域配置
      * 
-     * @param areaCode 系统区域配置主键
+     * @param areaId 系统区域配置主键
      * @return 系统区域配置
      */
     @Override
-    public SysArea selectSysAreaByAreaCode(String areaCode)
+    public SysArea selectSysAreaByAreaId(String areaId)
     {
-        return sysAreaMapper.selectSysAreaByAreaCode(areaCode);
+        return sysAreaMapper.selectSysAreaByAreaId(areaId);
     }
 
     /**
@@ -68,26 +71,21 @@ public class SysAreaServiceImpl implements ISysAreaService
     }
 
     /**
-     * 批量删除系统区域配置
-     * 
-     * @param areaCodes 需要删除的系统区域配置主键
+     * 校验区域编码是否唯一
+     *
+     * @param sysArea 区域信息
      * @return 结果
      */
     @Override
-    public int deleteSysAreaByAreaCodes(String[] areaCodes)
+    public boolean checkAreaIdUnique(SysArea sysArea)
     {
-        return sysAreaMapper.deleteSysAreaByAreaCodes(areaCodes);
+        SysArea info = sysAreaMapper.checkAreaIdUnique(sysArea.getAreaId());
+        if (StringUtils.isNotNull(info))
+        {
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 
-    /**
-     * 删除系统区域配置信息
-     * 
-     * @param areaCode 系统区域配置主键
-     * @return 结果
-     */
-    @Override
-    public int deleteSysAreaByAreaCode(String areaCode)
-    {
-        return sysAreaMapper.deleteSysAreaByAreaCode(areaCode);
-    }
+
 }

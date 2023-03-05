@@ -2,6 +2,10 @@ package com.icoolkj.web.controller.system;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.core.domain.entity.SysDept;
+import com.icoolkj.common.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,34 +43,33 @@ public class SysAreaController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:area:list')")
     @GetMapping("/list")
-    public TableDataInfo list(SysArea sysArea)
+    public AjaxResult list(SysArea sysArea)
     {
         startPage();
-        List<SysArea> list = sysAreaService.selectSysAreaList(sysArea);
-        return getDataTable(list);
+        List<SysArea> areas = sysAreaService.selectSysAreaList(sysArea);
+        return success(areas);
     }
 
     /**
-     * 导出系统区域配置列表
+     * 查询部门列表（排除节点）
      */
-    @PreAuthorize("@ss.hasPermi('system:area:export')")
-    @Log(title = "系统区域配置", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysArea sysArea)
+    @PreAuthorize("@ss.hasPermi('system:area:list')")
+    @GetMapping("/list/exclude/{areaId}")
+    public AjaxResult excludeChild(@PathVariable(value = "areaId", required = false) String areaId)
     {
-        List<SysArea> list = sysAreaService.selectSysAreaList(sysArea);
-        ExcelUtil<SysArea> util = new ExcelUtil<SysArea>(SysArea.class);
-        util.exportExcel(response, list, "系统区域配置数据");
+        List<SysArea> areas = sysAreaService.selectSysAreaList(new SysArea());
+        areas.removeIf(d -> areaId.equals(d.getAreaId()));
+        return success(areas);
     }
 
     /**
      * 获取系统区域配置详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:area:query')")
-    @GetMapping(value = "/{areaCode}")
-    public AjaxResult getInfo(@PathVariable("areaCode") String areaCode)
+    @GetMapping(value = "/{areaId}")
+    public AjaxResult getInfo(@PathVariable("areaId") String areaId)
     {
-        return success(sysAreaService.selectSysAreaByAreaCode(areaCode));
+        return success(sysAreaService.selectSysAreaByAreaId(areaId));
     }
 
     /**
@@ -77,6 +80,10 @@ public class SysAreaController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody SysArea sysArea)
     {
+        if (!sysAreaService.checkAreaIdUnique(sysArea))
+        {
+            return error("新增区域编码【" + sysArea.getAreaId() + "】失败，区域编码已存在");
+        }
         return toAjax(sysAreaService.insertSysArea(sysArea));
     }
 
@@ -91,14 +98,5 @@ public class SysAreaController extends BaseController
         return toAjax(sysAreaService.updateSysArea(sysArea));
     }
 
-    /**
-     * 删除系统区域配置
-     */
-    @PreAuthorize("@ss.hasPermi('system:area:remove')")
-    @Log(title = "系统区域配置", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{areaCodes}")
-    public AjaxResult remove(@PathVariable String[] areaCodes)
-    {
-        return toAjax(sysAreaService.deleteSysAreaByAreaCodes(areaCodes));
-    }
+
 }

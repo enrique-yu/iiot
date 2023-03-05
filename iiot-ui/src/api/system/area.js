@@ -9,10 +9,18 @@ export function listArea(query) {
   })
 }
 
-// 查询系统区域配置详细
-export function getArea(areaCode) {
+// 查询区域列表（排除节点）
+export function listAreaExcludeChild(areaId) {
   return request({
-    url: '/system/area/' + areaCode,
+    url: '/system/area/list/exclude/' + areaId,
+    method: 'get'
+  })
+}
+
+// 查询系统区域配置详细
+export function getArea(areaId) {
+  return request({
+    url: '/system/area/' + areaId,
     method: 'get'
   })
 }
@@ -35,10 +43,3 @@ export function updateArea(data) {
   })
 }
 
-// 删除系统区域配置
-export function delArea(areaCode) {
-  return request({
-    url: '/system/area/' + areaCode,
-    method: 'delete'
-  })
-}

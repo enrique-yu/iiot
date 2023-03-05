@@ -11,7 +11,7 @@ import org.tio.core.ChannelContext;
  *
  * @author icoolkj
  */
-@Service
+//@Service
 public class MqttConnectStatusListener implements IMqttConnectStatusListener {
 
     private static final Logger logger = LoggerFactory.getLogger(MqttConnectStatusListener.class);
