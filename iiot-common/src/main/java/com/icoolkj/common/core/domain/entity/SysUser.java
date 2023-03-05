@@ -3,6 +3,8 @@ package com.icoolkj.common.core.domain.entity;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.icoolkj.common.annotation.Excel;
@@ -23,11 +25,11 @@ public class SysUser extends BaseEntity
 
     /** 用户ID */
     @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
-    private Long userId;
+    private String userId;
 
     /** 部门ID */
     @Excel(name = "部门编号", type = Type.IMPORT)
-    private Long deptId;
+    private String deptId;
 
     /** 用户账号 */
     @Excel(name = "登录名称")
@@ -81,30 +83,30 @@ public class SysUser extends BaseEntity
     private List<SysRole> roles;
 
     /** 角色组 */
-    private Long[] roleIds;
+    private String[] roleIds;
 
     /** 岗位组 */
-    private Long[] postIds;
+    private String[] postIds;
 
     /** 角色ID */
-    private Long roleId;
+    private String roleId;
 
     public SysUser()
     {
 
     }
 
-    public SysUser(Long userId)
+    public SysUser(String userId)
     {
         this.userId = userId;
     }
 
-    public Long getUserId()
+    public String getUserId()
     {
         return userId;
     }
 
-    public void setUserId(Long userId)
+    public void setUserId(String userId)
     {
         this.userId = userId;
     }
@@ -114,17 +116,17 @@ public class SysUser extends BaseEntity
         return isAdmin(this.userId);
     }
 
-    public static boolean isAdmin(Long userId)
+    public static boolean isAdmin(String userId)
     {
-        return userId != null && 1L == userId;
+        return userId != null && SysConstants.SUPER_ADMIN .equals(userId);
     }
 
-    public Long getDeptId()
+    public String getDeptId()
     {
         return deptId;
     }
 
-    public void setDeptId(Long deptId)
+    public void setDeptId(String deptId)
     {
         this.deptId = deptId;
     }
@@ -267,32 +269,32 @@ public class SysUser extends BaseEntity
         this.roles = roles;
     }
 
-    public Long[] getRoleIds()
+    public String[] getRoleIds()
     {
         return roleIds;
     }
 
-    public void setRoleIds(Long[] roleIds)
+    public void setRoleIds(String[] roleIds)
     {
         this.roleIds = roleIds;
     }
 
-    public Long[] getPostIds()
+    public String[] getPostIds()
     {
         return postIds;
     }
 
-    public void setPostIds(Long[] postIds)
+    public void setPostIds(String[] postIds)
     {
         this.postIds = postIds;
     }
 
-    public Long getRoleId()
+    public String getRoleId()
     {
         return roleId;
     }
 
-    public void setRoleId(Long roleId)
+    public void setRoleId(String roleId)
     {
         this.roleId = roleId;
     }

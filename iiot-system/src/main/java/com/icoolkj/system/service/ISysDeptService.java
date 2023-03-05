@@ -49,7 +49,7 @@ public interface ISysDeptService
      * @param roleId 角色ID
      * @return 选中部门列表
      */
-    public List<Long> selectDeptListByRoleId(Long roleId);
+    public List<String> selectDeptListByRoleId(String roleId);
 
     /**
      * 根据部门ID查询信息
@@ -57,7 +57,7 @@ public interface ISysDeptService
      * @param deptId 部门ID
      * @return 部门信息
      */
-    public SysDept selectDeptById(Long deptId);
+    public SysDept selectDeptById(String deptId);
 
     /**
      * 根据ID查询所有子部门（正常状态）
@@ -65,7 +65,7 @@ public interface ISysDeptService
      * @param deptId 部门ID
      * @return 子部门数
      */
-    public int selectNormalChildrenDeptById(Long deptId);
+    public int selectNormalChildrenDeptById(String deptId);
 
     /**
      * 是否存在部门子节点
@@ -73,7 +73,7 @@ public interface ISysDeptService
      * @param deptId 部门ID
      * @return 结果
      */
-    public boolean hasChildByDeptId(Long deptId);
+    public boolean hasChildByDeptId(String deptId);
 
     /**
      * 查询部门是否存在用户
@@ -81,7 +81,7 @@ public interface ISysDeptService
      * @param deptId 部门ID
      * @return 结果 true 存在 false 不存在
      */
-    public boolean checkDeptExistUser(Long deptId);
+    public boolean checkDeptExistUser(String deptId);
 
     /**
      * 校验部门名称是否唯一
@@ -96,7 +96,7 @@ public interface ISysDeptService
      * 
      * @param deptId 部门id
      */
-    public void checkDeptDataScope(Long deptId);
+    public void checkDeptDataScope(String deptId);
 
     /**
      * 新增保存部门信息
@@ -120,5 +120,5 @@ public interface ISysDeptService
      * @param deptId 部门ID
      * @return 结果
      */
-    public int deleteDeptById(Long deptId);
+    public int deleteDeptById(String deptId);
 }

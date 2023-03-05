@@ -20,10 +20,10 @@ public class SysDept extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 部门ID */
-    private Long deptId;
+    private String deptId;
 
     /** 父部门ID */
-    private Long parentId;
+    private String parentId;
 
     /** 祖级列表 */
     private String ancestors;
@@ -55,22 +55,22 @@ public class SysDept extends BaseEntity
     /** 子部门 */
     private List<SysDept> children = new ArrayList<SysDept>();
 
-    public Long getDeptId()
+    public String getDeptId()
     {
         return deptId;
     }
 
-    public void setDeptId(Long deptId)
+    public void setDeptId(String deptId)
     {
         this.deptId = deptId;
     }
 
-    public Long getParentId()
+    public String getParentId()
     {
         return parentId;
     }
 
-    public void setParentId(Long parentId)
+    public void setParentId(String parentId)
     {
         this.parentId = parentId;
     }

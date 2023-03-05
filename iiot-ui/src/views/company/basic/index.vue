@@ -9,6 +9,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="信用代码" prop="compCreditCode">
+        <el-input
+          v-model="queryParams.compCreditCode"
+          placeholder="请输入统一社会信用代码"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="企业状态" prop="compStatus">
         <el-select v-model="queryParams.compStatus" placeholder="企业状态" clearable>
           <el-option

@@ -11,27 +11,27 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class SysRoleMenu
 {
     /** 角色ID */
-    private Long roleId;
+    private String roleId;
     
     /** 菜单ID */
-    private Long menuId;
+    private String menuId;
 
-    public Long getRoleId()
+    public String getRoleId()
     {
         return roleId;
     }
 
-    public void setRoleId(Long roleId)
+    public void setRoleId(String roleId)
     {
         this.roleId = roleId;
     }
 
-    public Long getMenuId()
+    public String getMenuId()
     {
         return menuId;
     }
 
-    public void setMenuId(Long menuId)
+    public void setMenuId(String menuId)
     {
         this.menuId = menuId;
     }

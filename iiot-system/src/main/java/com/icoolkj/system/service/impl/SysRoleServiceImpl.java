@@ -65,7 +65,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 角色列表
      */
     @Override
-    public List<SysRole> selectRolesByUserId(Long userId)
+    public List<SysRole> selectRolesByUserId(String userId)
     {
         List<SysRole> userRoles = roleMapper.selectRolePermissionByUserId(userId);
         List<SysRole> roles = selectRoleAll();
@@ -73,7 +73,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         {
             for (SysRole userRole : userRoles)
             {
-                if (role.getRoleId().longValue() == userRole.getRoleId().longValue())
+                if (role.getRoleId().equals(userRole.getRoleId()))
                 {
                     role.setFlag(true);
                     break;
@@ -90,7 +90,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 权限列表
      */
     @Override
-    public Set<String> selectRolePermissionByUserId(Long userId)
+    public Set<String> selectRolePermissionByUserId(String userId)
     {
         List<SysRole> perms = roleMapper.selectRolePermissionByUserId(userId);
         Set<String> permsSet = new HashSet<>();
@@ -122,7 +122,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 选中角色ID列表
      */
     @Override
-    public List<Long> selectRoleListByUserId(Long userId)
+    public List<String> selectRoleListByUserId(String userId)
     {
         return roleMapper.selectRoleListByUserId(userId);
     }
@@ -134,7 +134,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 角色对象信息
      */
     @Override
-    public SysRole selectRoleById(Long roleId)
+    public SysRole selectRoleById(String roleId)
     {
         return roleMapper.selectRoleById(roleId);
     }
@@ -148,9 +148,9 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public boolean checkRoleNameUnique(SysRole role)
     {
-        Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        String roleId = StringUtils.isNull(role.getRoleId()) ? "-1" : role.getRoleId();
         SysRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        if (StringUtils.isNotNull(info) && !info.getRoleId().equals(roleId))
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -166,9 +166,9 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public boolean checkRoleKeyUnique(SysRole role)
     {
-        Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        String roleId = StringUtils.isNull(role.getRoleId()) ? "-1" : role.getRoleId();
         SysRole info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        if (StringUtils.isNotNull(info) && !info.getRoleId().equals(roleId))
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -195,7 +195,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @param roleId 角色id
      */
     @Override
-    public void checkRoleDataScope(Long roleId)
+    public void checkRoleDataScope(String roleId)
     {
         if (!SysUser.isAdmin(SecurityUtils.getUserId()))
         {
@@ -216,7 +216,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 结果
      */
     @Override
-    public int countUserRoleByRoleId(Long roleId)
+    public int countUserRoleByRoleId(String roleId)
     {
         return userRoleMapper.countUserRoleByRoleId(roleId);
     }
@@ -293,7 +293,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         int rows = 1;
         // 新增用户与角色管理
         List<SysRoleMenu> list = new ArrayList<SysRoleMenu>();
-        for (Long menuId : role.getMenuIds())
+        for (String menuId : role.getMenuIds())
         {
             SysRoleMenu rm = new SysRoleMenu();
             rm.setRoleId(role.getRoleId());
@@ -317,7 +317,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         int rows = 1;
         // 新增角色与部门（数据权限）管理
         List<SysRoleDept> list = new ArrayList<SysRoleDept>();
-        for (Long deptId : role.getDeptIds())
+        for (String deptId : role.getDeptIds())
         {
             SysRoleDept rd = new SysRoleDept();
             rd.setRoleId(role.getRoleId());
@@ -339,7 +339,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      */
     @Override
     @Transactional
-    public int deleteRoleById(Long roleId)
+    public int deleteRoleById(String roleId)
     {
         // 删除角色与菜单关联
         roleMenuMapper.deleteRoleMenuByRoleId(roleId);
@@ -356,9 +356,9 @@ public class SysRoleServiceImpl implements ISysRoleService
      */
     @Override
     @Transactional
-    public int deleteRoleByIds(Long[] roleIds)
+    public int deleteRoleByIds(String[] roleIds)
     {
-        for (Long roleId : roleIds)
+        for (String roleId : roleIds)
         {
             checkRoleAllowed(new SysRole(roleId));
             checkRoleDataScope(roleId);
@@ -395,7 +395,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 结果
      */
     @Override
-    public int deleteAuthUsers(Long roleId, Long[] userIds)
+    public int deleteAuthUsers(String roleId, String[] userIds)
     {
         return userRoleMapper.deleteUserRoleInfos(roleId, userIds);
     }
@@ -408,11 +408,11 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 结果
      */
     @Override
-    public int insertAuthUsers(Long roleId, Long[] userIds)
+    public int insertAuthUsers(String roleId, String[] userIds)
     {
         // 新增用户与角色管理
         List<SysUserRole> list = new ArrayList<SysUserRole>();
-        for (Long userId : userIds)
+        for (String userId : userIds)
         {
             SysUserRole ur = new SysUserRole();
             ur.setUserId(userId);

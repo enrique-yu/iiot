@@ -49,7 +49,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * @return 结果
      */
     @Override
-    public int deleteLogininforByIds(Long[] infoIds)
+    public int deleteLogininforByIds(String[] infoIds)
     {
         return logininforMapper.deleteLogininforByIds(infoIds);
     }

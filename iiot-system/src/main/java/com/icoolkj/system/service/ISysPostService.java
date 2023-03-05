@@ -31,7 +31,7 @@ public interface ISysPostService
      * @param postId 岗位ID
      * @return 角色对象信息
      */
-    public SysPost selectPostById(Long postId);
+    public SysPost selectPostById(String postId);
 
     /**
      * 根据用户ID获取岗位选择框列表
@@ -39,7 +39,7 @@ public interface ISysPostService
      * @param userId 用户ID
      * @return 选中岗位ID列表
      */
-    public List<Long> selectPostListByUserId(Long userId);
+    public List<String> selectPostListByUserId(String userId);
 
     /**
      * 校验岗位名称
@@ -63,7 +63,7 @@ public interface ISysPostService
      * @param postId 岗位ID
      * @return 结果
      */
-    public int countUserPostById(Long postId);
+    public int countUserPostById(String postId);
 
     /**
      * 删除岗位信息
@@ -71,7 +71,7 @@ public interface ISysPostService
      * @param postId 岗位ID
      * @return 结果
      */
-    public int deletePostById(Long postId);
+    public int deletePostById(String postId);
 
     /**
      * 批量删除岗位信息
@@ -79,7 +79,7 @@ public interface ISysPostService
      * @param postIds 需要删除的岗位ID
      * @return 结果
      */
-    public int deletePostByIds(Long[] postIds);
+    public int deletePostByIds(String[] postIds);
 
     /**
      * 新增保存岗位信息

@@ -4,6 +4,8 @@ import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.icoolkj.common.annotation.Excel;
@@ -21,7 +23,7 @@ public class SysRole extends BaseEntity
 
     /** 角色ID */
     @Excel(name = "角色序号", cellType = ColumnType.NUMERIC)
-    private Long roleId;
+    private String roleId;
 
     /** 角色名称 */
     @Excel(name = "角色名称")
@@ -56,10 +58,10 @@ public class SysRole extends BaseEntity
     private boolean flag = false;
 
     /** 菜单组 */
-    private Long[] menuIds;
+    private String[] menuIds;
 
     /** 部门组（数据权限） */
-    private Long[] deptIds;
+    private String[] deptIds;
 
     /** 角色菜单权限 */
     private Set<String> permissions;
@@ -69,17 +71,17 @@ public class SysRole extends BaseEntity
 
     }
 
-    public SysRole(Long roleId)
+    public SysRole(String roleId)
     {
         this.roleId = roleId;
     }
 
-    public Long getRoleId()
+    public String getRoleId()
     {
         return roleId;
     }
 
-    public void setRoleId(Long roleId)
+    public void setRoleId(String roleId)
     {
         this.roleId = roleId;
     }
@@ -89,9 +91,9 @@ public class SysRole extends BaseEntity
         return isAdmin(this.roleId);
     }
 
-    public static boolean isAdmin(Long roleId)
+    public static boolean isAdmin(String roleId)
     {
-        return roleId != null && 1L == roleId;
+        return roleId != null && SysConstants.ROLE_GLY == roleId;
     }
 
     @NotBlank(message = "角色名称不能为空")
@@ -189,22 +191,22 @@ public class SysRole extends BaseEntity
         this.flag = flag;
     }
 
-    public Long[] getMenuIds()
+    public String[] getMenuIds()
     {
         return menuIds;
     }
 
-    public void setMenuIds(Long[] menuIds)
+    public void setMenuIds(String[] menuIds)
     {
         this.menuIds = menuIds;
     }
 
-    public Long[] getDeptIds()
+    public String[] getDeptIds()
     {
         return deptIds;
     }
 
-    public void setDeptIds(Long[] deptIds)
+    public void setDeptIds(String[] deptIds)
     {
         this.deptIds = deptIds;
     }

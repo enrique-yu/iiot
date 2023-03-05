@@ -20,7 +20,7 @@ public class SysDictType extends BaseEntity
 
     /** 字典主键 */
     @Excel(name = "字典主键", cellType = ColumnType.NUMERIC)
-    private Long dictId;
+    private String dictId;
 
     /** 字典名称 */
     @Excel(name = "字典名称")
@@ -34,12 +34,12 @@ public class SysDictType extends BaseEntity
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
-    public Long getDictId()
+    public String getDictId()
     {
         return dictId;
     }
 
-    public void setDictId(Long dictId)
+    public void setDictId(String dictId)
     {
         this.dictId = dictId;
     }

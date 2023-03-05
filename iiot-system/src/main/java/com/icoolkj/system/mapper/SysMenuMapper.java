@@ -40,7 +40,7 @@ public interface SysMenuMapper
      * @param roleId 角色ID
      * @return 权限列表
      */
-    public List<String> selectMenuPermsByRoleId(Long roleId);
+    public List<String> selectMenuPermsByRoleId(String roleId);
 
     /**
      * 根据用户ID查询权限
@@ -48,7 +48,7 @@ public interface SysMenuMapper
      * @param userId 用户ID
      * @return 权限列表
      */
-    public List<String> selectMenuPermsByUserId(Long userId);
+    public List<String> selectMenuPermsByUserId(String userId);
 
     /**
      * 根据用户ID查询菜单
@@ -63,7 +63,7 @@ public interface SysMenuMapper
      * @param userId 用户ID
      * @return 菜单列表
      */
-    public List<SysMenu> selectMenuTreeByUserId(Long userId);
+    public List<SysMenu> selectMenuTreeByUserId(String userId);
 
     /**
      * 根据角色ID查询菜单树信息
@@ -72,7 +72,7 @@ public interface SysMenuMapper
      * @param menuCheckStrictly 菜单树选择项是否关联显示
      * @return 选中菜单列表
      */
-    public List<Long> selectMenuListByRoleId(@Param("roleId") Long roleId, @Param("menuCheckStrictly") boolean menuCheckStrictly);
+    public List<String> selectMenuListByRoleId(@Param("roleId") String roleId, @Param("menuCheckStrictly") boolean menuCheckStrictly);
 
     /**
      * 根据菜单ID查询信息
@@ -80,7 +80,7 @@ public interface SysMenuMapper
      * @param menuId 菜单ID
      * @return 菜单信息
      */
-    public SysMenu selectMenuById(Long menuId);
+    public SysMenu selectMenuById(String menuId);
 
     /**
      * 是否存在菜单子节点
@@ -88,7 +88,7 @@ public interface SysMenuMapper
      * @param menuId 菜单ID
      * @return 结果
      */
-    public int hasChildByMenuId(Long menuId);
+    public int hasChildByMenuId(String menuId);
 
     /**
      * 新增菜单信息
@@ -112,7 +112,7 @@ public interface SysMenuMapper
      * @param menuId 菜单ID
      * @return 结果
      */
-    public int deleteMenuById(Long menuId);
+    public int deleteMenuById(String menuId);
 
     /**
      * 校验菜单名称是否唯一
@@ -121,5 +121,5 @@ public interface SysMenuMapper
      * @param parentId 父菜单ID
      * @return 结果
      */
-    public SysMenu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") Long parentId);
+    public SysMenu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") String parentId);
 }

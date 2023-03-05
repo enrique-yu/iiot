@@ -61,7 +61,7 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:query')")
     @GetMapping(value = "/{postId}")
-    public AjaxResult getInfo(@PathVariable Long postId)
+    public AjaxResult getInfo(@PathVariable String postId)
     {
         return success(postService.selectPostById(postId));
     }
@@ -112,7 +112,7 @@ public class SysPostController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:post:remove')")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{postIds}")
-    public AjaxResult remove(@PathVariable Long[] postIds)
+    public AjaxResult remove(@PathVariable String[] postIds)
     {
         return toAjax(postService.deletePostByIds(postIds));
     }

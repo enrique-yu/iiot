@@ -17,7 +17,7 @@ public class SysOperLog extends BaseEntity
 
     /** 日志主键 */
     @Excel(name = "操作序号", cellType = ColumnType.NUMERIC)
-    private Long operId;
+    private String operId;
 
     /** 操作模块 */
     @Excel(name = "操作模块")
@@ -87,12 +87,12 @@ public class SysOperLog extends BaseEntity
     @Excel(name = "消耗时间", suffix = "毫秒")
     private Long costTime;
 
-    public Long getOperId()
+    public String getOperId()
     {
         return operId;
     }
 
-    public void setOperId(Long operId)
+    public void setOperId(String operId)
     {
         this.operId = operId;
     }

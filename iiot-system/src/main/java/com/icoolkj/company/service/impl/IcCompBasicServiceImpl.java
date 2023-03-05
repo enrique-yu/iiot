@@ -59,7 +59,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     public int insertIcCompBasic(IcCompBasic icCompBasic)
     {
         icCompBasic.setCompBasicId(IdWorker.nextId().toString());
-        icCompBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()+"");
+        icCompBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         icCompBasic.setCreateTime(DateUtils.getNowDate());
         return icCompBasicMapper.insertIcCompBasic(icCompBasic);
     }
@@ -73,7 +73,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     @Override
     public int updateIcCompBasic(IcCompBasic icCompBasic)
     {
-        icCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId()+"");
+        icCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         icCompBasic.setUpdateTime(DateUtils.getNowDate());
         return icCompBasicMapper.updateIcCompBasic(icCompBasic);
     }

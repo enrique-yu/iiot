@@ -53,7 +53,7 @@ public class SysDeptController extends BaseController
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
     {
         List<SysDept> depts = deptService.selectDeptList(new SysDept());
-        depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
+        depts.removeIf(d -> d.getDeptId().equals(deptId) || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
         return success(depts);
     }
 
@@ -62,7 +62,7 @@ public class SysDeptController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:dept:query')")
     @GetMapping(value = "/{deptId}")
-    public AjaxResult getInfo(@PathVariable Long deptId)
+    public AjaxResult getInfo(@PathVariable String deptId)
     {
         deptService.checkDeptDataScope(deptId);
         return success(deptService.selectDeptById(deptId));
@@ -92,7 +92,7 @@ public class SysDeptController extends BaseController
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDept dept)
     {
-        Long deptId = dept.getDeptId();
+        String deptId = dept.getDeptId();
         deptService.checkDeptDataScope(deptId);
         if (!deptService.checkDeptNameUnique(dept))
         {
@@ -116,7 +116,7 @@ public class SysDeptController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:dept:remove')")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deptId}")
-    public AjaxResult remove(@PathVariable Long deptId)
+    public AjaxResult remove(@PathVariable String deptId)
     {
         if (deptService.hasChildByDeptId(deptId))
         {
