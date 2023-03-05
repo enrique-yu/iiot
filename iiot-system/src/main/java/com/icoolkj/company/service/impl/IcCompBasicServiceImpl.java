@@ -2,6 +2,7 @@ package com.icoolkj.company.service.impl;
 
 import com.icoolkj.common.constant.UserConstants;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
@@ -58,6 +59,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     public int insertIcCompBasic(IcCompBasic icCompBasic)
     {
         icCompBasic.setCompBasicId(IdWorker.nextId().toString());
+        icCompBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()+"");
         icCompBasic.setCreateTime(DateUtils.getNowDate());
         return icCompBasicMapper.insertIcCompBasic(icCompBasic);
     }
@@ -71,6 +73,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     @Override
     public int updateIcCompBasic(IcCompBasic icCompBasic)
     {
+        icCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId()+"");
         icCompBasic.setUpdateTime(DateUtils.getNowDate());
         return icCompBasicMapper.updateIcCompBasic(icCompBasic);
     }
@@ -87,6 +90,11 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
         IcCompBasic info = icCompBasicMapper.checkCreditCodeUnique(icCompBasic.getCompCreditCode());
         if (StringUtils.isNotNull(info))
         {
+            //如果是修改判断ID是否存在并且一致
+            String id = icCompBasic.getCompBasicId();
+            if(StringUtils.isNotEmpty(id) && id.equals(info.getCompBasicId())){
+                return UserConstants.UNIQUE;
+            }
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
