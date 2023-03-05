@@ -136,7 +136,15 @@ mybatis:
 pagehelper: 
   helperDialect: mysql
   supportMethodsArguments: true
-  params: count=countSql 
+  params: count=countSql
+
+# 生成主键的规则标识
+# 部署到不同tomcat下的id.worker都不能重复
+sequence:
+  # 机器标识ID【可用0、1、2、3、....31这32个数字】
+  id-worker: 0
+  # 数据中心ID【可用0、1、2、3、....31这32个数字】
+  id-datacenter: 0
 
 # Swagger配置
 swagger:
