@@ -146,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <select id="checkCreditCodeUnique" resultMap="IcCompBasicResult">
-        <include refid="selectSysAreaVo"/>
+        <include refid="selectIcCompBasicVo"/>
         where comp_credit_code=#{compCreditCode} limit 1
     </select>
 
