@@ -136,7 +136,7 @@
 </template>
 
 <script>
-  import { listArea, getArea, delArea, addArea, updateArea, listAreaExcludeChild } from "@/api/system/area";
+  import { listArea, getArea, addArea, updateArea, listAreaExcludeChild } from "@/api/system/area";
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
