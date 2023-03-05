@@ -45,4 +45,11 @@ public interface IcCompBasicMapper
     public int updateIcCompBasic(IcCompBasic icCompBasic);
 
 
+    /**
+     * 校验统一社会信用代码是否唯一
+     *
+     * @param compCreditCode
+     * @return 结果
+     */
+    public IcCompBasic checkCreditCodeUnique(String compCreditCode);
 }

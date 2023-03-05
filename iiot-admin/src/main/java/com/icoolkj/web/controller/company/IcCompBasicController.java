@@ -74,6 +74,10 @@ public class IcCompBasicController extends BaseController
     public AjaxResult add(@RequestBody IcCompBasic icCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(icCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
+        if (!icCompBasicService.checkCreditCodeUnique(icCompBasic))
+        {
+            return error("新增企业统一社会信用代码【" + icCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
+        }
 
         return toAjax(icCompBasicService.insertIcCompBasic(icCompBasic));
     }

@@ -1,6 +1,8 @@
 package com.icoolkj.company.service.impl;
 
+import com.icoolkj.common.constant.UserConstants;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.mapper.IcCompBasicMapper;
@@ -71,6 +73,23 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     {
         icCompBasic.setUpdateTime(DateUtils.getNowDate());
         return icCompBasicMapper.updateIcCompBasic(icCompBasic);
+    }
+
+    /**
+     * 校验统一社会信用代码是否唯一
+     *
+     * @param icCompBasic
+     * @return 结果
+     */
+    @Override
+    public boolean checkCreditCodeUnique(IcCompBasic icCompBasic)
+    {
+        IcCompBasic info = icCompBasicMapper.checkCreditCodeUnique(icCompBasic.getCompCreditCode());
+        if (StringUtils.isNotNull(info))
+        {
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 
 }
