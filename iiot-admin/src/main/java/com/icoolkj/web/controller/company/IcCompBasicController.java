@@ -5,11 +5,13 @@ import com.icoolkj.common.core.controller.BaseController;
 import com.icoolkj.common.core.domain.AjaxResult;
 import com.icoolkj.common.core.page.TableDataInfo;
 import com.icoolkj.common.enums.BusinessType;
+import com.icoolkj.common.utils.CreditCodeValidator;
 import com.icoolkj.common.utils.poi.ExcelUtil;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.service.IIcCompBasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +73,8 @@ public class IcCompBasicController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody IcCompBasic icCompBasic)
     {
+        Assert.isTrue(CreditCodeValidator.CodeValidate(icCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
+
         return toAjax(icCompBasicService.insertIcCompBasic(icCompBasic));
     }
 
@@ -85,14 +89,5 @@ public class IcCompBasicController extends BaseController
         return toAjax(icCompBasicService.updateIcCompBasic(icCompBasic));
     }
 
-    /**
-     * 删除企业基本信息
-     */
-    @PreAuthorize("@ss.hasPermi('company:basic:remove')")
-    @Log(title = "企业基本信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{compBasicIds}")
-    public AjaxResult remove(@PathVariable String[] compBasicIds)
-    {
-        return toAjax(icCompBasicService.deleteIcCompBasicByCompBasicIds(compBasicIds));
-    }
+
 }

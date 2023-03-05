@@ -44,19 +44,5 @@ public interface IcCompBasicMapper
      */
     public int updateIcCompBasic(IcCompBasic icCompBasic);
 
-    /**
-     * 删除企业基本信息
-     * 
-     * @param compBasicId 企业基本信息主键
-     * @return 结果
-     */
-    public int deleteIcCompBasicByCompBasicId(String compBasicId);
 
-    /**
-     * 批量删除企业基本信息
-     * 
-     * @param compBasicIds 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteIcCompBasicByCompBasicIds(String[] compBasicIds);
 }

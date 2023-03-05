@@ -9,6 +9,16 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="企业状态" prop="compStatus">
+        <el-select v-model="queryParams.compStatus" placeholder="企业状态" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_normal_disable"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
 
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -27,51 +37,19 @@
           v-hasPermi="['company:basic:add']"
         >新增</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['company:basic:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['company:basic:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['company:basic:export']"
-        >导出</el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="basicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="企业名称" align="center" prop="compName" />
-      <el-table-column label="企业类型" align="center" prop="compType" />
-      <el-table-column label="企业法人" align="center" prop="compFr" />
-      <el-table-column label="行政区划" align="center" prop="compArea" />
-      <el-table-column label="注册地址" align="center" prop="compAddr" />
-      <el-table-column label="营业期限" align="center" prop="compBusinessTerm" />
-      <el-table-column label="经营状态" align="center" prop="compManageStatus" />
-      <el-table-column label="状态【0停用，1正常】" align="center" prop="compStatus" />
+      <el-table-column label="统一社会信用代码" align="center" prop="compCreditCode" />
+      <el-table-column label="信息是否完善" align="center" prop="constrContactPhone" />
+      <el-table-column prop="compStatus" label="企业状态" width="160">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.compStatus"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -81,13 +59,6 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['company:basic:edit']"
           >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['company:basic:remove']"
-          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -102,7 +73,7 @@
 
     <!-- 添加或修改企业基本信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col >
             <el-form-item label="企业名称" prop="compName">
@@ -112,66 +83,27 @@
         </el-row>
         <el-row>
           <el-col >
-            <el-form-item :span="12" label="统一社会信用代码" prop="compCreditCode">
-              <el-input v-model="form.compCreditCode"  placeholder="请输入企业统一社会信用代码" />
+            <el-form-item label="统一社会信用代码" prop="compCreditCode">
+              <el-input v-model="form.compCreditCode"  placeholder="请输入企业统一社会信用代码"  maxlength="18" />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="企业统一社会信用代码" prop="compCreditCode">
-          <el-input v-model="form.compCreditCode" placeholder="请输入企业统一社会信用代码" />
-        </el-form-item>
-        <el-form-item label="企业法人" prop="compFr">
-          <el-input v-model="form.compFr" placeholder="请输入企业法人" />
-        </el-form-item>
-        <el-form-item label="行政区划" prop="compArea">
-          <el-input v-model="form.compArea" placeholder="请输入行政区划" />
-        </el-form-item>
-        <el-form-item label="注册地址" prop="compAddr">
-          <el-input v-model="form.compAddr" placeholder="请输入注册地址" />
-        </el-form-item>
-        <el-form-item label="经度" prop="compLng">
-          <el-input v-model="form.compLng" placeholder="请输入经度" />
-        </el-form-item>
-        <el-form-item label="维度" prop="compLat">
-          <el-input v-model="form.compLat" placeholder="请输入维度" />
-        </el-form-item>
-        <el-form-item label="成立日期" prop="compRegDate">
-          <el-date-picker clearable
-            v-model="form.compRegDate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择成立日期">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="营业期限" prop="compBusinessTerm">
-          <el-input v-model="form.compBusinessTerm" placeholder="请输入营业期限" />
-        </el-form-item>
-        <el-form-item label="核准日期" prop="compApproveDate">
-          <el-date-picker clearable
-            v-model="form.compApproveDate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择核准日期">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="登记机关" prop="compApproveOffice">
-          <el-input v-model="form.compApproveOffice" placeholder="请输入登记机关" />
-        </el-form-item>
-        <el-form-item label="注册资本" prop="compRegCapital">
-          <el-input v-model="form.compRegCapital" placeholder="请输入注册资本" />
-        </el-form-item>
-        <el-form-item label="实缴资本" prop="compPaidCapital">
-          <el-input v-model="form.compPaidCapital" placeholder="请输入实缴资本" />
-        </el-form-item>
-        <el-form-item label="经营范围" prop="compManageScope">
-          <el-input v-model="form.compManageScope" placeholder="请输入经营范围" />
-        </el-form-item>
-        <el-form-item label="删除标记【0删除，1存在】" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标记【0删除，1存在】" />
-        </el-form-item>
+        <el-row>
+          <el-col >
+            <el-form-item label="区域状态">
+              <el-radio-group v-model="form.compStatus">
+                <el-radio
+                  v-for="dict in dict.type.sys_normal_disable"
+                  :key="dict.value"
+                  :label="dict.value"
+                >{{dict.label}}</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" @click="submitForm">保存信息</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -183,6 +115,7 @@ import { listBasic, getBasic, delBasic, addBasic, updateBasic } from "@/api/comp
 
 export default {
   name: "Basic",
+  dicts: ['sys_normal_disable'],
   data() {
     return {
       // 遮罩层
@@ -209,26 +142,19 @@ export default {
         pageSize: 10,
         compName: null,
         compCreditCode: null,
-        compType: null,
-        compFr: null,
-        compArea: null,
-        compAddr: null,
-        compLng: null,
-        compLat: null,
-        compRegDate: null,
-        compBusinessTerm: null,
-        compManageStatus: null,
-        compApproveDate: null,
-        compApproveOffice: null,
-        compRegCapital: null,
-        compPaidCapital: null,
-        compManageScope: null,
         compStatus: null,
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
+        compName: [
+          { required: true, message: "企业名称不能为空", trigger: "blur" }
+        ],
+        compCreditCode: [
+          { required: true, message: "统一社会信用代码不能为空", trigger: "blur" },
+          { required: true, pattern: /^([0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}|[1-9]\d{14})$/, message: '统一社会信用代码格式不正确', trigger: 'blur' },
+        ],
       }
     };
   },
@@ -256,26 +182,7 @@ export default {
         compBasicId: null,
         compName: null,
         compCreditCode: null,
-        compType: null,
-        compFr: null,
-        compArea: null,
-        compAddr: null,
-        compLng: null,
-        compLat: null,
-        compRegDate: null,
-        compBusinessTerm: null,
-        compManageStatus: null,
-        compApproveDate: null,
-        compApproveOffice: null,
-        compRegCapital: null,
-        compPaidCapital: null,
-        compManageScope: null,
-        compStatus: null,
-        delFlag: null,
-        createBy: null,
-        createTime: null,
-        updateBy: null,
-        updateTime: null
+        compStatus: "0"
       };
       this.resetForm("form");
     },
@@ -299,7 +206,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加企业基本信息";
+      this.title = "新增企业基本信息";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -330,22 +237,6 @@ export default {
           }
         }
       });
-    },
-    /** 删除按钮操作 */
-    handleDelete(row) {
-      const compBasicIds = row.compBasicId || this.ids;
-      this.$modal.confirm('是否确认删除企业基本信息编号为"' + compBasicIds + '"的数据项？').then(function() {
-        return delBasic(compBasicIds);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
-    },
-    /** 导出按钮操作 */
-    handleExport() {
-      this.download('system/basic/export', {
-        ...this.queryParams
-      }, `basic_${new Date().getTime()}.xlsx`)
     }
   }
 };

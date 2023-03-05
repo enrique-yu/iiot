@@ -145,14 +145,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where comp_basic_id = #{compBasicId}
     </update>
 
-    <delete id="deleteIcCompBasicByCompBasicId" parameterType="String">
-        delete from ic_comp_basic where comp_basic_id = #{compBasicId}
-    </delete>
 
-    <delete id="deleteIcCompBasicByCompBasicIds" parameterType="String">
-        delete from ic_comp_basic where comp_basic_id in 
-        <foreach item="compBasicId" collection="array" open="(" separator="," close=")">
-            #{compBasicId}
-        </foreach>
-    </delete>
 </mapper>

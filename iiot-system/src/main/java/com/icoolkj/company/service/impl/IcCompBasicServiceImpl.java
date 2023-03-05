@@ -1,6 +1,7 @@
 package com.icoolkj.company.service.impl;
 
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.mapper.IcCompBasicMapper;
 import com.icoolkj.company.service.IIcCompBasicService;
@@ -54,6 +55,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
     @Override
     public int insertIcCompBasic(IcCompBasic icCompBasic)
     {
+        icCompBasic.setCompBasicId(IdWorker.nextId().toString());
         icCompBasic.setCreateTime(DateUtils.getNowDate());
         return icCompBasicMapper.insertIcCompBasic(icCompBasic);
     }
@@ -71,27 +73,4 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
         return icCompBasicMapper.updateIcCompBasic(icCompBasic);
     }
 
-    /**
-     * 批量删除企业基本信息
-     * 
-     * @param compBasicIds 需要删除的企业基本信息主键
-     * @return 结果
-     */
-    @Override
-    public int deleteIcCompBasicByCompBasicIds(String[] compBasicIds)
-    {
-        return icCompBasicMapper.deleteIcCompBasicByCompBasicIds(compBasicIds);
-    }
-
-    /**
-     * 删除企业基本信息信息
-     * 
-     * @param compBasicId 企业基本信息主键
-     * @return 结果
-     */
-    @Override
-    public int deleteIcCompBasicByCompBasicId(String compBasicId)
-    {
-        return icCompBasicMapper.deleteIcCompBasicByCompBasicId(compBasicId);
-    }
 }
