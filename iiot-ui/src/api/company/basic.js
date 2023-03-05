@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询企业基本信息列表
 export function listBasic(query) {
   return request({
-    url: '/system/basic/list',
+    url: '/company/basic/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listBasic(query) {
 // 查询企业基本信息详细
 export function getBasic(compBasicId) {
   return request({
-    url: '/system/basic/' + compBasicId,
+    url: '/company/basic/' + compBasicId,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getBasic(compBasicId) {
 // 新增企业基本信息
 export function addBasic(data) {
   return request({
-    url: '/system/basic',
+    url: '/company/basic',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addBasic(data) {
 // 修改企业基本信息
 export function updateBasic(data) {
   return request({
-    url: '/system/basic',
+    url: '/company/basic',
     method: 'put',
     data: data
   })
