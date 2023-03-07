@@ -27,6 +27,9 @@ public class SysUser extends BaseEntity
     @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private String userId;
 
+    /** 组织编号 */
+    private String domainId;
+
     /** 部门ID */
     @Excel(name = "部门编号", type = Type.IMPORT)
     private String deptId;
@@ -56,6 +59,12 @@ public class SysUser extends BaseEntity
 
     /** 密码 */
     private String password;
+
+    /** 密码明文 */
+    private String passwordCleartext;
+
+    /** 用户账号与业务关系ID */
+    private String userRelationId;
 
     /** 帐号状态（0正常 1停用） */
     @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
@@ -297,6 +306,30 @@ public class SysUser extends BaseEntity
     public void setRoleId(String roleId)
     {
         this.roleId = roleId;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
+
+    public String getPasswordCleartext() {
+        return passwordCleartext;
+    }
+
+    public void setPasswordCleartext(String passwordCleartext) {
+        this.passwordCleartext = passwordCleartext;
+    }
+
+    public String getUserRelationId() {
+        return userRelationId;
+    }
+
+    public void setUserRelationId(String userRelationId) {
+        this.userRelationId = userRelationId;
     }
 
     @Override
