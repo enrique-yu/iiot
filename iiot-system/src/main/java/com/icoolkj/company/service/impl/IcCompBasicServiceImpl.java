@@ -1,16 +1,27 @@
 package com.icoolkj.company.service.impl;
 
+import com.icoolkj.common.constant.SysConstants;
 import com.icoolkj.common.constant.UserConstants;
+import com.icoolkj.common.core.domain.entity.SysDept;
+import com.icoolkj.common.core.domain.entity.SysUser;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.aes.AESUtils;
+import com.icoolkj.common.utils.aes.PasswordUtils;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.mapper.IcCompBasicMapper;
 import com.icoolkj.company.service.IIcCompBasicService;
+import com.icoolkj.system.domain.SysUserRole;
+import com.icoolkj.system.mapper.SysDeptMapper;
+import com.icoolkj.system.mapper.SysUserMapper;
+import com.icoolkj.system.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +35,15 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
 {
     @Autowired
     private IcCompBasicMapper icCompBasicMapper;
+
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
     /**
      * 查询企业基本信息
@@ -99,5 +119,49 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
         }
         return UserConstants.UNIQUE;
     }
+
+
+    //企业账号管理
+    private void createCompAccount(IcCompBasic icCompBasic) {
+        //添加部门
+        SysDept dept = new SysDept();
+        String deptId = IdWorker.nextId().toString();
+        dept.setDeptId(deptId);
+        dept.setParentId(SysConstants.DEPT_133702242296393723);
+        dept.setAncestors(SysConstants.DEPT_HOME+","+SysConstants.DEPT_133702242296393723);
+        //dept.setDeptType(SysConstants.deptType.COMP);
+        dept.setDeptName(icCompBasic.getCompName()); //部门名称
+        dept.setOrderNum(1); //显示顺序
+        dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
+        dept.setCreateTime(DateUtils.getNowDate());//创建时间
+        sysDeptMapper.insertDept(dept);
+
+        //添加用户
+        SysUser sysUser = new SysUser();
+        String userId = IdWorker.nextId().toString();
+        sysUser.setUserId(userId);
+        sysUser.setDeptId(deptId); //所属部门ID
+        //生成随机8位密码，包含大小写和数字
+        String password = PasswordUtils.getPassword(8);
+        sysUser.setUserName("COMP-" + icCompBasic.getCompCreditCode()); //用户账号
+        sysUser.setNickName(icCompBasic.getCompName());//用户昵称
+        //sysUser.set(SysConstants.deptType.COMP); //用户类型
+        sysUser.setPassword(SecurityUtils.encryptPassword(password));
+        String pass = AESUtils.encryptAES(password, AESUtils.KEY, AESUtils.IV);
+        //sysUser.setCleartextPassword(pass);
+        sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysUser.setCreateTime(new Date());
+        sysUser.setPhonenumber("");
+        sysUserMapper.insertUser(sysUser);
+
+        //添加角色
+        SysUserRole ur = new SysUserRole();
+        ur.setUserId(sysUser.getUserId());
+        ur.setRoleId("");
+        sysUserRoleMapper.batchUserRole(Arrays.asList(ur));
+    }
+
+
+
 
 }
