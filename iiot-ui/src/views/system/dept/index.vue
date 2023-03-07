@@ -85,7 +85,7 @@
             v-hasPermi="['system:dept:add']"
           >新增</el-button>
           <el-button
-            v-if="scope.row.parentId != 0"
+            v-if="scope.row.parentId !== deptHome"
             size="mini"
             type="text"
             icon="el-icon-delete"
@@ -100,7 +100,7 @@
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
-          <el-col :span="24" v-if="form.parentId !== 0">
+          <el-col :span="24" v-if="form.parentId !== deptHome">
             <el-form-item label="上级部门" prop="parentId">
               <treeselect v-model="form.parentId" :options="deptOptions" :normalizer="normalizer" placeholder="选择上级部门" />
             </el-form-item>
@@ -158,9 +158,10 @@
 </template>
 
 <script>
-import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
+import { listDept, getDeptHome, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {getGenTable} from "@/api/tool/gen";
 
 export default {
   name: "Dept",
@@ -174,6 +175,7 @@ export default {
       showSearch: true,
       // 表格树数据
       deptList: [],
+      deptHome: "",
       // 部门树选项
       deptOptions: [],
       // 弹出层标题
@@ -221,6 +223,9 @@ export default {
   },
   created() {
     this.getList();
+    getDeptHome().then(res => {
+      this.deptHome =  res.data.deptHome;
+    });
   },
   methods: {
     /** 查询部门列表 */

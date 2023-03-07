@@ -20,9 +20,10 @@ public class SysConstants {
 
     /**【部门】根部门ID */
     public static final String DEPT_HOME ="133702242296393728";
+    public static final String DEPT_133702242296393723 ="133702242296393723"; //工业物联网
 
     //超级管理员
-    public static final String ROLE_GLY ="1";
+    public static final String ROLE_GLY ="133700983795478528";
 
     /** 根网站栏目ID */
     public static final String ITEM_HOME ="138644752437342208";

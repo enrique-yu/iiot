@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectDictTypeVo"/>
 	</select>
 	
-	<select id="selectDictTypeById" parameterType="Long" resultMap="SysDictTypeResult">
+	<select id="selectDictTypeById" parameterType="String" resultMap="SysDictTypeResult">
 		<include refid="selectDictTypeVo"/>
 		where dict_id = #{dictId}
 	</select>
@@ -60,11 +60,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where dict_type = #{dictType} limit 1
 	</select>
 	
-	<delete id="deleteDictTypeById" parameterType="Long">
+	<delete id="deleteDictTypeById" parameterType="String">
  		delete from sys_dict_type where dict_id = #{dictId}
  	</delete>
  	
- 	<delete id="deleteDictTypeByIds" parameterType="Long">
+ 	<delete id="deleteDictTypeByIds" parameterType="String">
  		delete from sys_dict_type where dict_id in
  		<foreach collection="array" item="dictId" open="(" separator="," close=")">
  			#{dictId}
@@ -86,6 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<insert id="insertDictType" parameterType="SysDictType">
  		insert into sys_dict_type(
+		    <if test="dictId != null and dictId != ''">dict_id,</if>
  			<if test="dictName != null and dictName != ''">dict_name,</if>
  			<if test="dictType != null and dictType != ''">dict_type,</if>
  			<if test="status != null">status,</if>
@@ -93,6 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			create_time
  		)values(
+		    <if test="dictId != null and dictId != ''">#{dictId},</if>
  			<if test="dictName != null and dictName != ''">#{dictName},</if>
  			<if test="dictType != null and dictType != ''">#{dictType},</if>
  			<if test="status != null">#{status},</if>

@@ -1,7 +1,11 @@
 package com.icoolkj.web.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -62,6 +66,15 @@ public class SysRoleController extends BaseController
         startPage();
         List<SysRole> list = roleService.selectRoleList(role);
         return getDataTable(list);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:role:list')")
+    @GetMapping("/getRoleGly")
+    public AjaxResult getRoleGly()
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("roleGly", SysConstants.ROLE_GLY);
+        return success(map);
     }
 
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)

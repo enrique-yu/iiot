@@ -1,6 +1,10 @@
 package com.icoolkj.web.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,6 +47,15 @@ public class SysDeptController extends BaseController
     {
         List<SysDept> depts = deptService.selectDeptList(dept);
         return success(depts);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @GetMapping("/getDeptHome")
+    public AjaxResult getDeptHome()
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("deptHome", SysConstants.DEPT_HOME);
+        return success(map);
     }
 
     /**

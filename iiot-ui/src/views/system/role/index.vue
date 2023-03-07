@@ -99,13 +99,14 @@
 
     <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="角色编号" prop="roleId" width="120" />
-      <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="150" />
+      <el-table-column label="角色编号" prop="roleId" width="200" />
+      <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="200" />
       <el-table-column label="权限字符" prop="roleKey" :show-overflow-tooltip="true" width="150" />
       <el-table-column label="显示顺序" prop="roleSort" width="100" />
       <el-table-column label="状态" align="center" width="100">
         <template slot-scope="scope">
           <el-switch
+            v-if="scope.row.roleId !== roleGly"
             v-model="scope.row.status"
             active-value="0"
             inactive-value="1"
@@ -118,8 +119,8 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope" v-if="scope.row.roleId !== 1">
+      <el-table-column label="操作" align="center"  class-name="small-padding fixed-width">
+        <template slot-scope="scope" v-if="scope.row.roleId !== roleGly">
           <el-button
             size="mini"
             type="text"
@@ -252,8 +253,9 @@
 </template>
 
 <script>
-import { listRole, getRole, delRole, addRole, updateRole, dataScope, changeRoleStatus, deptTreeSelect } from "@/api/system/role";
+import { listRole, getRoleGly, getRole, delRole, addRole, updateRole, dataScope, changeRoleStatus, deptTreeSelect } from "@/api/system/role";
 import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/api/system/menu";
+import {getDeptHome} from "@/api/system/dept";
 
 export default {
   name: "Role",
@@ -274,6 +276,8 @@ export default {
       total: 0,
       // 角色表格数据
       roleList: [],
+      //超级管理员
+      roleGly: "",
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -343,6 +347,9 @@ export default {
   },
   created() {
     this.getList();
+    getRoleGly().then(res => {
+      this.roleGly =  res.data.roleGly;
+    });
   },
   methods: {
     /** 查询角色列表 */
