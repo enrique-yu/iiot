@@ -1,22 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="父级组织编号" prop="domainParentId">
-        <el-input
-          v-model="queryParams.domainParentId"
-          placeholder="请输入父级组织编号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织角色编号" prop="drolesId">
-        <el-input
-          v-model="queryParams.drolesId"
-          placeholder="请输入组织角色编号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="100px">
       <el-form-item label="组织账户名称" prop="domainName">
         <el-input
           v-model="queryParams.domainName"
@@ -29,54 +13,6 @@
         <el-input
           v-model="queryParams.domainAccount"
           placeholder="请输入组织账号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织账户有效期" prop="domainIndate">
-        <el-date-picker clearable
-          v-model="queryParams.domainIndate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择组织账户有效期">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="组织可管区域" prop="domainRegion">
-        <el-input
-          v-model="queryParams.domainRegion"
-          placeholder="请输入组织可管区域"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织管理员手机" prop="domainPhone">
-        <el-input
-          v-model="queryParams.domainPhone"
-          placeholder="请输入组织管理员手机"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织管理员邮箱" prop="domainEmail">
-        <el-input
-          v-model="queryParams.domainEmail"
-          placeholder="请输入组织管理员邮箱"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织账户描述" prop="domainDesc">
-        <el-input
-          v-model="queryParams.domainDesc"
-          placeholder="请输入组织账户描述"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="组织账号与业务关系ID" prop="domainRelationId">
-        <el-input
-          v-model="queryParams.domainRelationId"
-          placeholder="请输入组织账号与业务关系ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -170,7 +106,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
