@@ -43,19 +43,11 @@ public interface ISysDomainRolesService
      */
     public int updateSysDomainRoles(SysDomainRoles sysDomainRoles);
 
-    /**
-     * 批量删除系统组织权限
-     * 
-     * @param drolesIds 需要删除的系统组织权限主键集合
-     * @return 结果
-     */
-    public int deleteSysDomainRolesByDrolesIds(String[] drolesIds);
 
     /**
-     * 删除系统组织权限信息
-     * 
-     * @param drolesId 系统组织权限主键
-     * @return 结果
+     * 查询所有系统组织权限
+     *
+     * @return 系统组织权限列表
      */
-    public int deleteSysDomainRolesByDrolesId(String drolesId);
+    public List<SysDomainRoles> selectDomainRolesAll();
 }

@@ -75,14 +75,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where droles_id = #{drolesId}
     </update>
 
-    <delete id="deleteSysDomainRolesByDrolesId" parameterType="String">
-        delete from sys_domain_roles where droles_id = #{drolesId}
-    </delete>
+    <select id="selectDomainRolesAll" resultMap="SysDomainRolesResult">
+        <include refid="selectSysDomainRolesVo"/>
+    </select>
 
-    <delete id="deleteSysDomainRolesByDrolesIds" parameterType="String">
-        delete from sys_domain_roles where droles_id in 
-        <foreach item="drolesId" collection="array" open="(" separator="," close=")">
-            #{drolesId}
-        </foreach>
-    </delete>
 </mapper>

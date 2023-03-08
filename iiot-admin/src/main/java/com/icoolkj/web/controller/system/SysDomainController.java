@@ -2,6 +2,9 @@ package com.icoolkj.web.controller.system;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.utils.StringUtils;
+import com.icoolkj.system.service.ISysDomainRolesService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,9 @@ public class SysDomainController extends BaseController
     @Autowired
     private ISysDomainService sysDomainService;
 
+    @Autowired
+    private ISysDomainRolesService sysDomainRolesService;
+
     /**
      * 查询系统组织账户列表
      */
@@ -63,10 +69,16 @@ public class SysDomainController extends BaseController
      * 获取系统组织账户详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:domain:query')")
-    @GetMapping(value = "/{domainId}")
-    public AjaxResult getInfo(@PathVariable("domainId") String domainId)
+    @GetMapping(value = { "/", "/{domainId}" })
+    public AjaxResult getInfo(@PathVariable(value = "domainId", required = false) String domainId)
     {
-        return success(sysDomainService.selectSysDomainByDomainId(domainId));
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("domainRoles", sysDomainRolesService.selectDomainRolesAll());
+        if (StringUtils.isNotNull(domainId)) {
+            SysDomain sysDomain = sysDomainService.selectSysDomainByDomainId(domainId);
+            ajax.put(AjaxResult.DATA_TAG, sysDomain);
+        }
+        return ajax;
     }
 
     /**
@@ -91,14 +103,5 @@ public class SysDomainController extends BaseController
         return toAjax(sysDomainService.updateSysDomain(sysDomain));
     }
 
-    /**
-     * 删除系统组织账户
-     */
-    @PreAuthorize("@ss.hasPermi('system:domain:remove')")
-    @Log(title = "系统组织账户", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{domainIds}")
-    public AjaxResult remove(@PathVariable String[] domainIds)
-    {
-        return toAjax(sysDomainService.deleteSysDomainByDomainIds(domainIds));
-    }
+
 }

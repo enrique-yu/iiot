@@ -76,27 +76,15 @@ public class SysDomainRolesServiceImpl implements ISysDomainRolesService
         return sysDomainRolesMapper.updateSysDomainRoles(sysDomainRoles);
     }
 
-    /**
-     * 批量删除系统组织权限
-     * 
-     * @param drolesIds 需要删除的系统组织权限主键
-     * @return 结果
-     */
-    @Override
-    public int deleteSysDomainRolesByDrolesIds(String[] drolesIds)
-    {
-        return sysDomainRolesMapper.deleteSysDomainRolesByDrolesIds(drolesIds);
-    }
 
     /**
-     * 删除系统组织权限信息
-     * 
-     * @param drolesId 系统组织权限主键
-     * @return 结果
+     * 查询所有系统组织权限
+     *
+     * @return 系统组织权限列表
      */
     @Override
-    public int deleteSysDomainRolesByDrolesId(String drolesId)
+    public List<SysDomainRoles> selectDomainRolesAll()
     {
-        return sysDomainRolesMapper.deleteSysDomainRolesByDrolesId(drolesId);
+        return sysDomainRolesMapper.selectDomainRolesAll();
     }
 }

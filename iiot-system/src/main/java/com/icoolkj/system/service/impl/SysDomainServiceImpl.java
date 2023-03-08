@@ -75,27 +75,5 @@ public class SysDomainServiceImpl implements ISysDomainService
         return sysDomainMapper.updateSysDomain(sysDomain);
     }
 
-    /**
-     * 批量删除系统组织账户
-     * 
-     * @param domainIds 需要删除的系统组织账户主键
-     * @return 结果
-     */
-    @Override
-    public int deleteSysDomainByDomainIds(String[] domainIds)
-    {
-        return sysDomainMapper.deleteSysDomainByDomainIds(domainIds);
-    }
 
-    /**
-     * 删除系统组织账户信息
-     * 
-     * @param domainId 系统组织账户主键
-     * @return 结果
-     */
-    @Override
-    public int deleteSysDomainByDomainId(String domainId)
-    {
-        return sysDomainMapper.deleteSysDomainByDomainId(domainId);
-    }
 }

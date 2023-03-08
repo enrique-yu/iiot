@@ -43,19 +43,5 @@ public interface ISysDomainService
      */
     public int updateSysDomain(SysDomain sysDomain);
 
-    /**
-     * 批量删除系统组织账户
-     * 
-     * @param domainIds 需要删除的系统组织账户主键集合
-     * @return 结果
-     */
-    public int deleteSysDomainByDomainIds(String[] domainIds);
 
-    /**
-     * 删除系统组织账户信息
-     * 
-     * @param domainId 系统组织账户主键
-     * @return 结果
-     */
-    public int deleteSysDomainByDomainId(String domainId);
 }

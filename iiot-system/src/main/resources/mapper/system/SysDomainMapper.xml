@@ -115,14 +115,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where domain_id = #{domainId}
     </update>
 
-    <delete id="deleteSysDomainByDomainId" parameterType="String">
-        delete from sys_domain where domain_id = #{domainId}
-    </delete>
 
-    <delete id="deleteSysDomainByDomainIds" parameterType="String">
-        delete from sys_domain where domain_id in 
-        <foreach item="domainId" collection="array" open="(" separator="," close=")">
-            #{domainId}
-        </foreach>
-    </delete>
 </mapper>

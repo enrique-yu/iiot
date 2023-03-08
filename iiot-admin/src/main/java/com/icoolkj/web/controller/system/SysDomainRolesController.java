@@ -91,14 +91,5 @@ public class SysDomainRolesController extends BaseController
         return toAjax(sysDomainRolesService.updateSysDomainRoles(sysDomainRoles));
     }
 
-    /**
-     * 删除系统组织权限
-     */
-    @PreAuthorize("@ss.hasPermi('system:droles:remove')")
-    @Log(title = "系统组织权限", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{drolesIds}")
-    public AjaxResult remove(@PathVariable String[] drolesIds)
-    {
-        return toAjax(sysDomainRolesService.deleteSysDomainRolesByDrolesIds(drolesIds));
-    }
+
 }

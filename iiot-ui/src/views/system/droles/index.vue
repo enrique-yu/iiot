@@ -54,17 +54,6 @@
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['system:droles:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
           type="warning"
           plain
           icon="el-icon-download"
@@ -95,13 +84,6 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:droles:edit']"
           >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['system:droles:remove']"
-          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -278,16 +260,6 @@ export default {
           }
         }
       });
-    },
-    /** 删除按钮操作 */
-    handleDelete(row) {
-      const drolesIds = row.drolesId || this.ids;
-      this.$modal.confirm('是否确认删除系统组织权限编号为"' + drolesIds + '"的数据项？').then(function() {
-        return delRoles(drolesIds);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
     },
     /** 导出按钮操作 */
     handleExport() {
