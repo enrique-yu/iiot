@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="100px">
       <el-form-item label="组织角色名称" prop="drolesName">
         <el-input
           v-model="queryParams.drolesName"
@@ -8,6 +8,21 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
+      </el-form-item>
+      <el-form-item label="组织角色状态" prop="drolesStatus">
+        <el-select
+          v-model="queryParams.drolesStatus"
+          placeholder="组织角色状态"
+          clearable
+          style="width: 240px"
+        >
+          <el-option
+            v-for="dict in dict.type.sys_normal_disable"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -63,10 +78,14 @@
 
     <el-table v-loading="loading" :data="rolesList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="ID" align="center" prop="drolesId" />
+      <el-table-column label="组织角色编号" align="center" prop="drolesId" />
       <el-table-column label="组织角色名称" align="center" prop="drolesName" />
-      <el-table-column label="组织角色类型" align="center" prop="drolesType" />
-      <el-table-column label="组织角色状态" align="center" prop="drolesStatus" />
+      <el-table-column label="组织角色CODE" align="center" prop="drolesType" />
+      <el-table-column label="组织角色状态" align="center" prop="drolesStatus">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.drolesStatus"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -96,13 +115,22 @@
     />
 
     <!-- 添加或修改系统组织权限对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-form-item label="组织角色名称" prop="drolesName">
           <el-input v-model="form.drolesName" placeholder="请输入组织角色名称" />
         </el-form-item>
-        <el-form-item label="删除标记" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标记" />
+        <el-form-item label="组织角色CODE" prop="drolesType">
+          <el-input v-model="form.drolesType" placeholder="请输入组织组织角色CODE"  />
+        </el-form-item>
+        <el-form-item label="组织角色状态" prop="drolesStatus">
+          <el-radio-group v-model="form.drolesStatus">
+            <el-radio
+              v-for="dict in dict.type.sys_normal_disable"
+              :key="dict.value"
+              :label="dict.value"
+            >{{dict.label}}</el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -117,7 +145,8 @@
 import { listRoles, getRoles, delRoles, addRoles, updateRoles } from "@/api/system/droles";
 
 export default {
-  name: "Roles",
+  name: "Droles",
+  dicts: ['sys_normal_disable'],
   data() {
     return {
       // 遮罩层
