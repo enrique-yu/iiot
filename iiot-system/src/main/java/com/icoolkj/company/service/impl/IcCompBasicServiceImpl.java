@@ -13,14 +13,17 @@ import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.mapper.IcCompBasicMapper;
 import com.icoolkj.company.service.IIcCompBasicService;
+import com.icoolkj.system.domain.SysDomain;
 import com.icoolkj.system.domain.SysUserRole;
 import com.icoolkj.system.mapper.SysDeptMapper;
+import com.icoolkj.system.mapper.SysDomainMapper;
 import com.icoolkj.system.mapper.SysUserMapper;
 import com.icoolkj.system.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,9 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
 {
     @Autowired
     private IcCompBasicMapper icCompBasicMapper;
+
+    @Autowired
+    private SysDomainMapper sysDomainMapper;
 
     @Autowired
     private SysDeptMapper sysDeptMapper;
@@ -123,13 +129,36 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
 
     //企业账号管理
     private void createCompAccount(IcCompBasic icCompBasic) {
+        String account = "COMP-" + icCompBasic.getCompCreditCode();  //企业管理用户账号
+        //组织账号
+        String domainId = IdWorker.nextId().toString();
+        SysDomain sysDomain = new SysDomain();
+        sysDomain.setDomainId(domainId);
+        sysDomain.setDomainParentId("");
+        sysDomain.setDrolesId(SysConstants.DOMAIN_TYPE_COMP);  //企业组织角色
+        sysDomain.setDomainName(icCompBasic.getCompName());
+        sysDomain.setDomainAccount(account);
+        Calendar rightNowDate = Calendar.getInstance();
+        rightNowDate.add(Calendar.YEAR, 20);
+        sysDomain.setDomainIndate(rightNowDate.getTime()); //组织账户有效期
+        sysDomain.setDomainRegion(icCompBasic.getCompArea());
+        sysDomain.setDomainPhone(icCompBasic.getCompLxrPhone());
+        sysDomain.setDomainEmail(icCompBasic.getCompLxrEmail());
+        sysDomain.setDomainDesc("");
+        sysDomain.setDomainRelationId(""); //组织账号与业务关系ID
+        sysDomain.setDomainStatus("0"); //组织账号状态（0正常 1停用）
+        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomain.setCreateTime(DateUtils.getNowDate());
+        sysDomainMapper.insertSysDomain(sysDomain);
+
+
         //添加部门
         SysDept dept = new SysDept();
         String deptId = IdWorker.nextId().toString();
         dept.setDeptId(deptId);
         dept.setParentId(SysConstants.DEPT_133702242296393723);
         dept.setAncestors(SysConstants.DEPT_HOME+","+SysConstants.DEPT_133702242296393723);
-        //dept.setDeptType(SysConstants.deptType.COMP);
+        dept.setDomainId(domainId);
         dept.setDeptName(icCompBasic.getCompName()); //部门名称
         dept.setOrderNum(1); //显示顺序
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
@@ -143,14 +172,14 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
         sysUser.setDeptId(deptId); //所属部门ID
         //生成随机8位密码，包含大小写和数字
         String password = PasswordUtils.getPassword(8);
-        sysUser.setUserName("COMP-" + icCompBasic.getCompCreditCode()); //用户账号
+        sysUser.setUserName(account); //企业管理用户账号
         sysUser.setNickName(icCompBasic.getCompName());//用户昵称
         //sysUser.set(SysConstants.deptType.COMP); //用户类型
         sysUser.setPassword(SecurityUtils.encryptPassword(password));
         String pass = AESUtils.encryptAES(password, AESUtils.KEY, AESUtils.IV);
         //sysUser.setCleartextPassword(pass);
         sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
-        sysUser.setCreateTime(new Date());
+        sysUser.setCreateTime(DateUtils.getNowDate());
         sysUser.setPhonenumber("");
         sysUserMapper.insertUser(sysUser);
 

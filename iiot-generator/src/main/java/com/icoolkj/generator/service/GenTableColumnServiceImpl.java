@@ -1,6 +1,8 @@
 package com.icoolkj.generator.service;
 
 import java.util.List;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.common.core.text.Convert;
@@ -39,6 +41,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	@Override
 	public int insertGenTableColumn(GenTableColumn genTableColumn)
 	{
+		genTableColumn.setColumnId(IdWorker.nextId().toString());
 	    return genTableColumnMapper.insertGenTableColumn(genTableColumn);
 	}
 	

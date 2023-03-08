@@ -1,18 +1,17 @@
 package com.icoolkj.company.domain;
 
+import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.icoolkj.common.annotation.Excel;
-import com.icoolkj.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.util.Date;
+import com.icoolkj.common.annotation.Excel;
+import com.icoolkj.common.core.domain.BaseEntity;
 
 /**
  * 企业基本信息对象 ic_comp_basic
  * 
  * @author icoolkj
- * @date 2023-03-05
+ * @date 2023-03-08
  */
 public class IcCompBasic extends BaseEntity
 {
@@ -36,6 +35,10 @@ public class IcCompBasic extends BaseEntity
     /** 企业法人 */
     @Excel(name = "企业法人")
     private String compFr;
+
+    /** 企业法人手机 */
+    @Excel(name = "企业法人手机")
+    private String compFrPhone;
 
     /** 行政区划 */
     @Excel(name = "行政区划")
@@ -87,11 +90,23 @@ public class IcCompBasic extends BaseEntity
     @Excel(name = "经营范围")
     private String compManageScope;
 
-    /** 状态【0停用，1正常】 */
-    @Excel(name = "状态【0停用，1正常】")
+    /** 企业联系人 */
+    @Excel(name = "企业联系人")
+    private String compLxr;
+
+    /** 企业联系人手机 */
+    @Excel(name = "企业联系人手机")
+    private String compLxrPhone;
+
+    /** 企业联系人邮箱 */
+    @Excel(name = "企业联系人邮箱")
+    private String compLxrEmail;
+
+    /** 状态（0正常 1停用） */
+    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String compStatus;
 
-    /** 删除标记【0删除，1存在】 */
+    /** 删除标记（0代表存在 2代表删除） */
     private String delFlag;
 
     public void setCompBasicId(String compBasicId) 
@@ -138,6 +153,15 @@ public class IcCompBasic extends BaseEntity
     public String getCompFr() 
     {
         return compFr;
+    }
+    public void setCompFrPhone(String compFrPhone) 
+    {
+        this.compFrPhone = compFrPhone;
+    }
+
+    public String getCompFrPhone() 
+    {
+        return compFrPhone;
     }
     public void setCompArea(String compArea) 
     {
@@ -247,6 +271,33 @@ public class IcCompBasic extends BaseEntity
     {
         return compManageScope;
     }
+    public void setCompLxr(String compLxr) 
+    {
+        this.compLxr = compLxr;
+    }
+
+    public String getCompLxr() 
+    {
+        return compLxr;
+    }
+    public void setCompLxrPhone(String compLxrPhone) 
+    {
+        this.compLxrPhone = compLxrPhone;
+    }
+
+    public String getCompLxrPhone() 
+    {
+        return compLxrPhone;
+    }
+    public void setCompLxrEmail(String compLxrEmail) 
+    {
+        this.compLxrEmail = compLxrEmail;
+    }
+
+    public String getCompLxrEmail() 
+    {
+        return compLxrEmail;
+    }
     public void setCompStatus(String compStatus) 
     {
         this.compStatus = compStatus;
@@ -274,6 +325,7 @@ public class IcCompBasic extends BaseEntity
             .append("compCreditCode", getCompCreditCode())
             .append("compType", getCompType())
             .append("compFr", getCompFr())
+            .append("compFrPhone", getCompFrPhone())
             .append("compArea", getCompArea())
             .append("compAddr", getCompAddr())
             .append("compLng", getCompLng())
@@ -286,6 +338,9 @@ public class IcCompBasic extends BaseEntity
             .append("compRegCapital", getCompRegCapital())
             .append("compPaidCapital", getCompPaidCapital())
             .append("compManageScope", getCompManageScope())
+            .append("compLxr", getCompLxr())
+            .append("compLxrPhone", getCompLxrPhone())
+            .append("compLxrEmail", getCompLxrEmail())
             .append("compStatus", getCompStatus())
             .append("delFlag", getDelFlag())
             .append("createBy", getCreateBy())

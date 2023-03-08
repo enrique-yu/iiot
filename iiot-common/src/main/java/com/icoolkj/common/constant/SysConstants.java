@@ -8,9 +8,6 @@ package com.icoolkj.common.constant;
  */
 public class SysConstants {
 
-    /** 根区域ID */
-    public static final String REGION_HOME ="340800";
-
     /** 超级管理员ID */
     public static final String SUPER_ADMIN ="133555608539361280";
 
@@ -27,6 +24,12 @@ public class SysConstants {
 
     /** 根网站栏目ID */
     public static final String ITEM_HOME ="138644752437342208";
+
+
+
+    /** 组织角色 */
+    public static final String DOMAIN_TYPE_SYSTEM ="553592170506878976";  //系统组织角色
+    public static final String DOMAIN_TYPE_COMP ="553519200858013696";  //企业组织角色
 
 
 

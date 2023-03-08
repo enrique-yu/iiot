@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.system.mapper.SysDomainMapper">
+    
+    <resultMap type="SysDomain" id="SysDomainResult">
+        <result property="domainId"    column="domain_id"    />
+        <result property="domainParentId"    column="domain_parent_id"    />
+        <result property="drolesId"    column="droles_id"    />
+        <result property="domainName"    column="domain_name"    />
+        <result property="domainAccount"    column="domain_account"    />
+        <result property="domainIndate"    column="domain_indate"    />
+        <result property="domainRegion"    column="domain_region"    />
+        <result property="domainPhone"    column="domain_phone"    />
+        <result property="domainEmail"    column="domain_email"    />
+        <result property="domainDesc"    column="domain_desc"    />
+        <result property="domainRelationId"    column="domain_relation_id"    />
+        <result property="domainStatus"    column="domain_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysDomainVo">
+        select domain_id, domain_parent_id, droles_id, domain_name, domain_account, domain_indate, domain_region, domain_phone, domain_email, domain_desc, domain_relation_id, domain_status, del_flag, create_by, create_time, update_by, update_time from sys_domain
+    </sql>
+
+    <select id="selectSysDomainList" parameterType="SysDomain" resultMap="SysDomainResult">
+        <include refid="selectSysDomainVo"/>
+        <where>  
+            <if test="domainParentId != null  and domainParentId != ''"> and domain_parent_id = #{domainParentId}</if>
+            <if test="drolesId != null  and drolesId != ''"> and droles_id = #{drolesId}</if>
+            <if test="domainName != null  and domainName != ''"> and domain_name like concat('%', #{domainName}, '%')</if>
+            <if test="domainAccount != null  and domainAccount != ''"> and domain_account = #{domainAccount}</if>
+            <if test="domainIndate != null "> and domain_indate = #{domainIndate}</if>
+            <if test="domainRegion != null  and domainRegion != ''"> and domain_region = #{domainRegion}</if>
+            <if test="domainPhone != null  and domainPhone != ''"> and domain_phone = #{domainPhone}</if>
+            <if test="domainEmail != null  and domainEmail != ''"> and domain_email = #{domainEmail}</if>
+            <if test="domainDesc != null  and domainDesc != ''"> and domain_desc = #{domainDesc}</if>
+            <if test="domainRelationId != null  and domainRelationId != ''"> and domain_relation_id = #{domainRelationId}</if>
+            <if test="domainStatus != null  and domainStatus != ''"> and domain_status = #{domainStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysDomainByDomainId" parameterType="String" resultMap="SysDomainResult">
+        <include refid="selectSysDomainVo"/>
+        where domain_id = #{domainId}
+    </select>
+        
+    <insert id="insertSysDomain" parameterType="SysDomain">
+        insert into sys_domain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domainId != null">domain_id,</if>
+            <if test="domainParentId != null">domain_parent_id,</if>
+            <if test="drolesId != null and drolesId != ''">droles_id,</if>
+            <if test="domainName != null and domainName != ''">domain_name,</if>
+            <if test="domainAccount != null and domainAccount != ''">domain_account,</if>
+            <if test="domainIndate != null">domain_indate,</if>
+            <if test="domainRegion != null and domainRegion != ''">domain_region,</if>
+            <if test="domainPhone != null">domain_phone,</if>
+            <if test="domainEmail != null">domain_email,</if>
+            <if test="domainDesc != null">domain_desc,</if>
+            <if test="domainRelationId != null">domain_relation_id,</if>
+            <if test="domainStatus != null and domainStatus != ''">domain_status,</if>
+            <if test="delFlag != null and delFlag != ''">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="domainId != null">#{domainId},</if>
+            <if test="domainParentId != null">#{domainParentId},</if>
+            <if test="drolesId != null and drolesId != ''">#{drolesId},</if>
+            <if test="domainName != null and domainName != ''">#{domainName},</if>
+            <if test="domainAccount != null and domainAccount != ''">#{domainAccount},</if>
+            <if test="domainIndate != null">#{domainIndate},</if>
+            <if test="domainRegion != null and domainRegion != ''">#{domainRegion},</if>
+            <if test="domainPhone != null">#{domainPhone},</if>
+            <if test="domainEmail != null">#{domainEmail},</if>
+            <if test="domainDesc != null">#{domainDesc},</if>
+            <if test="domainRelationId != null">#{domainRelationId},</if>
+            <if test="domainStatus != null and domainStatus != ''">#{domainStatus},</if>
+            <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysDomain" parameterType="SysDomain">
+        update sys_domain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="domainParentId != null">domain_parent_id = #{domainParentId},</if>
+            <if test="drolesId != null and drolesId != ''">droles_id = #{drolesId},</if>
+            <if test="domainName != null and domainName != ''">domain_name = #{domainName},</if>
+            <if test="domainAccount != null and domainAccount != ''">domain_account = #{domainAccount},</if>
+            <if test="domainIndate != null">domain_indate = #{domainIndate},</if>
+            <if test="domainRegion != null and domainRegion != ''">domain_region = #{domainRegion},</if>
+            <if test="domainPhone != null">domain_phone = #{domainPhone},</if>
+            <if test="domainEmail != null">domain_email = #{domainEmail},</if>
+            <if test="domainDesc != null">domain_desc = #{domainDesc},</if>
+            <if test="domainRelationId != null">domain_relation_id = #{domainRelationId},</if>
+            <if test="domainStatus != null and domainStatus != ''">domain_status = #{domainStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where domain_id = #{domainId}
+    </update>
+
+    <delete id="deleteSysDomainByDomainId" parameterType="String">
+        delete from sys_domain where domain_id = #{domainId}
+    </delete>
+
+    <delete id="deleteSysDomainByDomainIds" parameterType="String">
+        delete from sys_domain where domain_id in 
+        <foreach item="domainId" collection="array" open="(" separator="," close=")">
+            #{domainId}
+        </foreach>
+    </delete>
+</mapper>

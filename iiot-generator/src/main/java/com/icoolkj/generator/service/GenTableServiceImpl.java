@@ -11,6 +11,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -166,6 +168,7 @@ public class GenTableServiceImpl implements IGenTableService
             {
                 String tableName = table.getTableName();
                 GenUtils.initTable(table, operName);
+                table.setTableId(IdWorker.nextId().toString());
                 int row = genTableMapper.insertGenTable(table);
                 if (row > 0)
                 {
@@ -173,6 +176,7 @@ public class GenTableServiceImpl implements IGenTableService
                     List<GenTableColumn> genTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
                     for (GenTableColumn column : genTableColumns)
                     {
+                        column.setColumnId(IdWorker.nextId().toString());
                         GenUtils.initColumnField(column, table);
                         genTableColumnMapper.insertGenTableColumn(column);
                     }

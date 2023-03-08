@@ -28,6 +28,9 @@ public class SysDept extends BaseEntity
     /** 祖级列表 */
     private String ancestors;
 
+    /** 部门所属组织 */
+    private String domainId;
+
     /** 部门名称 */
     private String deptName;
 
@@ -83,6 +86,14 @@ public class SysDept extends BaseEntity
     public void setAncestors(String ancestors)
     {
         this.ancestors = ancestors;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 
     @NotBlank(message = "部门名称不能为空")

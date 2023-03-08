@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.system.mapper.SysDomainRolesMapper">
+    
+    <resultMap type="SysDomainRoles" id="SysDomainRolesResult">
+        <result property="drolesId"    column="droles_id"    />
+        <result property="drolesName"    column="droles_name"    />
+        <result property="drolesType"    column="droles_type"    />
+        <result property="drolesStatus"    column="droles_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysDomainRolesVo">
+        select droles_id, droles_name, droles_type, droles_status, del_flag, create_by, create_time, update_by, update_time from sys_domain_roles
+    </sql>
+
+    <select id="selectSysDomainRolesList" parameterType="SysDomainRoles" resultMap="SysDomainRolesResult">
+        <include refid="selectSysDomainRolesVo"/>
+        <where>  
+            <if test="drolesName != null  and drolesName != ''"> and droles_name like concat('%', #{drolesName}, '%')</if>
+            <if test="drolesType != null  and drolesType != ''"> and droles_type = #{drolesType}</if>
+            <if test="drolesStatus != null  and drolesStatus != ''"> and droles_status = #{drolesStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysDomainRolesByDrolesId" parameterType="String" resultMap="SysDomainRolesResult">
+        <include refid="selectSysDomainRolesVo"/>
+        where droles_id = #{drolesId}
+    </select>
+        
+    <insert id="insertSysDomainRoles" parameterType="SysDomainRoles">
+        insert into sys_domain_roles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="drolesId != null">droles_id,</if>
+            <if test="drolesName != null and drolesName != ''">droles_name,</if>
+            <if test="drolesType != null and drolesType != ''">droles_type,</if>
+            <if test="drolesStatus != null and drolesStatus != ''">droles_status,</if>
+            <if test="delFlag != null and delFlag != ''">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="drolesId != null">#{drolesId},</if>
+            <if test="drolesName != null and drolesName != ''">#{drolesName},</if>
+            <if test="drolesType != null and drolesType != ''">#{drolesType},</if>
+            <if test="drolesStatus != null and drolesStatus != ''">#{drolesStatus},</if>
+            <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysDomainRoles" parameterType="SysDomainRoles">
+        update sys_domain_roles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="drolesName != null and drolesName != ''">droles_name = #{drolesName},</if>
+            <if test="drolesType != null and drolesType != ''">droles_type = #{drolesType},</if>
+            <if test="drolesStatus != null and drolesStatus != ''">droles_status = #{drolesStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where droles_id = #{drolesId}
+    </update>
+
+    <delete id="deleteSysDomainRolesByDrolesId" parameterType="String">
+        delete from sys_domain_roles where droles_id = #{drolesId}
+    </delete>
+
+    <delete id="deleteSysDomainRolesByDrolesIds" parameterType="String">
+        delete from sys_domain_roles where droles_id in 
+        <foreach item="drolesId" collection="array" open="(" separator="," close=")">
+            #{drolesId}
+        </foreach>
+    </delete>
+</mapper>
