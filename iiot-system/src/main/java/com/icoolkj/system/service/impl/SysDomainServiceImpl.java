@@ -2,6 +2,7 @@ package com.icoolkj.system.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,7 @@ public class SysDomainServiceImpl implements ISysDomainService
     public int insertSysDomain(SysDomain sysDomain)
     {
         sysDomain.setDomainId(IdWorker.nextId().toString());
+        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomain.setCreateTime(DateUtils.getNowDate());
         return sysDomainMapper.insertSysDomain(sysDomain);
     }
@@ -68,6 +70,7 @@ public class SysDomainServiceImpl implements ISysDomainService
     @Override
     public int updateSysDomain(SysDomain sysDomain)
     {
+        sysDomain.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomain.setUpdateTime(DateUtils.getNowDate());
         return sysDomainMapper.updateSysDomain(sysDomain);
     }

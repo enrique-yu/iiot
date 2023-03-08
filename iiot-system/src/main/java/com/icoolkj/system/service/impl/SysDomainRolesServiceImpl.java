@@ -1,13 +1,15 @@
 package com.icoolkj.system.service.impl;
 
-import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
+import com.icoolkj.system.domain.SysDomainRoles;
+import com.icoolkj.system.mapper.SysDomainRolesMapper;
+import com.icoolkj.system.service.ISysDomainRolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.icoolkj.system.mapper.SysDomainRolesMapper;
-import com.icoolkj.system.domain.SysDomainRoles;
-import com.icoolkj.system.service.ISysDomainRolesService;
+
+import java.util.List;
 
 /**
  * 系统组织权限Service业务层处理
@@ -55,6 +57,7 @@ public class SysDomainRolesServiceImpl implements ISysDomainRolesService
     public int insertSysDomainRoles(SysDomainRoles sysDomainRoles)
     {
         sysDomainRoles.setDrolesId(IdWorker.nextId().toString());
+        sysDomainRoles.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomainRoles.setCreateTime(DateUtils.getNowDate());
         return sysDomainRolesMapper.insertSysDomainRoles(sysDomainRoles);
     }
@@ -68,6 +71,7 @@ public class SysDomainRolesServiceImpl implements ISysDomainRolesService
     @Override
     public int updateSysDomainRoles(SysDomainRoles sysDomainRoles)
     {
+        sysDomainRoles.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomainRoles.setUpdateTime(DateUtils.getNowDate());
         return sysDomainRolesMapper.updateSysDomainRoles(sysDomainRoles);
     }
