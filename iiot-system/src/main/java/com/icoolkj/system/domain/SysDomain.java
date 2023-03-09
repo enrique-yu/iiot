@@ -2,6 +2,7 @@ package com.icoolkj.system.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.icoolkj.common.core.domain.entity.SysDept;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.icoolkj.common.annotation.Excel;
@@ -67,6 +68,12 @@ public class SysDomain extends BaseEntity
 
     /** 删除标记（0代表存在 2代表删除） */
     private String delFlag;
+
+    /** 系统组织权限对象 **/
+    private SysDomainRoles domainRoles;
+
+    /** 系统组织权限对象 **/
+    private SysArea area;
 
     public void setDomainId(String domainId) 
     {
@@ -184,6 +191,22 @@ public class SysDomain extends BaseEntity
     public String getDelFlag() 
     {
         return delFlag;
+    }
+
+    public SysDomainRoles getDomainRoles() {
+        return domainRoles;
+    }
+
+    public void setDomainRoles(SysDomainRoles domainRoles) {
+        this.domainRoles = domainRoles;
+    }
+
+    public SysArea getArea() {
+        return area;
+    }
+
+    public void setArea(SysArea area) {
+        this.area = area;
     }
 
     @Override

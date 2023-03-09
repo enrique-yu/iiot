@@ -24,6 +24,11 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="组织角色" prop="drolesId">
+        <el-select clearable filterable v-model="queryParams.drolesId" placeholder="请选择项目名称">
+          <el-option v-for="item in drolesOptions" :key="item.drolesId" :value="item.drolesId" :label="item.drolesName"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -67,7 +72,7 @@
 
     <el-table v-loading="loading" :data="domainList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="组织角色编号" align="center" prop="drolesId" />
+      <el-table-column label="组织角色编号" align="center" prop="domainRoles.drolesName" />
       <el-table-column label="组织账户名称" align="center" prop="domainName" />
       <el-table-column label="组织账号" align="center" prop="domainAccount" />
       <el-table-column label="组织账号状态" align="center" prop="domainStatus">
@@ -80,19 +85,19 @@
           <span>{{ parseTime(scope.row.domainIndate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="组织可管区域" align="center" prop="domainRegion" />
+      <el-table-column label="组织可管区域" align="center" prop="area.areaName" />
       <el-table-column label="组织管理员手机" align="center" prop="domainPhone" />
       <el-table-column label="组织管理员邮箱" align="center" prop="domainEmail" />
-      <el-table-column label="入库时间" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="入库时间" align="center" prop="createTime" width="180">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -126,7 +131,7 @@
                   :key="item.drolesId"
                   :label="item.drolesName"
                   :value="item.drolesId"
-                  :disabled="item.status == 1"
+                  :disabled="item.drolesStatus == 1"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -204,6 +209,7 @@
 
 <script>
   import { listDomain, getDomain, delDomain, addDomain, updateDomain } from "@/api/system/domain";
+  import { listRoles } from "@/api/system/droles";
   import { listArea } from "@/api/system/area";
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
@@ -295,6 +301,9 @@
         listArea().then(response => {
           this.areaOptions = this.handleTree(response.data, "areaId", "parentId");
         });
+        listRoles().then(response => {
+          this.drolesOptions = response.rows;
+        });
         listDomain(this.queryParams).then(response => {
           this.domainList = response.rows;
           this.total = response.total;
@@ -325,7 +334,6 @@
           drolesId: null,
           domainName: null,
           domainAccount: null,
-          domainStatus: null,
           domainIndate: null,
           domainRegion: null,
           domainPhone: null,
@@ -371,6 +379,7 @@
         this.reset();
         const domainId = row.domainId || this.ids
         getDomain(domainId).then(response => {
+          this.drolesOptions = response.domainRoles;
           this.form = response.data;
           this.open = true;
           this.title = "修改系统组织账户";

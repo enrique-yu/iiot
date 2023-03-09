@@ -22,32 +22,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <association property="domainRoles"    column="droles_id" javaType="SysDomainRoles" resultMap="SysDomainRolesResult" />
+        <association property="area"    column="area_id" javaType="SysArea" resultMap="SysAreaResult" />
+    </resultMap>
+
+    <resultMap type="SysDomainRoles" id="SysDomainRolesResult">
+        <result property="drolesId"    column="droles_id"    />
+        <result property="drolesName"    column="droles_name"    />
+        <result property="drolesType"    column="droles_type"    />
+        <result property="drolesStatus"    column="droles_status"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <resultMap type="SysArea" id="SysAreaResult">
+        <result property="areaId"    column="area_id"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="areaDesc"    column="area_desc"    />
+        <result property="areaStatus"    column="area_status"    />
+        <result property="delFlag"    column="del_flag"    />
     </resultMap>
 
     <sql id="selectSysDomainVo">
-        select domain_id, domain_parent_id, droles_id, domain_name, domain_account, domain_indate, domain_region, domain_phone, domain_email, domain_desc, domain_relation_id, domain_status, del_flag, create_by, create_time, update_by, update_time from sys_domain
+        select d.domain_id, d.domain_parent_id, d.droles_id, d.domain_name, d.domain_account, d.domain_indate, d.domain_region, d.domain_phone,
+               d.domain_email, d.domain_desc, d.domain_relation_id, d.domain_status, d.del_flag, d.create_by, d.create_time, d.update_by, d.update_time,
+               r.droles_name, r.droles_type, r.droles_status,
+               a.area_name, a.area_status
+        from sys_domain d
+        inner join sys_domain_roles r on r.droles_id = d.droles_id
+        left  join sys_area a on a.area_id = d.domain_region
     </sql>
 
     <select id="selectSysDomainList" parameterType="SysDomain" resultMap="SysDomainResult">
         <include refid="selectSysDomainVo"/>
         <where>  
-            <if test="domainParentId != null  and domainParentId != ''"> and domain_parent_id = #{domainParentId}</if>
-            <if test="drolesId != null  and drolesId != ''"> and droles_id = #{drolesId}</if>
-            <if test="domainName != null  and domainName != ''"> and domain_name like concat('%', #{domainName}, '%')</if>
-            <if test="domainAccount != null  and domainAccount != ''"> and domain_account = #{domainAccount}</if>
-            <if test="domainIndate != null "> and domain_indate = #{domainIndate}</if>
-            <if test="domainRegion != null  and domainRegion != ''"> and domain_region = #{domainRegion}</if>
-            <if test="domainPhone != null  and domainPhone != ''"> and domain_phone = #{domainPhone}</if>
-            <if test="domainEmail != null  and domainEmail != ''"> and domain_email = #{domainEmail}</if>
-            <if test="domainDesc != null  and domainDesc != ''"> and domain_desc = #{domainDesc}</if>
-            <if test="domainRelationId != null  and domainRelationId != ''"> and domain_relation_id = #{domainRelationId}</if>
-            <if test="domainStatus != null  and domainStatus != ''"> and domain_status = #{domainStatus}</if>
+            <if test="domainParentId != null  and domainParentId != ''"> and d.domain_parent_id = #{domainParentId}</if>
+            <if test="drolesId != null  and drolesId != ''"> and d.droles_id = #{drolesId}</if>
+            <if test="domainName != null  and domainName != ''"> and d.domain_name like concat('%', #{domainName}, '%')</if>
+            <if test="domainAccount != null  and domainAccount != ''"> and d.domain_account = #{domainAccount}</if>
+            <if test="domainIndate != null "> and d.domain_indate = #{domainIndate}</if>
+            <if test="domainRegion != null  and domainRegion != ''"> and d.domain_region = #{domainRegion}</if>
+            <if test="domainPhone != null  and domainPhone != ''"> and d.domain_phone = #{domainPhone}</if>
+            <if test="domainEmail != null  and domainEmail != ''"> and d.domain_email = #{domainEmail}</if>
+            <if test="domainDesc != null  and domainDesc != ''"> and d.domain_desc = #{domainDesc}</if>
+            <if test="domainRelationId != null  and domainRelationId != ''"> and d.domain_relation_id = #{domainRelationId}</if>
+            <if test="domainStatus != null  and domainStatus != ''"> and d.domain_status = #{domainStatus}</if>
         </where>
     </select>
     
     <select id="selectSysDomainByDomainId" parameterType="String" resultMap="SysDomainResult">
         <include refid="selectSysDomainVo"/>
-        where domain_id = #{domainId}
+        where d.domain_id = #{domainId}
     </select>
         
     <insert id="insertSysDomain" parameterType="SysDomain">
