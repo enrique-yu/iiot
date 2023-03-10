@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.icoolkj.system.mapper.IcCompBasicMapper">
+<mapper namespace="com.icoolkj.company.mapper.IcCompBasicMapper">
     
     <resultMap type="IcCompBasic" id="IcCompBasicResult">
         <result property="compBasicId"    column="comp_basic_id"    />
