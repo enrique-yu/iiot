@@ -119,23 +119,20 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
     //企业账号管理
     private void createCompAccount(DcCompBasic dcCompBasic) {
         String account = "COMP-" + dcCompBasic.getCompCreditCode();  //企业管理用户账号
-        //组织账号
         String domainId = IdWorker.nextId().toString();
         SysDomain sysDomain = new SysDomain();
         sysDomain.setDomainId(domainId);
-        sysDomain.setDomainParentId("");
-        sysDomain.setDrolesId(SysConstants.DOMAIN_TYPE_COMP);  //企业组织角色
+        sysDomain.setDomainParentId(SysConstants.DOMAIN_COMP); //企业组织域
+        sysDomain.setDrolesId(SysConstants.DOMAIN_ROLE_COMP);  //企业组织角色
         sysDomain.setDomainName(dcCompBasic.getCompName());
         sysDomain.setDomainAccount(account);
         Calendar rightNowDate = Calendar.getInstance();
-        rightNowDate.add(Calendar.YEAR, 20);
+        rightNowDate.add(Calendar.YEAR, 20); //有效期20年
         sysDomain.setDomainIndate(rightNowDate.getTime()); //组织账户有效期
         sysDomain.setDomainRegion(dcCompBasic.getCompArea());
         sysDomain.setDomainPhone(dcCompBasic.getCompLxrPhone());
         sysDomain.setDomainEmail(dcCompBasic.getCompLxrEmail());
-        sysDomain.setDomainDesc("");
         sysDomain.setDomainRelationId(""); //组织账号与业务关系ID
-        sysDomain.setDomainStatus("0"); //组织账号状态（0正常 1停用）
         sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomain.setCreateTime(DateUtils.getNowDate());
         sysDomainMapper.insertSysDomain(sysDomain);
@@ -145,10 +142,8 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         SysDept dept = new SysDept();
         String deptId = IdWorker.nextId().toString();
         dept.setDeptId(deptId);
-        dept.setParentId(SysConstants.DEPT_133702242296393723);
-        dept.setAncestors(SysConstants.DEPT_HOME+","+SysConstants.DEPT_133702242296393723);
         dept.setDomainId(domainId);
-        dept.setDeptName(dcCompBasic.getCompName()); //部门名称
+        dept.setDeptName("系统默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
         dept.setCreateTime(DateUtils.getNowDate());//创建时间
@@ -162,14 +157,15 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         //生成随机8位密码，包含大小写和数字
         String password = PasswordUtils.getPassword(8);
         sysUser.setUserName(account); //企业管理用户账号
-        sysUser.setNickName(dcCompBasic.getCompName());//用户昵称
-        //sysUser.set(SysConstants.deptType.COMP); //用户类型
+        sysUser.setNickName(account+"管理员");//用户昵称
+        sysUser.setUserType(SysConstants.USER_TYPE_COMP); //企业用户
         sysUser.setPassword(SecurityUtils.encryptPassword(password));
         String pass = AESUtils.encryptAES(password, AESUtils.KEY, AESUtils.IV);
-        //sysUser.setCleartextPassword(pass);
+        sysUser.setPasswordCleartext(pass);
         sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
-        sysUser.setCreateTime(DateUtils.getNowDate());
-        sysUser.setPhonenumber("");
+        sysUser.setCreateTime(DateUtils.getNowDate());  //手机号码
+        sysUser.setPhonenumber(dcCompBasic.getCompLxrPhone());   //用户邮箱
+        sysUser.setEmail(dcCompBasic.getCompLxrEmail());
         sysUserMapper.insertUser(sysUser);
 
         //添加角色

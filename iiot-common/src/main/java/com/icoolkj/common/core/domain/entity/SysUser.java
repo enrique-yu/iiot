@@ -100,6 +100,9 @@ public class SysUser extends BaseEntity
     /** 角色ID */
     private String roleId;
 
+    /** 用户类型（00系统用户） */
+    private String userType;
+
     public SysUser()
     {
 
@@ -330,6 +333,14 @@ public class SysUser extends BaseEntity
 
     public void setUserRelationId(String userRelationId) {
         this.userRelationId = userRelationId;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @Override
