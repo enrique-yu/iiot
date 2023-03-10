@@ -1,16 +1,15 @@
 package com.icoolkj.company.mapper;
 
-import com.icoolkj.company.domain.DcCompBasic;
-
 import java.util.List;
+import com.icoolkj.company.domain.DcCompBasic;
 
 /**
  * 企业基本信息Mapper接口
  * 
  * @author icoolkj
- * @date 2023-03-05
+ * @date 2023-03-10
  */
-public interface DcCompBasicMapper
+public interface DcCompBasicMapper 
 {
     /**
      * 查询企业基本信息
@@ -18,32 +17,31 @@ public interface DcCompBasicMapper
      * @param compBasicId 企业基本信息主键
      * @return 企业基本信息
      */
-    public DcCompBasic selectIcCompBasicByCompBasicId(String compBasicId);
+    public DcCompBasic selectDcCompBasicByCompBasicId(String compBasicId);
 
     /**
      * 查询企业基本信息列表
      * 
-     * @param icCompBasic 企业基本信息
+     * @param dcCompBasic 企业基本信息
      * @return 企业基本信息集合
      */
-    public List<DcCompBasic> selectIcCompBasicList(DcCompBasic icCompBasic);
+    public List<DcCompBasic> selectDcCompBasicList(DcCompBasic dcCompBasic);
 
     /**
      * 新增企业基本信息
      * 
-     * @param icCompBasic 企业基本信息
+     * @param dcCompBasic 企业基本信息
      * @return 结果
      */
-    public int insertIcCompBasic(DcCompBasic icCompBasic);
+    public int insertDcCompBasic(DcCompBasic dcCompBasic);
 
     /**
      * 修改企业基本信息
      * 
-     * @param icCompBasic 企业基本信息
+     * @param dcCompBasic 企业基本信息
      * @return 结果
      */
-    public int updateIcCompBasic(DcCompBasic icCompBasic);
-
+    public int updateDcCompBasic(DcCompBasic dcCompBasic);
 
     /**
      * 校验统一社会信用代码是否唯一

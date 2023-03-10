@@ -8,7 +8,7 @@ import com.icoolkj.common.annotation.Excel;
 import com.icoolkj.common.core.domain.BaseEntity;
 
 /**
- * 企业基本信息对象 ic_comp_basic
+ * 企业基本信息对象 dc_comp_basic
  * 
  * @author icoolkj
  * @date 2023-03-10
