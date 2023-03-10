@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.icoolkj.company.mapper.DcCompBasicMapper">
     
-    <resultMap type="IcCompBasic" id="IcCompBasicResult">
+    <resultMap type="DcCompBasic" id="DcCompBasicResult">
         <result property="compBasicId"    column="comp_basic_id"    />
         <result property="compName"    column="comp_name"    />
         <result property="compCreditCode"    column="comp_credit_code"    />
@@ -34,12 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectIcCompBasicVo">
+    <sql id="selectDcCompBasicVo">
         select comp_basic_id, comp_name, comp_credit_code, comp_type, comp_fr, comp_fr_phone, comp_area, comp_addr, comp_lng, comp_lat, comp_reg_date, comp_business_term, comp_manage_status, comp_approve_date, comp_approve_office, comp_reg_capital, comp_paid_capital, comp_manage_scope, comp_lxr, comp_lxr_phone, comp_lxr_email, comp_status, del_flag, create_by, create_time, update_by, update_time from ic_comp_basic
     </sql>
 
-    <select id="selectIcCompBasicList" parameterType="IcCompBasic" resultMap="IcCompBasicResult">
-        <include refid="selectIcCompBasicVo"/>
+    <select id="selectDcCompBasicList" parameterType="DcCompBasic" resultMap="DcCompBasicResult">
+        <include refid="selectDcCompBasicVo"/>
         <where>  
             <if test="compName != null  and compName != ''"> and comp_name like concat('%', #{compName}, '%')</if>
             <if test="compCreditCode != null  and compCreditCode != ''"> and comp_credit_code = #{compCreditCode}</if>
@@ -65,12 +65,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectIcCompBasicByCompBasicId" parameterType="String" resultMap="IcCompBasicResult">
-        <include refid="selectIcCompBasicVo"/>
+    <select id="selectDcCompBasicByCompBasicId" parameterType="String" resultMap="DcCompBasicResult">
+        <include refid="selectDcCompBasicVo"/>
         where comp_basic_id = #{compBasicId}
     </select>
         
-    <insert id="insertIcCompBasic" parameterType="IcCompBasic">
+    <insert id="insertDcCompBasic" parameterType="DcCompBasic">
         insert into ic_comp_basic
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="compBasicId != null">comp_basic_id,</if>
@@ -132,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateIcCompBasic" parameterType="IcCompBasic">
+    <update id="updateDcCompBasic" parameterType="DcCompBasic">
         update ic_comp_basic
         <trim prefix="SET" suffixOverrides=",">
             <if test="compName != null and compName != ''">comp_name = #{compName},</if>
@@ -165,14 +165,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where comp_basic_id = #{compBasicId}
     </update>
 
-    <delete id="deleteIcCompBasicByCompBasicId" parameterType="String">
-        delete from ic_comp_basic where comp_basic_id = #{compBasicId}
-    </delete>
-
-    <delete id="deleteIcCompBasicByCompBasicIds" parameterType="String">
-        delete from ic_comp_basic where comp_basic_id in 
-        <foreach item="compBasicId" collection="array" open="(" separator="," close=")">
-            #{compBasicId}
-        </foreach>
-    </delete>
+    <select id="checkCreditCodeUnique" resultMap="DcCompBasicResult">
+        <include refid="selectSysAreaVo"/>
+        where comp_credit_code=#{compCreditCode} limit 1
+    </select>
 </mapper>
