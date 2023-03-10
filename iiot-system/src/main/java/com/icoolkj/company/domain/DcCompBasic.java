@@ -13,7 +13,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
  * @author icoolkj
  * @date 2023-03-10
  */
-public class IcCompBasic extends BaseEntity
+public class DcCompBasic extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

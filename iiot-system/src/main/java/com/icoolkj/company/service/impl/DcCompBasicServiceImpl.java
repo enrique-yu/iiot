@@ -10,9 +10,9 @@ import com.icoolkj.common.utils.aes.PasswordUtils;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
-import com.icoolkj.company.domain.IcCompBasic;
-import com.icoolkj.company.mapper.IcCompBasicMapper;
-import com.icoolkj.company.service.IIcCompBasicService;
+import com.icoolkj.company.domain.DcCompBasic;
+import com.icoolkj.company.mapper.DcCompBasicMapper;
+import com.icoolkj.company.service.IDcCompBasicService;
 import com.icoolkj.common.core.domain.entity.SysDomain;
 import com.icoolkj.system.domain.SysUserRole;
 import com.icoolkj.system.mapper.SysDeptMapper;
@@ -33,10 +33,10 @@ import java.util.List;
  * @date 2023-03-05
  */
 @Service
-public class IcCompBasicServiceImpl implements IIcCompBasicService 
+public class DcCompBasicServiceImpl implements IDcCompBasicService
 {
     @Autowired
-    private IcCompBasicMapper icCompBasicMapper;
+    private DcCompBasicMapper icCompBasicMapper;
 
     @Autowired
     private SysDomainMapper sysDomainMapper;
@@ -57,7 +57,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
      * @return 企业基本信息
      */
     @Override
-    public IcCompBasic selectIcCompBasicByCompBasicId(String compBasicId)
+    public DcCompBasic selectIcCompBasicByCompBasicId(String compBasicId)
     {
         return icCompBasicMapper.selectIcCompBasicByCompBasicId(compBasicId);
     }
@@ -69,7 +69,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
      * @return 企业基本信息
      */
     @Override
-    public List<IcCompBasic> selectIcCompBasicList(IcCompBasic icCompBasic)
+    public List<DcCompBasic> selectIcCompBasicList(DcCompBasic icCompBasic)
     {
         return icCompBasicMapper.selectIcCompBasicList(icCompBasic);
     }
@@ -81,7 +81,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
      * @return 结果
      */
     @Override
-    public int insertIcCompBasic(IcCompBasic icCompBasic)
+    public int insertIcCompBasic(DcCompBasic icCompBasic)
     {
         icCompBasic.setCompBasicId(IdWorker.nextId().toString());
         icCompBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
@@ -96,7 +96,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
      * @return 结果
      */
     @Override
-    public int updateIcCompBasic(IcCompBasic icCompBasic)
+    public int updateIcCompBasic(DcCompBasic icCompBasic)
     {
         icCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         icCompBasic.setUpdateTime(DateUtils.getNowDate());
@@ -110,9 +110,9 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
      * @return 结果
      */
     @Override
-    public boolean checkCreditCodeUnique(IcCompBasic icCompBasic)
+    public boolean checkCreditCodeUnique(DcCompBasic icCompBasic)
     {
-        IcCompBasic info = icCompBasicMapper.checkCreditCodeUnique(icCompBasic.getCompCreditCode());
+        DcCompBasic info = icCompBasicMapper.checkCreditCodeUnique(icCompBasic.getCompCreditCode());
         if (StringUtils.isNotNull(info))
         {
             //如果是修改判断ID是否存在并且一致
@@ -127,7 +127,7 @@ public class IcCompBasicServiceImpl implements IIcCompBasicService
 
 
     //企业账号管理
-    private void createCompAccount(IcCompBasic icCompBasic) {
+    private void createCompAccount(DcCompBasic icCompBasic) {
         String account = "COMP-" + icCompBasic.getCompCreditCode();  //企业管理用户账号
         //组织账号
         String domainId = IdWorker.nextId().toString();

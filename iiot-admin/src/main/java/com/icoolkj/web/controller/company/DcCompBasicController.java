@@ -7,8 +7,8 @@ import com.icoolkj.common.core.page.TableDataInfo;
 import com.icoolkj.common.enums.BusinessType;
 import com.icoolkj.common.utils.CreditCodeValidator;
 import com.icoolkj.common.utils.poi.ExcelUtil;
-import com.icoolkj.company.domain.IcCompBasic;
-import com.icoolkj.company.service.IIcCompBasicService;
+import com.icoolkj.company.domain.DcCompBasic;
+import com.icoolkj.company.service.IDcCompBasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
@@ -25,20 +25,20 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/company/basic")
-public class IcCompBasicController extends BaseController
+public class DcCompBasicController extends BaseController
 {
     @Autowired
-    private IIcCompBasicService icCompBasicService;
+    private IDcCompBasicService icCompBasicService;
 
     /**
      * 查询企业基本信息列表
      */
     @PreAuthorize("@ss.hasPermi('company:basic:list')")
     @GetMapping("/list")
-    public TableDataInfo list(IcCompBasic icCompBasic)
+    public TableDataInfo list(DcCompBasic icCompBasic)
     {
         startPage();
-        List<IcCompBasic> list = icCompBasicService.selectIcCompBasicList(icCompBasic);
+        List<DcCompBasic> list = icCompBasicService.selectIcCompBasicList(icCompBasic);
         return getDataTable(list);
     }
 
@@ -48,10 +48,10 @@ public class IcCompBasicController extends BaseController
     @PreAuthorize("@ss.hasPermi('company:basic:export')")
     @Log(title = "企业基本信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, IcCompBasic icCompBasic)
+    public void export(HttpServletResponse response, DcCompBasic icCompBasic)
     {
-        List<IcCompBasic> list = icCompBasicService.selectIcCompBasicList(icCompBasic);
-        ExcelUtil<IcCompBasic> util = new ExcelUtil<IcCompBasic>(IcCompBasic.class);
+        List<DcCompBasic> list = icCompBasicService.selectIcCompBasicList(icCompBasic);
+        ExcelUtil<DcCompBasic> util = new ExcelUtil<DcCompBasic>(DcCompBasic.class);
         util.exportExcel(response, list, "企业基本信息数据");
     }
 
@@ -71,7 +71,7 @@ public class IcCompBasicController extends BaseController
     @PreAuthorize("@ss.hasPermi('company:basic:add')")
     @Log(title = "企业基本信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody IcCompBasic icCompBasic)
+    public AjaxResult add(@RequestBody DcCompBasic icCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(icCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
         if (!icCompBasicService.checkCreditCodeUnique(icCompBasic))
@@ -88,13 +88,14 @@ public class IcCompBasicController extends BaseController
     @PreAuthorize("@ss.hasPermi('company:basic:edit')")
     @Log(title = "企业基本信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody IcCompBasic icCompBasic)
+    public AjaxResult edit(@RequestBody DcCompBasic icCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(icCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
-        if (!icCompBasicService.checkCreditCodeUnique(icCompBasic))
+       /* DcCompBasic oldCompBasic = icCompBasicService.checkCreditCodeUnique(icCompBasic);
+        if (!oldCompBasic)
         {
-            return error("新增企业统一社会信用代码【" + icCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
-        }
+            return error("修改企业统一社会信用代码【" + icCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
+        }*/
 
         return toAjax(icCompBasicService.updateIcCompBasic(icCompBasic));
     }
