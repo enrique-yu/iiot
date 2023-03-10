@@ -81,7 +81,7 @@ public class DcCompBasicController extends BaseController
     public AjaxResult add(@RequestBody DcCompBasic dcCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
-        if (!dcCompBasicService.checkCreditCodeUnique(dcCompBasic))
+        if ( dcCompBasicService.getDcCompBasicByCreditCode(dcCompBasic) != null )
         {
             return error("新增企业统一社会信用代码【" + dcCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
         }
@@ -98,11 +98,11 @@ public class DcCompBasicController extends BaseController
     public AjaxResult edit(@RequestBody DcCompBasic dcCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
-       /* DcCompBasic oldCompBasic = icCompBasicService.checkCreditCodeUnique(icCompBasic);
-        if (!oldCompBasic)
+        DcCompBasic oldCompBasic = dcCompBasicService.getDcCompBasicByCreditCode(dcCompBasic);
+        if (oldCompBasic != null && !dcCompBasic.equals(oldCompBasic.getCompBasicId() ))
         {
-            return error("修改企业统一社会信用代码【" + icCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
-        }*/
+            return error("修改企业统一社会信用代码【" + dcCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
+        }
 
         return toAjax(dcCompBasicService.updateDcCompBasic(dcCompBasic));
     }

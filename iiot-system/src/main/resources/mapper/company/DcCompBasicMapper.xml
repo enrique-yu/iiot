@@ -165,8 +165,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where comp_basic_id = #{compBasicId}
     </update>
 
-    <select id="checkCreditCodeUnique" resultMap="DcCompBasicResult">
+    <select id="getDcCompBasicByCreditCode" parameterType="String" resultMap="DcCompBasicResult">
         <include refid="selectDcCompBasicVo"/>
-        where comp_credit_code=#{compCreditCode} limit 1
+        where comp_credit_code=#{compCreditCode}
     </select>
+
+
 </mapper>

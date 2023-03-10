@@ -104,25 +104,15 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
 
 
     /**
-     * 校验统一社会信用代码是否唯一
+     * 根据统一社会信用代码获取信息
      *
      * @param dcCompBasic
      * @return 结果
      */
     @Override
-    public boolean checkCreditCodeUnique(DcCompBasic dcCompBasic)
+    public DcCompBasic getDcCompBasicByCreditCode(DcCompBasic dcCompBasic)
     {
-        DcCompBasic info = dcCompBasicMapper.checkCreditCodeUnique(dcCompBasic.getCompCreditCode());
-        if (StringUtils.isNotNull(info))
-        {
-            //如果是修改判断ID是否存在并且一致
-            String id = dcCompBasic.getCompBasicId();
-            if(StringUtils.isNotEmpty(id) && id.equals(info.getCompBasicId())){
-                return UserConstants.UNIQUE;
-            }
-            return UserConstants.NOT_UNIQUE;
-        }
-        return UserConstants.UNIQUE;
+        return dcCompBasicMapper.getDcCompBasicByCreditCode(dcCompBasic.getCompCreditCode());
     }
 
 

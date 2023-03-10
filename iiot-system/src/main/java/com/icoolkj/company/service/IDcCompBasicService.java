@@ -44,10 +44,10 @@ public interface IDcCompBasicService
     public int updateDcCompBasic(DcCompBasic dcCompBasic);
 
     /**
-     * 校验统一社会信用代码是否唯一
+     * 根据统一社会信用代码获取信息
      *
      * @param dcCompBasic
      * @return 结果
      */
-    public boolean checkCreditCodeUnique(DcCompBasic dcCompBasic);
+    public DcCompBasic getDcCompBasicByCreditCode(DcCompBasic dcCompBasic);
 }
