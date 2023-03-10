@@ -99,7 +99,7 @@ public class DcCompBasicController extends BaseController
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
         DcCompBasic oldCompBasic = dcCompBasicService.getDcCompBasicByCreditCode(dcCompBasic);
-        if (oldCompBasic != null && !dcCompBasic.equals(oldCompBasic.getCompBasicId() ))
+        if (oldCompBasic != null && !dcCompBasic.getCompBasicId().equals(oldCompBasic.getCompBasicId() ))
         {
             return error("修改企业统一社会信用代码【" + dcCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
         }
