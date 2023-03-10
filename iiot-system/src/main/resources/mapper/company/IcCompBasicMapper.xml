@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.icoolkj.company.mapper.IcCompBasicMapper">
+<mapper namespace="com.icoolkj.system.mapper.IcCompBasicMapper">
     
     <resultMap type="IcCompBasic" id="IcCompBasicResult">
         <result property="compBasicId"    column="comp_basic_id"    />
@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="compCreditCode"    column="comp_credit_code"    />
         <result property="compType"    column="comp_type"    />
         <result property="compFr"    column="comp_fr"    />
+        <result property="compFrPhone"    column="comp_fr_phone"    />
         <result property="compArea"    column="comp_area"    />
         <result property="compAddr"    column="comp_addr"    />
         <result property="compLng"    column="comp_lng"    />
@@ -22,6 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="compRegCapital"    column="comp_reg_capital"    />
         <result property="compPaidCapital"    column="comp_paid_capital"    />
         <result property="compManageScope"    column="comp_manage_scope"    />
+        <result property="compLxr"    column="comp_lxr"    />
+        <result property="compLxrPhone"    column="comp_lxr_phone"    />
+        <result property="compLxrEmail"    column="comp_lxr_email"    />
         <result property="compStatus"    column="comp_status"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
@@ -31,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectIcCompBasicVo">
-        select comp_basic_id, comp_name, comp_credit_code, comp_type, comp_fr, comp_area, comp_addr, comp_lng, comp_lat, comp_reg_date, comp_business_term, comp_manage_status, comp_approve_date, comp_approve_office, comp_reg_capital, comp_paid_capital, comp_manage_scope, comp_status, del_flag, create_by, create_time, update_by, update_time from ic_comp_basic
+        select comp_basic_id, comp_name, comp_credit_code, comp_type, comp_fr, comp_fr_phone, comp_area, comp_addr, comp_lng, comp_lat, comp_reg_date, comp_business_term, comp_manage_status, comp_approve_date, comp_approve_office, comp_reg_capital, comp_paid_capital, comp_manage_scope, comp_lxr, comp_lxr_phone, comp_lxr_email, comp_status, del_flag, create_by, create_time, update_by, update_time from ic_comp_basic
     </sql>
 
     <select id="selectIcCompBasicList" parameterType="IcCompBasic" resultMap="IcCompBasicResult">
@@ -41,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="compCreditCode != null  and compCreditCode != ''"> and comp_credit_code = #{compCreditCode}</if>
             <if test="compType != null  and compType != ''"> and comp_type = #{compType}</if>
             <if test="compFr != null  and compFr != ''"> and comp_fr = #{compFr}</if>
+            <if test="compFrPhone != null  and compFrPhone != ''"> and comp_fr_phone = #{compFrPhone}</if>
             <if test="compArea != null  and compArea != ''"> and comp_area = #{compArea}</if>
             <if test="compAddr != null  and compAddr != ''"> and comp_addr = #{compAddr}</if>
             <if test="compLng != null  and compLng != ''"> and comp_lng = #{compLng}</if>
@@ -53,6 +58,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="compRegCapital != null  and compRegCapital != ''"> and comp_reg_capital = #{compRegCapital}</if>
             <if test="compPaidCapital != null  and compPaidCapital != ''"> and comp_paid_capital = #{compPaidCapital}</if>
             <if test="compManageScope != null  and compManageScope != ''"> and comp_manage_scope = #{compManageScope}</if>
+            <if test="compLxr != null  and compLxr != ''"> and comp_lxr = #{compLxr}</if>
+            <if test="compLxrPhone != null  and compLxrPhone != ''"> and comp_lxr_phone = #{compLxrPhone}</if>
+            <if test="compLxrEmail != null  and compLxrEmail != ''"> and comp_lxr_email = #{compLxrEmail}</if>
             <if test="compStatus != null  and compStatus != ''"> and comp_status = #{compStatus}</if>
         </where>
     </select>
@@ -66,10 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into ic_comp_basic
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="compBasicId != null">comp_basic_id,</if>
-            <if test="compName != null">comp_name,</if>
-            <if test="compCreditCode != null">comp_credit_code,</if>
+            <if test="compName != null and compName != ''">comp_name,</if>
+            <if test="compCreditCode != null and compCreditCode != ''">comp_credit_code,</if>
             <if test="compType != null">comp_type,</if>
             <if test="compFr != null">comp_fr,</if>
+            <if test="compFrPhone != null">comp_fr_phone,</if>
             <if test="compArea != null">comp_area,</if>
             <if test="compAddr != null">comp_addr,</if>
             <if test="compLng != null">comp_lng,</if>
@@ -82,8 +91,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="compRegCapital != null">comp_reg_capital,</if>
             <if test="compPaidCapital != null">comp_paid_capital,</if>
             <if test="compManageScope != null">comp_manage_scope,</if>
-            <if test="compStatus != null">comp_status,</if>
-            <if test="delFlag != null">del_flag,</if>
+            <if test="compLxr != null">comp_lxr,</if>
+            <if test="compLxrPhone != null">comp_lxr_phone,</if>
+            <if test="compLxrEmail != null">comp_lxr_email,</if>
+            <if test="compStatus != null and compStatus != ''">comp_status,</if>
+            <if test="delFlag != null and delFlag != ''">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -91,10 +103,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="compBasicId != null">#{compBasicId},</if>
-            <if test="compName != null">#{compName},</if>
-            <if test="compCreditCode != null">#{compCreditCode},</if>
+            <if test="compName != null and compName != ''">#{compName},</if>
+            <if test="compCreditCode != null and compCreditCode != ''">#{compCreditCode},</if>
             <if test="compType != null">#{compType},</if>
             <if test="compFr != null">#{compFr},</if>
+            <if test="compFrPhone != null">#{compFrPhone},</if>
             <if test="compArea != null">#{compArea},</if>
             <if test="compAddr != null">#{compAddr},</if>
             <if test="compLng != null">#{compLng},</if>
@@ -107,8 +120,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="compRegCapital != null">#{compRegCapital},</if>
             <if test="compPaidCapital != null">#{compPaidCapital},</if>
             <if test="compManageScope != null">#{compManageScope},</if>
-            <if test="compStatus != null">#{compStatus},</if>
-            <if test="delFlag != null">#{delFlag},</if>
+            <if test="compLxr != null">#{compLxr},</if>
+            <if test="compLxrPhone != null">#{compLxrPhone},</if>
+            <if test="compLxrEmail != null">#{compLxrEmail},</if>
+            <if test="compStatus != null and compStatus != ''">#{compStatus},</if>
+            <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -119,10 +135,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateIcCompBasic" parameterType="IcCompBasic">
         update ic_comp_basic
         <trim prefix="SET" suffixOverrides=",">
-            <if test="compName != null">comp_name = #{compName},</if>
-            <if test="compCreditCode != null">comp_credit_code = #{compCreditCode},</if>
+            <if test="compName != null and compName != ''">comp_name = #{compName},</if>
+            <if test="compCreditCode != null and compCreditCode != ''">comp_credit_code = #{compCreditCode},</if>
             <if test="compType != null">comp_type = #{compType},</if>
             <if test="compFr != null">comp_fr = #{compFr},</if>
+            <if test="compFrPhone != null">comp_fr_phone = #{compFrPhone},</if>
             <if test="compArea != null">comp_area = #{compArea},</if>
             <if test="compAddr != null">comp_addr = #{compAddr},</if>
             <if test="compLng != null">comp_lng = #{compLng},</if>
@@ -135,8 +152,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="compRegCapital != null">comp_reg_capital = #{compRegCapital},</if>
             <if test="compPaidCapital != null">comp_paid_capital = #{compPaidCapital},</if>
             <if test="compManageScope != null">comp_manage_scope = #{compManageScope},</if>
-            <if test="compStatus != null">comp_status = #{compStatus},</if>
-            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="compLxr != null">comp_lxr = #{compLxr},</if>
+            <if test="compLxrPhone != null">comp_lxr_phone = #{compLxrPhone},</if>
+            <if test="compLxrEmail != null">comp_lxr_email = #{compLxrEmail},</if>
+            <if test="compStatus != null and compStatus != ''">comp_status = #{compStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
@@ -145,10 +165,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where comp_basic_id = #{compBasicId}
     </update>
 
-    <select id="checkCreditCodeUnique" resultMap="IcCompBasicResult">
-        <include refid="selectIcCompBasicVo"/>
-        where comp_credit_code=#{compCreditCode} limit 1
-    </select>
+    <delete id="deleteIcCompBasicByCompBasicId" parameterType="String">
+        delete from ic_comp_basic where comp_basic_id = #{compBasicId}
+    </delete>
 
-
+    <delete id="deleteIcCompBasicByCompBasicIds" parameterType="String">
+        delete from ic_comp_basic where comp_basic_id in 
+        <foreach item="compBasicId" collection="array" open="(" separator="," close=")">
+            #{compBasicId}
+        </foreach>
+    </delete>
 </mapper>

@@ -11,7 +11,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
  * 企业基本信息对象 ic_comp_basic
  * 
  * @author icoolkj
- * @date 2023-03-08
+ * @date 2023-03-10
  */
 public class IcCompBasic extends BaseEntity
 {
