@@ -1,4 +1,4 @@
-package com.icoolkj.system.domain;
+package com.icoolkj.common.core.domain.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

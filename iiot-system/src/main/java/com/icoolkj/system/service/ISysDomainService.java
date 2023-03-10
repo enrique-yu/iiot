@@ -1,7 +1,7 @@
 package com.icoolkj.system.service;
 
 import java.util.List;
-import com.icoolkj.system.domain.SysDomain;
+import com.icoolkj.common.core.domain.entity.SysDomain;
 
 /**
  * 系统组织账户Service接口

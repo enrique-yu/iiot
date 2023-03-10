@@ -21,27 +21,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime" column="create_time" />
 		<result property="updateBy"   column="update_by"   />
 		<result property="updateTime" column="update_time" />
+		<association property="domain"    column="domain_id" javaType="SysDomain" resultMap="SysDomainResult" />
+	</resultMap>
+
+	<resultMap type="SysDomain" id="SysDomainResult">
+		<result property="domainId"    column="domain_id"    />
+		<result property="domainParentId"    column="domain_parent_id"    />
+		<result property="drolesId"    column="droles_id"    />
+		<result property="domainName"    column="domain_name"    />
+		<result property="domainAccount"    column="domain_account"    />
+		<result property="domainIndate"    column="domain_indate"    />
+		<result property="domainRegion"    column="domain_region"    />
+		<result property="domainPhone"    column="domain_phone"    />
+		<result property="domainEmail"    column="domain_email"    />
+		<result property="domainDesc"    column="domain_desc"    />
+		<result property="domainRelationId"    column="domain_relation_id"    />
+		<result property="domainStatus"    column="domain_status"    />
+		<result property="delFlag"    column="del_flag"    />
+		<result property="createBy"    column="create_by"    />
+		<result property="createTime"    column="create_time"    />
+		<result property="updateBy"    column="update_by"    />
+		<result property="updateTime"    column="update_time"    />
 	</resultMap>
 	
 	<sql id="selectDeptVo">
-        select d.dept_id, d.parent_id, d.ancestors, d.domain_id, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time
+        select d.dept_id, d.parent_id, d.ancestors, d.domain_id, d.dept_name, d.order_num, d.leader, d.phone, d.email,
+               d.status, d.del_flag, d.create_by, d.create_time,
+               dn.domain_name
         from sys_dept d
+        inner join sys_domain dn on dn.domain_id = d.domain_id
     </sql>
     
 	<select id="selectDeptList" parameterType="SysDept" resultMap="SysDeptResult">
         <include refid="selectDeptVo"/>
         where d.del_flag = '0'
 		<if test="deptId != null and deptId != 0">
-			AND dept_id = #{deptId}
+			AND d.dept_id = #{deptId}
 		</if>
         <if test="parentId != null and parentId != 0">
-			AND parent_id = #{parentId}
+			AND d.parent_id = #{parentId}
+		</if>
+		<if test="domainName != null and domainName != ''">
+			AND dn.domain_name like concat('%', #{domainName}, '%')
 		</if>
 		<if test="deptName != null and deptName != ''">
-			AND dept_name like concat('%', #{deptName}, '%')
+			AND d.dept_name like concat('%', #{deptName}, '%')
 		</if>
 		<if test="status != null and status != ''">
-			AND status = #{status}
+			AND d.status = #{status}
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
@@ -85,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="checkDeptNameUnique" resultMap="SysDeptResult">
 	    <include refid="selectDeptVo"/>
-		where dept_name=#{deptName} and parent_id = #{parentId} and del_flag = '0' limit 1
+		where dept_name=#{deptName} and d.parent_id = #{parentId} and d.del_flag = '0' limit 1
 	</select>
     
     <insert id="insertDept" parameterType="SysDept">

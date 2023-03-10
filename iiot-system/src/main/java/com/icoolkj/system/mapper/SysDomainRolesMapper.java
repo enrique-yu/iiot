@@ -1,7 +1,7 @@
 package com.icoolkj.system.mapper;
 
 import java.util.List;
-import com.icoolkj.system.domain.SysDomainRoles;
+import com.icoolkj.common.core.domain.entity.SysDomainRoles;
 
 /**
  * 系统组织权限Mapper接口

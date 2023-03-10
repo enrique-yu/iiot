@@ -1,4 +1,4 @@
-package com.icoolkj.system.domain;
+package com.icoolkj.common.core.domain.entity;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -13,7 +13,7 @@ import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.company.domain.IcCompBasic;
 import com.icoolkj.company.mapper.IcCompBasicMapper;
 import com.icoolkj.company.service.IIcCompBasicService;
-import com.icoolkj.system.domain.SysDomain;
+import com.icoolkj.common.core.domain.entity.SysDomain;
 import com.icoolkj.system.domain.SysUserRole;
 import com.icoolkj.system.mapper.SysDeptMapper;
 import com.icoolkj.system.mapper.SysDomainMapper;
@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**

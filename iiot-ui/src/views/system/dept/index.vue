@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
+      <el-form-item label="组织账户名称" prop="domainName">
+        <el-input
+          v-model="queryParams.domainName"
+          placeholder="请输入组织账户名称"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="部门名称" prop="deptName">
         <el-input
           v-model="queryParams.deptName"
@@ -56,6 +64,7 @@
       :default-expand-all="isExpandAll"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
     >
+      <el-table-column label="组织账户名称" align="center" prop="domain.domainName" ></el-table-column>
       <el-table-column prop="deptName" label="部门名称" width="260"></el-table-column>
       <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
       <el-table-column prop="status" label="状态" width="100">
@@ -188,6 +197,7 @@ export default {
       refreshTable: true,
       // 查询参数
       queryParams: {
+        domainName: null,
         deptName: undefined,
         status: undefined
       },

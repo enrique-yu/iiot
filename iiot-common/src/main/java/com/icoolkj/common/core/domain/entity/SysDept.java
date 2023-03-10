@@ -54,6 +54,12 @@ public class SysDept extends BaseEntity
 
     /** 父部门名称 */
     private String parentName;
+
+    /** 系统组织账户名称 */
+    private String domainName;
+
+    /** 系统组织账户 **/
+    private SysDomain domain;
     
     /** 子部门 */
     private List<SysDept> children = new ArrayList<SysDept>();
@@ -190,6 +196,22 @@ public class SysDept extends BaseEntity
     public void setChildren(List<SysDept> children)
     {
         this.children = children;
+    }
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
+    }
+
+    public SysDomain getDomain() {
+        return domain;
+    }
+
+    public void setDomain(SysDomain domain) {
+        this.domain = domain;
     }
 
     @Override

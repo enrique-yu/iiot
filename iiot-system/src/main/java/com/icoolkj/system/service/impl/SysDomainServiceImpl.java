@@ -7,7 +7,7 @@ import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.mapper.SysDomainMapper;
-import com.icoolkj.system.domain.SysDomain;
+import com.icoolkj.common.core.domain.entity.SysDomain;
 import com.icoolkj.system.service.ISysDomainService;
 
 /**

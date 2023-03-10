@@ -2,7 +2,7 @@ package com.icoolkj.system.service.impl;
 
 import com.icoolkj.common.constant.UserConstants;
 import com.icoolkj.common.utils.StringUtils;
-import com.icoolkj.system.domain.SysArea;
+import com.icoolkj.common.core.domain.entity.SysArea;
 import com.icoolkj.system.mapper.SysAreaMapper;
 import com.icoolkj.system.service.ISysAreaService;
 import org.springframework.beans.factory.annotation.Autowired;

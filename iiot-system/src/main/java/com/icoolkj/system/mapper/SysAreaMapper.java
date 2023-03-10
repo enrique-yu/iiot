@@ -1,7 +1,7 @@
 package com.icoolkj.system.mapper;
 
 import java.util.List;
-import com.icoolkj.system.domain.SysArea;
+import com.icoolkj.common.core.domain.entity.SysArea;
 
 /**
  * 系统区域配置Mapper接口

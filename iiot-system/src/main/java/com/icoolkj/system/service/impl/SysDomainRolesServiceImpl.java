@@ -3,7 +3,7 @@ package com.icoolkj.system.service.impl;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
-import com.icoolkj.system.domain.SysDomainRoles;
+import com.icoolkj.common.core.domain.entity.SysDomainRoles;
 import com.icoolkj.system.mapper.SysDomainRolesMapper;
 import com.icoolkj.system.service.ISysDomainRolesService;
 import org.springframework.beans.factory.annotation.Autowired;

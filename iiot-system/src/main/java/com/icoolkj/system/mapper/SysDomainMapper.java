@@ -1,7 +1,7 @@
 package com.icoolkj.system.mapper;
 
 import java.util.List;
-import com.icoolkj.system.domain.SysDomain;
+import com.icoolkj.common.core.domain.entity.SysDomain;
 
 /**
  * 系统组织账户Mapper接口
