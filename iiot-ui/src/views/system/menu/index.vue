@@ -77,7 +77,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button 
+          <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -275,7 +275,7 @@
 </template>
 
 <script>
-import { listMenu, getMenu, delMenu, addMenu, updateMenu } from "@/api/system/menu";
+import { listMenu, getMenuHome, getMenu, delMenu, addMenu, updateMenu } from "@/api/system/menu";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import IconSelect from "@/components/IconSelect";
@@ -294,6 +294,7 @@ export default {
       menuList: [],
       // 菜单树选项
       menuOptions: [],
+      menuHome: "",
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -334,6 +335,9 @@ export default {
     /** 查询菜单列表 */
     getList() {
       this.loading = true;
+      getMenuHome().then(res => {
+        this.menuHome =  res.data.menuHome;
+      });
       listMenu(this.queryParams).then(response => {
         this.menuList = this.handleTree(response.data, "menuId");
         this.loading = false;
@@ -354,7 +358,7 @@ export default {
     getTreeselect() {
       listMenu().then(response => {
         this.menuOptions = [];
-        const menu = { menuId: 0, menuName: '主类目', children: [] };
+        const menu = { menuId: this.menuHome, menuName: '主类目', children: [] };
         menu.children = this.handleTree(response.data, "menuId");
         this.menuOptions.push(menu);
       });
@@ -368,7 +372,7 @@ export default {
     reset() {
       this.form = {
         menuId: undefined,
-        parentId: 0,
+        parentId: this.menuHome,
         menuName: undefined,
         icon: undefined,
         menuType: "M",
@@ -396,7 +400,7 @@ export default {
       if (row != null && row.menuId) {
         this.form.parentId = row.menuId;
       } else {
-        this.form.parentId = 0;
+        this.form.parentId = this.menuHome;
       }
       this.open = true;
       this.title = "添加菜单";

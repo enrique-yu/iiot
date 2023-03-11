@@ -1,6 +1,10 @@
 package com.icoolkj.web.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -42,6 +46,15 @@ public class SysMenuController extends BaseController
     {
         List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
         return success(menus);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:menu:list')")
+    @GetMapping("/getMenuHome")
+    public AjaxResult getMenuHome()
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("menuHome", SysConstants.MENU_HOME);
+        return success(map);
     }
 
     /**

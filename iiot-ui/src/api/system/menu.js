@@ -9,6 +9,13 @@ export function listMenu(query) {
   })
 }
 
+export function getMenuHome() {
+  return request({
+    url: '/system/menu/getMenuHome',
+    method: 'get',
+  })
+}
+
 // 查询菜单详细
 export function getMenu(menuId) {
   return request({
