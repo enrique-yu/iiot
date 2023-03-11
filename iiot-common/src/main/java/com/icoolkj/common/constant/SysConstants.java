@@ -19,16 +19,6 @@ public class SysConstants {
     public static final String MENU_HOME ="133698244612976640";
     public static final String MENU_SYS ="133697708996161536";
 
-    /**【部门】根部门ID */
-    public static final String DEPT_HOME ="133702242296393728";
-
-    //超级管理员
-    public static final String ROLE_GLY ="133700983795478528";
-
-    /** 根网站栏目ID */
-    public static final String ITEM_HOME ="138644752437342208";
-
-
 
     /** 系统组织角色 */
     public static final String DOMAIN_ROLE_SYSTEM ="553592170506878976";
@@ -36,11 +26,25 @@ public class SysConstants {
     /** 企业组织角色 */
     public static final String DOMAIN_ROLE_COMP ="553519200858013696";
 
+
     /** 系统组织域 */
     public static final String DOMAIN_SYSTEM ="553672938461593600";
 
     /** 企业组织域 */
     public static final String DOMAIN_COMP ="553692142187315200";
+
+
+    /**【部门】根部门ID */
+    public static final String DEPT_HOME ="133702242296393728";
+
+
+    /** 企业角色 */
+    public static final String ROLE_COMP ="138644752437342208";
+
+
+    //超级管理员
+    public static final String ROLE_GLY ="133700983795478528";
+
 
 
 

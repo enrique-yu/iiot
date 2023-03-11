@@ -102,6 +102,13 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="24">
+            <el-form-item label="企业所属区域" prop="compArea">
+              <treeselect v-model="form.compArea" :options="areaOptions" :normalizer="normalizer" placeholder="请选择企业所属区域" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col>
             <el-form-item label="企业联系人" prop="compLxr">
               <el-input v-model="form.compLxr" placeholder="请输入企业联系人" maxlength="80"/>
@@ -124,7 +131,7 @@
         </el-row>
         <el-row>
           <el-col>
-            <el-form-item label="区域状态">
+            <el-form-item label="企业状态">
               <el-radio-group v-model="form.compStatus">
                 <el-radio
                   v-for="dict in dict.type.sys_normal_disable"
@@ -147,10 +154,14 @@
 
 <script>
   import {listBasic, getBasic, delBasic, addBasic, updateBasic} from "@/api/company/basic";
+  import { listArea } from "@/api/system/area";
+  import Treeselect from "@riophae/vue-treeselect";
+  import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
   export default {
     name: "Basic",
     dicts: ['sys_normal_disable'],
+    components: { Treeselect },
     data() {
       return {
         // 遮罩层
@@ -167,6 +178,8 @@
         total: 0,
         // 企业基本信息表格数据
         basicList: [],
+        // 行政区域树选项
+        areaOptions: [],
         // 弹出层标题
         title: "",
         // 是否显示弹出层
@@ -195,6 +208,9 @@
               message: '统一社会信用代码格式不正确',
               trigger: 'blur'
             },
+          ],
+          compArea: [
+            { required: true, message: "企业所属区域不能为空", trigger: "blur" }
           ],
           compLxr: [
             {required: true, message: "企业联系人不能为空", trigger: "blur"},
@@ -226,11 +242,25 @@
       /** 查询企业基本信息列表 */
       getList() {
         this.loading = true;
+        listArea().then(response => {
+          this.areaOptions = this.handleTree(response.data, "areaId", "parentId");
+        });
         listBasic(this.queryParams).then(response => {
           this.basicList = response.rows;
           this.total = response.total;
           this.loading = false;
         });
+      },
+      /** 转换行政区域数据结构 */
+      normalizer(node) {
+        if (node.children && !node.children.length) {
+          delete node.children;
+        }
+        return {
+          id: node.areaId,
+          label: node.areaName,
+          children: node.children
+        };
       },
       // 取消按钮
       cancel() {

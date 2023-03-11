@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.icoolkj.company.mapper.DcCompBasicMapper;
 import com.icoolkj.company.domain.DcCompBasic;
 import com.icoolkj.company.service.IDcCompBasicService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 企业基本信息Service业务层处理
@@ -81,10 +82,12 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertDcCompBasic(DcCompBasic dcCompBasic)
     {
         dcCompBasic.setCompBasicId(IdWorker.nextId().toString());
         dcCompBasic.setCreateTime(DateUtils.getNowDate());
+        createCompAccount(dcCompBasic);
         return dcCompBasicMapper.insertDcCompBasic(dcCompBasic);
     }
 
@@ -95,10 +98,12 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateDcCompBasic(DcCompBasic dcCompBasic)
     {
         dcCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcCompBasic.setUpdateTime(DateUtils.getNowDate());
+        createCompAccount(dcCompBasic);
         return dcCompBasicMapper.updateDcCompBasic(dcCompBasic);
     }
 
@@ -118,6 +123,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
 
     //企业账号管理
     private void createCompAccount(DcCompBasic dcCompBasic) {
+        //添加企业组织账号
         String account = "COMP-" + dcCompBasic.getCompCreditCode();  //企业管理用户账号
         String domainId = IdWorker.nextId().toString();
         SysDomain sysDomain = new SysDomain();
@@ -137,22 +143,22 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysDomain.setCreateTime(DateUtils.getNowDate());
         sysDomainMapper.insertSysDomain(sysDomain);
 
-
-        //添加部门
+        //添加企业默认部门
         SysDept dept = new SysDept();
         String deptId = IdWorker.nextId().toString();
         dept.setDeptId(deptId);
         dept.setDomainId(domainId);
-        dept.setDeptName("系统默认部门"); //部门名称
+        dept.setDeptName("企业默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
         dept.setCreateTime(DateUtils.getNowDate());//创建时间
         sysDeptMapper.insertDept(dept);
 
-        //添加用户
+        //添加企业管理员用户
         SysUser sysUser = new SysUser();
         String userId = IdWorker.nextId().toString();
         sysUser.setUserId(userId);
+        sysUser.setDomainId(domainId); //所属组织
         sysUser.setDeptId(deptId); //所属部门ID
         //生成随机8位密码，包含大小写和数字
         String password = PasswordUtils.getPassword(8);
@@ -168,10 +174,10 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysUser.setEmail(dcCompBasic.getCompLxrEmail());
         sysUserMapper.insertUser(sysUser);
 
-        //添加角色
+        //添加企业角色
         SysUserRole ur = new SysUserRole();
-        ur.setUserId(sysUser.getUserId());
-        ur.setRoleId("");
+        ur.setUserId(userId);
+        ur.setRoleId(SysConstants.ROLE_COMP);
         sysUserRoleMapper.batchUserRole(Arrays.asList(ur));
     }
 }

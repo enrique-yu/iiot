@@ -119,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into sys_dept(
  			<if test="deptId != null and deptId != ''">dept_id,</if>
  			<if test="parentId != null and parentId != ''">parent_id,</if>
-		    <if test="domainId != null">domain_id,</if>
+		    <if test="domainId != null and domainId != ''">domain_id,</if>
  			<if test="deptName != null and deptName != ''">dept_name,</if>
  			<if test="ancestors != null and ancestors != ''">ancestors,</if>
  			<if test="orderNum != null">order_num,</if>
@@ -132,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		)values(
  			<if test="deptId != null and deptId != ''">#{deptId},</if>
  			<if test="parentId != null and parentId != ''">#{parentId},</if>
-		    <if test="domainId != null">#{domainId},</if>
+		    <if test="domainId != null and domainId != ''">#{domainId},</if>
  			<if test="deptName != null and deptName != ''">#{deptName},</if>
  			<if test="ancestors != null and ancestors != ''">#{ancestors},</if>
  			<if test="orderNum != null">#{orderNum},</if>
@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateDept" parameterType="SysDept">
  		update sys_dept
  		<set>
-			<if test="domainId != null and domainId != ''">domain_id = #{domainId},</if>
+			<!--<if test="domainId != null and domainId != ''">domain_id = #{domainId},</if>-->
  			<if test="parentId != null and parentId != ''">parent_id = #{parentId},</if>
  			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
  			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
