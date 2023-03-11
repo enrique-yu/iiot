@@ -138,7 +138,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysDomain.setDomainRegion(dcCompBasic.getCompArea());
         sysDomain.setDomainPhone(dcCompBasic.getCompLxrPhone());
         sysDomain.setDomainEmail(dcCompBasic.getCompLxrEmail());
-        sysDomain.setDomainRelationId(""); //组织账号与业务关系ID
+        sysDomain.setDomainRelationId(dcCompBasic.getCompBasicId()); //组织账号与业务关系ID
         sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         sysDomain.setCreateTime(DateUtils.getNowDate());
         sysDomainMapper.insertSysDomain(sysDomain);

@@ -39,7 +39,7 @@ public class SysConstants {
 
 
     /** 企业角色 */
-    public static final String ROLE_COMP ="138644752437342208";
+    public static final String ROLE_COMP ="554451769334169600";
 
 
     //超级管理员
