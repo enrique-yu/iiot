@@ -1,28 +1,23 @@
 package com.icoolkj.web.controller.company;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
-import com.icoolkj.common.utils.CreditCodeValidator;
-import io.jsonwebtoken.lang.Assert;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.icoolkj.common.annotation.Log;
 import com.icoolkj.common.core.controller.BaseController;
 import com.icoolkj.common.core.domain.AjaxResult;
+import com.icoolkj.common.core.domain.model.LoginUser;
+import com.icoolkj.common.core.page.TableDataInfo;
 import com.icoolkj.common.enums.BusinessType;
+import com.icoolkj.common.utils.CreditCodeValidator;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.poi.ExcelUtil;
 import com.icoolkj.company.domain.DcCompBasic;
 import com.icoolkj.company.service.IDcCompBasicService;
-import com.icoolkj.common.utils.poi.ExcelUtil;
-import com.icoolkj.common.core.page.TableDataInfo;
+import io.jsonwebtoken.lang.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 企业基本信息Controller
@@ -96,6 +91,35 @@ public class DcCompBasicController extends BaseController
     @Log(title = "企业基本信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody DcCompBasic dcCompBasic)
+    {
+        Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
+        DcCompBasic oldCompBasic = dcCompBasicService.getDcCompBasicByCreditCode(dcCompBasic);
+        if (oldCompBasic != null && !dcCompBasic.getCompBasicId().equals(oldCompBasic.getCompBasicId() ))
+        {
+            return error("修改企业统一社会信用代码【" + dcCompBasic.getCompCreditCode() + "】失败，统一社会信用代码已存在");
+        }
+
+        return toAjax(dcCompBasicService.updateDcCompBasic(dcCompBasic));
+    }
+
+
+    /**
+     * 通过当前企业用户，获取企业详细信息
+     */
+    @GetMapping(value = "/getCompUserInfo")
+    public AjaxResult getCompUserInfo()
+    {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        return success(dcCompBasicService.selectDcCompBasicByCompBasicId(loginUser.getUserId()));
+    }
+
+    /**
+     * 完善企业基本信息
+     */
+    @PreAuthorize("@ss.hasPermi('company:basic:perfectInfo')")
+    @Log(title = "完善企业基本信息", businessType = BusinessType.UPDATE)
+    @PostMapping("/perfectInfo")
+    public AjaxResult perfectInfo(@RequestBody DcCompBasic dcCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
         DcCompBasic oldCompBasic = dcCompBasicService.getDcCompBasicByCreditCode(dcCompBasic);
