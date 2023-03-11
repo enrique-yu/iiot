@@ -110,7 +110,7 @@ public class DcCompBasicController extends BaseController
     public AjaxResult getCompUserInfo()
     {
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        return success(dcCompBasicService.selectDcCompBasicByCompBasicId(loginUser.getUserId()));
+        return success(dcCompBasicService.selectDcCompBasicByCompBasicId(loginUser.getUser().getUserRelationId()));
     }
 
     /**
