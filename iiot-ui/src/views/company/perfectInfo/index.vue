@@ -8,16 +8,26 @@
         <div class="linebox">
           <el-divider content-position="left">企业信息</el-divider>
           <el-row>
-            <el-col :span="18">
+            <el-col :span="9">
               <el-form-item label="企业名称" prop="compName">
                 <el-input v-model="form.compName" disabled placeholder="请输入企业名称"></el-input>
               </el-form-item>
             </el-col>
+            <el-col :span="9">
+              <el-form-item label="经营状态" prop="compManageStatus">
+                <el-input v-model="form.compManageStatus"  placeholder="请输入经营状态"></el-input>
+              </el-form-item>
+            </el-col>
           </el-row>
           <el-row>
-            <el-col :span="18">
+            <el-col :span="9">
               <el-form-item label="统一社会信用代码" prop="compCreditCode">
                 <el-input v-model="form.compCreditCode" disabled placeholder="请输入统一社会信用代码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="9">
+              <el-form-item label="企业类型" prop="compType">
+                <el-input v-model="form.compType"  placeholder="请输入企业类型"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -174,6 +184,12 @@
               message: '统一社会信用代码格式不正确',
               trigger: 'blur'
             },
+          ],
+          compManageStatus: [
+            {required: true, message: "经营状态不能为空", trigger: "blur"}
+          ],
+          compType: [
+            {required: true, message: "企业类型不能为空", trigger: "blur"}
           ],
           compFr: [
             {required: true, message: "企业法人不能为空", trigger: "blur"},
