@@ -118,7 +118,7 @@ public class DcCompBasicController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('company:basic:perfectInfo')")
     @Log(title = "完善企业基本信息", businessType = BusinessType.UPDATE)
-    @PostMapping("/perfectInfo")
+    @PutMapping("/perfectInfo")
     public AjaxResult perfectInfo(@RequestBody DcCompBasic dcCompBasic)
     {
         Assert.isTrue(CreditCodeValidator.CodeValidate(dcCompBasic.getCompCreditCode()), "统一社会信用代码格式不正确");
