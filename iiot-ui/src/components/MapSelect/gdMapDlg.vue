@@ -5,7 +5,6 @@
       return {
         lngat: [],
         inputAddr: null,
-        addrLAL: null,
         thisMap: {},
       };
     },
@@ -71,7 +70,6 @@
         this.thisMap.addOverlay(myMarker);
         this.lngat[0] = e.point.lng;
         this.lngat[1] = e.point.lat;
-        // _this.addrLAL = e.point.lng + "," + e.point.lat;
         var geocoder = new BMap.Geocoder();
         geocoder.getLocation(e.point, function (geocoderResult, LocationOptions) {
           if (
@@ -116,7 +114,6 @@
               geocoder.getLocation(
                 new BMap.Point(this.cdata[0], this.cdata[1]),
                 function (result) {
-                  console.log(result);
                   _that.inputAddr = result.address;
 
                   const address = new BMap.Point(_that.cdata[0], _that.cdata[1]);
