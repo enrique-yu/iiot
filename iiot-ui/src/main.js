@@ -37,7 +37,6 @@ import DictTag from '@/components/DictTag'
 import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
-import BaiduMap from 'vue-baidu-map'
 
 
 // 全局方法挂载
@@ -59,7 +58,6 @@ Vue.component('Editor', Editor)
 Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
-Vue.use(BaiduMap, {ak: 'Glv3bck2PSBRWgkHAAtTWRipQZOZ8umH'})
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)

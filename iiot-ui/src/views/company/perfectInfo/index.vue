@@ -48,10 +48,15 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="10">
+            <el-col :span="8">
               <el-form-item label="经度" prop="compLng">
                 <el-input v-model="form.compLng" disabled placeholder="请输入经度"></el-input>
-                <el-button  type="primary">选择</el-button>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="纬度" prop="compLat">
+                <el-input v-model="form.compLat" disabled placeholder="请输入纬度" style="width:80%"></el-input>
+                <el-button :disabled="false" @click="mapDlg = true" style="width: 15%;margin-left: 5%;" type="primary">选择</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -135,6 +140,7 @@
           <el-button type="primary" @click="submitForm" v-hasPermi="['company:basic:perfectInfo']">保存信息</el-button>
       </span>
     </el-card>
+    <gdMapDlg :data="[form.compLng, form.compLat]" v-model="mapDlg" @selectPoint="selectPoint"></gdMapDlg>
   </div>
 </template>
 <script>
@@ -142,11 +148,12 @@
   import {listArea} from "@/api/system/area";
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+  import gdMapDlg from '@/components/MapSelect/gdMapDlg'
 
   export default {
     name: "PerfectInfo",
     dicts: ['sys_normal_disable'],
-    components: { Treeselect },
+    components: { Treeselect, gdMapDlg },
     data() {
       return {
         // 行政区域树选项
@@ -154,6 +161,7 @@
         // 表单参数
         form: {},
         // 表单校验
+        mapDlg:false,
         rules: {
           compName: [
             {required: true, message: "企业名称不能为空", trigger: "blur"}
@@ -267,6 +275,11 @@
           label: node.areaName,
           children: node.children
         };
+      },
+      selectPoint (lngat) {
+        this.mapDlg = false;
+        this.form.compLng = lngat[0]
+        this.form.compLat = lngat[1]
       },
       submitForm() {
         this.$refs['form'].validate((valid) => {
