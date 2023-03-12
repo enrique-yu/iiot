@@ -135,6 +135,9 @@
           <el-button type="primary" @click="submitForm" v-hasPermi="['company:basic:perfectInfo']">保存信息</el-button>
       </span>
     </el-card>
+
+    <div id="container"></div>
+
   </div>
 </template>
 <script>
@@ -149,6 +152,8 @@
     components: { Treeselect },
     data() {
       return {
+        map: {},
+        BMap: {},
         // 行政区域树选项
         areaOptions: [],
         // 表单参数
@@ -239,6 +244,28 @@
       this.getList()
     },
     methods: {
+       loadJScript() {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = 'http://api.map.baidu.com/getscript?&v=3.0&ak=1H8Dhi2pGmOMYbN4EcaAGr1rv8f7Gmjz&services=&t=20230223214850';
+         script.onload = () =>{
+           this.init();
+         };
+          document.body.appendChild(script);
+        },
+       init() {
+         console.log(window.BMap)
+          this.BMap = window.BMap;
+          this.map = new BMap.Map('container'); // 创建Map实例
+          var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+         this.map.centerAndZoom(point, 12);
+         this.map.enableScrollWheelZoom(); // 启用滚轮放大缩小
+          },
+      addMarker(){
+        var marker = new BMap.Marker(116.404, 39.915);
+        this.map.addOverlay(marker);
+      },
+
       getList() {
         this.loading = true;
         listArea().then(response => {
@@ -281,6 +308,12 @@
           }
         });
       }
+    },
+    mounted (){
+      this.loadJScript();
+      setTimeout(()=>{
+        this.addMarker()
+      },1000);
     }
   }
 </script>
@@ -290,5 +323,12 @@
     border-radius: 8px;
     margin-bottom: 20px;
     padding: 0 15px;
+  }
+  #container {
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-family: "微软雅黑";
   }
 </style>
