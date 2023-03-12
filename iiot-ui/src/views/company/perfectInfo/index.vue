@@ -320,4 +320,10 @@
     margin-bottom: 20px;
     padding: 0 15px;
   }
+
+  /* 输入框或下拉选框禁用时：加粗显示*/
+  .el-input.is-disabled input{
+    font-weight: bold !important;
+    color: #606266 !important;
+  }
 </style>
