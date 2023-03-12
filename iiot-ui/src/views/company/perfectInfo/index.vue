@@ -140,7 +140,7 @@
           <el-row>
             <el-col :span="18">
               <el-form-item label="经营范围">
-                <el-input type="textarea" v-model="form.compManageScope" placeholder="请输入经营范围"></el-input>
+                <el-input type="textarea" v-model="form.compManageScope" :maxlength="1000" :autosize="{ minRows: 5, maxRows: 5}" placeholder="请输入经营范围"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
