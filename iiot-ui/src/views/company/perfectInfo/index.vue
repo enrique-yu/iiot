@@ -132,7 +132,7 @@
         </div>
       </el-form>
       <span>
-          <el-button type="primary" @click="submitForm" v-hasPermi="['smz:comp:edit']">保存信息</el-button>
+          <el-button type="primary" @click="submitForm" v-hasPermi="['company:basic:perfectInfo']">保存信息</el-button>
       </span>
     </el-card>
   </div>

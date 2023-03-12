@@ -112,7 +112,7 @@ public class AESUtils {
         System.out.println(encryptAES(json, KEY, IV));
 
         /** 解密 **/
-        System.out.println(decryptAES(base_encode("zzCLycsaFRjkMXVPvDXlag=="),KEY, IV));
+        System.out.println(decryptAES(base_encode("hi2imYgf8Ek3tsABYKrEXg=="),KEY, IV));
     }
 
 }
