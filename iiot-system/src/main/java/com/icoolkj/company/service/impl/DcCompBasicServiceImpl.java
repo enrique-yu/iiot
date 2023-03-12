@@ -124,7 +124,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
     //企业账号管理
     private void createCompAccount(DcCompBasic dcCompBasic) {
         //添加企业组织账号
-        String account = "COMP-" + dcCompBasic.getCompCreditCode();  //企业管理用户账号
+        String account = "COMP#" + dcCompBasic.getCompCreditCode();  //企业管理用户账号
         String domainId = IdWorker.nextId().toString();
         SysDomain sysDomain = new SysDomain();
         sysDomain.setDomainId(domainId);
@@ -160,6 +160,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysUser.setUserId(userId);
         sysUser.setDomainId(domainId); //所属组织
         sysUser.setDeptId(deptId); //所属部门ID
+        sysUser.setUserRelationId(dcCompBasic.getCompBasicId());
         //生成随机8位密码，包含大小写和数字
         String password = PasswordUtils.getPassword(8);
         sysUser.setUserName(account); //企业管理用户账号
