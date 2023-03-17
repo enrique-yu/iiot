@@ -1,14 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="设备所属企业ID" prop="compBasicId">
-        <el-input
-          v-model="queryParams.compBasicId"
-          placeholder="请输入设备所属企业ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="设备名称" prop="deviceName">
         <el-input
           v-model="queryParams.deviceName"
@@ -17,26 +9,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="设备编号【设备ID】" prop="deviceSn">
+      <el-form-item label="设备编号" prop="deviceSn">
         <el-input
           v-model="queryParams.deviceSn"
           placeholder="请输入设备编号【设备ID】"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="设备规格型号" prop="deviceModel">
-        <el-input
-          v-model="queryParams.deviceModel"
-          placeholder="请输入设备规格型号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="品牌" prop="deviceBrand">
-        <el-input
-          v-model="queryParams.deviceBrand"
-          placeholder="请输入品牌"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -48,14 +24,6 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="设备最后活动时间" prop="deviceLastActiveTime">
-        <el-date-picker clearable
-          v-model="queryParams.deviceLastActiveTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择设备最后活动时间">
-        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
