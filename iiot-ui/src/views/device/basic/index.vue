@@ -79,15 +79,12 @@
 
     <el-table v-loading="loading" :data="basicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="device_basic_id" align="center" prop="deviceBasicId" />
-      <el-table-column label="设备所属企业ID" align="center" prop="compBasicId" />
       <el-table-column label="设备名称" align="center" prop="deviceName" />
-      <el-table-column label="设备编号【设备ID】" align="center" prop="deviceSn" />
+      <el-table-column label="设备编号" align="center" prop="deviceSn" />
       <el-table-column label="设备类型" align="center" prop="deviceType" />
       <el-table-column label="设备规格型号" align="center" prop="deviceModel" />
       <el-table-column label="品牌" align="center" prop="deviceBrand" />
       <el-table-column label="生产厂家" align="center" prop="deviceFactory" />
-      <el-table-column label="设备描述" align="center" prop="deviceDesc" />
       <el-table-column label="设备最后活动时间" align="center" prop="deviceLastActiveTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.deviceLastActiveTime, '{y}-{m}-{d}') }}</span>
@@ -126,9 +123,6 @@
     <!-- 添加或修改设备基础对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="设备所属企业ID" prop="compBasicId">
-          <el-input v-model="form.compBasicId" placeholder="请输入设备所属企业ID" />
-        </el-form-item>
         <el-form-item label="设备名称" prop="deviceName">
           <el-input v-model="form.deviceName" placeholder="请输入设备名称" />
         </el-form-item>
