@@ -166,12 +166,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="11">
-            <el-form-item label="证件有效期截至" prop="staffCardEdate">
+            <el-form-item label="证件有效期截止" prop="staffCardEdate">
               <el-date-picker clearable
                               v-model="form.staffCardEdate"
                               type="date"
                               value-format="yyyy-MM-dd"
-                              placeholder="请选择证件有效期截至">
+                              placeholder="请选择证件有效期截止">
               </el-date-picker>
             </el-form-item>
           </el-col>
@@ -280,6 +280,56 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        staffName: [
+          {required: true, message: "人员姓名不能为空", trigger: "blur"}
+        ],
+        staffCardType: [
+          {required: true, message: "证件类型不能为空", trigger: "blur"},
+        ],
+        staffCardNo: [
+          {required: true, message: "证件号码不能为空", trigger: "blur"},
+        ],
+        staffCardFzdate: [
+          {required: true, message: "证件发证日期不能为空", trigger: "blur"}
+        ],
+        staffCardFzunit: [
+          {required: true, message: "证件发证机关不能为空", trigger: "blur"},
+        ],
+        staffCardSdate: [
+          {required: true, message: "证件有效期开始不能为空", trigger: "blur"},
+        ],
+        staffCardEdate: [
+          {required: true, message: "证件有效期截止不能为空", trigger: "blur"},
+        ],
+        staffNation: [
+          {required: true, message: "民族不能为空", trigger: "blur"},
+        ],
+        staffBirthdate: [
+          {required: true, message: "出生日期不能为空", trigger: "blur"},
+        ],
+        staffPhone: [
+          {required: true, message: "联系手机不能为空", trigger: "blur"},
+          {
+            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            message: "请输入正确的手机号码",
+            trigger: "blur"
+          }
+        ],
+        staffEmail: [
+          {required: true, message: "联系邮箱不能为空", trigger: "blur"},
+          {
+            type: "email",
+            message: "请输入正确的邮箱地址",
+            trigger: ["blur", "change"]
+          }
+        ],
+        staffAddr: [
+          {required: true, message: "住址不能为空", trigger: "blur"},
+          {min: 2, max: 200, message: '住址长度必须介于 2 和 200 之间', trigger: 'blur'}
+        ],
+        staffRemark: [
+          {required: true, message: "备注不能为空", trigger: "change"}
+        ],
       }
     };
   },

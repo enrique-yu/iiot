@@ -50,9 +50,9 @@ public class DcStaffBasic extends BaseEntity
     @Excel(name = "证件有效期开始", width = 30, dateFormat = "yyyy-MM-dd")
     private Date staffCardSdate;
 
-    /** 证件有效期截至 */
+    /** 证件有效期截止 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "证件有效期截至", width = 30, dateFormat = "yyyy-MM-dd")
+    @Excel(name = "证件有效期截止", width = 30, dateFormat = "yyyy-MM-dd")
     private Date staffCardEdate;
 
     /** 性别 */
