@@ -17,94 +17,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="证件发证机关" prop="staffCardFzunit">
-        <el-input
-          v-model="queryParams.staffCardFzunit"
-          placeholder="请输入证件发证机关"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="证件有效期开始" prop="staffCardSdate">
-        <el-date-picker clearable
-          v-model="queryParams.staffCardSdate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择证件有效期开始">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="证件有效期截至" prop="staffCardEdate">
-        <el-date-picker clearable
-          v-model="queryParams.staffCardEdate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择证件有效期截至">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="年龄" prop="staffAge">
-        <el-input
-          v-model="queryParams.staffAge"
-          placeholder="请输入年龄"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="民族" prop="staffNation">
-        <el-input
-          v-model="queryParams.staffNation"
-          placeholder="请输入民族"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="出生日期" prop="staffBirthdate">
-        <el-date-picker clearable
-          v-model="queryParams.staffBirthdate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择出生日期">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="籍贯" prop="staffBirthplace">
-        <el-input
-          v-model="queryParams.staffBirthplace"
-          placeholder="请输入籍贯"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="住址" prop="staffAddr">
-        <el-input
-          v-model="queryParams.staffAddr"
-          placeholder="请输入住址"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="联系手机" prop="staffPhone">
-        <el-input
-          v-model="queryParams.staffPhone"
-          placeholder="请输入联系手机"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="联系邮箱" prop="staffEmail">
-        <el-input
-          v-model="queryParams.staffEmail"
-          placeholder="请输入联系邮箱"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="备注信息" prop="staffRemark">
-        <el-input
-          v-model="queryParams.staffRemark"
-          placeholder="请输入备注信息"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -159,22 +71,9 @@
 
     <el-table v-loading="loading" :data="basicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="staff_basic_id" align="center" prop="staffBasicId" />
       <el-table-column label="人员姓名" align="center" prop="staffName" />
-      <el-table-column label="证件类型【默认身份证】" align="center" prop="staffCardType" />
+      <el-table-column label="证件类型" align="center" prop="staffCardType" />
       <el-table-column label="证件号码" align="center" prop="staffCardNo" />
-      <el-table-column label="证件发证机关" align="center" prop="staffCardFzunit" />
-      <el-table-column label="证件是否长期" align="center" prop="staffCardStatus" />
-      <el-table-column label="证件有效期开始" align="center" prop="staffCardSdate" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.staffCardSdate, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="证件有效期截至" align="center" prop="staffCardEdate" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.staffCardEdate, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="性别" align="center" prop="staffSex" />
       <el-table-column label="年龄" align="center" prop="staffAge" />
       <el-table-column label="民族" align="center" prop="staffNation" />
@@ -183,12 +82,10 @@
           <span>{{ parseTime(scope.row.staffBirthdate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="籍贯" align="center" prop="staffBirthplace" />
       <el-table-column label="住址" align="center" prop="staffAddr" />
       <el-table-column label="联系手机" align="center" prop="staffPhone" />
       <el-table-column label="联系邮箱" align="center" prop="staffEmail" />
       <el-table-column label="政治面貌" align="center" prop="staffPoliticsStatus" />
-      <el-table-column label="备注信息" align="center" prop="staffRemark" />
       <el-table-column label="状态" align="center" prop="staffStatus" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -219,17 +116,37 @@
     />
 
     <!-- 添加或修改人员基本信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="人员姓名" prop="staffName">
-          <el-input v-model="form.staffName" placeholder="请输入人员姓名" />
-        </el-form-item>
-        <el-form-item label="证件号码" prop="staffCardNo">
-          <el-input v-model="form.staffCardNo" placeholder="请输入证件号码" />
-        </el-form-item>
-        <el-form-item label="证件发证机关" prop="staffCardFzunit">
-          <el-input v-model="form.staffCardFzunit" placeholder="请输入证件发证机关" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="22">
+            <el-form-item label="人员姓名" prop="staffName">
+              <el-input v-model="form.staffName" placeholder="请输入人员姓名" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="11">
+            <el-form-item label="证件类型" prop="staffCardType">
+              <el-input v-model="form.staffCardType" placeholder="请输入证件类型" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item label="证件号码" prop="staffCardNo">
+              <el-input v-model="form.staffCardNo" placeholder="请输入证件号码" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="22">
+            <el-form-item label="证件发证机关" prop="staffCardFzunit">
+              <el-input v-model="form.staffCardFzunit" placeholder="请输入证件发证机关" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+
+
         <el-form-item label="证件有效期开始" prop="staffCardSdate">
           <el-date-picker clearable
             v-model="form.staffCardSdate"
@@ -274,9 +191,6 @@
         </el-form-item>
         <el-form-item label="备注信息" prop="staffRemark">
           <el-input v-model="form.staffRemark" placeholder="请输入备注信息" />
-        </el-form-item>
-        <el-form-item label="删除标记" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标记" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
