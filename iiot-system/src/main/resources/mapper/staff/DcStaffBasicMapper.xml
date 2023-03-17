@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.staff.mapper.DcStaffBasicMapper">
+    
+    <resultMap type="DcStaffBasic" id="DcStaffBasicResult">
+        <result property="staffBasicId"    column="staff_basic_id"    />
+        <result property="staffName"    column="staff_name"    />
+        <result property="staffCardType"    column="staff_card_type"    />
+        <result property="staffCardNo"    column="staff_card_no"    />
+        <result property="staffCardFzunit"    column="staff_card_fzunit"    />
+        <result property="staffCardStatus"    column="staff_card_status"    />
+        <result property="staffCardSdate"    column="staff_card_sdate"    />
+        <result property="staffCardEdate"    column="staff_card_edate"    />
+        <result property="staffSex"    column="staff_sex"    />
+        <result property="staffAge"    column="staff_age"    />
+        <result property="staffNation"    column="staff_nation"    />
+        <result property="staffBirthdate"    column="staff_birthdate"    />
+        <result property="staffBirthplace"    column="staff_birthplace"    />
+        <result property="staffAddr"    column="staff_addr"    />
+        <result property="staffPhone"    column="staff_phone"    />
+        <result property="staffEmail"    column="staff_email"    />
+        <result property="staffPoliticsStatus"    column="staff_politics_status"    />
+        <result property="staffRemark"    column="staff_remark"    />
+        <result property="staffStatus"    column="staff_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDcStaffBasicVo">
+        select staff_basic_id, staff_name, staff_card_type, staff_card_no, staff_card_fzunit, staff_card_status, staff_card_sdate, staff_card_edate, staff_sex, staff_age, staff_nation, staff_birthdate, staff_birthplace, staff_addr, staff_phone, staff_email, staff_politics_status, staff_remark, staff_status, del_flag, create_by, create_time, update_by, update_time from dc_staff_basic
+    </sql>
+
+    <select id="selectDcStaffBasicList" parameterType="DcStaffBasic" resultMap="DcStaffBasicResult">
+        <include refid="selectDcStaffBasicVo"/>
+        <where>  
+            <if test="staffName != null  and staffName != ''"> and staff_name like concat('%', #{staffName}, '%')</if>
+            <if test="staffCardType != null  and staffCardType != ''"> and staff_card_type = #{staffCardType}</if>
+            <if test="staffCardNo != null  and staffCardNo != ''"> and staff_card_no = #{staffCardNo}</if>
+            <if test="staffCardFzunit != null  and staffCardFzunit != ''"> and staff_card_fzunit = #{staffCardFzunit}</if>
+            <if test="staffCardStatus != null  and staffCardStatus != ''"> and staff_card_status = #{staffCardStatus}</if>
+            <if test="staffCardSdate != null "> and staff_card_sdate = #{staffCardSdate}</if>
+            <if test="staffCardEdate != null "> and staff_card_edate = #{staffCardEdate}</if>
+            <if test="staffSex != null  and staffSex != ''"> and staff_sex = #{staffSex}</if>
+            <if test="staffAge != null "> and staff_age = #{staffAge}</if>
+            <if test="staffNation != null  and staffNation != ''"> and staff_nation = #{staffNation}</if>
+            <if test="staffBirthdate != null "> and staff_birthdate = #{staffBirthdate}</if>
+            <if test="staffBirthplace != null  and staffBirthplace != ''"> and staff_birthplace = #{staffBirthplace}</if>
+            <if test="staffAddr != null  and staffAddr != ''"> and staff_addr = #{staffAddr}</if>
+            <if test="staffPhone != null  and staffPhone != ''"> and staff_phone = #{staffPhone}</if>
+            <if test="staffEmail != null  and staffEmail != ''"> and staff_email = #{staffEmail}</if>
+            <if test="staffPoliticsStatus != null  and staffPoliticsStatus != ''"> and staff_politics_status = #{staffPoliticsStatus}</if>
+            <if test="staffRemark != null  and staffRemark != ''"> and staff_remark = #{staffRemark}</if>
+            <if test="staffStatus != null  and staffStatus != ''"> and staff_status = #{staffStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectDcStaffBasicByStaffBasicId" parameterType="String" resultMap="DcStaffBasicResult">
+        <include refid="selectDcStaffBasicVo"/>
+        where staff_basic_id = #{staffBasicId}
+    </select>
+        
+    <insert id="insertDcStaffBasic" parameterType="DcStaffBasic">
+        insert into dc_staff_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="staffBasicId != null">staff_basic_id,</if>
+            <if test="staffName != null">staff_name,</if>
+            <if test="staffCardType != null">staff_card_type,</if>
+            <if test="staffCardNo != null">staff_card_no,</if>
+            <if test="staffCardFzunit != null">staff_card_fzunit,</if>
+            <if test="staffCardStatus != null">staff_card_status,</if>
+            <if test="staffCardSdate != null">staff_card_sdate,</if>
+            <if test="staffCardEdate != null">staff_card_edate,</if>
+            <if test="staffSex != null">staff_sex,</if>
+            <if test="staffAge != null">staff_age,</if>
+            <if test="staffNation != null">staff_nation,</if>
+            <if test="staffBirthdate != null">staff_birthdate,</if>
+            <if test="staffBirthplace != null">staff_birthplace,</if>
+            <if test="staffAddr != null">staff_addr,</if>
+            <if test="staffPhone != null">staff_phone,</if>
+            <if test="staffEmail != null">staff_email,</if>
+            <if test="staffPoliticsStatus != null">staff_politics_status,</if>
+            <if test="staffRemark != null">staff_remark,</if>
+            <if test="staffStatus != null">staff_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="staffBasicId != null">#{staffBasicId},</if>
+            <if test="staffName != null">#{staffName},</if>
+            <if test="staffCardType != null">#{staffCardType},</if>
+            <if test="staffCardNo != null">#{staffCardNo},</if>
+            <if test="staffCardFzunit != null">#{staffCardFzunit},</if>
+            <if test="staffCardStatus != null">#{staffCardStatus},</if>
+            <if test="staffCardSdate != null">#{staffCardSdate},</if>
+            <if test="staffCardEdate != null">#{staffCardEdate},</if>
+            <if test="staffSex != null">#{staffSex},</if>
+            <if test="staffAge != null">#{staffAge},</if>
+            <if test="staffNation != null">#{staffNation},</if>
+            <if test="staffBirthdate != null">#{staffBirthdate},</if>
+            <if test="staffBirthplace != null">#{staffBirthplace},</if>
+            <if test="staffAddr != null">#{staffAddr},</if>
+            <if test="staffPhone != null">#{staffPhone},</if>
+            <if test="staffEmail != null">#{staffEmail},</if>
+            <if test="staffPoliticsStatus != null">#{staffPoliticsStatus},</if>
+            <if test="staffRemark != null">#{staffRemark},</if>
+            <if test="staffStatus != null">#{staffStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDcStaffBasic" parameterType="DcStaffBasic">
+        update dc_staff_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="staffName != null">staff_name = #{staffName},</if>
+            <if test="staffCardType != null">staff_card_type = #{staffCardType},</if>
+            <if test="staffCardNo != null">staff_card_no = #{staffCardNo},</if>
+            <if test="staffCardFzunit != null">staff_card_fzunit = #{staffCardFzunit},</if>
+            <if test="staffCardStatus != null">staff_card_status = #{staffCardStatus},</if>
+            <if test="staffCardSdate != null">staff_card_sdate = #{staffCardSdate},</if>
+            <if test="staffCardEdate != null">staff_card_edate = #{staffCardEdate},</if>
+            <if test="staffSex != null">staff_sex = #{staffSex},</if>
+            <if test="staffAge != null">staff_age = #{staffAge},</if>
+            <if test="staffNation != null">staff_nation = #{staffNation},</if>
+            <if test="staffBirthdate != null">staff_birthdate = #{staffBirthdate},</if>
+            <if test="staffBirthplace != null">staff_birthplace = #{staffBirthplace},</if>
+            <if test="staffAddr != null">staff_addr = #{staffAddr},</if>
+            <if test="staffPhone != null">staff_phone = #{staffPhone},</if>
+            <if test="staffEmail != null">staff_email = #{staffEmail},</if>
+            <if test="staffPoliticsStatus != null">staff_politics_status = #{staffPoliticsStatus},</if>
+            <if test="staffRemark != null">staff_remark = #{staffRemark},</if>
+            <if test="staffStatus != null">staff_status = #{staffStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where staff_basic_id = #{staffBasicId}
+    </update>
+
+    <delete id="deleteDcStaffBasicByStaffBasicId" parameterType="String">
+        delete from dc_staff_basic where staff_basic_id = #{staffBasicId}
+    </delete>
+
+    <delete id="deleteDcStaffBasicByStaffBasicIds" parameterType="String">
+        delete from dc_staff_basic where staff_basic_id in 
+        <foreach item="staffBasicId" collection="array" open="(" separator="," close=")">
+            #{staffBasicId}
+        </foreach>
+    </delete>
+</mapper>
