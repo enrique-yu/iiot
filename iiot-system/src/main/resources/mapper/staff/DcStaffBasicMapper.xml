@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="staffName"    column="staff_name"    />
         <result property="staffCardType"    column="staff_card_type"    />
         <result property="staffCardNo"    column="staff_card_no"    />
+        <result property="staffCardFzdate"    column="staff_card_fzdate"    />
         <result property="staffCardFzunit"    column="staff_card_fzunit"    />
         <result property="staffCardStatus"    column="staff_card_status"    />
         <result property="staffCardSdate"    column="staff_card_sdate"    />
@@ -32,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDcStaffBasicVo">
-        select staff_basic_id, staff_name, staff_card_type, staff_card_no, staff_card_fzunit, staff_card_status, staff_card_sdate, staff_card_edate, staff_sex, staff_age, staff_nation, staff_birthdate, staff_birthplace, staff_addr, staff_phone, staff_email, staff_politics_status, staff_remark, staff_status, del_flag, create_by, create_time, update_by, update_time from dc_staff_basic
+        select staff_basic_id, staff_name, staff_card_type, staff_card_no, staff_card_fzdate, staff_card_fzunit, staff_card_status, staff_card_sdate, staff_card_edate, staff_sex, staff_age, staff_nation, staff_birthdate, staff_birthplace, staff_addr, staff_phone, staff_email, staff_politics_status, staff_remark, staff_status, del_flag, create_by, create_time, update_by, update_time from dc_staff_basic
     </sql>
 
     <select id="selectDcStaffBasicList" parameterType="DcStaffBasic" resultMap="DcStaffBasicResult">
@@ -41,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="staffName != null  and staffName != ''"> and staff_name like concat('%', #{staffName}, '%')</if>
             <if test="staffCardType != null  and staffCardType != ''"> and staff_card_type = #{staffCardType}</if>
             <if test="staffCardNo != null  and staffCardNo != ''"> and staff_card_no = #{staffCardNo}</if>
+            <if test="staffCardFzdate != null "> and staff_card_fzdate = #{staffCardFzdate}</if>
             <if test="staffCardFzunit != null  and staffCardFzunit != ''"> and staff_card_fzunit = #{staffCardFzunit}</if>
             <if test="staffCardStatus != null  and staffCardStatus != ''"> and staff_card_status = #{staffCardStatus}</if>
             <if test="staffCardSdate != null "> and staff_card_sdate = #{staffCardSdate}</if>
@@ -71,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="staffName != null">staff_name,</if>
             <if test="staffCardType != null">staff_card_type,</if>
             <if test="staffCardNo != null">staff_card_no,</if>
+            <if test="staffCardFzdate != null">staff_card_fzdate,</if>
             <if test="staffCardFzunit != null">staff_card_fzunit,</if>
             <if test="staffCardStatus != null">staff_card_status,</if>
             <if test="staffCardSdate != null">staff_card_sdate,</if>
@@ -97,6 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="staffName != null">#{staffName},</if>
             <if test="staffCardType != null">#{staffCardType},</if>
             <if test="staffCardNo != null">#{staffCardNo},</if>
+            <if test="staffCardFzdate != null">#{staffCardFzdate},</if>
             <if test="staffCardFzunit != null">#{staffCardFzunit},</if>
             <if test="staffCardStatus != null">#{staffCardStatus},</if>
             <if test="staffCardSdate != null">#{staffCardSdate},</if>
@@ -126,6 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="staffName != null">staff_name = #{staffName},</if>
             <if test="staffCardType != null">staff_card_type = #{staffCardType},</if>
             <if test="staffCardNo != null">staff_card_no = #{staffCardNo},</if>
+            <if test="staffCardFzdate != null">staff_card_fzdate = #{staffCardFzdate},</if>
             <if test="staffCardFzunit != null">staff_card_fzunit = #{staffCardFzunit},</if>
             <if test="staffCardStatus != null">staff_card_status = #{staffCardStatus},</if>
             <if test="staffCardSdate != null">staff_card_sdate = #{staffCardSdate},</if>

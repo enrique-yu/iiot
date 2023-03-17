@@ -32,6 +32,11 @@ public class DcStaffBasic extends BaseEntity
     @Excel(name = "证件号码")
     private String staffCardNo;
 
+    /** 证件发证日期 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "证件发证日期", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date staffCardFzdate;
+
     /** 证件发证机关 */
     @Excel(name = "证件发证机关")
     private String staffCardFzunit;
@@ -133,6 +138,15 @@ public class DcStaffBasic extends BaseEntity
     public String getStaffCardNo() 
     {
         return staffCardNo;
+    }
+    public void setStaffCardFzdate(Date staffCardFzdate) 
+    {
+        this.staffCardFzdate = staffCardFzdate;
+    }
+
+    public Date getStaffCardFzdate() 
+    {
+        return staffCardFzdate;
     }
     public void setStaffCardFzunit(String staffCardFzunit) 
     {
@@ -286,6 +300,7 @@ public class DcStaffBasic extends BaseEntity
             .append("staffName", getStaffName())
             .append("staffCardType", getStaffCardType())
             .append("staffCardNo", getStaffCardNo())
+            .append("staffCardFzdate", getStaffCardFzdate())
             .append("staffCardFzunit", getStaffCardFzunit())
             .append("staffCardStatus", getStaffCardStatus())
             .append("staffCardSdate", getStaffCardSdate())
