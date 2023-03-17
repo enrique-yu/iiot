@@ -116,8 +116,8 @@
     />
 
     <!-- 添加或修改人员基本信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="22">
             <el-form-item label="人员姓名" prop="staffName">
@@ -138,60 +138,87 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="22">
-            <el-form-item label="证件发证机关" prop="staffCardFzunit">
+          <el-col :span="11">
+            <el-form-item label="发证日期" prop="staffCardSdate">
+              <el-date-picker clearable
+                              v-model="form.staffCardSdate"
+                              type="date"
+                              value-format="yyyy-MM-dd"
+                              placeholder="请选择证件发证日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item label="发证机关" prop="staffCardFzunit">
               <el-input v-model="form.staffCardFzunit" placeholder="请输入证件发证机关" />
             </el-form-item>
           </el-col>
         </el-row>
-
-
-
-        <el-form-item label="证件有效期开始" prop="staffCardSdate">
-          <el-date-picker clearable
-            v-model="form.staffCardSdate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择证件有效期开始">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="证件有效期截至" prop="staffCardEdate">
-          <el-date-picker clearable
-            v-model="form.staffCardEdate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择证件有效期截至">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="年龄" prop="staffAge">
-          <el-input v-model="form.staffAge" placeholder="请输入年龄" />
-        </el-form-item>
-        <el-form-item label="民族" prop="staffNation">
-          <el-input v-model="form.staffNation" placeholder="请输入民族" />
-        </el-form-item>
-        <el-form-item label="出生日期" prop="staffBirthdate">
-          <el-date-picker clearable
-            v-model="form.staffBirthdate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择出生日期">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="籍贯" prop="staffBirthplace">
-          <el-input v-model="form.staffBirthplace" placeholder="请输入籍贯" />
-        </el-form-item>
-        <el-form-item label="住址" prop="staffAddr">
-          <el-input v-model="form.staffAddr" placeholder="请输入住址" />
-        </el-form-item>
-        <el-form-item label="联系手机" prop="staffPhone">
-          <el-input v-model="form.staffPhone" placeholder="请输入联系手机" />
-        </el-form-item>
-        <el-form-item label="联系邮箱" prop="staffEmail">
-          <el-input v-model="form.staffEmail" placeholder="请输入联系邮箱" />
-        </el-form-item>
-        <el-form-item label="备注信息" prop="staffRemark">
-          <el-input v-model="form.staffRemark" placeholder="请输入备注信息" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="11">
+            <el-form-item label="证件有效期开始" prop="staffCardSdate">
+              <el-date-picker clearable
+                              v-model="form.staffCardSdate"
+                              type="date"
+                              value-format="yyyy-MM-dd"
+                              placeholder="请选择证件有效期开始">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item label="证件有效期截至" prop="staffCardEdate">
+              <el-date-picker clearable
+                              v-model="form.staffCardEdate"
+                              type="date"
+                              value-format="yyyy-MM-dd"
+                              placeholder="请选择证件有效期截至">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="11">
+            <el-form-item label="民族" prop="staffNation">
+              <el-input v-model="form.staffNation" placeholder="请输入民族" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item label="出生日期" prop="staffBirthdate">
+              <el-date-picker clearable
+                              v-model="form.staffBirthdate"
+                              type="date"
+                              value-format="yyyy-MM-dd"
+                              placeholder="请选择出生日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="11">
+            <el-form-item label="联系手机" prop="staffPhone">
+              <el-input v-model="form.staffPhone" placeholder="请输入联系手机" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item label="联系邮箱" prop="staffEmail">
+              <el-input v-model="form.staffEmail" placeholder="请输入联系邮箱" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="22">
+            <el-form-item label="住址" prop="staffAddr">
+              <el-input v-model="form.staffAddr" placeholder="请输入住址" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="22">
+            <el-form-item label="备注信息">
+              <el-input type="textarea" v-model="form.staffRemark" :maxlength="1000" :autosize="{ minRows: 5, maxRows: 5}" placeholder="请输入备注信息"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
