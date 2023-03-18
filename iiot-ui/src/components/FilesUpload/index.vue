@@ -64,7 +64,7 @@
                        src="@/assets/files/file_xlsx.png" />
                   <img v-else-if="items.name.substring(items.name.length - 4, items.name.length) == '.doc' || items.name.substring(items.name.length - 4, items.name.length) == 'docx'"
                        style="width:25px;height:25px;margin-left:10px"
-                       src="@/assets/files/file_tip_doc.png" />
+                       src="@/assets/files/file_doc.png" />
                   <img v-else-if="items.name.substring(items.name.length - 4, items.name.length) == '.jpg'"
                        style="width:25px;height:25px;margin-left:10px"
                        src="@/assets/files/file_jpg.png" />
