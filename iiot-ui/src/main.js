@@ -31,6 +31,8 @@ import FileUpload from "@/components/FileUpload"
 import ImageUpload from "@/components/ImageUpload"
 // 图片预览组件
 import ImagePreview from "@/components/ImagePreview"
+// 文件上传组件
+import FilesUpload from "@/components/FilesUpload"
 // 字典标签组件
 import DictTag from '@/components/DictTag'
 // 头部标签组件
@@ -58,6 +60,7 @@ Vue.component('Editor', Editor)
 Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
+Vue.component('FilesUpload', FilesUpload)
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
