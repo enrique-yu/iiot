@@ -131,7 +131,7 @@
 
 <script>
 import { getToken } from "@/utils/auth";
-import { getFileList, fileUploadAPI } from "@/api/files/file";
+import { getFileList, fileUploadAPI } from "@/api/file/file";
 export default {
   props: {
     name: {
