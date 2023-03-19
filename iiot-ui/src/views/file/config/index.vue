@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { listConfig, getConfig, delConfig, addConfig, updateConfig } from "@/api/file/config";
+import { listConfig, getConfig } from "@/api/file/config";
 import addDlg from './addDlg';
 import updateDlg from './updateDlg';
 import ListPageMixin from '@/mixins/listPageMixin';

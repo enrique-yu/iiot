@@ -1,6 +1,5 @@
 <template>
   <div >
-    <!-- 添加或修改文件配置对话框 -->
     <el-dialog v-if="dialogVisible" :title="title"  :visible.sync="dialogVisible" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="文件名称" prop="fileConfigName">

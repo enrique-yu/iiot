@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFileConfigVo"/>
         <where>  
             <if test="fileConfigName != null  and fileConfigName != ''"> and file_config_name like concat('%', #{fileConfigName}, '%')</if>
-            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code = #{fileConfigCode}</if>
+            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code like concat('%', #{fileConfigCode}, '%')</if>
             <if test="fileConfigStatus != null  and fileConfigStatus != ''"> and file_config_status = #{fileConfigStatus}</if>
         </where>
     </select>
