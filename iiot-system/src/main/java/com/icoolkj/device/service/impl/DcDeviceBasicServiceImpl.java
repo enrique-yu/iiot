@@ -2,6 +2,8 @@ package com.icoolkj.device.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.device.mapper.DcDeviceBasicMapper;
@@ -53,6 +55,8 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
     @Override
     public int insertDcDeviceBasic(DcDeviceBasic dcDeviceBasic)
     {
+        dcDeviceBasic.setDeviceBasicId(IdWorker.nextId().toString());
+        dcDeviceBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcDeviceBasic.setCreateTime(DateUtils.getNowDate());
         return dcDeviceBasicMapper.insertDcDeviceBasic(dcDeviceBasic);
     }
@@ -66,6 +70,7 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
     @Override
     public int updateDcDeviceBasic(DcDeviceBasic dcDeviceBasic)
     {
+        dcDeviceBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcDeviceBasic.setUpdateTime(DateUtils.getNowDate());
         return dcDeviceBasicMapper.updateDcDeviceBasic(dcDeviceBasic);
     }
