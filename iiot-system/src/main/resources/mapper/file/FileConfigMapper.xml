@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileConfigMapper">
+    
+    <resultMap type="FileConfig" id="FileConfigResult">
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigTemplate"    column="file_config_template"    />
+        <result property="fileConfigDesc"    column="file_config_desc"    />
+        <result property="fileConfigStatus"    column="file_config_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileConfigVo">
+        select file_config_code, file_config_name, file_config_template, file_config_desc, file_config_status, del_flag, create_by, create_time, update_by, update_time from file_config
+    </sql>
+
+    <select id="selectFileConfigList" parameterType="FileConfig" resultMap="FileConfigResult">
+        <include refid="selectFileConfigVo"/>
+        <where>  
+            <if test="fileConfigName != null  and fileConfigName != ''"> and file_config_name like concat('%', #{fileConfigName}, '%')</if>
+            <if test="fileConfigTemplate != null  and fileConfigTemplate != ''"> and file_config_template = #{fileConfigTemplate}</if>
+            <if test="fileConfigDesc != null  and fileConfigDesc != ''"> and file_config_desc = #{fileConfigDesc}</if>
+            <if test="fileConfigStatus != null  and fileConfigStatus != ''"> and file_config_status = #{fileConfigStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileConfigByFileConfigCode" parameterType="String" resultMap="FileConfigResult">
+        <include refid="selectFileConfigVo"/>
+        where file_config_code = #{fileConfigCode}
+    </select>
+        
+    <insert id="insertFileConfig" parameterType="FileConfig">
+        insert into file_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileConfigCode != null">file_config_code,</if>
+            <if test="fileConfigName != null">file_config_name,</if>
+            <if test="fileConfigTemplate != null">file_config_template,</if>
+            <if test="fileConfigDesc != null">file_config_desc,</if>
+            <if test="fileConfigStatus != null">file_config_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileConfigCode != null">#{fileConfigCode},</if>
+            <if test="fileConfigName != null">#{fileConfigName},</if>
+            <if test="fileConfigTemplate != null">#{fileConfigTemplate},</if>
+            <if test="fileConfigDesc != null">#{fileConfigDesc},</if>
+            <if test="fileConfigStatus != null">#{fileConfigStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileConfig" parameterType="FileConfig">
+        update file_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileConfigName != null">file_config_name = #{fileConfigName},</if>
+            <if test="fileConfigTemplate != null">file_config_template = #{fileConfigTemplate},</if>
+            <if test="fileConfigDesc != null">file_config_desc = #{fileConfigDesc},</if>
+            <if test="fileConfigStatus != null">file_config_status = #{fileConfigStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_config_code = #{fileConfigCode}
+    </update>
+
+    <delete id="deleteFileConfigByFileConfigCode" parameterType="String">
+        delete from file_config where file_config_code = #{fileConfigCode}
+    </delete>
+
+    <delete id="deleteFileConfigByFileConfigCodes" parameterType="String">
+        delete from file_config where file_config_code in 
+        <foreach item="fileConfigCode" collection="array" open="(" separator="," close=")">
+            #{fileConfigCode}
+        </foreach>
+    </delete>
+</mapper>

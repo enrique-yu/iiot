@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileCatalogRelationMapper">
+    
+    <resultMap type="FileCatalogRelation" id="FileCatalogRelationResult">
+        <result property="fileCatalogRelationId"    column="file_catalog_relation_id"    />
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="fileConfigType"    column="file_config_type"    />
+        <result property="fileConfigMust"    column="file_config_must"    />
+        <result property="fileConfigMinNum"    column="file_config_min_num"    />
+        <result property="fileConfigMaxNum"    column="file_config_max_num"    />
+        <result property="fileConfigMinSize"    column="file_config_min_size"    />
+        <result property="fileConfigMaxSize"    column="file_config_max_size"    />
+        <result property="fileConfigSortNum"    column="file_config_sort_num"    />
+        <result property="fileCatalogRelationStatus"    column="file_catalog_relation_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileCatalogRelationVo">
+        select file_catalog_relation_id, file_catalog_code, file_config_code, file_config_type, file_config_must, file_config_min_num, file_config_max_num, file_config_min_size, file_config_max_size, file_config_sort_num, file_catalog_relation_status, del_flag, create_by, create_time, update_by, update_time from file_catalog_relation
+    </sql>
+
+    <select id="selectFileCatalogRelationList" parameterType="FileCatalogRelation" resultMap="FileCatalogRelationResult">
+        <include refid="selectFileCatalogRelationVo"/>
+        <where>  
+            <if test="fileCatalogCode != null  and fileCatalogCode != ''"> and file_catalog_code = #{fileCatalogCode}</if>
+            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code = #{fileConfigCode}</if>
+            <if test="fileConfigType != null  and fileConfigType != ''"> and file_config_type = #{fileConfigType}</if>
+            <if test="fileConfigMust != null  and fileConfigMust != ''"> and file_config_must = #{fileConfigMust}</if>
+            <if test="fileConfigMinNum != null "> and file_config_min_num = #{fileConfigMinNum}</if>
+            <if test="fileConfigMaxNum != null "> and file_config_max_num = #{fileConfigMaxNum}</if>
+            <if test="fileConfigMinSize != null "> and file_config_min_size = #{fileConfigMinSize}</if>
+            <if test="fileConfigMaxSize != null "> and file_config_max_size = #{fileConfigMaxSize}</if>
+            <if test="fileConfigSortNum != null "> and file_config_sort_num = #{fileConfigSortNum}</if>
+            <if test="fileCatalogRelationStatus != null  and fileCatalogRelationStatus != ''"> and file_catalog_relation_status = #{fileCatalogRelationStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileCatalogRelationByFileCatalogRelationId" parameterType="String" resultMap="FileCatalogRelationResult">
+        <include refid="selectFileCatalogRelationVo"/>
+        where file_catalog_relation_id = #{fileCatalogRelationId}
+    </select>
+        
+    <insert id="insertFileCatalogRelation" parameterType="FileCatalogRelation">
+        insert into file_catalog_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileCatalogRelationId != null">file_catalog_relation_id,</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code,</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">file_config_code,</if>
+            <if test="fileConfigType != null">file_config_type,</if>
+            <if test="fileConfigMust != null">file_config_must,</if>
+            <if test="fileConfigMinNum != null">file_config_min_num,</if>
+            <if test="fileConfigMaxNum != null">file_config_max_num,</if>
+            <if test="fileConfigMinSize != null">file_config_min_size,</if>
+            <if test="fileConfigMaxSize != null">file_config_max_size,</if>
+            <if test="fileConfigSortNum != null">file_config_sort_num,</if>
+            <if test="fileCatalogRelationStatus != null">file_catalog_relation_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileCatalogRelationId != null">#{fileCatalogRelationId},</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">#{fileCatalogCode},</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">#{fileConfigCode},</if>
+            <if test="fileConfigType != null">#{fileConfigType},</if>
+            <if test="fileConfigMust != null">#{fileConfigMust},</if>
+            <if test="fileConfigMinNum != null">#{fileConfigMinNum},</if>
+            <if test="fileConfigMaxNum != null">#{fileConfigMaxNum},</if>
+            <if test="fileConfigMinSize != null">#{fileConfigMinSize},</if>
+            <if test="fileConfigMaxSize != null">#{fileConfigMaxSize},</if>
+            <if test="fileConfigSortNum != null">#{fileConfigSortNum},</if>
+            <if test="fileCatalogRelationStatus != null">#{fileCatalogRelationStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileCatalogRelation" parameterType="FileCatalogRelation">
+        update file_catalog_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code = #{fileCatalogCode},</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">file_config_code = #{fileConfigCode},</if>
+            <if test="fileConfigType != null">file_config_type = #{fileConfigType},</if>
+            <if test="fileConfigMust != null">file_config_must = #{fileConfigMust},</if>
+            <if test="fileConfigMinNum != null">file_config_min_num = #{fileConfigMinNum},</if>
+            <if test="fileConfigMaxNum != null">file_config_max_num = #{fileConfigMaxNum},</if>
+            <if test="fileConfigMinSize != null">file_config_min_size = #{fileConfigMinSize},</if>
+            <if test="fileConfigMaxSize != null">file_config_max_size = #{fileConfigMaxSize},</if>
+            <if test="fileConfigSortNum != null">file_config_sort_num = #{fileConfigSortNum},</if>
+            <if test="fileCatalogRelationStatus != null">file_catalog_relation_status = #{fileCatalogRelationStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_catalog_relation_id = #{fileCatalogRelationId}
+    </update>
+
+    <delete id="deleteFileCatalogRelationByFileCatalogRelationId" parameterType="String">
+        delete from file_catalog_relation where file_catalog_relation_id = #{fileCatalogRelationId}
+    </delete>
+
+    <delete id="deleteFileCatalogRelationByFileCatalogRelationIds" parameterType="String">
+        delete from file_catalog_relation where file_catalog_relation_id in 
+        <foreach item="fileCatalogRelationId" collection="array" open="(" separator="," close=")">
+            #{fileCatalogRelationId}
+        </foreach>
+    </delete>
+</mapper>

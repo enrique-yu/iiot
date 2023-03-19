@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileCatalogConfigMapper">
+    
+    <resultMap type="FileCatalogConfig" id="FileCatalogConfigResult">
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileCatalogDesc"    column="file_catalog_desc"    />
+        <result property="fileCatalogStatus"    column="file_catalog_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileCatalogConfigVo">
+        select file_catalog_code, file_catalog_name, file_catalog_desc, file_catalog_status, del_flag, create_by, create_time, update_by, update_time from file_catalog_config
+    </sql>
+
+    <select id="selectFileCatalogConfigList" parameterType="FileCatalogConfig" resultMap="FileCatalogConfigResult">
+        <include refid="selectFileCatalogConfigVo"/>
+        <where>  
+            <if test="fileCatalogName != null  and fileCatalogName != ''"> and file_catalog_name like concat('%', #{fileCatalogName}, '%')</if>
+            <if test="fileCatalogDesc != null  and fileCatalogDesc != ''"> and file_catalog_desc = #{fileCatalogDesc}</if>
+            <if test="fileCatalogStatus != null  and fileCatalogStatus != ''"> and file_catalog_status = #{fileCatalogStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileCatalogConfigByFileCatalogCode" parameterType="String" resultMap="FileCatalogConfigResult">
+        <include refid="selectFileCatalogConfigVo"/>
+        where file_catalog_code = #{fileCatalogCode}
+    </select>
+        
+    <insert id="insertFileCatalogConfig" parameterType="FileCatalogConfig">
+        insert into file_catalog_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileCatalogCode != null">file_catalog_code,</if>
+            <if test="fileCatalogName != null">file_catalog_name,</if>
+            <if test="fileCatalogDesc != null">file_catalog_desc,</if>
+            <if test="fileCatalogStatus != null">file_catalog_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileCatalogCode != null">#{fileCatalogCode},</if>
+            <if test="fileCatalogName != null">#{fileCatalogName},</if>
+            <if test="fileCatalogDesc != null">#{fileCatalogDesc},</if>
+            <if test="fileCatalogStatus != null">#{fileCatalogStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileCatalogConfig" parameterType="FileCatalogConfig">
+        update file_catalog_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileCatalogName != null">file_catalog_name = #{fileCatalogName},</if>
+            <if test="fileCatalogDesc != null">file_catalog_desc = #{fileCatalogDesc},</if>
+            <if test="fileCatalogStatus != null">file_catalog_status = #{fileCatalogStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_catalog_code = #{fileCatalogCode}
+    </update>
+
+    <delete id="deleteFileCatalogConfigByFileCatalogCode" parameterType="String">
+        delete from file_catalog_config where file_catalog_code = #{fileCatalogCode}
+    </delete>
+
+    <delete id="deleteFileCatalogConfigByFileCatalogCodes" parameterType="String">
+        delete from file_catalog_config where file_catalog_code in 
+        <foreach item="fileCatalogCode" collection="array" open="(" separator="," close=")">
+            #{fileCatalogCode}
+        </foreach>
+    </delete>
+</mapper>

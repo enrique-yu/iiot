@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileRecordMapper">
+    
+    <resultMap type="FileRecord" id="FileRecordResult">
+        <result property="fileRecordId"    column="file_record_id"    />
+        <result property="businessRecordId"    column="business_record_id"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileRecordStatus"    column="file_record_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileRecordVo">
+        select file_record_id, business_record_id, file_catalog_name, file_catalog_code, file_record_status, del_flag, create_by, create_time, update_by, update_time from file_record
+    </sql>
+
+    <select id="selectFileRecordList" parameterType="FileRecord" resultMap="FileRecordResult">
+        <include refid="selectFileRecordVo"/>
+        <where>  
+            <if test="businessRecordId != null  and businessRecordId != ''"> and business_record_id = #{businessRecordId}</if>
+            <if test="fileCatalogName != null  and fileCatalogName != ''"> and file_catalog_name like concat('%', #{fileCatalogName}, '%')</if>
+            <if test="fileCatalogCode != null  and fileCatalogCode != ''"> and file_catalog_code = #{fileCatalogCode}</if>
+            <if test="fileRecordStatus != null  and fileRecordStatus != ''"> and file_record_status = #{fileRecordStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileRecordByFileRecordId" parameterType="String" resultMap="FileRecordResult">
+        <include refid="selectFileRecordVo"/>
+        where file_record_id = #{fileRecordId}
+    </select>
+        
+    <insert id="insertFileRecord" parameterType="FileRecord">
+        insert into file_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileRecordId != null">file_record_id,</if>
+            <if test="businessRecordId != null">business_record_id,</if>
+            <if test="fileCatalogName != null">file_catalog_name,</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code,</if>
+            <if test="fileRecordStatus != null">file_record_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileRecordId != null">#{fileRecordId},</if>
+            <if test="businessRecordId != null">#{businessRecordId},</if>
+            <if test="fileCatalogName != null">#{fileCatalogName},</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">#{fileCatalogCode},</if>
+            <if test="fileRecordStatus != null">#{fileRecordStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileRecord" parameterType="FileRecord">
+        update file_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="businessRecordId != null">business_record_id = #{businessRecordId},</if>
+            <if test="fileCatalogName != null">file_catalog_name = #{fileCatalogName},</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code = #{fileCatalogCode},</if>
+            <if test="fileRecordStatus != null">file_record_status = #{fileRecordStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_record_id = #{fileRecordId}
+    </update>
+
+    <delete id="deleteFileRecordByFileRecordId" parameterType="String">
+        delete from file_record where file_record_id = #{fileRecordId}
+    </delete>
+
+    <delete id="deleteFileRecordByFileRecordIds" parameterType="String">
+        delete from file_record where file_record_id in 
+        <foreach item="fileRecordId" collection="array" open="(" separator="," close=")">
+            #{fileRecordId}
+        </foreach>
+    </delete>
+</mapper>

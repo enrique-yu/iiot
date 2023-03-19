@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileRecordDetailMapper">
+    
+    <resultMap type="FileRecordDetail" id="FileRecordDetailResult">
+        <result property="fileRecordDetailId"    column="file_record_detail_id"    />
+        <result property="fileRecordId"    column="file_record_id"    />
+        <result property="businessRecordId"    column="business_record_id"    />
+        <result property="fileCatalogRelationId"    column="file_catalog_relation_id"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="uploadName"    column="upload_name"    />
+        <result property="uploadOriginalName"    column="upload_original_name"    />
+        <result property="uploadType"    column="upload_type"    />
+        <result property="uploadSize"    column="upload_size"    />
+        <result property="uploadParentPath"    column="upload_parent_path"    />
+        <result property="uploadPath"    column="upload_path"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="uploadDesc"    column="upload_desc"    />
+        <result property="fileSortNum"    column="file_sort_num"    />
+        <result property="uploadStatus"    column="upload_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileRecordDetailVo">
+        select file_record_detail_id, file_record_id, business_record_id, file_catalog_relation_id, file_config_name, file_config_code, upload_name, upload_original_name, upload_type, upload_size, upload_parent_path, upload_path, upload_time, upload_desc, file_sort_num, upload_status, del_flag, create_by, create_time, update_by, update_time from file_record_detail
+    </sql>
+
+    <select id="selectFileRecordDetailList" parameterType="FileRecordDetail" resultMap="FileRecordDetailResult">
+        <include refid="selectFileRecordDetailVo"/>
+        <where>  
+            <if test="fileRecordId != null  and fileRecordId != ''"> and file_record_id = #{fileRecordId}</if>
+            <if test="businessRecordId != null  and businessRecordId != ''"> and business_record_id = #{businessRecordId}</if>
+            <if test="fileCatalogRelationId != null  and fileCatalogRelationId != ''"> and file_catalog_relation_id = #{fileCatalogRelationId}</if>
+            <if test="fileConfigName != null  and fileConfigName != ''"> and file_config_name like concat('%', #{fileConfigName}, '%')</if>
+            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code = #{fileConfigCode}</if>
+            <if test="uploadName != null  and uploadName != ''"> and upload_name like concat('%', #{uploadName}, '%')</if>
+            <if test="uploadOriginalName != null  and uploadOriginalName != ''"> and upload_original_name like concat('%', #{uploadOriginalName}, '%')</if>
+            <if test="uploadType != null  and uploadType != ''"> and upload_type = #{uploadType}</if>
+            <if test="uploadSize != null "> and upload_size = #{uploadSize}</if>
+            <if test="uploadParentPath != null  and uploadParentPath != ''"> and upload_parent_path = #{uploadParentPath}</if>
+            <if test="uploadPath != null  and uploadPath != ''"> and upload_path = #{uploadPath}</if>
+            <if test="uploadTime != null "> and upload_time = #{uploadTime}</if>
+            <if test="uploadDesc != null  and uploadDesc != ''"> and upload_desc = #{uploadDesc}</if>
+            <if test="fileSortNum != null "> and file_sort_num = #{fileSortNum}</if>
+            <if test="uploadStatus != null  and uploadStatus != ''"> and upload_status = #{uploadStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileRecordDetailByFileRecordDetailId" parameterType="String" resultMap="FileRecordDetailResult">
+        <include refid="selectFileRecordDetailVo"/>
+        where file_record_detail_id = #{fileRecordDetailId}
+    </select>
+        
+    <insert id="insertFileRecordDetail" parameterType="FileRecordDetail">
+        insert into file_record_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileRecordDetailId != null">file_record_detail_id,</if>
+            <if test="fileRecordId != null">file_record_id,</if>
+            <if test="businessRecordId != null">business_record_id,</if>
+            <if test="fileCatalogRelationId != null">file_catalog_relation_id,</if>
+            <if test="fileConfigName != null">file_config_name,</if>
+            <if test="fileConfigCode != null">file_config_code,</if>
+            <if test="uploadName != null">upload_name,</if>
+            <if test="uploadOriginalName != null">upload_original_name,</if>
+            <if test="uploadType != null">upload_type,</if>
+            <if test="uploadSize != null">upload_size,</if>
+            <if test="uploadParentPath != null">upload_parent_path,</if>
+            <if test="uploadPath != null">upload_path,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="uploadDesc != null">upload_desc,</if>
+            <if test="fileSortNum != null">file_sort_num,</if>
+            <if test="uploadStatus != null">upload_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileRecordDetailId != null">#{fileRecordDetailId},</if>
+            <if test="fileRecordId != null">#{fileRecordId},</if>
+            <if test="businessRecordId != null">#{businessRecordId},</if>
+            <if test="fileCatalogRelationId != null">#{fileCatalogRelationId},</if>
+            <if test="fileConfigName != null">#{fileConfigName},</if>
+            <if test="fileConfigCode != null">#{fileConfigCode},</if>
+            <if test="uploadName != null">#{uploadName},</if>
+            <if test="uploadOriginalName != null">#{uploadOriginalName},</if>
+            <if test="uploadType != null">#{uploadType},</if>
+            <if test="uploadSize != null">#{uploadSize},</if>
+            <if test="uploadParentPath != null">#{uploadParentPath},</if>
+            <if test="uploadPath != null">#{uploadPath},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="uploadDesc != null">#{uploadDesc},</if>
+            <if test="fileSortNum != null">#{fileSortNum},</if>
+            <if test="uploadStatus != null">#{uploadStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileRecordDetail" parameterType="FileRecordDetail">
+        update file_record_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileRecordId != null">file_record_id = #{fileRecordId},</if>
+            <if test="businessRecordId != null">business_record_id = #{businessRecordId},</if>
+            <if test="fileCatalogRelationId != null">file_catalog_relation_id = #{fileCatalogRelationId},</if>
+            <if test="fileConfigName != null">file_config_name = #{fileConfigName},</if>
+            <if test="fileConfigCode != null">file_config_code = #{fileConfigCode},</if>
+            <if test="uploadName != null">upload_name = #{uploadName},</if>
+            <if test="uploadOriginalName != null">upload_original_name = #{uploadOriginalName},</if>
+            <if test="uploadType != null">upload_type = #{uploadType},</if>
+            <if test="uploadSize != null">upload_size = #{uploadSize},</if>
+            <if test="uploadParentPath != null">upload_parent_path = #{uploadParentPath},</if>
+            <if test="uploadPath != null">upload_path = #{uploadPath},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="uploadDesc != null">upload_desc = #{uploadDesc},</if>
+            <if test="fileSortNum != null">file_sort_num = #{fileSortNum},</if>
+            <if test="uploadStatus != null">upload_status = #{uploadStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_record_detail_id = #{fileRecordDetailId}
+    </update>
+
+    <delete id="deleteFileRecordDetailByFileRecordDetailId" parameterType="String">
+        delete from file_record_detail where file_record_detail_id = #{fileRecordDetailId}
+    </delete>
+
+    <delete id="deleteFileRecordDetailByFileRecordDetailIds" parameterType="String">
+        delete from file_record_detail where file_record_detail_id in 
+        <foreach item="fileRecordDetailId" collection="array" open="(" separator="," close=")">
+            #{fileRecordDetailId}
+        </foreach>
+    </delete>
+</mapper>
