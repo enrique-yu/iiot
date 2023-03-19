@@ -28,7 +28,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
  * @date 2023-03-18
  */
 @RestController
-@RequestMapping("/company/detail")
+@RequestMapping("/file/detail")
 public class FileRecordDetailController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 查询文件记录明细列表
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:list')")
+    @PreAuthorize("@ss.hasPermi('file:detail:list')")
     @GetMapping("/list")
     public TableDataInfo list(FileRecordDetail fileRecordDetail)
     {
@@ -49,7 +49,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 导出文件记录明细列表
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:export')")
+    @PreAuthorize("@ss.hasPermi('file:detail:export')")
     @Log(title = "文件记录明细", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FileRecordDetail fileRecordDetail)
@@ -62,7 +62,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 获取文件记录明细详细信息
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:query')")
+    @PreAuthorize("@ss.hasPermi('file:detail:query')")
     @GetMapping(value = "/{fileRecordDetailId}")
     public AjaxResult getInfo(@PathVariable("fileRecordDetailId") String fileRecordDetailId)
     {
@@ -72,7 +72,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 新增文件记录明细
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:add')")
+    @PreAuthorize("@ss.hasPermi('file:detail:add')")
     @Log(title = "文件记录明细", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FileRecordDetail fileRecordDetail)
@@ -83,7 +83,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 修改文件记录明细
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:edit')")
+    @PreAuthorize("@ss.hasPermi('file:detail:edit')")
     @Log(title = "文件记录明细", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FileRecordDetail fileRecordDetail)
@@ -94,7 +94,7 @@ public class FileRecordDetailController extends BaseController
     /**
      * 删除文件记录明细
      */
-    @PreAuthorize("@ss.hasPermi('company:detail:remove')")
+    @PreAuthorize("@ss.hasPermi('file:detail:remove')")
     @Log(title = "文件记录明细", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{fileRecordDetailIds}")
     public AjaxResult remove(@PathVariable String[] fileRecordDetailIds)

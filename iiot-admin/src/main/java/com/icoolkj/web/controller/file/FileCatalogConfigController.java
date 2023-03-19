@@ -28,7 +28,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
  * @date 2023-03-18
  */
 @RestController
-@RequestMapping("/company/config")
+@RequestMapping("/file/catalog")
 public class FileCatalogConfigController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 查询文件目录配置列表
      */
-    @PreAuthorize("@ss.hasPermi('company:config:list')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:list')")
     @GetMapping("/list")
     public TableDataInfo list(FileCatalogConfig fileCatalogConfig)
     {
@@ -49,7 +49,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 导出文件目录配置列表
      */
-    @PreAuthorize("@ss.hasPermi('company:config:export')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:export')")
     @Log(title = "文件目录配置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FileCatalogConfig fileCatalogConfig)
@@ -62,7 +62,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 获取文件目录配置详细信息
      */
-    @PreAuthorize("@ss.hasPermi('company:config:query')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:query')")
     @GetMapping(value = "/{fileCatalogCode}")
     public AjaxResult getInfo(@PathVariable("fileCatalogCode") String fileCatalogCode)
     {
@@ -72,7 +72,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 新增文件目录配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:add')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:add')")
     @Log(title = "文件目录配置", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FileCatalogConfig fileCatalogConfig)
@@ -83,7 +83,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 修改文件目录配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:edit')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:edit')")
     @Log(title = "文件目录配置", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FileCatalogConfig fileCatalogConfig)
@@ -94,7 +94,7 @@ public class FileCatalogConfigController extends BaseController
     /**
      * 删除文件目录配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:remove')")
+    @PreAuthorize("@ss.hasPermi('file:catalog:remove')")
     @Log(title = "文件目录配置", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{fileCatalogCodes}")
     public AjaxResult remove(@PathVariable String[] fileCatalogCodes)

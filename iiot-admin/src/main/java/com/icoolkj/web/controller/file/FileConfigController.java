@@ -28,7 +28,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
  * @date 2023-03-18
  */
 @RestController
-@RequestMapping("/company/config")
+@RequestMapping("/file/config")
 public class FileConfigController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FileConfigController extends BaseController
     /**
      * 查询文件配置列表
      */
-    @PreAuthorize("@ss.hasPermi('company:config:list')")
+    @PreAuthorize("@ss.hasPermi('file:config:list')")
     @GetMapping("/list")
     public TableDataInfo list(FileConfig fileConfig)
     {
@@ -49,7 +49,7 @@ public class FileConfigController extends BaseController
     /**
      * 导出文件配置列表
      */
-    @PreAuthorize("@ss.hasPermi('company:config:export')")
+    @PreAuthorize("@ss.hasPermi('file:config:export')")
     @Log(title = "文件配置", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FileConfig fileConfig)
@@ -62,7 +62,7 @@ public class FileConfigController extends BaseController
     /**
      * 获取文件配置详细信息
      */
-    @PreAuthorize("@ss.hasPermi('company:config:query')")
+    @PreAuthorize("@ss.hasPermi('file:config:query')")
     @GetMapping(value = "/{fileConfigCode}")
     public AjaxResult getInfo(@PathVariable("fileConfigCode") String fileConfigCode)
     {
@@ -72,7 +72,7 @@ public class FileConfigController extends BaseController
     /**
      * 新增文件配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:add')")
+    @PreAuthorize("@ss.hasPermi('file:config:add')")
     @Log(title = "文件配置", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FileConfig fileConfig)
@@ -83,7 +83,7 @@ public class FileConfigController extends BaseController
     /**
      * 修改文件配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:edit')")
+    @PreAuthorize("@ss.hasPermi('file:config:edit')")
     @Log(title = "文件配置", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FileConfig fileConfig)
@@ -94,7 +94,7 @@ public class FileConfigController extends BaseController
     /**
      * 删除文件配置
      */
-    @PreAuthorize("@ss.hasPermi('company:config:remove')")
+    @PreAuthorize("@ss.hasPermi('file:config:remove')")
     @Log(title = "文件配置", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{fileConfigCodes}")
     public AjaxResult remove(@PathVariable String[] fileConfigCodes)

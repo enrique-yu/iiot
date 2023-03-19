@@ -28,7 +28,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
  * @date 2023-03-18
  */
 @RestController
-@RequestMapping("/company/relation")
+@RequestMapping("/file/relation")
 public class FileCatalogRelationController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 查询文件与目录关系列表
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:list')")
+    @PreAuthorize("@ss.hasPermi('file:relation:list')")
     @GetMapping("/list")
     public TableDataInfo list(FileCatalogRelation fileCatalogRelation)
     {
@@ -49,7 +49,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 导出文件与目录关系列表
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:export')")
+    @PreAuthorize("@ss.hasPermi('file:relation:export')")
     @Log(title = "文件与目录关系", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FileCatalogRelation fileCatalogRelation)
@@ -62,7 +62,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 获取文件与目录关系详细信息
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:query')")
+    @PreAuthorize("@ss.hasPermi('file:relation:query')")
     @GetMapping(value = "/{fileCatalogRelationId}")
     public AjaxResult getInfo(@PathVariable("fileCatalogRelationId") String fileCatalogRelationId)
     {
@@ -72,7 +72,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 新增文件与目录关系
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:add')")
+    @PreAuthorize("@ss.hasPermi('file:relation:add')")
     @Log(title = "文件与目录关系", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FileCatalogRelation fileCatalogRelation)
@@ -83,7 +83,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 修改文件与目录关系
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:edit')")
+    @PreAuthorize("@ss.hasPermi('file:relation:edit')")
     @Log(title = "文件与目录关系", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FileCatalogRelation fileCatalogRelation)
@@ -94,7 +94,7 @@ public class FileCatalogRelationController extends BaseController
     /**
      * 删除文件与目录关系
      */
-    @PreAuthorize("@ss.hasPermi('company:relation:remove')")
+    @PreAuthorize("@ss.hasPermi('file:relation:remove')")
     @Log(title = "文件与目录关系", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{fileCatalogRelationIds}")
     public AjaxResult remove(@PathVariable String[] fileCatalogRelationIds)
