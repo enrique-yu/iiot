@@ -80,14 +80,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where file_record_id = #{fileRecordId}
     </update>
 
-    <delete id="deleteFileRecordByFileRecordId" parameterType="String">
-        delete from file_record where file_record_id = #{fileRecordId}
-    </delete>
-
-    <delete id="deleteFileRecordByFileRecordIds" parameterType="String">
-        delete from file_record where file_record_id in 
-        <foreach item="fileRecordId" collection="array" open="(" separator="," close=")">
-            #{fileRecordId}
-        </foreach>
-    </delete>
 </mapper>

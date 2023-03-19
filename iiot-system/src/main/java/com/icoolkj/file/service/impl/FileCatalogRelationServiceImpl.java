@@ -2,6 +2,8 @@ package com.icoolkj.file.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileCatalogRelationMapper;
@@ -53,6 +55,8 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     @Override
     public int insertFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
+        fileCatalogRelation.setFileCatalogRelationId(IdWorker.nextId().toString());
+        fileCatalogRelation.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileCatalogRelation.setCreateTime(DateUtils.getNowDate());
         return fileCatalogRelationMapper.insertFileCatalogRelation(fileCatalogRelation);
     }
@@ -66,31 +70,9 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     @Override
     public int updateFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
+        fileCatalogRelation.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileCatalogRelation.setUpdateTime(DateUtils.getNowDate());
         return fileCatalogRelationMapper.updateFileCatalogRelation(fileCatalogRelation);
     }
 
-    /**
-     * 批量删除文件与目录关系
-     * 
-     * @param fileCatalogRelationIds 需要删除的文件与目录关系主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileCatalogRelationByFileCatalogRelationIds(String[] fileCatalogRelationIds)
-    {
-        return fileCatalogRelationMapper.deleteFileCatalogRelationByFileCatalogRelationIds(fileCatalogRelationIds);
-    }
-
-    /**
-     * 删除文件与目录关系信息
-     * 
-     * @param fileCatalogRelationId 文件与目录关系主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileCatalogRelationByFileCatalogRelationId(String fileCatalogRelationId)
-    {
-        return fileCatalogRelationMapper.deleteFileCatalogRelationByFileCatalogRelationId(fileCatalogRelationId);
-    }
 }

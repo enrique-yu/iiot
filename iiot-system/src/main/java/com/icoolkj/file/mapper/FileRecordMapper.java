@@ -43,19 +43,4 @@ public interface FileRecordMapper
      */
     public int updateFileRecord(FileRecord fileRecord);
 
-    /**
-     * 删除文件记录
-     * 
-     * @param fileRecordId 文件记录主键
-     * @return 结果
-     */
-    public int deleteFileRecordByFileRecordId(String fileRecordId);
-
-    /**
-     * 批量删除文件记录
-     * 
-     * @param fileRecordIds 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteFileRecordByFileRecordIds(String[] fileRecordIds);
 }

@@ -91,14 +91,4 @@ public class FileCatalogRelationController extends BaseController
         return toAjax(fileCatalogRelationService.updateFileCatalogRelation(fileCatalogRelation));
     }
 
-    /**
-     * 删除文件与目录关系
-     */
-    @PreAuthorize("@ss.hasPermi('file:relation:remove')")
-    @Log(title = "文件与目录关系", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{fileCatalogRelationIds}")
-    public AjaxResult remove(@PathVariable String[] fileCatalogRelationIds)
-    {
-        return toAjax(fileCatalogRelationService.deleteFileCatalogRelationByFileCatalogRelationIds(fileCatalogRelationIds));
-    }
 }

@@ -2,6 +2,7 @@ package com.icoolkj.file.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileCatalogConfigMapper;
@@ -53,6 +54,7 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int insertFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
+        fileCatalogConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileCatalogConfig.setCreateTime(DateUtils.getNowDate());
         return fileCatalogConfigMapper.insertFileCatalogConfig(fileCatalogConfig);
     }
@@ -66,31 +68,9 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int updateFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
+        fileCatalogConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileCatalogConfig.setUpdateTime(DateUtils.getNowDate());
         return fileCatalogConfigMapper.updateFileCatalogConfig(fileCatalogConfig);
     }
 
-    /**
-     * 批量删除文件目录配置
-     * 
-     * @param fileCatalogCodes 需要删除的文件目录配置主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileCatalogConfigByFileCatalogCodes(String[] fileCatalogCodes)
-    {
-        return fileCatalogConfigMapper.deleteFileCatalogConfigByFileCatalogCodes(fileCatalogCodes);
-    }
-
-    /**
-     * 删除文件目录配置信息
-     * 
-     * @param fileCatalogCode 文件目录配置主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileCatalogConfigByFileCatalogCode(String fileCatalogCode)
-    {
-        return fileCatalogConfigMapper.deleteFileCatalogConfigByFileCatalogCode(fileCatalogCode);
-    }
 }

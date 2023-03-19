@@ -43,19 +43,4 @@ public interface IFileCatalogConfigService
      */
     public int updateFileCatalogConfig(FileCatalogConfig fileCatalogConfig);
 
-    /**
-     * 批量删除文件目录配置
-     * 
-     * @param fileCatalogCodes 需要删除的文件目录配置主键集合
-     * @return 结果
-     */
-    public int deleteFileCatalogConfigByFileCatalogCodes(String[] fileCatalogCodes);
-
-    /**
-     * 删除文件目录配置信息
-     * 
-     * @param fileCatalogCode 文件目录配置主键
-     * @return 结果
-     */
-    public int deleteFileCatalogConfigByFileCatalogCode(String fileCatalogCode);
 }

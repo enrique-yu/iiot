@@ -2,6 +2,8 @@ package com.icoolkj.file.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileRecordDetailMapper;
@@ -53,6 +55,8 @@ public class FileRecordDetailServiceImpl implements IFileRecordDetailService
     @Override
     public int insertFileRecordDetail(FileRecordDetail fileRecordDetail)
     {
+        fileRecordDetail.setFileRecordDetailId(IdWorker.nextId().toString());
+        fileRecordDetail.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileRecordDetail.setCreateTime(DateUtils.getNowDate());
         return fileRecordDetailMapper.insertFileRecordDetail(fileRecordDetail);
     }
@@ -66,31 +70,9 @@ public class FileRecordDetailServiceImpl implements IFileRecordDetailService
     @Override
     public int updateFileRecordDetail(FileRecordDetail fileRecordDetail)
     {
+        fileRecordDetail.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileRecordDetail.setUpdateTime(DateUtils.getNowDate());
         return fileRecordDetailMapper.updateFileRecordDetail(fileRecordDetail);
     }
 
-    /**
-     * 批量删除文件记录明细
-     * 
-     * @param fileRecordDetailIds 需要删除的文件记录明细主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileRecordDetailByFileRecordDetailIds(String[] fileRecordDetailIds)
-    {
-        return fileRecordDetailMapper.deleteFileRecordDetailByFileRecordDetailIds(fileRecordDetailIds);
-    }
-
-    /**
-     * 删除文件记录明细信息
-     * 
-     * @param fileRecordDetailId 文件记录明细主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileRecordDetailByFileRecordDetailId(String fileRecordDetailId)
-    {
-        return fileRecordDetailMapper.deleteFileRecordDetailByFileRecordDetailId(fileRecordDetailId);
-    }
 }

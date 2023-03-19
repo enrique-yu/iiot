@@ -2,6 +2,7 @@ package com.icoolkj.file.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileConfigMapper;
@@ -53,6 +54,7 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int insertFileConfig(FileConfig fileConfig)
     {
+        fileConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileConfig.setCreateTime(DateUtils.getNowDate());
         return fileConfigMapper.insertFileConfig(fileConfig);
     }
@@ -66,31 +68,10 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int updateFileConfig(FileConfig fileConfig)
     {
+        fileConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         fileConfig.setUpdateTime(DateUtils.getNowDate());
         return fileConfigMapper.updateFileConfig(fileConfig);
     }
 
-    /**
-     * 批量删除文件配置
-     * 
-     * @param fileConfigCodes 需要删除的文件配置主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileConfigByFileConfigCodes(String[] fileConfigCodes)
-    {
-        return fileConfigMapper.deleteFileConfigByFileConfigCodes(fileConfigCodes);
-    }
 
-    /**
-     * 删除文件配置信息
-     * 
-     * @param fileConfigCode 文件配置主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFileConfigByFileConfigCode(String fileConfigCode)
-    {
-        return fileConfigMapper.deleteFileConfigByFileConfigCode(fileConfigCode);
-    }
 }

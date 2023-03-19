@@ -43,19 +43,4 @@ public interface FileConfigMapper
      */
     public int updateFileConfig(FileConfig fileConfig);
 
-    /**
-     * 删除文件配置
-     * 
-     * @param fileConfigCode 文件配置主键
-     * @return 结果
-     */
-    public int deleteFileConfigByFileConfigCode(String fileConfigCode);
-
-    /**
-     * 批量删除文件配置
-     * 
-     * @param fileConfigCodes 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteFileConfigByFileConfigCodes(String[] fileConfigCodes);
 }

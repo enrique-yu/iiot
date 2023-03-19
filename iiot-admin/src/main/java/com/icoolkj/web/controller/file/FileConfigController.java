@@ -91,14 +91,4 @@ public class FileConfigController extends BaseController
         return toAjax(fileConfigService.updateFileConfig(fileConfig));
     }
 
-    /**
-     * 删除文件配置
-     */
-    @PreAuthorize("@ss.hasPermi('file:config:remove')")
-    @Log(title = "文件配置", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{fileConfigCodes}")
-    public AjaxResult remove(@PathVariable String[] fileConfigCodes)
-    {
-        return toAjax(fileConfigService.deleteFileConfigByFileConfigCodes(fileConfigCodes));
-    }
 }

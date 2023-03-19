@@ -1,29 +1,31 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="文件配置名称" prop="fileConfigName">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="80px">
+      <el-form-item label="文件名称" prop="fileConfigName">
         <el-input
           v-model="queryParams.fileConfigName"
-          placeholder="请输入文件配置名称"
+          placeholder="请输入文件名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="文件配置模板" prop="fileConfigTemplate">
+      <el-form-item label="文件编码" prop="fileConfigCode">
         <el-input
-          v-model="queryParams.fileConfigTemplate"
-          placeholder="请输入文件配置模板"
+          v-model="queryParams.fileConfigCode"
+          placeholder="请输入文件编码"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="文件配置备注信息" prop="fileConfigDesc">
-        <el-input
-          v-model="queryParams.fileConfigDesc"
-          placeholder="请输入文件配置备注信息"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+      <el-form-item label="状态" prop="fileConfigStatus">
+        <el-select v-model="queryParams.fileConfigStatus" placeholder="状态" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_normal_disable"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -53,37 +55,20 @@
           v-hasPermi="['file:config:edit']"
         >修改</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['file:config:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['file:config:export']"
-        >导出</el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="文件配置代码" align="center" prop="fileConfigCode" />
-      <el-table-column label="文件配置名称" align="center" prop="fileConfigName" />
-      <el-table-column label="文件配置模板" align="center" prop="fileConfigTemplate" />
-      <el-table-column label="文件配置备注信息" align="center" prop="fileConfigDesc" />
-      <el-table-column label="状态" align="center" prop="fileConfigStatus" />
+      <el-table-column prop="fileConfigStatus" align="center"  label="状态" width="80">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.fileConfigStatus"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="文件名称" align="center" prop="fileConfigName" />
+      <el-table-column label="文件编码" align="center" prop="fileConfigCode" />
+      <el-table-column label="引用模板" align="center" prop="fileConfigTemplate" />
+      <el-table-column label="备注信息" align="center" prop="fileConfigDesc" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -93,13 +78,6 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['file:config:edit']"
           >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['file:config:remove']"
-          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -113,19 +91,29 @@
     />
 
     <!-- 添加或修改文件配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="文件配置名称" prop="fileConfigName">
-          <el-input v-model="form.fileConfigName" placeholder="请输入文件配置名称" />
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="文件名称" prop="fileConfigName">
+          <el-input v-model="form.fileConfigName" placeholder="请输入文件名称" />
         </el-form-item>
-        <el-form-item label="文件配置模板" prop="fileConfigTemplate">
-          <el-input v-model="form.fileConfigTemplate" placeholder="请输入文件配置模板" />
+        <el-form-item label="文件编码" prop="fileConfigCode">
+          <el-input v-model="form.fileConfigCode"  :maxlength="10" placeholder="请输入文件编码" />
         </el-form-item>
-        <el-form-item label="文件配置备注信息" prop="fileConfigDesc">
-          <el-input v-model="form.fileConfigDesc" placeholder="请输入文件配置备注信息" />
+        <el-form-item label="状态" prop="fileConfigStatus">
+          <el-radio-group v-model="form.fileConfigStatus">
+            <el-radio
+              v-for="dict in dict.type.sys_normal_disable"
+              :key="dict.value"
+              :label="dict.value"
+            >{{dict.label}}
+            </el-radio>
+          </el-radio-group>
         </el-form-item>
-        <el-form-item label="删除标记" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标记" />
+        <el-form-item label="引用模板" prop="fileConfigTemplate">
+          <el-input v-model="form.fileConfigTemplate" placeholder="请输入引用模板" />
+        </el-form-item>
+        <el-form-item label="备注信息" prop="fileConfigDesc">
+          <el-input type="textarea" v-model="form.fileConfigDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注信息"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -141,6 +129,7 @@ import { listConfig, getConfig, delConfig, addConfig, updateConfig } from "@/api
 
 export default {
   name: "Config",
+  dicts: ['sys_normal_disable'],
   data() {
     return {
       // 遮罩层
@@ -174,6 +163,26 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        fileConfigName: [
+          {required: true, message: "文件名称不能为空", trigger: "blur"},
+          {min: 2, max: 10, message: '文件名称长度必须介于 2 和 80 之间', trigger: 'blur'}
+        ],
+        fileConfigCode: [
+          {required: true, message: "文件编码配置不能为空", trigger: "blur"},
+          {
+            required: true,
+            pattern: /^[0-9A-HJ-NPQRTUWXY_]{0,10}$/,
+            message: '文件编码格式不正确，只允许大写字母或数字或“_”组成。',
+            trigger: 'blur'
+          },
+          {min: 2, max: 10, message: '文件编码长度必须介于 2 和 10 之间', trigger: 'blur'}
+        ],
+        fileConfigTemplate: [
+          {required: true, message: "引用模板不能为空", trigger: "blur"},
+        ],
+        fileConfigStatus: [
+          { required: true, message: "状态不能为空", trigger: "blur" }
+        ],
       }
     };
   },
@@ -203,11 +212,6 @@ export default {
         fileConfigTemplate: null,
         fileConfigDesc: null,
         fileConfigStatus: null,
-        delFlag: null,
-        createBy: null,
-        createTime: null,
-        updateBy: null,
-        updateTime: null
       };
       this.resetForm("form");
     },
@@ -247,7 +251,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.fileConfigCode != null) {
+          if (this.title === "修改文件配置") {
             updateConfig(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
@@ -263,22 +267,6 @@ export default {
         }
       });
     },
-    /** 删除按钮操作 */
-    handleDelete(row) {
-      const fileConfigCodes = row.fileConfigCode || this.ids;
-      this.$modal.confirm('是否确认删除文件配置编号为"' + fileConfigCodes + '"的数据项？').then(function() {
-        return delConfig(fileConfigCodes);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
-    },
-    /** 导出按钮操作 */
-    handleExport() {
-      this.download('file/config/export', {
-        ...this.queryParams
-      }, `config_${new Date().getTime()}.xlsx`)
-    }
   }
 };
 </script>

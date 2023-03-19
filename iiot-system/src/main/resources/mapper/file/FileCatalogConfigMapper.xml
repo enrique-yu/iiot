@@ -75,14 +75,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where file_catalog_code = #{fileCatalogCode}
     </update>
 
-    <delete id="deleteFileCatalogConfigByFileCatalogCode" parameterType="String">
-        delete from file_catalog_config where file_catalog_code = #{fileCatalogCode}
-    </delete>
-
-    <delete id="deleteFileCatalogConfigByFileCatalogCodes" parameterType="String">
-        delete from file_catalog_config where file_catalog_code in 
-        <foreach item="fileCatalogCode" collection="array" open="(" separator="," close=")">
-            #{fileCatalogCode}
-        </foreach>
-    </delete>
 </mapper>

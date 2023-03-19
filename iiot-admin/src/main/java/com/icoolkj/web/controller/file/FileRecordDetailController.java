@@ -91,14 +91,4 @@ public class FileRecordDetailController extends BaseController
         return toAjax(fileRecordDetailService.updateFileRecordDetail(fileRecordDetail));
     }
 
-    /**
-     * 删除文件记录明细
-     */
-    @PreAuthorize("@ss.hasPermi('file:detail:remove')")
-    @Log(title = "文件记录明细", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{fileRecordDetailIds}")
-    public AjaxResult remove(@PathVariable String[] fileRecordDetailIds)
-    {
-        return toAjax(fileRecordDetailService.deleteFileRecordDetailByFileRecordDetailIds(fileRecordDetailIds));
-    }
 }

@@ -43,19 +43,4 @@ public interface IFileCatalogRelationService
      */
     public int updateFileCatalogRelation(FileCatalogRelation fileCatalogRelation);
 
-    /**
-     * 批量删除文件与目录关系
-     * 
-     * @param fileCatalogRelationIds 需要删除的文件与目录关系主键集合
-     * @return 结果
-     */
-    public int deleteFileCatalogRelationByFileCatalogRelationIds(String[] fileCatalogRelationIds);
-
-    /**
-     * 删除文件与目录关系信息
-     * 
-     * @param fileCatalogRelationId 文件与目录关系主键
-     * @return 结果
-     */
-    public int deleteFileCatalogRelationByFileCatalogRelationId(String fileCatalogRelationId);
 }

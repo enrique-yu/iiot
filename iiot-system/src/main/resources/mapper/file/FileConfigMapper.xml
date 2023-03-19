@@ -80,14 +80,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where file_config_code = #{fileConfigCode}
     </update>
 
-    <delete id="deleteFileConfigByFileConfigCode" parameterType="String">
-        delete from file_config where file_config_code = #{fileConfigCode}
-    </delete>
-
-    <delete id="deleteFileConfigByFileConfigCodes" parameterType="String">
-        delete from file_config where file_config_code in 
-        <foreach item="fileConfigCode" collection="array" open="(" separator="," close=")">
-            #{fileConfigCode}
-        </foreach>
-    </delete>
 </mapper>

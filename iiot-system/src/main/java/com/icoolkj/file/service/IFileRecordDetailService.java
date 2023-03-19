@@ -43,19 +43,4 @@ public interface IFileRecordDetailService
      */
     public int updateFileRecordDetail(FileRecordDetail fileRecordDetail);
 
-    /**
-     * 批量删除文件记录明细
-     * 
-     * @param fileRecordDetailIds 需要删除的文件记录明细主键集合
-     * @return 结果
-     */
-    public int deleteFileRecordDetailByFileRecordDetailIds(String[] fileRecordDetailIds);
-
-    /**
-     * 删除文件记录明细信息
-     * 
-     * @param fileRecordDetailId 文件记录明细主键
-     * @return 结果
-     */
-    public int deleteFileRecordDetailByFileRecordDetailId(String fileRecordDetailId);
 }

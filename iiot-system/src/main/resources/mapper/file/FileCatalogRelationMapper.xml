@@ -110,14 +110,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where file_catalog_relation_id = #{fileCatalogRelationId}
     </update>
 
-    <delete id="deleteFileCatalogRelationByFileCatalogRelationId" parameterType="String">
-        delete from file_catalog_relation where file_catalog_relation_id = #{fileCatalogRelationId}
-    </delete>
-
-    <delete id="deleteFileCatalogRelationByFileCatalogRelationIds" parameterType="String">
-        delete from file_catalog_relation where file_catalog_relation_id in 
-        <foreach item="fileCatalogRelationId" collection="array" open="(" separator="," close=")">
-            #{fileCatalogRelationId}
-        </foreach>
-    </delete>
 </mapper>

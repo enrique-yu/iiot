@@ -91,14 +91,4 @@ public class FileCatalogConfigController extends BaseController
         return toAjax(fileCatalogConfigService.updateFileCatalogConfig(fileCatalogConfig));
     }
 
-    /**
-     * 删除文件目录配置
-     */
-    @PreAuthorize("@ss.hasPermi('file:catalog:remove')")
-    @Log(title = "文件目录配置", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{fileCatalogCodes}")
-    public AjaxResult remove(@PathVariable String[] fileCatalogCodes)
-    {
-        return toAjax(fileCatalogConfigService.deleteFileCatalogConfigByFileCatalogCodes(fileCatalogCodes));
-    }
 }

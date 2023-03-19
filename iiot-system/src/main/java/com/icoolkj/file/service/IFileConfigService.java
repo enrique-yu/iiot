@@ -43,19 +43,5 @@ public interface IFileConfigService
      */
     public int updateFileConfig(FileConfig fileConfig);
 
-    /**
-     * 批量删除文件配置
-     * 
-     * @param fileConfigCodes 需要删除的文件配置主键集合
-     * @return 结果
-     */
-    public int deleteFileConfigByFileConfigCodes(String[] fileConfigCodes);
 
-    /**
-     * 删除文件配置信息
-     * 
-     * @param fileConfigCode 文件配置主键
-     * @return 结果
-     */
-    public int deleteFileConfigByFileConfigCode(String fileConfigCode);
 }
