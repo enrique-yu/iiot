@@ -3,7 +3,7 @@
     <el-dialog v-if="dialogVisible" :title="title" :visible.sync="dialogVisible" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="文件名称" prop="fileConfigName">
-          <el-input v-model="form.fileConfigName" placeholder="请输入文件名称" />
+          <el-input v-model="form.fileConfigName" :maxlength="30" placeholder="请输入文件名称" />
         </el-form-item>
         <el-form-item label="文件编码" prop="fileConfigCode">
           <el-input v-model="form.fileConfigCode" :maxlength="10" placeholder="请输入文件编码" />
@@ -54,7 +54,7 @@ export default {
       rules: {
         fileConfigName: [
           {required: true, message: "文件名称不能为空", trigger: "blur"},
-          {min: 2, max: 10, message: '文件名称长度必须介于 2 和 80 之间', trigger: 'blur'}
+          {min: 2, max: 30, message: '文件名称长度必须介于 2 和 30 之间', trigger: 'blur'}
         ],
         fileConfigCode: [
           {required: true, message: "文件编码配置不能为空", trigger: "blur"},
