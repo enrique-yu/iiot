@@ -98,8 +98,6 @@ export default {
   data() {
     return {
       listApi: listConfig,
-      // 文件配置表格数据
-      configList: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
