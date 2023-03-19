@@ -1,3 +1,4 @@
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -29,8 +30,8 @@ CREATE TABLE `dc_comp_basic`  (
   `comp_lxr_email` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '企业联系人邮箱',
   `comp_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`comp_basic_id`) USING BTREE,
@@ -41,10 +42,10 @@ CREATE TABLE `dc_comp_basic`  (
 -- ----------------------------
 -- Records of dc_comp_basic
 -- ----------------------------
-INSERT INTO `dc_comp_basic` VALUES ('552543924565049344', '安徽建工集团有限公司', '91340000148940170G', '有限责任公司(非自然人投资或控股的法人独资)', '赵时运', '15888888888', '3401', '安徽省合肥市包河区芜湖路325号', '117.324911', '31.869924', '1989-04-25', '1989-05-06 至 无固定期限', '注销', '2018-07-30', '安徽省市场监督管理局', '52,000万(元)', '52,000万(元)', '各类工程建设项目总承包；房屋建筑、公路、市政公用、水利水电、矿山、铁路、冶炼、石油化工（不含危险品）、港口与航道、城市园林绿化；各类工程专业承包；建筑装修装饰、公路路基、公路路面、桥梁、隧道、炉窑、建筑幕墙、消防设施、钢结构、机电设备安装、河湖整治、起重设备安装；对外工程承包和劳务合作、国际国内商贸服务；交通建设投资；建筑材料的生产与销售，建筑机械制造、经销与租赁，建筑工程勘察设计，建筑和交通研发、咨询、检测、监理（以上范围涉及许可和资质证的凭许可和资质证经营）。', '戴国华', '15888888888', '158@qq.com', '0', '0', NULL, '2023-03-08 17:32:17', '554948857633439744', '2023-03-12 18:17:27');
-INSERT INTO `dc_comp_basic` VALUES ('552544230317228032', '安徽大学资产经营有限公司', '913401007529530585', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '方强国', '15999999999', '159@qq.com', '0', '0', NULL, '2023-03-08 17:33:30', '133555608539361280', '2023-03-12 08:48:41');
+INSERT INTO `dc_comp_basic` VALUES ('552543924565049344', '安徽建工集团有限公司', '91340000148940170G', '有限责任公司(非自然人投资或控股的法人独资)', '赵时运', '15888888888', '3401', '安徽省合肥市包河区芜湖路325号', '117.324911', '31.869924', '1989-04-25', '1989-05-06 至 无固定期限', '注销', '2018-07-30', '安徽省市场监督管理局', '52,000万(元)', '52,000万(元)', '各类工程建设项目总承包；房屋建筑、公路、市政公用、水利水电、矿山、铁路、冶炼、石油化工（不含危险品）、港口与航道、城市园林绿化；各类工程专业承包；建筑装修装饰、公路路基、公路路面、桥梁、隧道、炉窑、建筑幕墙、消防设施、钢结构、机电设备安装、河湖整治、起重设备安装；对外工程承包和劳务合作、国际国内商贸服务；交通建设投资；建筑材料的生产与销售，建筑机械制造、经销与租赁，建筑工程勘察设计，建筑和交通研发、咨询、检测、监理（以上范围涉及许可和资质证的凭许可和资质证经营）。', '戴国华', '15888888888', '158@qq.com', '0', '0', '133555608539361280', '2023-03-08 17:32:17', '554948857633439744', '2023-03-12 18:17:27');
+INSERT INTO `dc_comp_basic` VALUES ('552544230317228032', '安徽大学资产经营有限公司', '913401007529530585', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '方强国', '15999999999', '159@qq.com', '0', '0', '133555608539361280', '2023-03-08 17:33:30', '133555608539361280', '2023-03-12 08:48:41');
 INSERT INTO `dc_comp_basic` VALUES ('554428458738909184', '安徽省建设监理有限公司', '91340000148947612F', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '王庆国', '13666666666', '136@qq.com', '0', '0', '133555608539361280', '2023-03-10 22:20:45', '133555608539361280', '2023-03-12 08:48:45');
-INSERT INTO `dc_comp_basic` VALUES ('554445566969380864', '安徽建筑大学资产经营有限公司', '91340111MA2UC77U2R', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '徐卫国', '15777777777', '157@qq.com', '0', '0', NULL, '2023-03-10 23:28:44', '133555608539361280', '2023-03-12 08:48:48');
+INSERT INTO `dc_comp_basic` VALUES ('554445566969380864', '安徽建筑大学资产经营有限公司', '91340111MA2UC77U2R', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '徐卫国', '15777777777', '157@qq.com', '0', '0', '133555608539361280', '2023-03-10 23:28:44', '133555608539361280', '2023-03-12 08:48:48');
 
 -- ----------------------------
 -- Table structure for dc_device_basic
@@ -53,19 +54,19 @@ DROP TABLE IF EXISTS `dc_device_basic`;
 CREATE TABLE `dc_device_basic`  (
   `device_basic_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'device_basic_id',
   `comp_basic_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备所属企业ID',
-  `device_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备名称',
-  `device_sn` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备编号【设备ID】',
-  `device_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备类型',
+  `device_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备名称',
+  `device_sn` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备编号【设备ID】',
+  `device_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备类型',
   `device_model` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备规格型号',
   `device_brand` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '品牌',
   `device_factory` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生产厂家',
   `device_desc` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备描述',
   `device_last_active_time` datetime(0) DEFAULT NULL COMMENT '设备最后活动时间',
-  `device_online_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '在线状态（0离线 1在线  2未注册）',
-  `device_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备状态（0正常 1停用  2故障）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `device_online_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '在线状态（0离线 1在线  2未注册）',
+  `device_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '设备状态（0正常 1停用  2故障）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`device_basic_id`) USING BTREE
@@ -77,9 +78,9 @@ CREATE TABLE `dc_device_basic`  (
 DROP TABLE IF EXISTS `dc_staff_basic`;
 CREATE TABLE `dc_staff_basic`  (
   `staff_basic_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'staff_basic_id',
-  `staff_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '人员姓名',
-  `staff_card_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '证件类型【默认身份证】',
-  `staff_card_no` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '证件号码',
+  `staff_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '人员姓名',
+  `staff_card_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '证件类型【默认身份证】',
+  `staff_card_no` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '证件号码',
   `staff_card_fzdate` date DEFAULT NULL COMMENT '证件发证日期',
   `staff_card_fzunit` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '证件发证机关',
   `staff_card_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '证件是否长期（0长期 1非长期）',
@@ -95,10 +96,10 @@ CREATE TABLE `dc_staff_basic`  (
   `staff_email` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '联系邮箱',
   `staff_politics_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '政治面貌',
   `staff_remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注信息',
-  `staff_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `staff_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`staff_basic_id`) USING BTREE
@@ -110,12 +111,12 @@ CREATE TABLE `dc_staff_basic`  (
 DROP TABLE IF EXISTS `file_catalog_config`;
 CREATE TABLE `file_catalog_config`  (
   `file_catalog_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件目录编码',
-  `file_catalog_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件目录名称',
+  `file_catalog_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件目录名称',
   `file_catalog_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件目录配置备注信息',
-  `file_catalog_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `file_catalog_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`file_catalog_code`) USING BTREE
@@ -129,17 +130,17 @@ CREATE TABLE `file_catalog_relation`  (
   `file_catalog_relation_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'file_catalog_relation_id',
   `file_catalog_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件目录编码',
   `file_config_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件配置代码',
-  `file_config_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件类型【逗号拼接】',
-  `file_config_must` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否必传【0非必须 1必须】',
-  `file_config_min_num` int(11) DEFAULT NULL COMMENT '最小文件数量',
-  `file_config_max_num` int(11) DEFAULT NULL COMMENT '最大文件数量',
-  `file_config_min_size` bigint(20) DEFAULT NULL COMMENT '最小文件大小',
-  `file_config_max_size` bigint(20) DEFAULT NULL COMMENT '最大文件大小',
-  `file_config_sort_num` double(5, 2) DEFAULT NULL COMMENT '排序序号',
-  `file_catalog_relation_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `file_config_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件类型【逗号拼接】',
+  `file_config_must` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '是否必传【0非必须 1必须】',
+  `file_config_min_num` int(11) NOT NULL COMMENT '最小文件数量',
+  `file_config_max_num` int(11) NOT NULL COMMENT '最大文件数量',
+  `file_config_min_size` bigint(20) NOT NULL COMMENT '最小文件大小',
+  `file_config_max_size` bigint(20) NOT NULL COMMENT '最大文件大小',
+  `file_config_sort_num` double(5, 2) NOT NULL COMMENT '排序序号',
+  `file_catalog_relation_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`file_catalog_relation_id`) USING BTREE
@@ -151,13 +152,13 @@ CREATE TABLE `file_catalog_relation`  (
 DROP TABLE IF EXISTS `file_config`;
 CREATE TABLE `file_config`  (
   `file_config_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件配置代码',
-  `file_config_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件配置名称',
+  `file_config_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件配置名称',
   `file_config_template` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件配置模板',
   `file_config_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文件配置备注信息',
-  `file_config_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `file_config_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`file_config_code`) USING BTREE
@@ -169,13 +170,13 @@ CREATE TABLE `file_config`  (
 DROP TABLE IF EXISTS `file_record`;
 CREATE TABLE `file_record`  (
   `file_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'file_record_id',
-  `business_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属业务记录ID',
-  `file_catalog_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属文件目录名称',
+  `business_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属业务记录ID',
+  `file_catalog_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件目录名称',
   `file_catalog_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件目录编码',
-  `file_record_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `file_record_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`file_record_id`) USING BTREE
@@ -187,24 +188,24 @@ CREATE TABLE `file_record`  (
 DROP TABLE IF EXISTS `file_record_detail`;
 CREATE TABLE `file_record_detail`  (
   `file_record_detail_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'file_record_detail_id',
-  `file_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属文件记录',
-  `business_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属业务记录ID',
-  `file_catalog_relation_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属文件目录关系ID',
-  `file_config_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属文件配置名称',
-  `file_config_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属文件配置编码',
-  `upload_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传文件名称',
-  `upload_original_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传文件原始名称',
-  `upload_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传文件类型',
-  `upload_size` bigint(20) DEFAULT NULL COMMENT '上传文件大小',
-  `upload_parent_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传文件服务器路径',
-  `upload_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传文件路径',
-  `upload_time` datetime(0) DEFAULT NULL COMMENT '上传时间',
+  `file_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件记录',
+  `business_record_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属业务记录ID',
+  `file_catalog_relation_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件目录关系ID',
+  `file_config_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件配置名称',
+  `file_config_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属文件配置编码',
+  `upload_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '上传文件名称',
+  `upload_original_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '上传文件原始名称',
+  `upload_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '上传文件类型',
+  `upload_size` bigint(20) NOT NULL COMMENT '上传文件大小',
+  `upload_parent_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '上传文件服务器路径',
+  `upload_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '上传文件路径',
+  `upload_time` datetime(0) NOT NULL COMMENT '上传时间',
   `upload_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上传备注',
-  `file_sort_num` double(5, 2) DEFAULT NULL COMMENT '排序序号【如果是配置，则写入配置的序号】',
-  `upload_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `file_sort_num` double(5, 2) NOT NULL COMMENT '排序序号【如果是配置，则写入配置的序号】',
+  `upload_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`file_record_detail_id`) USING BTREE
@@ -634,8 +635,8 @@ CREATE TABLE `sys_domain`  (
   `domain_relation_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组织账号与业务关系ID',
   `domain_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '组织账号状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`domain_id`) USING BTREE,
@@ -664,8 +665,8 @@ CREATE TABLE `sys_domain_roles`  (
   `droles_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '组织角色类型',
   `droles_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '组织角色状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记（0代表存在 2代表删除）',
-  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`droles_id`) USING BTREE
@@ -674,8 +675,8 @@ CREATE TABLE `sys_domain_roles`  (
 -- ----------------------------
 -- Records of sys_domain_roles
 -- ----------------------------
-INSERT INTO `sys_domain_roles` VALUES ('553519200858013696', '企业组织角色', 'DOMAIN_TYPE_COMP', '0', '0', NULL, NULL, '133555608539361280', '2023-03-11 18:53:43');
-INSERT INTO `sys_domain_roles` VALUES ('553592170506878976', '系统组织角色', 'DOMAIN_TYPE_SYSTEM', '0', '0', NULL, NULL, '133555608539361280', '2023-03-08 21:05:02');
+INSERT INTO `sys_domain_roles` VALUES ('553519200858013696', '企业组织角色', 'DOMAIN_TYPE_COMP', '0', '0', '133555608539361280', '2023-03-19 16:29:16', '133555608539361280', '2023-03-11 18:53:43');
+INSERT INTO `sys_domain_roles` VALUES ('553592170506878976', '系统组织角色', 'DOMAIN_TYPE_SYSTEM', '0', '0', '133555608539361280', '2023-03-19 16:29:19', '133555608539361280', '2023-03-08 21:05:02');
 
 -- ----------------------------
 -- Table structure for sys_job
@@ -732,6 +733,15 @@ CREATE TABLE `sys_logininfor`  (
   INDEX `idx_sys_logininfor_s`(`status`) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 143 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_logininfor
+-- ----------------------------
+INSERT INTO `sys_logininfor` VALUES ('557586279529709568', 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-03-19 15:28:48');
+INSERT INTO `sys_logininfor` VALUES ('557592696894521344', 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '退出成功', '2023-03-19 15:54:37');
+INSERT INTO `sys_logininfor` VALUES ('557592808177795072', 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '登录成功', '2023-03-19 15:54:45');
+INSERT INTO `sys_logininfor` VALUES ('557597911202922496', 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '退出成功', '2023-03-19 16:15:20');
+INSERT INTO `sys_logininfor` VALUES ('557597940760182784', 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '登录成功', '2023-03-19 16:15:08');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -972,6 +982,26 @@ CREATE TABLE `sys_oper_log`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 224 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of sys_oper_log
+-- ----------------------------
+INSERT INTO `sys_oper_log` VALUES ('557585349283414016', '文件配置', 1, 'com.icoolkj.web.controller.file.FileConfigController.add()', 'POST', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"createTime\":\"2023-03-19 15:25:06\",\"params\":{}}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\r\n### The error may exist in file [D:\\Idea\\Workspace\\iiot\\iiot-system\\target\\classes\\mapper\\file\\FileConfigMapper.xml]\r\n### The error may involve com.icoolkj.file.mapper.FileConfigMapper.insertFileConfig-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into file_config          ( create_time )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\n; Field \'file_config_code\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value', '2023-03-19 15:25:06', 70);
+INSERT INTO `sys_oper_log` VALUES ('557586024595718144', '文件配置', 1, 'com.icoolkj.web.controller.file.FileConfigController.add()', 'POST', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"createTime\":\"2023-03-19 15:27:47\",\"params\":{}}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\r\n### The error may exist in file [D:\\Idea\\Workspace\\iiot\\iiot-system\\target\\classes\\mapper\\file\\FileConfigMapper.xml]\r\n### The error may involve com.icoolkj.file.mapper.FileConfigMapper.insertFileConfig-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into file_config          ( create_time )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\n; Field \'file_config_code\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value', '2023-03-19 15:27:47', 35);
+INSERT INTO `sys_oper_log` VALUES ('557587452798173184', '文件配置', 1, 'com.icoolkj.web.controller.file.FileConfigController.add()', 'POST', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"createTime\":\"2023-03-19 15:33:28\",\"params\":{}}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\r\n### The error may exist in file [D:\\Idea\\Workspace\\iiot\\iiot-system\\target\\classes\\mapper\\file\\FileConfigMapper.xml]\r\n### The error may involve com.icoolkj.file.mapper.FileConfigMapper.insertFileConfig-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into file_config          ( create_time )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value\n; Field \'file_config_code\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'file_config_code\' doesn\'t have a default value', '2023-03-19 15:33:28', 36);
+INSERT INTO `sys_oper_log` VALUES ('557587746097463296', '设备基础', 1, 'com.icoolkj.web.controller.device.DcDeviceBasicController.add()', 'POST', 1, 'admin', NULL, '/device/basic', '127.0.0.1', '内网IP', '{\"createTime\":\"2023-03-19 15:34:38\",\"params\":{}}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'device_basic_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\Idea\\Workspace\\iiot\\iiot-system\\target\\classes\\mapper\\device\\DcDeviceBasicMapper.xml]\r\n### The error may involve com.icoolkj.device.mapper.DcDeviceBasicMapper.insertDcDeviceBasic-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into dc_device_basic          ( create_time )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'device_basic_id\' doesn\'t have a default value\n; Field \'device_basic_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'device_basic_id\' doesn\'t have a default value', '2023-03-19 15:34:38', 40);
+INSERT INTO `sys_oper_log` VALUES ('557593032824717312', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"ce\",\"fileConfigDesc\":\"tt\",\"fileConfigName\":\"ce\",\"fileConfigTemplate\":\"ce\",\"params\":{},\"updateTime\":\"2023-03-19 15:55:38\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 15:55:38', 47);
+INSERT INTO `sys_oper_log` VALUES ('557593038067597312', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"ce\",\"fileConfigDesc\":\"tt\",\"fileConfigName\":\"ce\",\"fileConfigTemplate\":\"ce\",\"params\":{},\"updateTime\":\"2023-03-19 15:55:39\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 15:55:39', 48);
+INSERT INTO `sys_oper_log` VALUES ('557596098357624832', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"测试\",\"fileConfigTemplate\":\"cc\",\"params\":{},\"updateTime\":\"2023-03-19 16:07:49\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:07:49', 48);
+INSERT INTO `sys_oper_log` VALUES ('557597991083442176', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:15:20\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:15:20', 31);
+INSERT INTO `sys_oper_log` VALUES ('557598075305066496', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:15:40\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:15:40', 46);
+INSERT INTO `sys_oper_log` VALUES ('557598391949852672', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:16:56\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:16:56', 67);
+INSERT INTO `sys_oper_log` VALUES ('557598396957851648', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:16:57\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:16:57', 44);
+INSERT INTO `sys_oper_log` VALUES ('557598446945566720', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:17:09\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:17:09', 45);
+INSERT INTO `sys_oper_log` VALUES ('557598487861002240', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:17:19\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:17:19', 45);
+INSERT INTO `sys_oper_log` VALUES ('557598509478445056', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:17:24\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:17:24', 45);
+INSERT INTO `sys_oper_log` VALUES ('557598605297319936', '文件配置', 2, 'com.icoolkj.web.controller.file.FileConfigController.edit()', 'PUT', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"fileConfigCode\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{},\"updateTime\":\"2023-03-19 16:17:47\"}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2023-03-19 16:17:47', 45);
+INSERT INTO `sys_oper_log` VALUES ('557599118432665600', '文件配置', 1, 'com.icoolkj.web.controller.file.FileConfigController.add()', 'POST', 1, 'admin', NULL, '/file/config', '127.0.0.1', '内网IP', '{\"createTime\":\"2023-03-19 16:19:49\",\"fileConfigCode\":\"CC\",\"fileConfigDesc\":\"CC\",\"fileConfigName\":\"CC\",\"fileConfigTemplate\":\"CC\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-03-19 16:19:49', 140);
+
+-- ----------------------------
 -- Table structure for sys_post
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_post`;
@@ -1107,7 +1137,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('133555608539361280', '', '133702242296393728', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', NULL, NULL, '0', '0', '127.0.0.1', '2023-03-19 15:17:54', 'admin', '2023-02-28 09:46:12', '', '2023-03-19 15:17:53', '管理员');
+INSERT INTO `sys_user` VALUES ('133555608539361280', '', '133702242296393728', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', NULL, NULL, '0', '0', '127.0.0.1', '2023-03-19 16:15:09', 'admin', '2023-02-28 09:46:12', '', '2023-03-19 16:15:08', '管理员');
 INSERT INTO `sys_user` VALUES ('554743409269538816', '553672938461593600', '554743409055629312', 'DOMAIN_SYSTEM', 'DOMAIN_SYSTEM管理员', '00', '', '', '0', '', '$2a$10$hjW/eeTsel6iqzyez0SSmeGRiDkvlvTXhcXN6r8oggPTNelCrSJJC', 'zzCLycsaFRjkMXVPvDXlag==', '', '0', '0', '127.0.0.1', '2023-03-11 19:23:05', '133555608539361280', '2023-03-11 19:12:14', '', '2023-03-11 19:23:04', NULL);
 INSERT INTO `sys_user` VALUES ('554743424868155392', '553692142187315200', '554805441297645569', 'DOMAIN_COMP', 'DOMAIN_COMP管理员', '00', '', '', '0', '', '$2a$10$o2Dixf6qXbRcXooWsg2vZuPEBuYlXI5tDbO5x0O9Bf3Z68ecigFZC', 'x5TMWFDw61u9yXOqtFwKEA==', '552543924565049344', '0', '0', '127.0.0.1', '2023-03-11 23:12:24', '133555608539361280', '2023-03-11 19:12:18', '', '2023-03-11 23:12:23', NULL);
 INSERT INTO `sys_user` VALUES ('554948857633439744', '554948857285312512', '554948857469861888', 'COMP#91340000148940170G', 'COMP#91340000148940170G管理员', '00', '158@qq.com', '15888888888', '0', '', '$2a$10$BKVAmUGQjujjpfONs9ganexFkTd0nrZrH/Vm2NETQkOgqMl.dEQxq', 'F4wJbPeBp41hyT5Y9i6aBw==', '552543924565049344', '0', '0', '127.0.0.1', '2023-03-12 18:14:10', '133555608539361280', '2023-03-12 08:48:36', '', '2023-03-12 18:14:09', NULL);
