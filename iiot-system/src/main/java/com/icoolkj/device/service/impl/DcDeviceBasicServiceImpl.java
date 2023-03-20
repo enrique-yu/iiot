@@ -1,8 +1,11 @@
 package com.icoolkj.device.service.impl;
 
 import java.util.List;
+
+import com.icoolkj.common.constant.UserConstants;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,26 +79,20 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
     }
 
     /**
-     * 批量删除设备基础
-     * 
-     * @param deviceBasicIds 需要删除的设备基础主键
+     * 校验设备编号是否唯一
+     *
+     * @param dcDeviceBasic 设备基础
      * @return 结果
      */
     @Override
-    public int deleteDcDeviceBasicByDeviceBasicIds(String[] deviceBasicIds)
+    public boolean checkDeviceSnUnique(DcDeviceBasic dcDeviceBasic)
     {
-        return dcDeviceBasicMapper.deleteDcDeviceBasicByDeviceBasicIds(deviceBasicIds);
+        DcDeviceBasic info = dcDeviceBasicMapper.checkDeviceSnUnique(dcDeviceBasic.getDeviceSn());
+        if (StringUtils.isNotNull(info))
+        {
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 
-    /**
-     * 删除设备基础信息
-     * 
-     * @param deviceBasicId 设备基础主键
-     * @return 结果
-     */
-    @Override
-    public int deleteDcDeviceBasicByDeviceBasicId(String deviceBasicId)
-    {
-        return dcDeviceBasicMapper.deleteDcDeviceBasicByDeviceBasicId(deviceBasicId);
-    }
 }

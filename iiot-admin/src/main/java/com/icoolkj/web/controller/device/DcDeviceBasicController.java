@@ -77,6 +77,10 @@ public class DcDeviceBasicController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody DcDeviceBasic dcDeviceBasic)
     {
+        if (!dcDeviceBasicService.checkDeviceSnUnique(dcDeviceBasic))
+        {
+            return error("新增设备编号【" + dcDeviceBasic.getDeviceSn() + "】失败，设备编号已存在");
+        }
         return toAjax(dcDeviceBasicService.insertDcDeviceBasic(dcDeviceBasic));
     }
 
@@ -91,14 +95,5 @@ public class DcDeviceBasicController extends BaseController
         return toAjax(dcDeviceBasicService.updateDcDeviceBasic(dcDeviceBasic));
     }
 
-    /**
-     * 删除设备基础
-     */
-    @PreAuthorize("@ss.hasPermi('device:basic:remove')")
-    @Log(title = "设备基础", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{deviceBasicIds}")
-    public AjaxResult remove(@PathVariable String[] deviceBasicIds)
-    {
-        return toAjax(dcDeviceBasicService.deleteDcDeviceBasicByDeviceBasicIds(deviceBasicIds));
-    }
+
 }

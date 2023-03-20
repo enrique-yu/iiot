@@ -18,6 +18,9 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="设备类型" prop="deviceType">
+          <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+        </el-form-item>
         <el-form-item label="设备规格型号" prop="deviceModel">
           <el-input v-model="form.deviceModel" placeholder="请输入设备规格型号" />
         </el-form-item>

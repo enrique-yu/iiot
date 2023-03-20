@@ -43,19 +43,12 @@ public interface IDcDeviceBasicService
      */
     public int updateDcDeviceBasic(DcDeviceBasic dcDeviceBasic);
 
-    /**
-     * 批量删除设备基础
-     * 
-     * @param deviceBasicIds 需要删除的设备基础主键集合
-     * @return 结果
-     */
-    public int deleteDcDeviceBasicByDeviceBasicIds(String[] deviceBasicIds);
 
     /**
-     * 删除设备基础信息
-     * 
-     * @param deviceBasicId 设备基础主键
+     * 校验设备编号是否唯一
+     *
+     * @param dcDeviceBasic
      * @return 结果
      */
-    public int deleteDcDeviceBasicByDeviceBasicId(String deviceBasicId);
+    boolean checkDeviceSnUnique(DcDeviceBasic dcDeviceBasic);
 }

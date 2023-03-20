@@ -1,6 +1,7 @@
 package com.icoolkj.device.mapper;
 
 import java.util.List;
+
 import com.icoolkj.device.domain.DcDeviceBasic;
 
 /**
@@ -44,18 +45,10 @@ public interface DcDeviceBasicMapper
     public int updateDcDeviceBasic(DcDeviceBasic dcDeviceBasic);
 
     /**
-     * 删除设备基础
-     * 
-     * @param deviceBasicId 设备基础主键
+     * 校验设备编号是否唯一
+     *
+     * @param deviceSn 设备编号
      * @return 结果
      */
-    public int deleteDcDeviceBasicByDeviceBasicId(String deviceBasicId);
-
-    /**
-     * 批量删除设备基础
-     * 
-     * @param deviceBasicIds 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteDcDeviceBasicByDeviceBasicIds(String[] deviceBasicIds);
+    DcDeviceBasic checkDeviceSnUnique(String deviceSn);
 }

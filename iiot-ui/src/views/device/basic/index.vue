@@ -48,6 +48,12 @@
 
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+      <el-table-column prop="deviceStatus" align="center"  label="状态" width="80">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.deviceStatus"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="在线状态" align="center" prop="deviceOnlineStatus" />
       <el-table-column label="设备名称" align="center" prop="deviceName" />
       <el-table-column label="设备编号" align="center" prop="deviceSn" />
       <el-table-column label="设备类型" align="center" prop="deviceType" />
@@ -59,8 +65,6 @@
           <span>{{ parseTime(scope.row.deviceLastActiveTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="在线状态" align="center" prop="deviceOnlineStatus" />
-      <el-table-column label="设备状态" align="center" prop="deviceStatus" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button

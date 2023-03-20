@@ -115,14 +115,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where device_basic_id = #{deviceBasicId}
     </update>
 
-    <delete id="deleteDcDeviceBasicByDeviceBasicId" parameterType="String">
-        delete from dc_device_basic where device_basic_id = #{deviceBasicId}
-    </delete>
+    <select id="checkDeviceSnUnique" resultMap="DcDeviceBasicResult">
+        <include refid="selectDcDeviceBasicVo"/>
+        where device_sn=#{deviceSn} limit 1
+    </select>
 
-    <delete id="deleteDcDeviceBasicByDeviceBasicIds" parameterType="String">
-        delete from dc_device_basic where device_basic_id in 
-        <foreach item="deviceBasicId" collection="array" open="(" separator="," close=")">
-            #{deviceBasicId}
-        </foreach>
-    </delete>
 </mapper>

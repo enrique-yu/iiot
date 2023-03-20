@@ -18,6 +18,9 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="设备类型" prop="deviceType">
+          <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+        </el-form-item>
         <el-form-item label="设备规格型号" prop="deviceModel">
           <el-input v-model="form.deviceModel" placeholder="请输入设备规格型号" />
         </el-form-item>
@@ -40,7 +43,7 @@
 </template>
 
 <script>
-  import { addBasic } from "@/api/device/basic";
+  import { updateBasic } from "@/api/device/basic";
   import ActionPageMixin from '@/mixins/actionPageMixin';
 
   export default {
@@ -52,7 +55,7 @@
         initData: {},
         // 表单参数
         form: {},
-        actionApi: addBasic,
+        actionApi: updateBasic,
         title: '编辑设备信息',
         successMsg: '编辑设备信息完成！',
         isDisabled: false,
