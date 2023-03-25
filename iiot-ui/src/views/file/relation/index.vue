@@ -1,66 +1,18 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="文件目录编码" prop="fileCatalogCode">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="100px">
+      <el-form-item label="文件目录名称" prop="fileCatalogName">
         <el-input
-          v-model="queryParams.fileCatalogCode"
-          placeholder="请输入文件目录编码"
+          v-model="queryParams.fileCatalogName"
+          placeholder="请输入文件目录名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="文件配置代码" prop="fileConfigCode">
+      <el-form-item label="文件配置名称" prop="fileConfigName">
         <el-input
-          v-model="queryParams.fileConfigCode"
-          placeholder="请输入文件配置代码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="是否必传【0非必须 1必须】" prop="fileConfigMust">
-        <el-input
-          v-model="queryParams.fileConfigMust"
-          placeholder="请输入是否必传【0非必须 1必须】"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="最小文件数量" prop="fileConfigMinNum">
-        <el-input
-          v-model="queryParams.fileConfigMinNum"
-          placeholder="请输入最小文件数量"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="最大文件数量" prop="fileConfigMaxNum">
-        <el-input
-          v-model="queryParams.fileConfigMaxNum"
-          placeholder="请输入最大文件数量"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="最小文件大小" prop="fileConfigMinSize">
-        <el-input
-          v-model="queryParams.fileConfigMinSize"
-          placeholder="请输入最小文件大小"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="最大文件大小" prop="fileConfigMaxSize">
-        <el-input
-          v-model="queryParams.fileConfigMaxSize"
-          placeholder="请输入最大文件大小"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="排序序号" prop="fileConfigSortNum">
-        <el-input
-          v-model="queryParams.fileConfigSortNum"
-          placeholder="请输入排序序号"
+          v-model="queryParams.fileConfigName"
+          placeholder="请输入文件配置名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -119,17 +71,17 @@
 
     <el-table v-loading="loading" :data="relationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="file_catalog_relation_id" align="center" prop="fileCatalogRelationId" />
-      <el-table-column label="文件目录编码" align="center" prop="fileCatalogCode" />
-      <el-table-column label="文件配置代码" align="center" prop="fileConfigCode" />
-      <el-table-column label="文件类型【逗号拼接】" align="center" prop="fileConfigType" />
+      <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus" />
+      <el-table-column label="文件目录名称" align="center" prop="fileCatalogName" />
+      <el-table-column label="文件名称" align="center" prop="fileConfigName" />
+      <el-table-column label="文件类型" align="center" prop="fileConfigType" />
       <el-table-column label="是否必传【0非必须 1必须】" align="center" prop="fileConfigMust" />
       <el-table-column label="最小文件数量" align="center" prop="fileConfigMinNum" />
       <el-table-column label="最大文件数量" align="center" prop="fileConfigMaxNum" />
       <el-table-column label="最小文件大小" align="center" prop="fileConfigMinSize" />
       <el-table-column label="最大文件大小" align="center" prop="fileConfigMaxSize" />
       <el-table-column label="排序序号" align="center" prop="fileConfigSortNum" />
-      <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus" />
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button

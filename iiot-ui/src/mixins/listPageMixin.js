@@ -49,8 +49,8 @@ const mixin = {
 
     /** 新增按钮操作 */
     handleAdd(event, row) {
-      this.addDlgOption.isVisible = true
-      this.addDlgOption.initData = this.initDataCreateEntity()
+      this.addDlgOption.isVisible = true;
+      this.addDlgOption.initData = this.initDataCreateEntity();
     },
     initDataCreateEntity() {
       return {}
@@ -58,14 +58,14 @@ const mixin = {
 
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.updateDlgOption.isVisible = true
-      this.updateDlgOption.initData = Object.assign({}, row)
+      this.updateDlgOption.isVisible = true;
+      this.updateDlgOption.initData = Object.assign({}, row);
     },
 
     /** 详情按钮操作 */
     handleView(row) {
-      this.viewDlgOption.isVisible = true
-      this.viewDlgOption.initData = Object.assign({}, row)
+      this.viewDlgOption.isVisible = true;
+      this.viewDlgOption.initData = Object.assign({}, row);
     },
 
     /** 搜索按钮操作 */

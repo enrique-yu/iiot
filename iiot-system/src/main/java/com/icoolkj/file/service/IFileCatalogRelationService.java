@@ -43,4 +43,20 @@ public interface IFileCatalogRelationService
      */
     public int updateFileCatalogRelation(FileCatalogRelation fileCatalogRelation);
 
+
+    /**
+     * 查询目录已配置的文件
+     * @param fileCatalogRelation
+     * @return
+     */
+    public List<FileCatalogRelation> selectAllocatedFileList(FileCatalogRelation fileCatalogRelation);
+
+    /**
+     * 查查询目录未配置的文件
+     * @param fileCatalogRelation
+     * @return
+     */
+    public List<FileCatalogRelation> selectUnallocatedFileList(FileCatalogRelation fileCatalogRelation);
+
+
 }

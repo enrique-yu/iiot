@@ -1,21 +1,19 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="用户名称" prop="userName">
+      <el-form-item label="文件目录名称" prop="fileCatalogName">
         <el-input
-          v-model="queryParams.userName"
-          placeholder="请输入用户名称"
+          v-model="queryParams.fileCatalogName"
+          placeholder="请输入文件目录名称"
           clearable
-          style="width: 240px"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="手机号码" prop="phonenumber">
+      <el-form-item label="文件配置名称" prop="fileConfigName">
         <el-input
-          v-model="queryParams.phonenumber"
-          placeholder="请输入手机号码"
+          v-model="queryParams.fileConfigName"
+          placeholder="请输入文件配置名称"
           clearable
-          style="width: 240px"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
@@ -32,9 +30,9 @@
           plain
           icon="el-icon-plus"
           size="mini"
-          @click="openSelectUser"
-          v-hasPermi="['system:role:add']"
-        >添加用户</el-button>
+          @click="handleAddFile"
+          v-hasPermi="['file:catalog:add']"
+        >添加文件</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -50,7 +48,11 @@
 
     <el-table v-loading="loading" :data="relationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus" />
+      <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.fileCatalogRelationStatus"/>
+        </template>
+      </el-table-column>
       <el-table-column label="文件目录名称" align="center" prop="fileCatalogName" />
       <el-table-column label="文件名称" align="center" prop="fileConfigName" />
       <el-table-column label="文件类型" align="center" prop="fileConfigType" />
@@ -60,22 +62,6 @@
       <el-table-column label="最小文件大小" align="center" prop="fileConfigMinSize" />
       <el-table-column label="最大文件大小" align="center" prop="fileConfigMaxSize" />
       <el-table-column label="排序序号" align="center" prop="fileConfigSortNum" />
-
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="用户名称" prop="userName" :show-overflow-tooltip="true" />
-      <el-table-column label="用户昵称" prop="nickName" :show-overflow-tooltip="true" />
-      <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
-      <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
-      <el-table-column label="状态" align="center" prop="status">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
-        </template>
-      </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime) }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -96,58 +82,81 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
-    <select-user ref="select" :roleId="queryParams.roleId" @ok="handleQuery" />
+
+    <addFileDlg v-if="addFileDlgOption.isVisible" :fileCatalogCode="queryParams.fileCatalogCode" :option="addFileDlgOption"></addFileDlg>
+
   </div>
 </template>
 
 <script>
-  import { listCatalog, getCatalog } from "@/api/file/catalog";
+  import { allocatedFileList, listCatalog, getCatalog } from "@/api/file/catalog";
+  import addFileDlg from "./addFileDlg";
+
 
   export default {
     name: "FileConfig",
     dicts: ['sys_normal_disable'],
+    components: { addFileDlg },
     data() {
       return {
         // 遮罩层
         loading: true,
-        // 选中用户组
-        userIds: [],
+        // 选中数组
+        ids: [],
+        // 非单个禁用
+        single: true,
         // 非多个禁用
         multiple: true,
         // 显示搜索条件
         showSearch: true,
         // 总条数
         total: 0,
-        // 用户表格数据
+        // 文件与目录关系表格数据
         relationList: [],
+        // 弹出层标题
+        title: "",
+        // 是否显示弹出层
+        open: false,
         // 查询参数
         queryParams: {
           pageNum: 1,
           pageSize: 10,
-          roleId: undefined,
-          userName: undefined,
-          phonenumber: undefined
-        }
+          fileCatalogCode: null,
+          fileCatalogName: null,
+          fileConfigName: null,
+        },
+        addFileDlgOption: {
+          isVisible: false,
+          initData: {}
+        },
       };
     },
     created() {
-      const roleId = this.$route.params && this.$route.params.roleId;
-      if (roleId) {
-        this.queryParams.roleId = roleId;
+      const fileCatalogCode = this.$route.params && this.$route.params.fileCatalogCode;
+      if (fileCatalogCode) {
+        this.queryParams.fileCatalogCode = fileCatalogCode;
         this.getList();
       }
     },
     methods: {
-      /** 查询授权用户列表 */
+      /** 查询目录已配置的文件 */
       getList() {
         this.loading = true;
-        allocatedUserList(this.queryParams).then(response => {
-            this.userList = response.rows;
+        allocatedFileList(this.queryParams).then(response => {
+            this.relationList = response.rows;
             this.total = response.total;
             this.loading = false;
           }
         );
       },
+
+      // 多选框选中数据
+      handleSelectionChange(selection) {
+        this.ids = selection.map(item => item.fileCatalogRelationId)
+        this.single = selection.length!==1
+        this.multiple = !selection.length
+      },
+
       // 返回按钮
       handleClose() {
         const obj = { path: "/file/catalog" };
@@ -163,36 +172,16 @@
         this.resetForm("queryForm");
         this.handleQuery();
       },
-      // 多选框选中数据
-      handleSelectionChange(selection) {
-        this.userIds = selection.map(item => item.userId)
-        this.multiple = !selection.length
+
+      /** 添加附件 */
+      handleAddFile(row) {
+        this.addFileDlgOption.isVisible = true;
+        this.addFileDlgOption.initData = this.initDataCreateEntity();
       },
-      /** 打开授权用户表弹窗 */
-      openSelectUser() {
-        this.$refs.select.show();
+      initDataCreateEntity() {
+        return {}
       },
-      /** 取消授权按钮操作 */
-      cancelAuthUser(row) {
-        const roleId = this.queryParams.roleId;
-        this.$modal.confirm('确认要取消该用户"' + row.userName + '"角色吗？').then(function() {
-          return authUserCancel({ userId: row.userId, roleId: roleId });
-        }).then(() => {
-          this.getList();
-          this.$modal.msgSuccess("取消授权成功");
-        }).catch(() => {});
-      },
-      /** 批量取消授权按钮操作 */
-      cancelAuthUserAll(row) {
-        const roleId = this.queryParams.roleId;
-        const userIds = this.userIds.join(",");
-        this.$modal.confirm('是否取消选中用户授权数据项？').then(function() {
-          return authUserCancelAll({ roleId: roleId, userIds: userIds });
-        }).then(() => {
-          this.getList();
-          this.$modal.msgSuccess("取消授权成功");
-        }).catch(() => {});
-      }
+
     }
   };
 </script>

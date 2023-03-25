@@ -161,6 +161,20 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
+  },
+  {
+    path: '/file/file-config',
+    component: Layout,
+    hidden: true,
+    permissions: ['file:catalog:edit'],
+    children: [
+      {
+        path: 'catalog/:fileCatalogCode(\\w+)',
+        component: () => import('@/views/file/catalog/fileConfig'),
+        name: 'FileConfig',
+        meta: { title: '配置文件目录', activeMenu: '/file/catalog' }
+      }
+    ]
   }
 ]
 

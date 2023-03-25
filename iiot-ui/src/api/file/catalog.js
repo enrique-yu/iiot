@@ -42,3 +42,22 @@ export function delCatalog(fileCatalogCode) {
     method: 'delete'
   })
 }
+
+
+// 查询目录已配置的文件
+export function allocatedFileList(query) {
+  return request({
+    url: '/file/catalog/configFile/allocatedFileList',
+    method: 'get',
+    params: query
+  })
+}
+
+// 查询目录未配置的文件
+export function unallocatedFileList(query) {
+  return request({
+    url: '/file/catalog/configFile/unallocatedFileList',
+    method: 'get',
+    params: query
+  })
+}

@@ -2,6 +2,9 @@ package com.icoolkj.web.controller.file;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.file.domain.FileCatalogRelation;
+import com.icoolkj.file.service.IFileCatalogRelationService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,9 @@ public class FileCatalogConfigController extends BaseController
 {
     @Autowired
     private IFileCatalogConfigService fileCatalogConfigService;
+
+    @Autowired
+    private IFileCatalogRelationService fileCatalogRelationService;
 
     /**
      * 查询文件目录配置列表
@@ -90,5 +96,30 @@ public class FileCatalogConfigController extends BaseController
     {
         return toAjax(fileCatalogConfigService.updateFileCatalogConfig(fileCatalogConfig));
     }
+
+    /**
+     * 查询目录已配置的文件
+     */
+    @PreAuthorize("@ss.hasPermi('file:catalog:list')")
+    @GetMapping("/configFile/allocatedFileList")
+    public TableDataInfo allocatedFileList(FileCatalogRelation fileCatalogRelation)
+    {
+        startPage();
+        List<FileCatalogRelation> list = fileCatalogRelationService.selectAllocatedFileList(fileCatalogRelation);
+        return getDataTable(list);
+    }
+
+    /**
+     * 查询目录未配置的文件
+     */
+    @PreAuthorize("@ss.hasPermi('file:catalog:list')")
+    @GetMapping("/configFile/unallocatedFileList")
+    public TableDataInfo unallocatedFileList(FileCatalogRelation fileCatalogRelation)
+    {
+        startPage();
+        List<FileCatalogRelation> list = fileCatalogRelationService.selectUnallocatedFileList(fileCatalogRelation);
+        return getDataTable(list);
+    }
+
 
 }

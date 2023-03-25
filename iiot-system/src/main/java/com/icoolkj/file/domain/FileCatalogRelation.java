@@ -1,6 +1,8 @@
 package com.icoolkj.file.domain;
 
 import java.math.BigDecimal;
+
+import com.icoolkj.common.core.domain.entity.SysDomain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.icoolkj.common.annotation.Excel;
@@ -61,6 +63,18 @@ public class FileCatalogRelation extends BaseEntity
 
     /** 删除标记（0代表存在 2代表删除） */
     private String delFlag;
+
+    /** 文件目录名称 */
+    private String fileCatalogName;
+
+    /** 文件目录对象 **/
+    private FileCatalogConfig fileCatalogConfig;
+
+    /** 文件配置名称 */
+    private String fileConfigName;
+
+    /** 文件配置对象*/
+    private FileConfig fileConfig;
 
     public void setFileCatalogRelationId(String fileCatalogRelationId) 
     {

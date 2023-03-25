@@ -21,25 +21,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <association property="fileConfig"    column="fileConfigCode" javaType="FileConfig" resultMap="FileConfigResult" />
+        <association property="fileCatalogConfig"    column="fileCatalogCode" javaType="FileCatalogConfig" resultMap="FileCatalogConfigResult" />
+    </resultMap>
+
+    <resultMap type="FileConfig" id="FileConfigResult">
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigTemplate"    column="file_config_template"    />
+        <result property="fileConfigDesc"    column="file_config_desc"    />
+        <result property="fileConfigStatus"    column="file_config_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <resultMap type="FileCatalogConfig" id="FileCatalogConfigResult">
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileCatalogDesc"    column="file_catalog_desc"    />
+        <result property="fileCatalogStatus"    column="file_catalog_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectFileCatalogRelationVo">
-        select file_catalog_relation_id, file_catalog_code, file_config_code, file_config_type, file_config_must, file_config_min_num, file_config_max_num, file_config_min_size, file_config_max_size, file_config_sort_num, file_catalog_relation_status, del_flag, create_by, create_time, update_by, update_time from file_catalog_relation
+        select re.file_catalog_relation_id, re.file_catalog_code, re.file_config_code, re.file_config_type, re.file_config_must,
+               re.file_config_min_num, re.file_config_max_num, re.file_config_min_size, re.file_config_max_size, re.file_config_sort_num,
+               re.file_catalog_relation_status, re.del_flag, re.create_by, re.create_time, re.update_by, re.update_time,
+               cf.file_config_name, cf.file_config_status,
+               cc.file_catalog_name, cc.file_catalog_status
+          from file_catalog_relation re
+          inner join file_config cf on cf.file_config_code = re.file_config_code
+          inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code
     </sql>
 
     <select id="selectFileCatalogRelationList" parameterType="FileCatalogRelation" resultMap="FileCatalogRelationResult">
         <include refid="selectFileCatalogRelationVo"/>
         <where>  
-            <if test="fileCatalogCode != null  and fileCatalogCode != ''"> and file_catalog_code = #{fileCatalogCode}</if>
-            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code = #{fileConfigCode}</if>
-            <if test="fileConfigType != null  and fileConfigType != ''"> and file_config_type = #{fileConfigType}</if>
-            <if test="fileConfigMust != null  and fileConfigMust != ''"> and file_config_must = #{fileConfigMust}</if>
-            <if test="fileConfigMinNum != null "> and file_config_min_num = #{fileConfigMinNum}</if>
-            <if test="fileConfigMaxNum != null "> and file_config_max_num = #{fileConfigMaxNum}</if>
-            <if test="fileConfigMinSize != null "> and file_config_min_size = #{fileConfigMinSize}</if>
-            <if test="fileConfigMaxSize != null "> and file_config_max_size = #{fileConfigMaxSize}</if>
-            <if test="fileConfigSortNum != null "> and file_config_sort_num = #{fileConfigSortNum}</if>
-            <if test="fileCatalogRelationStatus != null  and fileCatalogRelationStatus != ''"> and file_catalog_relation_status = #{fileCatalogRelationStatus}</if>
+            <if test="fileCatalogCode != null  and fileCatalogCode != ''"> and re.file_catalog_code = #{fileCatalogCode}</if>
+            <if test="fileConfigCode != null  and fileConfigCode != ''"> and re.file_config_code = #{fileConfigCode}</if>
+            <if test="fileConfigType != null  and fileConfigType != ''"> and re.file_config_type = #{fileConfigType}</if>
+            <if test="fileConfigMust != null  and fileConfigMust != ''"> and re.file_config_must = #{fileConfigMust}</if>
+            <if test="fileConfigMinNum != null "> and re.file_config_min_num = #{fileConfigMinNum}</if>
+            <if test="fileConfigMaxNum != null "> and re.file_config_max_num = #{fileConfigMaxNum}</if>
+            <if test="fileConfigMinSize != null "> and re.file_config_min_size = #{fileConfigMinSize}</if>
+            <if test="fileConfigMaxSize != null "> and re.file_config_max_size = #{fileConfigMaxSize}</if>
+            <if test="fileConfigSortNum != null "> and re.file_config_sort_num = #{fileConfigSortNum}</if>
+            <if test="fileCatalogRelationStatus != null  and fileCatalogRelationStatus != ''"> and re.file_catalog_relation_status = #{fileCatalogRelationStatus}</if>
         </where>
     </select>
     
@@ -109,5 +143,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         where file_catalog_relation_id = #{fileCatalogRelationId}
     </update>
+
+    <select id="selectUnallocatedFileList" parameterType="FileCatalogRelation" resultMap="FileCatalogRelationResult">
+        select re.file_catalog_relation_id, re.file_catalog_code, re.file_config_code, re.file_config_type, re.file_config_must,
+        re.file_config_min_num, re.file_config_max_num, re.file_config_min_size, re.file_config_max_size, re.file_config_sort_num,
+        re.file_catalog_relation_status, re.del_flag, re.create_by, re.create_time, re.update_by, re.update_time,
+        cf.file_config_name, cf.file_config_status,
+        cc.file_catalog_name, cc.file_catalog_status
+        from file_catalog_relation re
+        inner join file_config cf on cf.file_config_code = re.file_config_code
+        inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code
+        where re.del_flag = '0' and (re.file_catalog_code != #{fileCatalogCode} or re.file_catalog_code IS NULL)
+        and re.file_catalog_relation_id not in (select u.file_catalog_relation_id from file_catalog_relation re inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code and cc.file_catalog_code = #{fileCatalogCode})
+        <if test="fileConfigName != null and fileConfigName != ''">
+            AND u.file_config_name like concat('%', #{fileConfigName}, '%')
+        </if>
+        <if test="fileCatalogName != null and fileCatalogName != ''">
+            AND u.file_catalog_name like concat('%', #{fileCatalogName}, '%')
+        </if>
+    </select>
 
 </mapper>

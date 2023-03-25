@@ -66,6 +66,13 @@
             @click="handleUpdate(scope.row)"
             v-hasPermi="['file:catalog:edit']"
           >修改</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="fileConfig(scope.row)"
+            v-hasPermi="['file:catalog:edit']"
+          >配置目录文件</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -101,8 +108,8 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        fileCatalogName: null,
         fileCatalogCode: null,
+        fileCatalogName: null,
         fileCatalogStatus: null,
       },
     };
@@ -118,6 +125,12 @@ export default {
       this.ids = selection.map(item => item.fileCatalogCode)
       this.single = selection.length!==1
       this.multiple = !selection.length
+    },
+
+    /** 配置文件按钮操作 */
+    fileConfig(row) {
+      const fileCatalogCode = row.fileCatalogCode;
+      this.$router.push("/file/file-config/catalog/" + fileCatalogCode);
     },
 
   },

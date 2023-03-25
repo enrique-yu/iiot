@@ -75,4 +75,24 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
         return fileCatalogRelationMapper.updateFileCatalogRelation(fileCatalogRelation);
     }
 
+    /**
+     * 查询目录已配置的文件
+     * @param fileCatalogRelation
+     * @return
+     */
+    @Override
+    public List<FileCatalogRelation> selectAllocatedFileList(FileCatalogRelation fileCatalogRelation){
+        return fileCatalogRelationMapper.selectAllocatedFileList(fileCatalogRelation);
+    }
+
+    /**
+     * 查询目录未配置的文件
+     * @param fileCatalogRelation
+     * @return
+     */
+    @Override
+    public List<FileCatalogRelation> selectUnallocatedFileList(FileCatalogRelation fileCatalogRelation){
+        return fileCatalogRelationMapper.selectUnallocatedFileList(fileCatalogRelation);
+    }
+
 }
