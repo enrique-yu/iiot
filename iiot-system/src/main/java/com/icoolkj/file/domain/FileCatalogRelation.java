@@ -185,6 +185,38 @@ public class FileCatalogRelation extends BaseEntity
         return delFlag;
     }
 
+    public String getFileCatalogName() {
+        return fileCatalogName;
+    }
+
+    public void setFileCatalogName(String fileCatalogName) {
+        this.fileCatalogName = fileCatalogName;
+    }
+
+    public FileCatalogConfig getFileCatalogConfig() {
+        return fileCatalogConfig;
+    }
+
+    public void setFileCatalogConfig(FileCatalogConfig fileCatalogConfig) {
+        this.fileCatalogConfig = fileCatalogConfig;
+    }
+
+    public String getFileConfigName() {
+        return fileConfigName;
+    }
+
+    public void setFileConfigName(String fileConfigName) {
+        this.fileConfigName = fileConfigName;
+    }
+
+    public FileConfig getFileConfig() {
+        return fileConfig;
+    }
+
+    public void setFileConfig(FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

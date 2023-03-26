@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="选择文件" :visible.sync="dialogVisible" width="800px" top="5vh" append-to-body>
+  <el-dialog v-if="dialogVisible" title="选择文件" :visible.sync="dialogVisible" width="800px" append-to-body>
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
       <el-form-item label="文件名称" prop="fileConfigName">
         <el-input
@@ -23,7 +23,7 @@
       </el-form-item>
     </el-form>
     <el-row>
-      <el-table @row-click="clickRow" ref="table" :data="tableList" @selection-change="handleSelectionChange" height="260px">
+      <el-table :data="tableList" ref="multipleTable" v-loading="loading" @select-all="handleClickRow" @select="select">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="fileConfigStatus" align="center"  label="状态" width="80">
           <template slot-scope="scope">
@@ -32,7 +32,6 @@
         </el-table-column>
         <el-table-column label="文件名称" align="center" prop="fileConfigName" />
         <el-table-column label="文件编码" align="center" prop="fileConfigCode" />
-        <el-table-column label="备注信息" align="center" prop="fileConfigDesc" />
       </el-table>
       <pagination
         v-show="total>0"
@@ -43,100 +42,56 @@
       />
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="handleSelectUser">确 定</el-button>
-      <el-button @click="visible = false">取 消</el-button>
+      <el-button type="primary" @click="handleSelectFile">确 定</el-button>
+      <el-button size="small" @click="cancel">取 消</el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
 import { unallocatedFileList } from "@/api/file/catalog";
+import ListPageMixin from '@/mixins/listPageMixin';
+import ActionPageMixin from '@/mixins/actionPageMixin';
 
 export default {
+  name: "selectFile",
   dicts: ['sys_normal_disable'],
-  props: {
-    // 角色编号
-    roleId: {
-      type: [Number, String]
-    }
-  },
+  mixins: [ ListPageMixin, ActionPageMixin ],
   data() {
     return {
-      // 遮罩层
-      visible: false,
-      // 选中数组值
-      userIds: [],
-      // 总条数
-      total: 0,
-      // 未配置的文件信息
-      tableList: [],
+      listApi: unallocatedFileList,
+      fileList: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        roleId: undefined,
-        userName: undefined,
-        phonenumber: undefined
+        fileCatalogCode: undefined,
+        fileConfigName: undefined,
+        fileConfigCode: undefined
       }
     };
   },
+
   methods: {
-    // 显示弹框
-    show() {
-      this.queryParams.roleId = this.roleId;
-      this.getList();
-      this.visible = true;
-    },
-    clickRow(row) {
-      this.$refs.table.toggleRowSelection(row);
-    },
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.userIds = selection.map(item => item.userId);
-    },
-    // 查询表数据
-    getList() {
-      unallocatedFileList(this.queryParams).then(res => {
-        this.tableList = res.rows;
-        this.total = res.total;
-      });
-    },
-    /** 搜索按钮操作 */
-    handleQuery() {
-      this.queryParams.pageNum = 1;
-      this.getList();
-    },
-    /** 重置按钮操作 */
-    resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
-    },
-    /** 选择授权用户操作 */
-    handleSelectUser() {
-      const roleId = this.queryParams.roleId;
-      const userIds = this.userIds.join(",");
-      if (userIds == "") {
-        this.$modal.msgError("请选择要分配的用户");
+    handleSelectFile () {
+      if (this.fileList[0] == undefined) {
+        this.$modal.msgError("请选择要配置的附件");
         return;
       }
-      authUserSelectAll({ roleId: roleId, userIds: userIds }).then(res => {
-        this.$modal.msgSuccess(res.msg);
-        if (res.code === 200) {
-          this.visible = false;
-          this.$emit("ok");
-        }
-      });
-    }
-  },
-  computed: {
-    dialogVisible: {
-      get: function () {
-        return this.option.isVisible
-      },
-      set: function (val) {
-        this.option.isVisible = val
-      }
+      this.$emit('getFile',this.fileList[0])
+      this.dialogVisible = false
     },
+    handleClickRow () {
+      this.$refs.multipleTable.clearSelection();
+    },
+    select(selection, row) {
+      this.$refs.multipleTable.clearSelection();
+      if (selection.length == 0) return;
+      this.$refs.multipleTable.toggleRowSelection(row, true);
+      if(selection.length > 0) {
+        this.fileList = selection
+      }
+    }
   }
 };
 </script>

@@ -1,18 +1,20 @@
 <template>
   <div class="app-container">
+    <div slot="header" style="margin-bottom: 20px;"><span>当前文件目录： <b>{{ fileCatalogName }}</b></span></div>
+
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="文件目录名称" prop="fileCatalogName">
+      <el-form-item label="文件名称" prop="fileConfigName">
         <el-input
-          v-model="queryParams.fileCatalogName"
-          placeholder="请输入文件目录名称"
+          v-model="queryParams.fileConfigName"
+          placeholder="请输入文件名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="文件配置名称" prop="fileConfigName">
+      <el-form-item label="文件编码" prop="fileConfigCode">
         <el-input
-          v-model="queryParams.fileConfigName"
-          placeholder="请输入文件配置名称"
+          v-model="queryParams.fileConfigCode"
+          placeholder="请输入文件编码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -55,8 +57,8 @@
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.fileCatalogRelationStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="文件目录名称" align="center" prop="fileCatalogName"/>
-      <el-table-column label="文件名称" align="center" prop="fileConfigName"/>
+      <el-table-column label="文件名称" align="center" prop="fileConfig.fileConfigName"/>
+      <el-table-column label="文件编码" align="center" prop="fileConfig.fileConfigCode"/>
       <el-table-column label="文件类型" align="center" prop="fileConfigType"/>
       <el-table-column label="是否必传【0非必须 1必须】" align="center" prop="fileConfigMust"/>
       <el-table-column label="最小文件数量" align="center" prop="fileConfigMinNum"/>
@@ -119,6 +121,8 @@
         // 是否显示弹出层
         open: false,
         tableList: [],
+        fileCatalogName: "",
+        fileCatalogCode: "",
         // 查询参数
         queryParams: {
           pageNum: 1,
@@ -134,9 +138,11 @@
       };
     },
     created() {
-      const fileCatalogCode = this.$route.params && this.$route.params.fileCatalogCode;
-      if (fileCatalogCode) {
-        this.queryParams.fileCatalogCode = fileCatalogCode;
+      this.fileCatalogName = this.$route.query.fileCatalogName;
+      this.fileCatalogCode = this.$route.query.fileCatalogCode;
+      if (this.fileCatalogCode) {
+        this.queryParams.fileCatalogName = this.fileCatalogName;
+        this.queryParams.fileCatalogCode = this.fileCatalogCode;
         this.getList();
       }
     },
@@ -178,14 +184,13 @@
       },
 
       /** 添加附件 */
-      handleAddFile(row) {
+      handleAddFile(event, row) {
         this.addFileDlgOption.isVisible = true;
         this.addFileDlgOption.initData = this.initDataCreateEntity();
       },
       initDataCreateEntity() {
         return {}
       },
-
     }
   };
 </script>

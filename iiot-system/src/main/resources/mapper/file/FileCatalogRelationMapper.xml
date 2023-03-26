@@ -155,30 +155,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code
         where re.del_flag = '0' and re.file_catalog_code = #{fileCatalogCode}
         <if test="fileConfigName != null and fileConfigName != ''">
-            AND u.file_config_name like concat('%', #{fileConfigName}, '%')
+            AND cf.file_config_name like concat('%', #{fileConfigName}, '%')
         </if>
         <if test="fileCatalogName != null and fileCatalogName != ''">
-            AND u.file_catalog_name like concat('%', #{fileCatalogName}, '%')
+            AND cc.file_catalog_name like concat('%', #{fileCatalogName}, '%')
         </if>
     </select>
 
-    <select id="selectUnallocatedFileList" parameterType="FileCatalogRelation" resultMap="FileCatalogRelationResult">
-        select re.file_catalog_relation_id, re.file_catalog_code, re.file_config_code, re.file_config_type, re.file_config_must,
-        re.file_config_min_num, re.file_config_max_num, re.file_config_min_size, re.file_config_max_size, re.file_config_sort_num,
-        re.file_catalog_relation_status, re.del_flag, re.create_by, re.create_time, re.update_by, re.update_time,
-        cf.file_config_name, cf.file_config_status,
-        cc.file_catalog_name, cc.file_catalog_status
-        from file_catalog_relation re
-        inner join file_config cf on cf.file_config_code = re.file_config_code
-        inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code
-        where re.del_flag = '0' and (re.file_catalog_code != #{fileCatalogCode} or re.file_catalog_code IS NULL)
-        and re.file_catalog_relation_id not in (select u.file_catalog_relation_id from file_catalog_relation re inner join file_catalog_config cc on cc.file_catalog_code = re.file_catalog_code and cc.file_catalog_code = #{fileCatalogCode})
-        <if test="fileConfigName != null and fileConfigName != ''">
-            AND u.file_config_name like concat('%', #{fileConfigName}, '%')
-        </if>
-        <if test="fileCatalogName != null and fileCatalogName != ''">
-            AND u.file_catalog_name like concat('%', #{fileCatalogName}, '%')
-        </if>
+
+    <select id="selectUnallocatedFileList" parameterType="FileConfig" resultMap="FileConfigResult">
+        select cf.file_config_code, cf.file_config_name, cf.file_config_template, cf.file_config_desc, cf.file_config_status,
+        cf.del_flag, cf.create_by, cf.create_time, cf.update_by, cf.update_time
+        from file_config cf
+        where cf.del_flag = '0'
+        <if test="fileConfigName != null and fileConfigName != ''"> AND cf.file_config_name like concat('%', #{fileConfigName}, '%') </if>
+        <if test="fileConfigCode != null  and fileConfigCode != ''"> AND cf.file_config_code like concat('%', #{fileConfigCode}, '%') </if>
     </select>
+
 
 </mapper>
