@@ -32,7 +32,8 @@
           size="mini"
           @click="handleAddFile"
           v-hasPermi="['file:catalog:add']"
-        >添加文件</el-button>
+        >添加文件
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -41,27 +42,28 @@
           icon="el-icon-close"
           size="mini"
           @click="handleClose"
-        >关闭</el-button>
+        >关闭
+        </el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="relationList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+    <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.fileCatalogRelationStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="文件目录名称" align="center" prop="fileCatalogName" />
-      <el-table-column label="文件名称" align="center" prop="fileConfigName" />
-      <el-table-column label="文件类型" align="center" prop="fileConfigType" />
-      <el-table-column label="是否必传【0非必须 1必须】" align="center" prop="fileConfigMust" />
-      <el-table-column label="最小文件数量" align="center" prop="fileConfigMinNum" />
-      <el-table-column label="最大文件数量" align="center" prop="fileConfigMaxNum" />
-      <el-table-column label="最小文件大小" align="center" prop="fileConfigMinSize" />
-      <el-table-column label="最大文件大小" align="center" prop="fileConfigMaxSize" />
-      <el-table-column label="排序序号" align="center" prop="fileConfigSortNum" />
+      <el-table-column label="文件目录名称" align="center" prop="fileCatalogName"/>
+      <el-table-column label="文件名称" align="center" prop="fileConfigName"/>
+      <el-table-column label="文件类型" align="center" prop="fileConfigType"/>
+      <el-table-column label="是否必传【0非必须 1必须】" align="center" prop="fileConfigMust"/>
+      <el-table-column label="最小文件数量" align="center" prop="fileConfigMinNum"/>
+      <el-table-column label="最大文件数量" align="center" prop="fileConfigMaxNum"/>
+      <el-table-column label="最小文件大小" align="center" prop="fileConfigMinSize"/>
+      <el-table-column label="最大文件大小" align="center" prop="fileConfigMaxSize"/>
+      <el-table-column label="排序序号" align="center" prop="fileConfigSortNum"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -70,7 +72,8 @@
             icon="el-icon-circle-close"
             @click="cancelAuthUser(scope.row)"
             v-hasPermi="['system:role:remove']"
-          >取消授权</el-button>
+          >取消授权
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -83,20 +86,20 @@
       @pagination="getList"
     />
 
-    <addFileDlg v-if="addFileDlgOption.isVisible" :fileCatalogCode="queryParams.fileCatalogCode" :option="addFileDlgOption"></addFileDlg>
+    <addFileDlg v-if="addFileDlgOption.isVisible" :fileCatalogCode="queryParams.fileCatalogCode"
+                :option="addFileDlgOption"></addFileDlg>
 
   </div>
 </template>
 
 <script>
-  import { allocatedFileList, listCatalog, getCatalog } from "@/api/file/catalog";
+  import {allocatedFileList, listCatalog, getCatalog} from "@/api/file/catalog";
   import addFileDlg from "./addFileDlg";
-
 
   export default {
     name: "FileConfig",
     dicts: ['sys_normal_disable'],
-    components: { addFileDlg },
+    components: {addFileDlg},
     data() {
       return {
         // 遮罩层
@@ -111,12 +114,11 @@
         showSearch: true,
         // 总条数
         total: 0,
-        // 文件与目录关系表格数据
-        relationList: [],
         // 弹出层标题
         title: "",
         // 是否显示弹出层
         open: false,
+        tableList: [],
         // 查询参数
         queryParams: {
           pageNum: 1,
@@ -143,7 +145,7 @@
       getList() {
         this.loading = true;
         allocatedFileList(this.queryParams).then(response => {
-            this.relationList = response.rows;
+            this.tableList = response.rows;
             this.total = response.total;
             this.loading = false;
           }
@@ -153,20 +155,22 @@
       // 多选框选中数据
       handleSelectionChange(selection) {
         this.ids = selection.map(item => item.fileCatalogRelationId)
-        this.single = selection.length!==1
+        this.single = selection.length !== 1
         this.multiple = !selection.length
       },
 
       // 返回按钮
       handleClose() {
-        const obj = { path: "/file/catalog" };
+        const obj = {path: "/file/catalog"};
         this.$tab.closeOpenPage(obj);
       },
+
       /** 搜索按钮操作 */
       handleQuery() {
         this.queryParams.pageNum = 1;
         this.getList();
       },
+
       /** 重置按钮操作 */
       resetQuery() {
         this.resetForm("queryForm");
