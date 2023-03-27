@@ -58,6 +58,7 @@
 </template>
 
 <script>
+  import { getCatalog } from "@/api/file/catalog";
   import { addRelation } from "@/api/file/relation";
   import ActionPageMixin from '@/mixins/actionPageMixin';
   import selectFile from "./selectFile";
@@ -76,6 +77,8 @@
         title: '配置目录文件',
         successMsg: '配置目录文件完成！',
         isDisabled: false,
+        // 目录信息
+        catalog: {},
         // 表单校验
         rules: {
           fileCatalogCode: [
@@ -128,8 +131,13 @@
       init() {
         const initData = this.option.initData || {};
         this.form = initData;
-        this.form.fileCatalogName = this.$route.query.fileCatalogName;
-        this.form.fileCatalogCode = this.$route.query.fileCatalogCode;
+        this.form.fileCatalogCode = this.$route.params && this.$route.params.fileCatalogCode;
+        console.log(this.$route.params)
+        getCatalog(this.form.fileCatalogCode).then(response => {
+          this.catalog = response.data;
+          this.form.fileCatalogName = this.catalog.fileCatalogName;
+          console.log(this.form.fileCatalogName)
+        });
       },
       handleSelectFile () {
         this.selectFileDlgOption.isVisible = true

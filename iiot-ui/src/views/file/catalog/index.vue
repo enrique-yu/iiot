@@ -129,10 +129,8 @@ export default {
 
     /** 配置文件按钮操作 */
     fileConfig(row) {
-      this.$router.push({
-        name: "FileConfig",
-        query: { fileCatalogName: row.fileCatalogName, fileCatalogCode: row.fileCatalogCode },
-      });
+      const fileCatalogCode = row.fileCatalogCode;
+      this.$router.push("/file/file-config/catalog/" + fileCatalogCode);
     },
 
   },

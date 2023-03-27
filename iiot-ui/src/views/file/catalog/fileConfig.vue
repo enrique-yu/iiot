@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div slot="header" style="margin-bottom: 20px;"><span>当前文件目录： <b>{{ fileCatalogName }}</b></span></div>
+    <div slot="header" style="margin-bottom: 20px;"><span>当前文件目录： <b>{{ queryParams.fileCatalogName }}</b></span></div>
 
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="文件名称" prop="fileConfigName">
@@ -121,8 +121,8 @@
         // 是否显示弹出层
         open: false,
         tableList: [],
-        fileCatalogName: "",
-        fileCatalogCode: "",
+        // 目录信息
+        catalog: {},
         // 查询参数
         queryParams: {
           pageNum: 1,
@@ -138,12 +138,14 @@
       };
     },
     created() {
-      this.fileCatalogName = this.$route.query.fileCatalogName;
-      this.fileCatalogCode = this.$route.query.fileCatalogCode;
-      if (this.fileCatalogCode) {
-        this.queryParams.fileCatalogName = this.fileCatalogName;
-        this.queryParams.fileCatalogCode = this.fileCatalogCode;
+      const fileCatalogCode = this.$route.params && this.$route.params.fileCatalogCode;
+      if (fileCatalogCode) {
+        this.queryParams.fileCatalogCode = fileCatalogCode;
         this.getList();
+        getCatalog(fileCatalogCode).then(response => {
+          this.catalog = response.data;
+          this.queryParams.fileCatalogName = this.catalog.fileCatalogName;
+        });
       }
     },
     methods: {
