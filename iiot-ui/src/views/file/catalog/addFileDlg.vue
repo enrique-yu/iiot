@@ -132,7 +132,6 @@
         const initData = this.option.initData || {};
         this.form = initData;
         this.form.fileCatalogCode = this.$route.params && this.$route.params.fileCatalogCode;
-        console.log(this.$route.params)
         getCatalog(this.form.fileCatalogCode).then(response => {
           this.catalog = response.data;
           this.form.fileCatalogName = this.catalog.fileCatalogName;
