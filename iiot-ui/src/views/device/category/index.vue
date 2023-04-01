@@ -50,7 +50,7 @@
             :default-expand-all="isExpandAll"
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
           >
-            <el-table-column prop="categoryName" label="分类名称" width="160"></el-table-column>
+            <el-table-column prop="categoryName" label="分类名称" width="300"></el-table-column>
             <el-table-column prop="categorySn" label="分类编号" width="200"></el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
               <template slot-scope="scope">
