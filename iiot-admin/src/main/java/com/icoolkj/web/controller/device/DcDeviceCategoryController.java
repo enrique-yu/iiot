@@ -1,7 +1,11 @@
 package com.icoolkj.web.controller.device;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.constant.SysConstants;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +23,6 @@ import com.icoolkj.common.enums.BusinessType;
 import com.icoolkj.device.domain.DcDeviceCategory;
 import com.icoolkj.device.service.IDcDeviceCategoryService;
 import com.icoolkj.common.utils.poi.ExcelUtil;
-import com.icoolkj.common.core.page.TableDataInfo;
 
 /**
  * 设备分类信息Controller
@@ -28,7 +31,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
  * @date 2023-04-01
  */
 @RestController
-@RequestMapping("/company/category")
+@RequestMapping("/device/category")
 public class DcDeviceCategoryController extends BaseController
 {
     @Autowired
@@ -37,19 +40,28 @@ public class DcDeviceCategoryController extends BaseController
     /**
      * 查询设备分类信息列表
      */
-    @PreAuthorize("@ss.hasPermi('company:category:list')")
+    @PreAuthorize("@ss.hasPermi('device:category:list')")
     @GetMapping("/list")
-    public TableDataInfo list(DcDeviceCategory dcDeviceCategory)
+    public AjaxResult list(DcDeviceCategory dcDeviceCategory)
     {
         startPage();
         List<DcDeviceCategory> list = dcDeviceCategoryService.selectDcDeviceCategoryList(dcDeviceCategory);
-        return getDataTable(list);
+        return success(list);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:category:list')")
+    @GetMapping("/getCategoryHome")
+    public AjaxResult getCategoryHome()
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("categoryHome", SysConstants.DEVICE_CATEGORY_HOME);
+        return success(map);
     }
 
     /**
      * 导出设备分类信息列表
      */
-    @PreAuthorize("@ss.hasPermi('company:category:export')")
+    @PreAuthorize("@ss.hasPermi('device:category:export')")
     @Log(title = "设备分类信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, DcDeviceCategory dcDeviceCategory)
@@ -62,7 +74,7 @@ public class DcDeviceCategoryController extends BaseController
     /**
      * 获取设备分类信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('company:category:query')")
+    @PreAuthorize("@ss.hasPermi('device:category:query')")
     @GetMapping(value = "/{deviceCategoryId}")
     public AjaxResult getInfo(@PathVariable("deviceCategoryId") String deviceCategoryId)
     {
@@ -72,7 +84,7 @@ public class DcDeviceCategoryController extends BaseController
     /**
      * 新增设备分类信息
      */
-    @PreAuthorize("@ss.hasPermi('company:category:add')")
+    @PreAuthorize("@ss.hasPermi('device:category:add')")
     @Log(title = "设备分类信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody DcDeviceCategory dcDeviceCategory)
@@ -83,7 +95,7 @@ public class DcDeviceCategoryController extends BaseController
     /**
      * 修改设备分类信息
      */
-    @PreAuthorize("@ss.hasPermi('company:category:edit')")
+    @PreAuthorize("@ss.hasPermi('device:category:edit')")
     @Log(title = "设备分类信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody DcDeviceCategory dcDeviceCategory)
@@ -94,7 +106,7 @@ public class DcDeviceCategoryController extends BaseController
     /**
      * 删除设备分类信息
      */
-    @PreAuthorize("@ss.hasPermi('company:category:remove')")
+    @PreAuthorize("@ss.hasPermi('device:category:remove')")
     @Log(title = "设备分类信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{deviceCategoryIds}")
     public AjaxResult remove(@PathVariable String[] deviceCategoryIds)

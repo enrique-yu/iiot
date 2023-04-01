@@ -2,6 +2,8 @@ package com.icoolkj.device.service.impl;
 
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.device.mapper.DcDeviceCategoryMapper;
@@ -53,6 +55,9 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
     @Override
     public int insertDcDeviceCategory(DcDeviceCategory dcDeviceCategory)
     {
+        dcDeviceCategory.setDomainId("11111111111111111");
+        dcDeviceCategory.setDeviceCategoryId(IdWorker.nextId().toString());
+        dcDeviceCategory.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcDeviceCategory.setCreateTime(DateUtils.getNowDate());
         return dcDeviceCategoryMapper.insertDcDeviceCategory(dcDeviceCategory);
     }
@@ -66,6 +71,7 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
     @Override
     public int updateDcDeviceCategory(DcDeviceCategory dcDeviceCategory)
     {
+        dcDeviceCategory.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcDeviceCategory.setUpdateTime(DateUtils.getNowDate());
         return dcDeviceCategoryMapper.updateDcDeviceCategory(dcDeviceCategory);
     }

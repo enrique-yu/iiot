@@ -17,6 +17,7 @@ const mixin = {
       title: "",
       // 是否显示弹出层
       open: false,
+      // 表格数据
       tableList: [],
       addDlgOption: {
         isVisible: false,

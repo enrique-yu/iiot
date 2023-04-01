@@ -17,6 +17,13 @@ export function getCategory(deviceCategoryId) {
   })
 }
 
+export function getCategoryHome() {
+  return request({
+    url: '/device/category/getCategoryHome',
+    method: 'get',
+  })
+}
+
 // 新增设备分类信息
 export function addCategory(data) {
   return request({

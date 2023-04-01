@@ -46,6 +46,10 @@ public class SysConstants {
     public static final String ROLE_GLY ="133700983795478528";
 
 
+    /**【设备分类】设备分类根ID */
+    public static final String DEVICE_CATEGORY_HOME ="562291915345625088";
+
+
 
 
 

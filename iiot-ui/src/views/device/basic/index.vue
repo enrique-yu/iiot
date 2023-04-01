@@ -39,9 +39,8 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['company:basic:add']"
+          v-hasPermi="['device:basic:add']"
         >新增</el-button>
-      </el-col>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -72,7 +71,7 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['company:basic:edit']"
+            v-hasPermi="['device:basic:edit']"
           >修改</el-button>
         </template>
       </el-table-column>
