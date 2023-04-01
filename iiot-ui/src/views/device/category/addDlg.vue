@@ -2,8 +2,8 @@
   <div >
     <el-dialog v-if="dialogVisible" :title="title" :visible.sync="dialogVisible" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="上级分类" v-if="form.categoryParentId !== ''"  prop="categoryParentId">
-          <treeselect v-model="form.categoryParentId" :options="categoryOptions" :normalizer="normalizer" placeholder="选择上级分类" />
+        <el-form-item label="上级分类" prop="categoryParentId">
+          <el-input v-model="form.parentcategoryName" disabled placeholder="选择上级分类" />
         </el-form-item>
         <el-form-item label="分类名称" prop="categoryName">
           <el-input v-model="form.categoryName" placeholder="请输入分类名称" />
@@ -18,7 +18,7 @@
           <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
         </el-form-item>
         <el-form-item label="备注" prop="categoryDesc">
-          <el-input v-model="form.categoryDesc" placeholder="请输入备注" />
+          <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { listCategory, getCategoryHome, addCategory} from "@/api/device/category";
+import { listCategory, addCategory} from "@/api/device/category";
 import ActionPageMixin from '@/mixins/actionPageMixin';
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
@@ -49,7 +49,6 @@ export default {
       title: '新增设备分类',
       successMsg: '新增设备分类完成！',
       isDisabled: false,
-      categoryHome: "",
       // 分类树选项
       categoryOptions: [],
       // 表单校验
@@ -85,14 +84,8 @@ export default {
   },
   methods: {
     init() {
-      getCategoryHome().then(res => {
-        this.categoryHome =  res.data.categoryHome;
-      });
       const initData = this.option.initData || {};
       this.form = initData;
-      listCategory().then(response => {
-        this.categoryOptions = this.handleTree(response.data, "deviceCategoryId", "categoryParentId");
-      });
     },
 
     /** 转换数据结构 */

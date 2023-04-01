@@ -17,9 +17,9 @@ export function getCategory(deviceCategoryId) {
   })
 }
 
-export function getCategoryHome() {
+export function getSysDefalutCategory() {
   return request({
-    url: '/device/category/getCategoryHome',
+    url: '/device/category/getSysDefalutCategory',
     method: 'get',
   })
 }

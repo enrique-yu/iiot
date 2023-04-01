@@ -25,7 +25,7 @@
                 plain
                 icon="el-icon-plus"
                 size="mini"
-                @click="handleAdd"
+                @click="handleAdd('')"
                 v-hasPermi="['device:category:add']"
               >新增</el-button>
             </el-col>
@@ -62,7 +62,7 @@
                   v-hasPermi="['device:category:add']"
                 >新增</el-button>
                 <el-button
-                  v-if="scope.row.parentId !== deptHome"
+                  v-if="scope.row.deviceCategoryId !== sysDefaultCategory"
                   size="mini"
                   type="text"
                   icon="el-icon-delete"
@@ -94,7 +94,7 @@
               <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
             </el-form-item>
             <el-form-item label="备注" prop="categoryDesc">
-              <el-input v-model="form.categoryDesc" placeholder="请输入备注" />
+              <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
             </el-form-item>
           </el-form>
         </el-card>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  import {listCategory, getCategory, delCategory, addCategory, updateCategory} from "@/api/device/category";
+  import {listCategory, getCategory, getSysDefalutCategory, delCategory, addCategory, updateCategory} from "@/api/device/category";
   import addDlg from './addDlg';
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
@@ -143,12 +143,15 @@
         },
         addDlgOption: {
           isVisible: false,
-          initPid: ""
+          initData: {}
         },
         // 是否展开，默认全部展开
         isExpandAll: true,
         // 重新渲染表格状态
         refreshTable: true,
+        sysDefaultCategory: "",
+        sysDefaultCategoryName: "",
+        rowData: {},
         // 表单参数
         form: {},
         // 表单校验
@@ -180,6 +183,10 @@
       };
     },
     created() {
+      getSysDefalutCategory().then(res => {
+        this.sysDefaultCategory =  res.data.deviceCategoryId;
+        this.sysDefaultCategoryName =  res.data.categoryName;
+      });
       this.getList();
     },
     methods: {
@@ -239,17 +246,15 @@
 
       /** 新增按钮操作 */
       handleAdd(row) {
-        this.updateDlgOption.isVisible = true;
-        if (row != undefined) {
-          row.categoryParentId = row.deviceCategoryId;
-        } else {
-          row.categoryParentId =
+        if (row != "" && row != undefined ) {
+          this.rowData.categoryParentId = row.deviceCategoryId;
+          this.rowData.parentcategoryName = row.categoryName;
+        } else{
+          this.rowData.categoryParentId = this.sysDefaultCategory;
+          this.rowData.parentcategoryName = this.sysDefaultCategoryName;
         }
-        this.updateDlgOption.initData = Object.assign({}, row);
-
-
-        this.open = true;
-        this.title = "添加部门";
+        this.addDlgOption.isVisible = true;
+        this.addDlgOption.initData = Object.assign({}, this.rowData);
       },
 
     }

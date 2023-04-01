@@ -55,9 +55,9 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
     @Override
     public int insertDcDeviceCategory(DcDeviceCategory dcDeviceCategory)
     {
-        dcDeviceCategory.setDomainId("11111111111111111");
         dcDeviceCategory.setDeviceCategoryId(IdWorker.nextId().toString());
-        dcDeviceCategory.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        dcDeviceCategory.setDomainId(SecurityUtils.getDomainId());
+        dcDeviceCategory.setCreateBy(SecurityUtils.getUserId());
         dcDeviceCategory.setCreateTime(DateUtils.getNowDate());
         return dcDeviceCategoryMapper.insertDcDeviceCategory(dcDeviceCategory);
     }

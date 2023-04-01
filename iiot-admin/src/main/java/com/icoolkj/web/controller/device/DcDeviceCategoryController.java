@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.icoolkj.common.constant.SysConstants;
+import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,17 +46,17 @@ public class DcDeviceCategoryController extends BaseController
     public AjaxResult list(DcDeviceCategory dcDeviceCategory)
     {
         startPage();
+        String domainID = SecurityUtils.getDomainId();
+        dcDeviceCategory.setDomainId(domainID);
         List<DcDeviceCategory> list = dcDeviceCategoryService.selectDcDeviceCategoryList(dcDeviceCategory);
         return success(list);
     }
 
     @PreAuthorize("@ss.hasPermi('system:category:list')")
-    @GetMapping("/getCategoryHome")
-    public AjaxResult getCategoryHome()
+    @GetMapping("/getSysDefalutCategory")
+    public AjaxResult getSysDefalutCategory()
     {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("categoryHome", SysConstants.DEVICE_CATEGORY_HOME);
-        return success(map);
+        return success(dcDeviceCategoryService.selectDcDeviceCategoryByDeviceCategoryId(SysConstants.SYS_DEFAULT_DEVICE_CATEGORY));
     }
 
     /**
