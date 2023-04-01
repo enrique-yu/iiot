@@ -22,6 +22,16 @@ public class LoginUser implements UserDetails
     private String userId;
 
     /**
+     * 组织账户id
+     */
+    private String domainId;
+
+    /**
+     * 用户所属关系id
+     */
+    private String userRelationId;
+
+    /**
      * 部门ID
      */
     private String deptId;
@@ -81,6 +91,22 @@ public class LoginUser implements UserDetails
         this.userId = userId;
     }
 
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
+
+    public String getUserRelationId() {
+        return userRelationId;
+    }
+
+    public void setUserRelationId(String userRelationId) {
+        this.userRelationId = userRelationId;
+    }
+
     public String getDeptId()
     {
         return deptId;
@@ -111,9 +137,11 @@ public class LoginUser implements UserDetails
         this.permissions = permissions;
     }
 
-    public LoginUser(String userId, String deptId, SysUser user, Set<String> permissions)
+    public LoginUser(String userId, String domainId, String userRelationId, String deptId, SysUser user, Set<String> permissions)
     {
         this.userId = userId;
+        this.domainId = domainId;
+        this.userRelationId = userRelationId;
         this.deptId = deptId;
         this.user = user;
         this.permissions = permissions;

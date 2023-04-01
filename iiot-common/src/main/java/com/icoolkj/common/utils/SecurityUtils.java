@@ -31,6 +31,36 @@ public class SecurityUtils
     }
 
     /**
+     * 获取组织账户ID
+     **/
+    public static String getDomainId()
+    {
+        try
+        {
+            return getLoginUser().getDomainId();
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("获取组织账户ID异常", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
+     * 获取用户所属关系ID
+     **/
+    public static String getUserRelationId()
+    {
+        try
+        {
+            return getLoginUser().getUserRelationId();
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("获取用户所属关系ID异常", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
      * 获取部门ID
      **/
     public static String getDeptId()
