@@ -27,7 +27,8 @@
                 size="mini"
                 @click="handleAdd('')"
                 v-hasPermi="['device:category:add']"
-              >新增</el-button>
+              >新增
+              </el-button>
             </el-col>
             <el-col :span="1.5">
               <el-button
@@ -60,7 +61,8 @@
                   icon="el-icon-plus"
                   @click="handleAdd(scope.row)"
                   v-hasPermi="['device:category:add']"
-                >新增</el-button>
+                >新增
+                </el-button>
                 <el-button
                   v-if="scope.row.deviceCategoryId !== sysDefaultCategory"
                   size="mini"
@@ -68,7 +70,8 @@
                   icon="el-icon-delete"
                   @click="handleDelete(scope.row)"
                   v-hasPermi="['device:category:remove']"
-                >删除</el-button>
+                >删除
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -79,24 +82,31 @@
         <el-card :bordered="false" style="height: calc(100vh - 125px)">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
             <el-form-item label="上级分类ID" prop="categoryParentId">
-              <el-input v-model="form.categoryParentId" placeholder="请输入上级分类ID" />
+              <el-input v-model="form.categoryParentId" placeholder="请输入上级分类ID"/>
             </el-form-item>
             <el-form-item label="分类名称" prop="categoryName">
-              <el-input v-model="form.categoryName" placeholder="请输入分类名称" />
+              <el-input v-model="form.categoryName" placeholder="请输入分类名称"/>
             </el-form-item>
             <el-form-item label="分类编号" prop="categorySn">
-              <el-input v-model="form.categorySn" placeholder="请输入分类编号" />
+              <el-input v-model="form.categorySn" placeholder="请输入分类编号"/>
             </el-form-item>
             <el-form-item label="分类等级" prop="categoryLevel">
-              <el-input v-model="form.categoryLevel" placeholder="请输入分类等级" />
+              <el-input v-model="form.categoryLevel" placeholder="请输入分类等级"/>
             </el-form-item>
             <el-form-item label="排序序号" prop="categorySortNum">
-              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
+              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号"/>
             </el-form-item>
             <el-form-item label="备注" prop="categoryDesc">
-              <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
+              <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200"
+                        :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
             </el-form-item>
           </el-form>
+
+          <div class="anty-form-btn">
+            <el-button type="primary" @click="submitForm">确 定</el-button>
+          </div>
+          <el-button type="primary" @click="submitForm">确 定</el-button>
+
         </el-card>
       </el-col>
 
@@ -108,14 +118,23 @@
 </template>
 
 <script>
-  import {listCategory, getCategory, getSysDefalutCategory, delCategory, addCategory, updateCategory} from "@/api/device/category";
+  import {
+    listCategory,
+    getCategory,
+    getSysDefalutCategory,
+    delCategory,
+    addCategory,
+    updateCategory
+  } from "@/api/device/category";
   import addDlg from './addDlg';
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+  import ActionPageMixin from '@/mixins/actionPageMixin';
 
   export default {
     name: "Category",
     dicts: ['sys_normal_disable'],
+    mixins: [ActionPageMixin],
     components: {Treeselect, addDlg},
     data() {
       return {
@@ -157,7 +176,7 @@
         // 表单校验
         rules: {
           categoryParentId: [
-            { required: true, message: "上级分类不能为空", trigger: "blur" }
+            {required: true, message: "上级分类不能为空", trigger: "blur"}
           ],
           categoryName: [
             {required: true, message: "分类名称不能为空", trigger: "blur"},
@@ -174,18 +193,18 @@
             {min: 2, max: 30, message: '分类编号长度必须介于 2 和 30 之间', trigger: 'blur'}
           ],
           categoryLevel: [
-            { required: true, message: "分类等级不能为空", trigger: "blur" }
+            {required: true, message: "分类等级不能为空", trigger: "blur"}
           ],
           categorySortNum: [
-            { required: true, message: "排序序号不能为空", trigger: "blur" }
+            {required: true, message: "排序序号不能为空", trigger: "blur"}
           ],
         }
       };
     },
     created() {
       getSysDefalutCategory().then(res => {
-        this.sysDefaultCategory =  res.data.deviceCategoryId;
-        this.sysDefaultCategoryName =  res.data.categoryName;
+        this.sysDefaultCategory = res.data.deviceCategoryId;
+        this.sysDefaultCategoryName = res.data.categoryName;
       });
       this.getList();
     },
@@ -246,10 +265,10 @@
 
       /** 新增按钮操作 */
       handleAdd(row) {
-        if (row != "" && row != undefined ) {
+        if (row != "" && row != undefined) {
           this.rowData.categoryParentId = row.deviceCategoryId;
           this.rowData.parentcategoryName = row.categoryName;
-        } else{
+        } else {
           this.rowData.categoryParentId = this.sysDefaultCategory;
           this.rowData.parentcategoryName = this.sysDefaultCategoryName;
         }
@@ -260,3 +279,10 @@
     }
   };
 </script>
+
+<style scoped>
+  .anty-form-btn {
+    width: 100%;
+    text-align: center;
+  }
+</style>
