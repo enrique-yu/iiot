@@ -6,6 +6,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.icoolkj.common.annotation.Excel;
 import com.icoolkj.common.core.domain.BaseEntity;
 
+import javax.validation.constraints.Size;
+
 /**
  * 设备分类信息对象 dc_device_category
  * 
@@ -29,6 +31,7 @@ public class DcDeviceCategory extends BaseEntity
 
     /** 分类编号 */
     @Excel(name = "分类编号")
+    @Size(min = 2, max = 30, message = "分类编号长度必须介于 2 和 30 之间")
     private String categorySn;
 
     /** 分类等级 */

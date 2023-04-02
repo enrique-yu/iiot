@@ -11,6 +11,7 @@ import com.icoolkj.device.domain.DcDeviceCategory;
 import com.icoolkj.device.service.IDcDeviceCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -92,7 +93,7 @@ public class DcDeviceCategoryController extends BaseController
     @PreAuthorize("@ss.hasPermi('device:category:add')")
     @Log(title = "设备分类信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody DcDeviceCategory dcDeviceCategory)
+    public AjaxResult add(@Validated @RequestBody DcDeviceCategory dcDeviceCategory)
     {
         return toAjax(dcDeviceCategoryService.insertDcDeviceCategory(dcDeviceCategory));
     }
@@ -103,7 +104,7 @@ public class DcDeviceCategoryController extends BaseController
     @PreAuthorize("@ss.hasPermi('device:category:edit')")
     @Log(title = "设备分类信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody DcDeviceCategory dcDeviceCategory)
+    public AjaxResult edit(@Validated @RequestBody DcDeviceCategory dcDeviceCategory)
     {
         return toAjax(dcDeviceCategoryService.updateDcDeviceCategory(dcDeviceCategory));
     }

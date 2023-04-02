@@ -64,6 +64,7 @@
                 >新增
                 </el-button>
                 <el-button
+                  v-if="scope.row.deviceCategoryId !== sysDefaultCategory"
                   size="mini"
                   type="text"
                   icon="el-icon-edit"
@@ -100,8 +101,8 @@
             <el-form-item label="分类等级" prop="categoryLevel">
               <el-input v-model="form.categoryLevel" placeholder="请输入分类等级" />
             </el-form-item>
-            <el-form-item label="排序序号" prop="categorySortNum">
-              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
+            <el-form-item label="排序序号" prop="categorySortNum" >
+              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" :maxlength="6"/>
             </el-form-item>
             <el-form-item label="备注" prop="categoryDesc">
               <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
@@ -201,7 +202,7 @@
             {required: true, message: "分类等级不能为空", trigger: "blur"}
           ],
           categorySortNum: [
-            {required: true, message: "排序序号不能为空", trigger: "blur"}
+            {required: true, pattern: /^\d{1,5}(\.\d{1,2})?$|^[0-9]{1,3}$/, message: "排序序号限整数长度不超过3位，最多两位小数。", trigger: "blur"},
           ],
         }
       };
