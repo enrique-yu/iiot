@@ -64,7 +64,7 @@ export default {
           {required: true, message: "分类编号不能为空", trigger: "blur"},
           {
             required: true,
-            pattern: /^([0-9A-Z_]{2,10})$/,
+            pattern: /^([0-9A-Z_]{0,10})$/,
             message: '分类编号格式不正确，只允许大写字母或数字或“_”组成。',
             trigger: 'blur'
           },
