@@ -75,6 +75,10 @@ public class DcDeviceBasic extends BaseEntity
     /** 删除标记（0代表存在 2代表删除） */
     private String delFlag;
 
+    /** 分类名称 */
+    @Excel(name = "分类名称")
+    private String categoryName;
+
     public void setDeviceBasicId(String deviceBasicId) 
     {
         this.deviceBasicId = deviceBasicId;
@@ -205,6 +209,14 @@ public class DcDeviceBasic extends BaseEntity
     public String getDelFlag() 
     {
         return delFlag;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override

@@ -1,14 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="设备分类" prop="categoryName">
-        <el-input
-          v-model="queryParams.categoryName"
-          placeholder="请输入设备所属分类"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="设备名称" prop="deviceName">
         <el-input
           v-model="queryParams.deviceName"
@@ -39,20 +31,6 @@
       </el-form-item>
     </el-form>
 
-    <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['device:basic:add']"
-        >新增</el-button>
-      </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
-    </el-row>
-
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column prop="deviceStatus" align="center"  label="状态" width="80">
@@ -60,22 +38,16 @@
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.deviceStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="设备所属分类" align="center" prop="categoryName" />
+      <el-table-column label="在线状态" align="center" prop="deviceOnlineStatus" />
       <el-table-column label="设备名称" align="center" prop="deviceName" />
       <el-table-column label="设备编号" align="center" prop="deviceSn" />
       <el-table-column label="设备类型" align="center" prop="deviceType" />
       <el-table-column label="设备规格型号" align="center" prop="deviceModel" />
       <el-table-column label="品牌" align="center" prop="deviceBrand" />
       <el-table-column label="生产厂家" align="center" prop="deviceFactory" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="设备最后活动时间" align="center" prop="deviceLastActiveTime" width="180">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['device:basic:edit']"
-          >修改</el-button>
+          <span>{{ parseTime(scope.row.deviceLastActiveTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -88,59 +60,51 @@
       @pagination="getList"
     />
 
-    <addDlg v-if="addDlgOption.isVisible" @getList="getList" :option="addDlgOption"></addDlg>
-    <updateDlg v-if="updateDlgOption.isVisible" @getList="getList"  :option="updateDlgOption"></updateDlg>
 
   </div>
 </template>
 
 <script>
-import { listBasic, getBasic } from "@/api/device/basic";
-import addDlg from './addDlg';
-import updateDlg from './updateDlg';
-import ListPageMixin from '@/mixins/listPageMixin';
+  import { activityIndex } from "@/api/device/warning";
+  import ListPageMixin from '@/mixins/listPageMixin';
 
-export default {
-  name: "Basic",
-  mixins: [ ListPageMixin ],
-  dicts: ['sys_normal_disable'],
-  data() {
-    return {
-      listApi: listBasic,
-      // 文件配置表格数据
-      configList: [],
-      // 查询参数
-      queryParams: {
-        pageNum: 1,
-        pageSize: 10,
-        deviceName: null,
-        deviceSn: null,
-        deviceType: null,
-        deviceModel: null,
-        deviceBrand: null,
-        deviceFactory: null,
-        deviceDesc: null,
-        deviceLastActiveTime: null,
-        deviceOnlineStatus: null,
-        deviceStatus: null,
+  export default {
+    name: "Basic",
+    mixins: [ ListPageMixin ],
+    dicts: ['sys_normal_disable'],
+    data() {
+      return {
+        listApi: activityIndex,
+        // 文件配置表格数据
+        configList: [],
+        // 查询参数
+        queryParams: {
+          pageNum: 1,
+          pageSize: 10,
+          deviceName: null,
+          deviceSn: null,
+          deviceType: null,
+          deviceModel: null,
+          deviceBrand: null,
+          deviceFactory: null,
+          deviceDesc: null,
+          deviceLastActiveTime: null,
+          deviceOnlineStatus: null,
+          deviceStatus: null,
+        },
+      };
+    },
+    methods: {
+
+      // 多选框选中数据
+      handleSelectionChange(selection) {
+        this.ids = selection.map(item => item.deviceBasicId)
+        this.single = selection.length!==1
+        this.multiple = !selection.length
       },
-    };
-  },
-  components: {
-    addDlg,
-    updateDlg
-  },
-  methods: {
 
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.deviceBasicId)
-      this.single = selection.length!==1
-      this.multiple = !selection.length
     },
 
-  },
-
-};
+  };
 
 </script>

@@ -24,35 +24,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="categoryName"    column="category_name"    />
     </resultMap>
 
     <sql id="selectDcDeviceBasicVo">
-        select device_basic_id, device_category_id, comp_basic_id, device_name, device_sn, device_type, device_model, device_brand, device_factory, device_desc,
-               device_last_active_time, device_online_status, device_status, domain_id, del_flag, create_by, create_time, update_by, update_time
-          from dc_device_basic
+        select d.device_basic_id, d.device_category_id, d.comp_basic_id, d.device_name, d.device_sn, d.device_type, d.device_model, d.device_brand, d.device_factory, d.device_desc,
+               d.device_last_active_time, d.device_online_status, d.device_status, d.domain_id, d.del_flag, d.create_by, d.create_time, d.update_by, d.update_time,
+               c.category_name
+          from dc_device_basic d
+          inner join dc_device_category c on c.device_category_id = d.device_category_id
     </sql>
 
     <select id="selectDcDeviceBasicList" parameterType="DcDeviceBasic" resultMap="DcDeviceBasicResult">
         <include refid="selectDcDeviceBasicVo"/>
         <where>  
-            <if test="compBasicId != null  and compBasicId != ''"> and comp_basic_id = #{compBasicId}</if>
-            <if test="deviceName != null  and deviceName != ''"> and device_name like concat('%', #{deviceName}, '%')</if>
-            <if test="deviceSn != null  and deviceSn != ''"> and device_sn = #{deviceSn}</if>
-            <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
-            <if test="deviceModel != null  and deviceModel != ''"> and device_model = #{deviceModel}</if>
-            <if test="deviceBrand != null  and deviceBrand != ''"> and device_brand = #{deviceBrand}</if>
-            <if test="deviceFactory != null  and deviceFactory != ''"> and device_factory = #{deviceFactory}</if>
-            <if test="deviceDesc != null  and deviceDesc != ''"> and device_desc = #{deviceDesc}</if>
-            <if test="deviceLastActiveTime != null "> and device_last_active_time = #{deviceLastActiveTime}</if>
-            <if test="deviceOnlineStatus != null  and deviceOnlineStatus != ''"> and device_online_status = #{deviceOnlineStatus}</if>
-            <if test="deviceStatus != null  and deviceStatus != ''"> and device_status = #{deviceStatus}</if>
-            <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
+            <if test="compBasicId != null  and compBasicId != ''"> and d.comp_basic_id = #{compBasicId}</if>
+            <if test="deviceName != null  and deviceName != ''"> and d.device_name like concat('%', #{deviceName}, '%')</if>
+            <if test="deviceSn != null  and deviceSn != ''"> and d.device_sn = #{deviceSn}</if>
+            <if test="deviceType != null  and deviceType != ''"> and d.device_type = #{deviceType}</if>
+            <if test="deviceModel != null  and deviceModel != ''"> and d.device_model = #{deviceModel}</if>
+            <if test="deviceBrand != null  and deviceBrand != ''"> and d.device_brand = #{deviceBrand}</if>
+            <if test="deviceFactory != null  and deviceFactory != ''"> and d.device_factory = #{deviceFactory}</if>
+            <if test="deviceDesc != null  and deviceDesc != ''"> and d.device_desc = #{deviceDesc}</if>
+            <if test="deviceLastActiveTime != null "> and d.device_last_active_time = #{deviceLastActiveTime}</if>
+            <if test="deviceOnlineStatus != null  and deviceOnlineStatus != ''"> and d.device_online_status = #{deviceOnlineStatus}</if>
+            <if test="deviceStatus != null  and deviceStatus != ''"> and d.device_status = #{deviceStatus}</if>
+            <if test="domainId != null  and domainId != ''"> and d.domain_id = #{domainId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and c.category_name like concat('%', #{categoryName}, '%')</if>
         </where>
     </select>
     
     <select id="selectDcDeviceBasicByDeviceBasicId" parameterType="String" resultMap="DcDeviceBasicResult">
         <include refid="selectDcDeviceBasicVo"/>
-        where device_basic_id = #{deviceBasicId}
+        where d.device_basic_id = #{deviceBasicId}
     </select>
         
     <insert id="insertDcDeviceBasic" parameterType="DcDeviceBasic">
@@ -128,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="checkDeviceSnUnique" resultMap="DcDeviceBasicResult">
         <include refid="selectDcDeviceBasicVo"/>
-        where device_sn=#{deviceSn} limit 1
+        where d.device_sn=#{deviceSn} limit 1
     </select>
 
 </mapper>

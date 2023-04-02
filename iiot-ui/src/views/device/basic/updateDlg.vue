@@ -2,6 +2,10 @@
   <div >
     <el-dialog v-if="dialogVisible" :title="title" :visible.sync="dialogVisible" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-form-item label="设备分类" prop="deviceCategoryId">
+          <treeselect v-model="form.deviceCategoryId" :options="categoryOptions" :normalizer="normalizer"
+                      placeholder="选择设备所属分类"/>
+        </el-form-item>
         <el-form-item label="设备名称" prop="deviceName">
           <el-input v-model="form.deviceName" placeholder="请输入设备名称" />
         </el-form-item>
@@ -43,13 +47,17 @@
 </template>
 
 <script>
+  import {listCategory} from "@/api/device/category";
   import { updateBasic } from "@/api/device/basic";
   import ActionPageMixin from '@/mixins/actionPageMixin';
+  import Treeselect from "@riophae/vue-treeselect";
+  import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
   export default {
     name: "updateBasic",
     dicts: ['sys_normal_disable'],
     mixins: [ ActionPageMixin ],
+    components: { Treeselect },
     data() {
       return {
         initData: {},
@@ -59,8 +67,12 @@
         title: '编辑设备信息',
         successMsg: '编辑设备信息完成！',
         isDisabled: false,
+        categoryOptions: [],
         // 表单校验
         rules: {
+          deviceCategoryId: [
+            {required: true, message: "设备所属分类不能为空", trigger: "blur"}
+          ],
           deviceName: [
             {required: true, message: "设备名称不能为空", trigger: "blur"},
             {min: 2, max: 30, message: '设备名称长度必须介于 2 和 30 之间', trigger: 'blur'}
@@ -98,8 +110,23 @@
     },
     methods: {
       init() {
+        listCategory().then(response => {
+          this.categoryOptions = this.handleTree(response.data, "deviceCategoryId", "categoryParentId");
+        });
         const initData = this.option.initData || {}
         this.form = initData
+      },
+
+      /** 转换数据结构 */
+      normalizer(node) {
+        if (node.children && !node.children.length) {
+          delete node.children;
+        }
+        return {
+          id: node.deviceCategoryId,
+          label: node.categoryName,
+          children: node.children
+        };
       },
 
 
