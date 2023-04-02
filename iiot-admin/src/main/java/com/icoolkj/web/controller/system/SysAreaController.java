@@ -44,7 +44,7 @@ public class SysAreaController extends BaseController
     }
 
     /**
-     * 查询部门列表（排除节点）
+     * 查询区域列表（排除节点）
      */
     @PreAuthorize("@ss.hasPermi('system:area:list')")
     @GetMapping("/list/exclude/{areaId}")

@@ -9,6 +9,13 @@ export function listCategory(query) {
   })
 }
 
+export function listCategoryExcludeChild(deviceCategoryId) {
+  return request({
+    url: '/device/category/list/exclude/' + deviceCategoryId,
+    method: 'get'
+  })
+}
+
 // 查询设备分类信息详细
 export function getCategory(deviceCategoryId) {
   return request({

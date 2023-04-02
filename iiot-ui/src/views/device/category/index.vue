@@ -64,6 +64,13 @@
                 >新增
                 </el-button>
                 <el-button
+                  size="mini"
+                  type="text"
+                  icon="el-icon-edit"
+                  @click="handleUpdate(scope.row)"
+                  v-hasPermi="['device:category:edit']"
+                >修改</el-button>
+                <el-button
                   v-if="scope.row.deviceCategoryId !== sysDefaultCategory"
                   size="mini"
                   type="text"
@@ -81,31 +88,29 @@
       <el-col :span="12">
         <el-card :bordered="false" style="height: calc(100vh - 125px)">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-            <el-form-item label="上级分类ID" prop="categoryParentId">
-              <el-input v-model="form.categoryParentId" placeholder="请输入上级分类ID"/>
+            <el-form-item label="上级分类" prop="categoryParentId">
+              <treeselect v-model="form.categoryParentId" :options="categoryOptions" :normalizer="normalizer" placeholder="选择上级分类" />
             </el-form-item>
             <el-form-item label="分类名称" prop="categoryName">
-              <el-input v-model="form.categoryName" placeholder="请输入分类名称"/>
+              <el-input v-model="form.categoryName" placeholder="请输入分类名称" />
             </el-form-item>
             <el-form-item label="分类编号" prop="categorySn">
-              <el-input v-model="form.categorySn" placeholder="请输入分类编号"/>
+              <el-input v-model="form.categorySn" placeholder="请输入分类编号" />
             </el-form-item>
             <el-form-item label="分类等级" prop="categoryLevel">
-              <el-input v-model="form.categoryLevel" placeholder="请输入分类等级"/>
+              <el-input v-model="form.categoryLevel" placeholder="请输入分类等级" />
             </el-form-item>
             <el-form-item label="排序序号" prop="categorySortNum">
-              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号"/>
+              <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
             </el-form-item>
             <el-form-item label="备注" prop="categoryDesc">
-              <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200"
-                        :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
+              <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
             </el-form-item>
           </el-form>
 
-          <div class="anty-form-btn">
-            <el-button type="primary" @click="submitForm">确 定</el-button>
+          <div class="ic-form-btn">
+            <el-button type="primary" @click="submitUpdateForm">确定修改</el-button>
           </div>
-          <el-button type="primary" @click="submitForm">确 定</el-button>
 
         </el-card>
       </el-col>
@@ -120,6 +125,7 @@
 <script>
   import {
     listCategory,
+    listCategoryExcludeChild,
     getCategory,
     getSysDefalutCategory,
     delCategory,
@@ -129,12 +135,10 @@
   import addDlg from './addDlg';
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-  import ActionPageMixin from '@/mixins/actionPageMixin';
 
   export default {
     name: "Category",
     dicts: ['sys_normal_disable'],
-    mixins: [ActionPageMixin],
     components: {Treeselect, addDlg},
     data() {
       return {
@@ -168,6 +172,7 @@
         isExpandAll: true,
         // 重新渲染表格状态
         refreshTable: true,
+        categoryOptions: [],
         sysDefaultCategory: "",
         sysDefaultCategoryName: "",
         rowData: {},
@@ -276,12 +281,44 @@
         this.addDlgOption.initData = Object.assign({}, this.rowData);
       },
 
+      /** 修改按钮操作 */
+      handleUpdate(row) {
+        this.reset();
+        getCategory(row.deviceCategoryId).then(response => {
+          this.form = response.data;
+          this.open = true;
+          listCategoryExcludeChild(row.deviceCategoryId).then(response => {
+            this.categoryOptions = this.handleTree(response.data, "deviceCategoryId", "categoryParentId");
+            if (this.categoryOptions.length == 0) {
+              const noResultsOptions = { deviceCategoryId: this.form.deviceCategoryId, categoryName: this.form.categoryName, children: [] };
+              this.categoryOptions.push(noResultsOptions);
+            }
+          });
+        });
+      },
+
+      /** 提交更新按钮 */
+      submitUpdateForm() {
+        this.$refs['form'].validate((valid) => {
+          if (valid) {
+            updateCategory(this.form).then(res => {
+              this.$modal.msgSuccess("修改成功");
+              this.open = false;
+              this.getList();
+            })
+          } else {
+            this.$message({message: '信息尚未完善完整，请完善后再进行提交！', type: 'warning'});
+            return false;
+          }
+        });
+      },
+
     }
   };
 </script>
 
 <style scoped>
-  .anty-form-btn {
+  .ic-form-btn {
     width: 100%;
     text-align: center;
   }

@@ -36,6 +36,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
         </where>
     </select>
+
+    <select id="selectDcDeviceCategoryExcludeChildList" parameterType="DcDeviceCategory" resultMap="DcDeviceCategoryResult">
+        <include refid="selectDcDeviceCategoryVo"/>
+        <where>
+            NOT FIND_IN_SET(device_category_id, getDeviceCategoryChildList(#{deviceCategoryId}))
+            <if test="categoryParentId != null  and categoryParentId != ''"> and category_parent_id = #{categoryParentId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categorySn != null  and categorySn != ''"> and category_sn = #{categorySn}</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="categorySortNum != null "> and category_sort_num = #{categorySortNum}</if>
+            <if test="categoryDesc != null  and categoryDesc != ''"> and category_desc = #{categoryDesc}</if>
+            <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
+        </where>
+    </select>
     
     <select id="selectDcDeviceCategoryByDeviceCategoryId" parameterType="String" resultMap="DcDeviceCategoryResult">
         <include refid="selectDcDeviceCategoryVo"/>

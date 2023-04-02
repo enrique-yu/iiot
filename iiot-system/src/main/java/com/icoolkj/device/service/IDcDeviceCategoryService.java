@@ -28,6 +28,14 @@ public interface IDcDeviceCategoryService
     public List<DcDeviceCategory> selectDcDeviceCategoryList(DcDeviceCategory dcDeviceCategory);
 
     /**
+     * 查询设备分类列表（排除节点及节点下子节点）
+     *
+     * @param dcDeviceCategory 设备分类信息
+     * @return 设备分类信息集合
+     */
+    public List<DcDeviceCategory> selectDcDeviceCategoryExcludeChildList(DcDeviceCategory dcDeviceCategory);
+
+    /**
      * 新增设备分类信息
      * 
      * @param dcDeviceCategory 设备分类信息

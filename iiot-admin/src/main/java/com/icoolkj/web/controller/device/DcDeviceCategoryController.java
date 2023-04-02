@@ -1,29 +1,20 @@
 package com.icoolkj.web.controller.device;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletResponse;
-
-import com.icoolkj.common.constant.SysConstants;
-import com.icoolkj.common.utils.SecurityUtils;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.icoolkj.common.annotation.Log;
+import com.icoolkj.common.constant.SysConstants;
 import com.icoolkj.common.core.controller.BaseController;
 import com.icoolkj.common.core.domain.AjaxResult;
 import com.icoolkj.common.enums.BusinessType;
+import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.poi.ExcelUtil;
 import com.icoolkj.device.domain.DcDeviceCategory;
 import com.icoolkj.device.service.IDcDeviceCategoryService;
-import com.icoolkj.common.utils.poi.ExcelUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 设备分类信息Controller
@@ -46,10 +37,23 @@ public class DcDeviceCategoryController extends BaseController
     public AjaxResult list(DcDeviceCategory dcDeviceCategory)
     {
         startPage();
-        String domainID = SecurityUtils.getDomainId();
-        dcDeviceCategory.setDomainId(domainID);
+        dcDeviceCategory.setDomainId(SecurityUtils.getDomainId());
         List<DcDeviceCategory> list = dcDeviceCategoryService.selectDcDeviceCategoryList(dcDeviceCategory);
         return success(list);
+    }
+
+    /**
+     * 查询设备分类列表（排除节点及节点下子节点）
+     */
+    @PreAuthorize("@ss.hasPermi('device:category:list')")
+    @GetMapping("/list/exclude/{deviceCategoryId}")
+    public AjaxResult excludeChild(@PathVariable(value = "deviceCategoryId", required = true) String deviceCategoryId)
+    {
+        DcDeviceCategory dcDeviceCategory = new DcDeviceCategory();
+        dcDeviceCategory.setDomainId(SecurityUtils.getDomainId());
+        dcDeviceCategory.setDeviceCategoryId(deviceCategoryId);
+        List<DcDeviceCategory> categorys = dcDeviceCategoryService.selectDcDeviceCategoryExcludeChildList(dcDeviceCategory);
+        return success(categorys);
     }
 
     @PreAuthorize("@ss.hasPermi('system:category:list')")

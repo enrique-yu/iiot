@@ -46,6 +46,19 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
         return dcDeviceCategoryMapper.selectDcDeviceCategoryList(dcDeviceCategory);
     }
 
+
+    /**
+     * 询设备分类列表（排除节点及节点下子节点）
+     *
+     * @param dcDeviceCategory 设备分类信息
+     * @return 设备分类信息集合
+     */
+    @Override
+    public List<DcDeviceCategory> selectDcDeviceCategoryExcludeChildList(DcDeviceCategory dcDeviceCategory)
+    {
+        return dcDeviceCategoryMapper.selectDcDeviceCategoryExcludeChildList(dcDeviceCategory);
+    }
+
     /**
      * 新增设备分类信息
      * 
