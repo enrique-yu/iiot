@@ -9,13 +9,13 @@
           <el-input v-model="form.categoryName" placeholder="请输入分类名称" />
         </el-form-item>
         <el-form-item label="分类编号" prop="categorySn">
-          <el-input v-model="form.categorySn" placeholder="请输入分类编号" />
+          <el-input v-model="form.categorySn" placeholder="请输入分类编号" :maxlength="10"/>
         </el-form-item>
         <el-form-item label="分类等级" prop="categoryLevel">
-          <el-input v-model="form.categoryLevel" placeholder="请输入分类等级" />
+          <el-input v-model="form.categoryLevel" placeholder="请输入分类等级" :maxlength="5" />
         </el-form-item>
         <el-form-item label="排序序号" prop="categorySortNum">
-          <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" />
+          <el-input v-model="form.categorySortNum" placeholder="请输入排序序号" :maxlength="6"/>
         </el-form-item>
         <el-form-item label="备注" prop="categoryDesc">
           <el-input type="textarea" v-model="form.categoryDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入备注"></el-input>
@@ -64,17 +64,19 @@ export default {
           {required: true, message: "分类编号不能为空", trigger: "blur"},
           {
             required: true,
-            pattern: /^([0-9A-Z_]{0,10})$/,
+            pattern: /^([0-9A-Z_]{2,10})$/,
             message: '分类编号格式不正确，只允许大写字母或数字或“_”组成。',
             trigger: 'blur'
           },
-          {min: 2, max: 30, message: '分类编号长度必须介于 2 和 30 之间', trigger: 'blur'}
+          {min: 2, max: 10, message: '分类编号长度必须介于 2 和 10 之间', trigger: 'blur'}
         ],
         categoryLevel: [
-          { required: true, message: "分类等级不能为空", trigger: "blur" }
+          {required: true, message: "分类等级不能为空", trigger: "blur"},
+          {required: true, pattern: /^[1-9][0-9]{0,4}$/, message: "分类等级格式不正确，只允许数字，且长度不超过5位数。", trigger: "blur"},
         ],
         categorySortNum: [
-          { required: true, message: "排序序号不能为空", trigger: "blur" }
+          {required: true, message: "排序序号不能为空", trigger: "blur"},
+          {required: true, pattern: /^\d{1,5}(\.\d{1,2})?$|^[0-9]{1,3}$/, message: "排序序号格式不正确，整数部分长度不超过3位，最多两位小数。", trigger: "blur"},
         ],
       }
     };
