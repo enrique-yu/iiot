@@ -72,6 +72,7 @@ public class DcDeviceCategoryController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, DcDeviceCategory dcDeviceCategory)
     {
+        dcDeviceCategory.setDomainId(SecurityUtils.getDomainId());
         List<DcDeviceCategory> list = dcDeviceCategoryService.selectDcDeviceCategoryList(dcDeviceCategory);
         ExcelUtil<DcDeviceCategory> util = new ExcelUtil<DcDeviceCategory>(DcDeviceCategory.class);
         util.exportExcel(response, list, "设备分类信息数据");

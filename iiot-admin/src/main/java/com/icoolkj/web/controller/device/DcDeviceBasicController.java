@@ -2,6 +2,8 @@ package com.icoolkj.web.controller.device;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,7 @@ public class DcDeviceBasicController extends BaseController
     public TableDataInfo list(DcDeviceBasic dcDeviceBasic)
     {
         startPage();
+        dcDeviceBasic.setDomainId(SecurityUtils.getDomainId());
         List<DcDeviceBasic> list = dcDeviceBasicService.selectDcDeviceBasicList(dcDeviceBasic);
         return getDataTable(list);
     }
@@ -54,6 +57,7 @@ public class DcDeviceBasicController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, DcDeviceBasic dcDeviceBasic)
     {
+        dcDeviceBasic.setDomainId(SecurityUtils.getDomainId());
         List<DcDeviceBasic> list = dcDeviceBasicService.selectDcDeviceBasicList(dcDeviceBasic);
         ExcelUtil<DcDeviceBasic> util = new ExcelUtil<DcDeviceBasic>(DcDeviceBasic.class);
         util.exportExcel(response, list, "设备基础数据");
