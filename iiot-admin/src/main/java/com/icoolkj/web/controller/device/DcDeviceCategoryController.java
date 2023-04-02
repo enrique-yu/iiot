@@ -106,6 +106,11 @@ public class DcDeviceCategoryController extends BaseController
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody DcDeviceCategory dcDeviceCategory)
     {
+
+        if (SysConstants.SYS_DEFAULT_DEVICE_CATEGORY.equals(dcDeviceCategory.getDeviceCategoryId()))
+        {
+            return error("系统默认分类，不允许修改。");
+        }
         return toAjax(dcDeviceCategoryService.updateDcDeviceCategory(dcDeviceCategory));
     }
 
@@ -114,9 +119,17 @@ public class DcDeviceCategoryController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('device:category:remove')")
     @Log(title = "设备分类信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{deviceCategoryIds}")
-    public AjaxResult remove(@PathVariable String[] deviceCategoryIds)
+	@DeleteMapping("/{deviceCategoryId}")
+    public AjaxResult remove(@PathVariable String deviceCategoryId)
     {
-        return toAjax(dcDeviceCategoryService.deleteDcDeviceCategoryByDeviceCategoryIds(deviceCategoryIds));
+        if (dcDeviceCategoryService.hasChildById(deviceCategoryId))
+        {
+            return warn("存在下级分类,不允许删除");
+        }
+        if (dcDeviceCategoryService.checkDeviceById(deviceCategoryId))
+        {
+            return warn("分类存在设备,不允许删除");
+        }
+        return toAjax(dcDeviceCategoryService.deleteDcDeviceCategoryByDeviceCategoryId(deviceCategoryId));
     }
 }

@@ -60,10 +60,19 @@ public interface DcDeviceCategoryMapper
     public int deleteDcDeviceCategoryByDeviceCategoryId(String deviceCategoryId);
 
     /**
-     * 批量删除设备分类信息
-     * 
-     * @param deviceCategoryIds 需要删除的数据主键集合
+     * 是否有子分类信息
+     *
+     * @param deviceCategoryId 设备分类信息主键
      * @return 结果
      */
-    public int deleteDcDeviceCategoryByDeviceCategoryIds(String[] deviceCategoryIds);
+    public int hasChildById(String deviceCategoryId);
+
+    /**
+     * 查询分类下是否登记设备
+     *
+     * @param deviceCategoryId 设备分类信息主键
+     * @return 结果
+     */
+    public int checkDeviceById(String deviceCategoryId);
+
 }

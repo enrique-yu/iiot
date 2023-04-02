@@ -89,17 +89,6 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
         return dcDeviceCategoryMapper.updateDcDeviceCategory(dcDeviceCategory);
     }
 
-    /**
-     * 批量删除设备分类信息
-     * 
-     * @param deviceCategoryIds 需要删除的设备分类信息主键
-     * @return 结果
-     */
-    @Override
-    public int deleteDcDeviceCategoryByDeviceCategoryIds(String[] deviceCategoryIds)
-    {
-        return dcDeviceCategoryMapper.deleteDcDeviceCategoryByDeviceCategoryIds(deviceCategoryIds);
-    }
 
     /**
      * 删除设备分类信息信息
@@ -112,4 +101,32 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
     {
         return dcDeviceCategoryMapper.deleteDcDeviceCategoryByDeviceCategoryId(deviceCategoryId);
     }
+
+
+    /**
+     * 是否有子分类信息
+     *
+     * @param deviceCategoryId 设备分类信息主键
+     * @return 结果
+     */
+    @Override
+    public boolean hasChildById(String deviceCategoryId)
+    {
+        int result = dcDeviceCategoryMapper.hasChildById(deviceCategoryId);
+        return result > 0;
+    }
+
+    /**
+     * 查询分类下是否登记设备
+     *
+     * @param deviceCategoryId 设备分类信息主键
+     * @return 结果 true 存在 false 不存在
+     */
+    @Override
+    public boolean checkDeviceById(String deviceCategoryId)
+    {
+        int result = dcDeviceCategoryMapper.checkDeviceById(deviceCategoryId);
+        return result > 0;
+    }
+
 }

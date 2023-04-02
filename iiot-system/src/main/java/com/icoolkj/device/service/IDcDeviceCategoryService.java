@@ -51,13 +51,6 @@ public interface IDcDeviceCategoryService
      */
     public int updateDcDeviceCategory(DcDeviceCategory dcDeviceCategory);
 
-    /**
-     * 批量删除设备分类信息
-     * 
-     * @param deviceCategoryIds 需要删除的设备分类信息主键集合
-     * @return 结果
-     */
-    public int deleteDcDeviceCategoryByDeviceCategoryIds(String[] deviceCategoryIds);
 
     /**
      * 删除设备分类信息信息
@@ -66,4 +59,22 @@ public interface IDcDeviceCategoryService
      * @return 结果
      */
     public int deleteDcDeviceCategoryByDeviceCategoryId(String deviceCategoryId);
+
+
+    /**
+     * 是否有子分类信息
+     *
+     * @param deviceCategoryId 设备分类信息主键
+     * @return 结果
+     */
+    public boolean hasChildById(String deviceCategoryId);
+
+    /**
+     * 查询分类下是否登记设备
+     *
+     * @param deviceCategoryId 设备分类信息主键
+     * @return 结果 true 存在 false 不存在
+     */
+    public boolean checkDeviceById(String deviceCategoryId);
+
 }

@@ -113,10 +113,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from dc_device_category where device_category_id = #{deviceCategoryId}
     </delete>
 
-    <delete id="deleteDcDeviceCategoryByDeviceCategoryIds" parameterType="String">
-        delete from dc_device_category where device_category_id in 
-        <foreach item="deviceCategoryId" collection="array" open="(" separator="," close=")">
-            #{deviceCategoryId}
-        </foreach>
-    </delete>
+    <select id="hasChildById" parameterType="String" resultType="int">
+		select count(1) from dc_device_category
+		where del_flag = '0' and category_parent_id = #{deviceCategoryId} limit 1
+	</select>
+
+    <select id="checkDeviceById" parameterType="String" resultType="int">
+		select count(1) from dc_device_basic where device_category_id = #{deviceCategoryId} and del_flag = '0'
+	</select>
+
+
 </mapper>
