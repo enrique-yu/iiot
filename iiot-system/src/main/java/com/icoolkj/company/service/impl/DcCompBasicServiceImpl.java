@@ -103,7 +103,6 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
     {
         dcCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcCompBasic.setUpdateTime(DateUtils.getNowDate());
-        createCompAccount(dcCompBasic);
         return dcCompBasicMapper.updateDcCompBasic(dcCompBasic);
     }
 
