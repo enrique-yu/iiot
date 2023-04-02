@@ -109,7 +109,7 @@ public class DcDeviceCategoryController extends BaseController
 
         if (SysConstants.SYS_DEFAULT_DEVICE_CATEGORY.equals(dcDeviceCategory.getDeviceCategoryId()))
         {
-            return error("系统默认分类，不允许修改。");
+            return warn("系统默认分类，不允许修改");
         }
         return toAjax(dcDeviceCategoryService.updateDcDeviceCategory(dcDeviceCategory));
     }
@@ -122,6 +122,10 @@ public class DcDeviceCategoryController extends BaseController
 	@DeleteMapping("/{deviceCategoryId}")
     public AjaxResult remove(@PathVariable String deviceCategoryId)
     {
+        if (SysConstants.SYS_DEFAULT_DEVICE_CATEGORY.equals(deviceCategoryId))
+        {
+            return warn("系统默认分类，不允许删除");
+        }
         if (dcDeviceCategoryService.hasChildById(deviceCategoryId))
         {
             return warn("存在下级分类,不允许删除");

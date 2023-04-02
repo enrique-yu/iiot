@@ -316,6 +316,16 @@
         });
       },
 
+      /** 删除按钮操作 */
+      handleDelete(row) {
+        this.$modal.confirm('是否确认删除名称为"' + row.categoryName + '"的数据项？').then(function() {
+          return delCategory(row.deviceCategoryId);
+        }).then(() => {
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => {});
+      }
+
     }
   };
 </script>
