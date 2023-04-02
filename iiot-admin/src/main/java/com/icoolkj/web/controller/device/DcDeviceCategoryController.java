@@ -57,7 +57,7 @@ public class DcDeviceCategoryController extends BaseController
         return success(categorys);
     }
 
-    @PreAuthorize("@ss.hasPermi('system:category:list')")
+    @PreAuthorize("@ss.hasPermi('device:category:list')")
     @GetMapping("/getSysDefalutCategory")
     public AjaxResult getSysDefalutCategory()
     {

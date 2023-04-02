@@ -59,6 +59,8 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
     public int insertDcDeviceBasic(DcDeviceBasic dcDeviceBasic)
     {
         dcDeviceBasic.setDeviceBasicId(IdWorker.nextId().toString());
+        dcDeviceBasic.setCompBasicId(SecurityUtils.getUserRelationId());
+        dcDeviceBasic.setDomainId(SecurityUtils.getDomainId());
         dcDeviceBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
         dcDeviceBasic.setCreateTime(DateUtils.getNowDate());
         return dcDeviceBasicMapper.insertDcDeviceBasic(dcDeviceBasic);
