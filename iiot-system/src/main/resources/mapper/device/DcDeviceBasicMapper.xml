@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="DcDeviceBasic" id="DcDeviceBasicResult">
         <result property="deviceBasicId"    column="device_basic_id"    />
+        <result property="deviceCategoryId"    column="device_category_id"    />
         <result property="compBasicId"    column="comp_basic_id"    />
         <result property="deviceName"    column="device_name"    />
         <result property="deviceSn"    column="device_sn"    />
@@ -17,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="deviceLastActiveTime"    column="device_last_active_time"    />
         <result property="deviceOnlineStatus"    column="device_online_status"    />
         <result property="deviceStatus"    column="device_status"    />
+        <result property="domainId"    column="domain_id"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -25,7 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDcDeviceBasicVo">
-        select device_basic_id, comp_basic_id, device_name, device_sn, device_type, device_model, device_brand, device_factory, device_desc, device_last_active_time, device_online_status, device_status, del_flag, create_by, create_time, update_by, update_time from dc_device_basic
+        select device_basic_id, device_basic_id, comp_basic_id, device_name, device_sn, device_type, device_model, device_brand, device_factory, device_desc,
+               device_last_active_time, device_online_status, device_status, domain_id, del_flag, create_by, create_time, update_by, update_time
+          from dc_device_basic
     </sql>
 
     <select id="selectDcDeviceBasicList" parameterType="DcDeviceBasic" resultMap="DcDeviceBasicResult">

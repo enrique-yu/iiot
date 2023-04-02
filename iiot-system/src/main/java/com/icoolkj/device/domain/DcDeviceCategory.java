@@ -46,8 +46,8 @@ public class DcDeviceCategory extends BaseEntity
     @Excel(name = "备注")
     private String categoryDesc;
 
-    /** 组织编号 */
-    @Excel(name = "组织编号")
+    /** 组织ID */
+    @Excel(name = "组织ID")
     private String domainId;
 
     /** 删除标记（0代表存在 2代表删除） */

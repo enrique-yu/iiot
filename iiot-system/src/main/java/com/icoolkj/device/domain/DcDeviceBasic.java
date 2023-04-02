@@ -20,6 +20,9 @@ public class DcDeviceBasic extends BaseEntity
     /** device_basic_id */
     private String deviceBasicId;
 
+    /** device_category_id */
+    private String deviceCategoryId;
+
     /** 设备所属企业ID */
     @Excel(name = "设备所属企业ID")
     private String compBasicId;
@@ -65,6 +68,10 @@ public class DcDeviceBasic extends BaseEntity
     @Excel(name = "设备状态", readConverterExp = "0=正常,1=停用,2=故障")
     private String deviceStatus;
 
+    /** 组织ID */
+    @Excel(name = "组织ID")
+    private String domainId;
+
     /** 删除标记（0代表存在 2代表删除） */
     private String delFlag;
 
@@ -77,7 +84,14 @@ public class DcDeviceBasic extends BaseEntity
     {
         return deviceBasicId;
     }
-    public void setCompBasicId(String compBasicId) 
+    public void setDeviceCategoryId(String deviceCategoryId) {
+        this.deviceCategoryId = deviceCategoryId;
+    }
+
+    public String getDeviceCategoryId() {
+        return deviceCategoryId;
+    }
+    public void setCompBasicId(String compBasicId)
     {
         this.compBasicId = compBasicId;
     }
@@ -176,7 +190,14 @@ public class DcDeviceBasic extends BaseEntity
     {
         return deviceStatus;
     }
-    public void setDelFlag(String delFlag) 
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+    public void setDelFlag(String delFlag)
     {
         this.delFlag = delFlag;
     }
