@@ -195,7 +195,7 @@
           this.loading = false;
         });
       },
-      /** 转换部门数据结构 */
+      /** 转换数据结构 */
       normalizer(node) {
         if (node.children && !node.children.length) {
           delete node.children;
