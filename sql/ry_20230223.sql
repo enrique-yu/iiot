@@ -1605,3 +1605,43 @@ END
 delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+DESC dc_device_basic;
+
+## 所属组织
+alter table sys_user add constraint fk_domain_id foreign key (domain_id) references sys_domain(domain_id);
+##所属部门
+alter table sys_user add constraint fk_dept_id foreign key (dept_id) references sys_dept(dept_id);
+
+## 部门所属组织
+alter table sys_dept add constraint fk_dept_domain_id foreign key (domain_id) references sys_domain(domain_id);
+
+## 设备分类所属组织
+alter table dc_device_category add constraint fk_device_category_domain_id foreign key (domain_id) references sys_domain(domain_id);
+
+
+## 设备分类所属分类
+alter table dc_device_basic add constraint fk_device_category_id foreign key (device_category_id) references dc_device_category(device_category_id);
+
+## 设备分类所属组织
+alter table dc_device_basic add constraint fk_device_domain_id foreign key (domain_id) references sys_domain(domain_id);
+
+## 设备分类所属企业
+alter table dc_device_basic add constraint fk_device_comp_id foreign key (comp_basic_id) references dc_comp_basic(comp_basic_id);
+
+## 所属目录
+alter table file_catalog_relation add constraint fk_catalog_code foreign key (file_catalog_code) references file_catalog_config(file_catalog_code);
+##所属文件
+alter table file_catalog_relation add constraint fk_config_code foreign key (file_config_code) references file_config(file_config_code);
+
+## 所属目录
+alter table file_record add constraint fk_record_catalog_code foreign key (file_catalog_code) references file_catalog_config(file_catalog_code);
+
+## 所属记录
+alter table file_record_detail add constraint fk_detail_record_id foreign key (file_record_id) references file_record(file_record_id);
+## 所属文件目录关系
+alter table file_record_detail add constraint fk_detail_catalog_relation_id foreign key (file_catalog_relation_id) references file_catalog_relation(file_catalog_relation_id);
+##所属文件
+alter table file_record_detail add constraint fk_detail_config_code foreign key (file_config_code) references file_config(file_config_code);
+

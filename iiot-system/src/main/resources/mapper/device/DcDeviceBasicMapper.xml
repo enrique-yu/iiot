@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDcDeviceBasicVo">
-        select device_basic_id, device_basic_id, comp_basic_id, device_name, device_sn, device_type, device_model, device_brand, device_factory, device_desc,
+        select device_basic_id, device_category_id, comp_basic_id, device_name, device_sn, device_type, device_model, device_brand, device_factory, device_desc,
                device_last_active_time, device_online_status, device_status, domain_id, del_flag, create_by, create_time, update_by, update_time
           from dc_device_basic
     </sql>
@@ -58,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into dc_device_basic
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="deviceBasicId != null">device_basic_id,</if>
+            <if test="deviceCategoryId != null">device_category_id,</if>
             <if test="compBasicId != null">comp_basic_id,</if>
             <if test="deviceName != null">device_name,</if>
             <if test="deviceSn != null">device_sn,</if>
@@ -69,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceLastActiveTime != null">device_last_active_time,</if>
             <if test="deviceOnlineStatus != null">device_online_status,</if>
             <if test="deviceStatus != null">device_status,</if>
+            <if test="domainId != null">domain_id,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -77,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="deviceBasicId != null">#{deviceBasicId},</if>
+            <if test="deviceCategoryId != null">#{deviceCategoryId},</if>
             <if test="compBasicId != null">#{compBasicId},</if>
             <if test="deviceName != null">#{deviceName},</if>
             <if test="deviceSn != null">#{deviceSn},</if>
@@ -88,6 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceLastActiveTime != null">#{deviceLastActiveTime},</if>
             <if test="deviceOnlineStatus != null">#{deviceOnlineStatus},</if>
             <if test="deviceStatus != null">#{deviceStatus},</if>
+            <if test="domainId != null">#{domainId},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -99,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateDcDeviceBasic" parameterType="DcDeviceBasic">
         update dc_device_basic
         <trim prefix="SET" suffixOverrides=",">
+            <if test="deviceCategoryId != null">device_category_id = #{deviceCategoryId},</if>
             <if test="compBasicId != null">comp_basic_id = #{compBasicId},</if>
             <if test="deviceName != null">device_name = #{deviceName},</if>
             <if test="deviceSn != null">device_sn = #{deviceSn},</if>
@@ -110,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceLastActiveTime != null">device_last_active_time = #{deviceLastActiveTime},</if>
             <if test="deviceOnlineStatus != null">device_online_status = #{deviceOnlineStatus},</if>
             <if test="deviceStatus != null">device_status = #{deviceStatus},</if>
+            <if test="domainId != null">domain_id = #{domainId},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
