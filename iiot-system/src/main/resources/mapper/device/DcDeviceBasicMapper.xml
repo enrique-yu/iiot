@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceLastActiveTime != null "> and device_last_active_time = #{deviceLastActiveTime}</if>
             <if test="deviceOnlineStatus != null  and deviceOnlineStatus != ''"> and device_online_status = #{deviceOnlineStatus}</if>
             <if test="deviceStatus != null  and deviceStatus != ''"> and device_status = #{deviceStatus}</if>
+            <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
         </where>
     </select>
     

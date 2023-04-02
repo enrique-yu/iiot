@@ -54,6 +54,9 @@ public class DcDeviceCategoryController extends BaseController
         dcDeviceCategory.setDomainId(SecurityUtils.getDomainId());
         dcDeviceCategory.setDeviceCategoryId(deviceCategoryId);
         List<DcDeviceCategory> categorys = dcDeviceCategoryService.selectDcDeviceCategoryExcludeChildList(dcDeviceCategory);
+        if(!categorys.stream().filter(m->m.getDeviceCategoryId().equals(SysConstants.SYS_DEFAULT_DEVICE_CATEGORY)).findAny().isPresent()){
+            categorys.add(dcDeviceCategoryService.selectDcDeviceCategoryByDeviceCategoryId(SysConstants.SYS_DEFAULT_DEVICE_CATEGORY));
+        }
         return success(categorys);
     }
 
