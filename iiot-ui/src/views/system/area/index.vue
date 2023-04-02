@@ -152,7 +152,7 @@
         showSearch: true,
         // 表格树数据
         areaList: [],
-        // 部门树选项
+        // 区域树选项
         areaOptions: [],
         // 弹出层标题
         title: "",
