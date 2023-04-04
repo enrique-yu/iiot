@@ -56,18 +56,13 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table
-      v-if="refreshTable"
-      v-loading="loading"
-      :data="deptList"
-      row-key="deptId"
-      :default-expand-all="isExpandAll"
-      :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-    >
-      <el-table-column label="组织账户名称" align="center" prop="domain.domainName" ></el-table-column>
-      <el-table-column prop="deptName" label="部门名称" width="260"></el-table-column>
-      <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
-      <el-table-column prop="status" label="状态" width="100">
+
+    <el-table v-loading="loading" :data="deptList" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column prop="domain.domainName" label="组织账户名称"  ></el-table-column>
+      <el-table-column prop="deptName" label="部门名称" ></el-table-column>
+      <el-table-column prop="orderNum" label="排序" ></el-table-column>
+      <el-table-column prop="status" label="状态" >
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
         </template>
@@ -167,7 +162,7 @@
 </template>
 
 <script>
-import { listDept, getDeptHome, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
+import { listDept, treeList, getDeptHome, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import {getGenTable} from "@/api/tool/gen";
@@ -242,7 +237,8 @@ export default {
     getList() {
       this.loading = true;
       listDept(this.queryParams).then(response => {
-        this.deptList = this.handleTree(response.data, "deptId");
+        this.deptList = response.rows;
+        this.total = response.total;
         this.loading = false;
       });
     },
@@ -285,6 +281,14 @@ export default {
       this.resetForm("queryForm");
       this.handleQuery();
     },
+
+    // 多选框选中数据
+    handleSelectionChange(selection) {
+      this.ids = selection.map(item => item.deptId)
+      this.single = selection.length!==1
+      this.multiple = !selection.length
+    },
+
     /** 新增按钮操作 */
     handleAdd(row) {
       this.reset();
@@ -293,8 +297,8 @@ export default {
       }
       this.open = true;
       this.title = "添加部门";
-      listDept().then(response => {
-        this.deptOptions = this.handleTree(response.data, "deptId");
+      treeList().then(response => {
+        this.deptOptions = this.handleTree(response.data, "deptId", "parentId");
       });
     },
     /** 展开/折叠操作 */

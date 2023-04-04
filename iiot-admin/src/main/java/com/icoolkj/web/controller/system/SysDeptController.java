@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.icoolkj.common.constant.SysConstants;
+import com.icoolkj.common.core.page.TableDataInfo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,10 +44,11 @@ public class SysDeptController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:dept:list')")
     @GetMapping("/list")
-    public AjaxResult list(SysDept dept)
+    public TableDataInfo list(SysDept dept)
     {
-        List<SysDept> depts = deptService.selectDeptList(dept);
-        return success(depts);
+        startPage();
+        List<SysDept> list = deptService.selectDeptList(dept);
+        return getDataTable(list);
     }
 
     @PreAuthorize("@ss.hasPermi('system:dept:list')")
@@ -56,6 +58,14 @@ public class SysDeptController extends BaseController
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("deptHome", SysConstants.DEPT_HOME);
         return success(map);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @GetMapping("/treeList")
+    public AjaxResult treeList(SysDept dept)
+    {
+        List<SysDept> depts = deptService.selectDeptList(dept);
+        return success(depts);
     }
 
     /**

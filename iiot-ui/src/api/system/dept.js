@@ -9,6 +9,14 @@ export function listDept(query) {
   })
 }
 
+export function treeList(query) {
+  return request({
+    url: '/system/dept/treeList',
+    method: 'get',
+    params: query
+  })
+}
+
 export function getDeptHome() {
   return request({
     url: '/system/dept/getDeptHome',
