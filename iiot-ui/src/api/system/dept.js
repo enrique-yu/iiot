@@ -9,14 +9,6 @@ export function listDept(query) {
   })
 }
 
-export function treeList(query) {
-  return request({
-    url: '/system/dept/treeList',
-    method: 'get',
-    params: query
-  })
-}
-
 export function getDeptHome() {
   return request({
     url: '/system/dept/getDeptHome',
@@ -63,5 +55,13 @@ export function delDept(deptId) {
   return request({
     url: '/system/dept/' + deptId,
     method: 'delete'
+  })
+}
+
+export function domainList(query) {
+  return request({
+    url: '/system/dept/domainList',
+    method: 'get',
+    params: query
   })
 }
