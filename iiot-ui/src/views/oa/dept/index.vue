@@ -113,9 +113,7 @@
       getList() {
         this.loading = true;
         listDept(this.queryParams).then(response => {
-          console.log(response.data)
           this.tableList = this.handleTree(response.data, "deptId", "parentId");
-          console.log(this.tableList)
           this.loading = false;
         });
       },
