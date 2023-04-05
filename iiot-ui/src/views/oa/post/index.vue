@@ -162,11 +162,11 @@ export default {
       // 表单校验
       rules: {
         postName: [
-          { required: true, message: "岗位名称不能为空", trigger: "blur" },
+          {required: true, message: "岗位名称不能为空", trigger: "blur" },
           {min: 2, max: 20, message: '岗位名称长度必须介于 2 和 20 之间', trigger: 'blur'}
         ],
         postCode: [
-          { required: true, message: "岗位编码不能为空", trigger: "blur" },
+          {required: true, message: "岗位编码不能为空", trigger: "blur" },
           {
             required: true,
             pattern: /^([0-9A-Z_]{0,10})$/,
@@ -176,8 +176,8 @@ export default {
           {min: 2, max: 10, message: '分类编号长度必须介于 2 和 10 之间', trigger: 'blur'}
         ],
         postSort: [
-          { required: true, message: "岗位顺序不能为空", trigger: "blur" },
-          {required: true, pattern: /^[0-9]{1,3}$/, message: "岗位顺序格式不正确，整数且长度不超过3位。", trigger: "blur"}
+          {required: true, message: "岗位排序不能为空", trigger: "blur" },
+          {required: true, pattern: /^[0-9]{1,3}$/, message: "岗位排序格式不正确，整数且长度不超过3位。", trigger: "blur"}
         ]
       }
     };
