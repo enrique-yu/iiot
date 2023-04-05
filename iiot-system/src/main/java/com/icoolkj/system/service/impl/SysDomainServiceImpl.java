@@ -80,10 +80,10 @@ public class SysDomainServiceImpl implements ISysDomainService
         sysDomain.setDomainId(IdWorker.nextId().toString());
         sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setCreateTime(DateUtils.getNowDate());
-        if(SysConstants.DOMAIN_ROLE_SYSTEM.equals(sysDomain.getDomainRoles())){  /** 系统组织角色 */
+        if(SysConstants.DOMAIN_ROLE_SYSTEM.equals(sysDomain.getDrolesId())){  /** 系统组织角色 */
             sysDomain.setDomainParentId(SysConstants.DOMAIN_SYSTEM); /** 系统组织域 */
         }
-        if(SysConstants.DOMAIN_ROLE_COMP.equals(sysDomain.getDomainRoles())){    /** 企业组织角色 */
+        if(SysConstants.DOMAIN_ROLE_COMP.equals(sysDomain.getDrolesId())){    /** 企业组织角色 */
             sysDomain.setDomainParentId(SysConstants.DOMAIN_COMP);   /** 企业组织域 */
         }
         int count = sysDomainMapper.insertSysDomain(sysDomain);
@@ -118,11 +118,11 @@ public class SysDomainServiceImpl implements ISysDomainService
         String deptId = IdWorker.nextId().toString();
         dept.setDeptId(deptId);
         dept.setDomainId(sysDomain.getDomainId());
-        if(SysConstants.DOMAIN_ROLE_SYSTEM.equals(sysDomain.getDomainRoles())){  /** 系统组织角色 */
+        if(SysConstants.DOMAIN_ROLE_SYSTEM.equals(sysDomain.getDrolesId())){  /** 系统组织角色 */
             dept.setParentId(SysConstants.DEPT_DOMAIN_SYSTEM); /** 系统根部门 */
             dept.setAncestors("0,"+SysConstants.DEPT_DOMAIN_SYSTEM);
         }
-        if(SysConstants.DOMAIN_ROLE_COMP.equals(sysDomain.getDomainRoles())){    /** 企业组织角色 */
+        if(SysConstants.DOMAIN_ROLE_COMP.equals(sysDomain.getDrolesId())){    /** 企业组织角色 */
             dept.setParentId(SysConstants.DEPT_DOMAIN_COMP);   /** 企业根部门 */
             dept.setAncestors("0,"+SysConstants.DEPT_DOMAIN_COMP);
         }
