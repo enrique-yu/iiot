@@ -180,6 +180,7 @@
         <module>iiot-quartz</module>
         <module>iiot-generator</module>
         <module>iiot-common</module>
+        <module>iiot-oa</module>
     </modules>
     <packaging>pom</packaging>
 
