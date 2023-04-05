@@ -146,9 +146,11 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         SysDept dept = new SysDept();
         String deptId = IdWorker.nextId().toString();
         dept.setDeptId(deptId);
+        dept.setParentId(SysConstants.DEPT_HOME);
         dept.setDomainId(domainId);
         dept.setDeptName("企业默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
+        dept.setSysDeptFlag("1");
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName()); //创建者
         dept.setCreateTime(DateUtils.getNowDate());//创建时间
         sysDeptMapper.insertDept(dept);

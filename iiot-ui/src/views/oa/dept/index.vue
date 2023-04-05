@@ -146,6 +146,13 @@
         this.addDlgOption.initData = Object.assign({}, this.rowData);
       },
 
+      /** 修改按钮操作 */
+      handleUpdate(row) {
+        row.parentDeptName = row.parentName;
+        this.updateDlgOption.isVisible = true;
+        this.updateDlgOption.initData = Object.assign({}, row);
+      },
+
     }
   };
 </script>

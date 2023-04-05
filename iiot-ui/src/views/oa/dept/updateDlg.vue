@@ -2,40 +2,23 @@
   <div >
     <el-dialog v-if="dialogVisible" :title="title" :visible.sync="dialogVisible" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="设备分类" prop="deviceCategoryId">
-          <treeselect v-model="form.deviceCategoryId" :options="categoryOptions" :normalizer="normalizer"
-                      placeholder="选择设备所属分类"/>
+        <el-form-item label="父级部门" prop="parentId">
+          <el-input v-model="form.parentDeptName" disabled placeholder="选择父级部门" />
         </el-form-item>
-        <el-form-item label="设备名称" prop="deviceName">
-          <el-input v-model="form.deviceName" placeholder="请输入设备名称" />
+        <el-form-item label="部门名称" prop="deptName">
+          <el-input v-model="form.deptName" placeholder="请输入部门名称"  :maxlength="20" />
         </el-form-item>
-        <el-form-item label="设备编号" prop="deviceSn">
-          <el-input v-model="form.deviceSn" placeholder="请输入设备编号" />
+        <el-form-item label="部门负责人" prop="leader">
+          <el-input v-model="form.leader" placeholder="请输入部门负责人"  :maxlength="20" />
         </el-form-item>
-        <el-form-item label="状态" prop="deviceStatus">
-          <el-radio-group v-model="form.deviceStatus">
-            <el-radio
-              v-for="dict in dict.type.sys_normal_disable"
-              :key="dict.value"
-              :label="dict.value"
-            >{{dict.label}}
-            </el-radio>
-          </el-radio-group>
+        <el-form-item label="部门负责人手机" prop="phone">
+          <el-input v-model="form.phone" placeholder="请输入部门负责人手机" :maxlength="11" />
         </el-form-item>
-        <el-form-item label="设备类型" prop="deviceType">
-          <el-input v-model="form.deviceType" placeholder="请输入设备类型" />
+        <el-form-item label="部门负责人邮箱" prop="email">
+          <el-input v-model="form.email" placeholder="请输入部门负责人邮箱" :maxlength="60" />
         </el-form-item>
-        <el-form-item label="设备规格型号" prop="deviceModel">
-          <el-input v-model="form.deviceModel" placeholder="请输入设备规格型号" />
-        </el-form-item>
-        <el-form-item label="品牌" prop="deviceBrand">
-          <el-input v-model="form.deviceBrand" placeholder="请输入品牌" />
-        </el-form-item>
-        <el-form-item label="生产厂家" prop="deviceFactory">
-          <el-input v-model="form.deviceFactory" placeholder="请输入生产厂家" />
-        </el-form-item>
-        <el-form-item label="设备描述" prop="deviceDesc">
-          <el-input type="textarea" v-model="form.deviceDesc" :maxlength="200" :autosize="{ minRows: 3, maxRows: 3}" placeholder="请输入设备描述"></el-input>
+        <el-form-item label="显示顺序" prop="orderNum">
+          <el-input v-model="form.orderNum" placeholder="请输入显示顺序" :maxlength="6" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -47,60 +30,54 @@
 </template>
 
 <script>
-  import {listCategory} from "@/api/device/category";
-  import { updateBasic } from "@/api/device/basic";
+  import { updateDept} from "@/api/oa/dept";
   import ActionPageMixin from '@/mixins/actionPageMixin';
-  import Treeselect from "@riophae/vue-treeselect";
-  import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
   export default {
-    name: "updateBasic",
+    name: "updateDept",
     dicts: ['sys_normal_disable'],
     mixins: [ ActionPageMixin ],
-    components: { Treeselect },
     data() {
       return {
         initData: {},
         // 表单参数
         form: {},
-        actionApi: updateBasic,
-        title: '编辑设备信息',
-        successMsg: '编辑设备信息完成！',
+        actionApi: updateDept,
+        title: '编辑部门',
+        successMsg: '编辑部门成！',
         isDisabled: false,
-        categoryOptions: [],
         // 表单校验
         rules: {
-          deviceCategoryId: [
-            {required: true, message: "设备所属分类不能为空", trigger: "blur"}
+          parentId: [
+            { required: true, message: "父级部门不能为空", trigger: "blur" }
           ],
-          deviceName: [
-            {required: true, message: "设备名称不能为空", trigger: "blur"},
-            {min: 2, max: 30, message: '设备名称长度必须介于 2 和 30 之间', trigger: 'blur'}
+          deptName: [
+            {required: true, message: "部门名称不能为空", trigger: "blur"},
+            {min: 2, max: 30, message: '部门名称长度必须介于 2 和 30 之间', trigger: 'blur'}
           ],
-          deviceSn: [
-            {required: true, message: "设备编号不能为空", trigger: "blur"},
+          leader: [
+            {required: true, message: "部门负责人不能为空", trigger: "blur"},
+            {min: 2, max: 30, message: '部门负责人长度必须介于 2 和 30 之间', trigger: 'blur'}
+          ],
+          phone: [
+            {required: true, message: "部门负责人手机不能为空", trigger: "blur"},
             {
-              required: true,
-              pattern: /^([0-9A-Z_]{0,10})$/,
-              message: '设备编号格式不正确，只允许大写字母或数字或“_”组成。',
-              trigger: 'blur'
-            },
-            {min: 2, max: 30, message: '设备编号长度必须介于 2 和 30 之间', trigger: 'blur'}
+              pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+              message: "请输入正确的手机号码",
+              trigger: "blur"
+            }
           ],
-          deviceStatus: [
-            { required: true, message: "状态不能为空", trigger: "blur" }
+          email: [
+            {required: true, message: "部门负责人邮箱不能为空", trigger: "blur"},
+            {
+              type: "email",
+              message: "请输入正确的邮箱地址",
+              trigger: ["blur", "change"]
+            }
           ],
-          deviceType: [
-            { required: true, message: "设备类型不能为空", trigger: "blur" }
-          ],
-          deviceModel: [
-            { required: true, message: "设备规格型号不能为空", trigger: "blur" }
-          ],
-          deviceBrand: [
-            { required: true, message: "品牌不能为空", trigger: "blur" }
-          ],
-          deviceFactory: [
-            { required: true, message: "生产厂家不能为空", trigger: "blur" }
+          orderNum: [
+            {required: true, message: "排序序号不能为空", trigger: "blur"},
+            {required: true, pattern: /^\d{1,5}(\.\d{1,2})?$|^[0-9]{1,3}$/, message: "排序序号格式不正确，整数部分长度不超过3位，最多两位小数。", trigger: "blur"},
           ],
         }
       };
@@ -110,36 +87,9 @@
     },
     methods: {
       init() {
-        listCategory().then(response => {
-          this.categoryOptions = this.handleTree(response.data, "deviceCategoryId", "categoryParentId");
-        });
         const initData = this.option.initData || {}
         this.form = initData
       },
-
-      /** 转换数据结构 */
-      normalizer(node) {
-        if (node.children && !node.children.length) {
-          delete node.children;
-        }
-        return {
-          id: node.deviceCategoryId,
-          label: node.categoryName,
-          children: node.children
-        };
-      },
-
-
     },
-    computed: {
-      dialogVisible: {
-        get: function () {
-          return this.option.isVisible
-        },
-        set: function (val) {
-          this.option.isVisible = val
-        }
-      },
-    }
   };
 </script>

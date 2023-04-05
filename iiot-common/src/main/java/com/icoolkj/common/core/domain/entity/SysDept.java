@@ -46,6 +46,9 @@ public class SysDept extends BaseEntity
     /** 邮箱 */
     private String email;
 
+    /** 系统部门不允许删除停用操作【0代表非系统，1代表系统】 */
+    private String sysDeptFlag;
+
     /** 部门状态:0正常,1停用 */
     private String status;
 
@@ -156,6 +159,14 @@ public class SysDept extends BaseEntity
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public String getSysDeptFlag() {
+        return sysDeptFlag;
+    }
+
+    public void setSysDeptFlag(String sysDeptFlag) {
+        this.sysDeptFlag = sysDeptFlag;
     }
 
     public String getStatus()

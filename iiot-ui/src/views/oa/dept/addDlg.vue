@@ -32,14 +32,11 @@
 <script>
 import { addDept} from "@/api/oa/dept";
 import ActionPageMixin from '@/mixins/actionPageMixin';
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
   name: "addDept",
   dicts: ['sys_normal_disable'],
   mixins: [ ActionPageMixin ],
-  components: {Treeselect},
   data() {
     return {
       initData: {},
@@ -92,18 +89,6 @@ export default {
     init() {
       const initData = this.option.initData || {};
       this.form = initData;
-    },
-
-    /** 转换数据结构 */
-    normalizer(node) {
-      if (node.children && !node.children.length) {
-        delete node.children;
-      }
-      return {
-        id: node.deviceCategoryId,
-        label: node.categoryName,
-        children: node.children
-      };
     },
   }
 };
