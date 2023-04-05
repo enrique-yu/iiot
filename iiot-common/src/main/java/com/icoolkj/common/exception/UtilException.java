@@ -3,7 +3,7 @@ package com.icoolkj.common.exception;
 /**
  * 工具类异常
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class UtilException extends RuntimeException
 {

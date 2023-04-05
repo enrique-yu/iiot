@@ -9,7 +9,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 获取IP方法
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class IpUtils
 {

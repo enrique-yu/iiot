@@ -20,7 +20,7 @@ import com.icoolkj.framework.security.context.AuthenticationContextHolder;
 /**
  * 登录密码方法
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Component
 public class SysPasswordService

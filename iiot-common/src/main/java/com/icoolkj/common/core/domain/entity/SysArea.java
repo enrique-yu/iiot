@@ -8,7 +8,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 系统区域配置对象 sys_area
  * 
- * @author ruoyi
+ * @author icoolkj
  * @date 2023-03-05
  */
 public class SysArea extends BaseEntity

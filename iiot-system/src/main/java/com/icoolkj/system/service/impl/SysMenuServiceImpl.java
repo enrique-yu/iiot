@@ -31,7 +31,7 @@ import com.icoolkj.system.service.ISysMenuService;
 /**
  * 菜单 业务层处理
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Service
 public class SysMenuServiceImpl implements ISysMenuService

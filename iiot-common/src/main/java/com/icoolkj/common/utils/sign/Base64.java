@@ -3,7 +3,7 @@ package com.icoolkj.common.utils.sign;
 /**
  * Base64工具类
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public final class Base64
 {

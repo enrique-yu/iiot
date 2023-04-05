@@ -14,7 +14,7 @@ import com.icoolkj.common.utils.ServletUtils;
 /**
  * 防止重复提交拦截器
  *
- * @author ruoyi
+ * @author icoolkj
  */
 @Component
 public abstract class RepeatSubmitInterceptor implements HandlerInterceptor

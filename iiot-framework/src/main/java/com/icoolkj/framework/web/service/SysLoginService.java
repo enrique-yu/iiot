@@ -32,7 +32,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 登录校验方法
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Component
 public class SysLoginService

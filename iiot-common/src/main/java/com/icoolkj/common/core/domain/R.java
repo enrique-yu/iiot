@@ -6,7 +6,7 @@ import com.icoolkj.common.constant.HttpStatus;
 /**
  * 响应信息主体
  *
- * @author ruoyi
+ * @author icoolkj
  */
 public class R<T> implements Serializable
 {

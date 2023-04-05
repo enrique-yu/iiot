@@ -32,7 +32,7 @@ import com.icoolkj.system.service.ISysDeptService;
 /**
  * 部门信息
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @RestController
 @RequestMapping("/system/dept")

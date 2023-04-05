@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.Arith;
 /**
  * CPU相关信息
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class Cpu
 {

@@ -7,7 +7,7 @@ import com.icoolkj.common.core.domain.entity.SysMenu;
 /**
  * 菜单表 数据层
  *
- * @author ruoyi
+ * @author icoolkj
  */
 public interface SysMenuMapper
 {

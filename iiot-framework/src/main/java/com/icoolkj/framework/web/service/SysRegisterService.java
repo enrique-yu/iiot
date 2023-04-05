@@ -21,7 +21,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 注册校验方法
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Component
 public class SysRegisterService

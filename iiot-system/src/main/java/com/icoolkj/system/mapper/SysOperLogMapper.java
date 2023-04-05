@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysOperLog;
 /**
  * 操作日志 数据层
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public interface SysOperLogMapper
 {

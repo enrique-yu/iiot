@@ -7,7 +7,7 @@ import com.icoolkj.common.core.domain.entity.SysDept;
 /**
  * 部门管理 数据层
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public interface SysDeptMapper
 {

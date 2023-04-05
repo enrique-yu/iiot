@@ -18,7 +18,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 全局异常处理器
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

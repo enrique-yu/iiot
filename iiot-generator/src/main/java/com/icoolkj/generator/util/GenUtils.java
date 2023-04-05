@@ -11,7 +11,7 @@ import com.icoolkj.generator.domain.GenTableColumn;
 /**
  * 代码生成器 工具类
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class GenUtils
 {

@@ -23,7 +23,7 @@ import com.icoolkj.system.service.ISysLogininforService;
 /**
  * 系统访问记录
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @RestController
 @RequestMapping("/monitor/logininfor")

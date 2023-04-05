@@ -35,7 +35,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService

@@ -3,7 +3,7 @@ package com.icoolkj.common.core.domain.model;
 /**
  * 用户登录对象
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class LoginBody
 {

@@ -12,7 +12,7 @@ import com.icoolkj.generator.mapper.GenTableColumnMapper;
 /**
  * 业务字段 服务层实现
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Service
 public class GenTableColumnServiceImpl implements IGenTableColumnService 

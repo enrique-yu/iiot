@@ -7,7 +7,7 @@ import com.icoolkj.generator.domain.GenTable;
 /**
  * 业务 服务层
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public interface IGenTableService
 {

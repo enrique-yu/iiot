@@ -73,7 +73,7 @@ import com.icoolkj.common.annotation.Excel;
 import com.icoolkj.common.annotation.Excel.ColumnType;
 import com.icoolkj.common.annotation.Excel.Type;
 import com.icoolkj.common.annotation.Excels;
-import com.icoolkj.common.config.RuoYiConfig;
+import com.icoolkj.common.config.IcoolKjConfig;
 import com.icoolkj.common.core.domain.AjaxResult;
 import com.icoolkj.common.core.text.Convert;
 import com.icoolkj.common.exception.UtilException;
@@ -88,7 +88,7 @@ import com.icoolkj.common.utils.reflect.ReflectUtils;
 /**
  * Excel相关处理
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class ExcelUtil<T>
 {
@@ -1332,7 +1332,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = IcoolKjConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {

@@ -17,7 +17,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 用户验证处理
  *
- * @author ruoyi
+ * @author icoolkj
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService

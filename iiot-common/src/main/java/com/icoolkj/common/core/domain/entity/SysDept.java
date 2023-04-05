@@ -13,7 +13,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 部门表 sys_dept
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class SysDept extends BaseEntity
 {

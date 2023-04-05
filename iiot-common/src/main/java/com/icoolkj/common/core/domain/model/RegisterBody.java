@@ -3,7 +3,7 @@ package com.icoolkj.common.core.domain.model;
 /**
  * 用户注册对象
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class RegisterBody extends LoginBody
 {

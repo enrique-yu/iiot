@@ -8,7 +8,7 @@ import com.icoolkj.system.domain.SysUserRole;
 /**
  * 角色业务层
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public interface ISysRoleService
 {

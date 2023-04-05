@@ -11,7 +11,7 @@ import com.icoolkj.common.exception.ServiceException;
 /**
  * 安全服务工具类
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class SecurityUtils
 {

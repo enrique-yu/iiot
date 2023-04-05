@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysNotice;
 /**
  * 公告 服务层
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public interface ISysNoticeService
 {

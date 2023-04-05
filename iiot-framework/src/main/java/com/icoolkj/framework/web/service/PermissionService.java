@@ -10,9 +10,9 @@ import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.framework.security.context.PermissionContextHolder;
 
 /**
- * RuoYi首创 自定义权限实现，ss取自SpringSecurity首字母
+ * IcoolKj首创 自定义权限实现，ss取自SpringSecurity首字母
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Service("ss")
 public class PermissionService

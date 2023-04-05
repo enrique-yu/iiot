@@ -23,7 +23,7 @@ import com.icoolkj.system.service.ISysDictTypeService;
 /**
  * 字典 业务层处理
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 @Service
 public class SysDictTypeServiceImpl implements ISysDictTypeService

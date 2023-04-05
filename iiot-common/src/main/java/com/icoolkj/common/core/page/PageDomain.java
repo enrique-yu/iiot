@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 分页数据
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class PageDomain
 {

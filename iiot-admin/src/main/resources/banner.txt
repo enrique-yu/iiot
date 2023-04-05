@@ -1,4 +1,4 @@
-Application Version: ${ruoyi.version}
+Application Version: ${icoolkj.version}
 Spring Boot Version: ${spring-boot.version}
 ====================================================================================================================
 

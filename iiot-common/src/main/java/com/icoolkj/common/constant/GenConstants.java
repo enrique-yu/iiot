@@ -3,7 +3,7 @@ package com.icoolkj.common.constant;
 /**
  * 代码生成通用常量
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class GenConstants
 {

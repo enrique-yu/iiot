@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.StringUtils;
 
 /**
- * @author ruoyi 序列生成类
+ * @author icoolkj 序列生成类
  */
 public class Seq
 {

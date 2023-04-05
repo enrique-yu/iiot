@@ -12,7 +12,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 岗位表 sys_post
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class SysPost extends BaseEntity
 {

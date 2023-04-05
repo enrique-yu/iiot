@@ -1,5 +1,5 @@
 {
-  "name": "ruoyi",
+  "name": "icoolkj",
   "version": "3.8.5",
   "description": "工业物联网平台",
   "author": "若依",
@@ -33,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+    "url": "https://gitee.com/y_project/IcoolKj-Vue.git"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",

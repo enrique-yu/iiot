@@ -7,7 +7,7 @@ import com.icoolkj.common.constant.Constants;
 /**
  * VelocityEngine工厂
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class VelocityInitializer
 {

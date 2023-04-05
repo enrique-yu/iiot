@@ -3,7 +3,7 @@ package com.icoolkj.common.exception;
 /**
  * 全局异常
  * 
- * @author ruoyi
+ * @author icoolkj
  */
 public class GlobalException extends RuntimeException
 {
