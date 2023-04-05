@@ -80,7 +80,7 @@ public class OaDeptController extends BaseController {
     @DeleteMapping("/{deptId}")
     public AjaxResult remove(@PathVariable String deptId) {
         if ("1".equals(deptService.selectDeptById(deptId).getSysDeptFlag())) {
-            return warn("系统创建的部门，不允许删除");
+            return warn("系统创建部门，不允许删除");
         }
         if (deptService.hasChildByDeptId(deptId)) {
             return warn("存在下级部门,不允许删除");

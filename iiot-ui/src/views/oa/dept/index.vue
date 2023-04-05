@@ -63,6 +63,7 @@
           >修改
           </el-button>
           <el-button
+            v-if="scope.row.sysDeptFlag !== '1'"
             size="mini"
             type="text"
             icon="el-icon-delete"
@@ -81,7 +82,7 @@
 </template>
 
 <script>
-  import { listDept } from "@/api/oa/dept";
+  import { listDept, delDept } from "@/api/oa/dept";
   import addDlg from './addDlg';
   import updateDlg from './updateDlg';
   import ListPageMixin from '@/mixins/listPageMixin';
@@ -109,11 +110,12 @@
       };
     },
     methods: {
-      /** 查询分类列表 */
       getList() {
         this.loading = true;
         listDept(this.queryParams).then(response => {
+          console.log(response.data)
           this.tableList = this.handleTree(response.data, "deptId", "parentId");
+          console.log(this.tableList)
           this.loading = false;
         });
       },
@@ -123,8 +125,8 @@
           delete node.children;
         }
         return {
-          id: node.deviceCategoryId,
-          label: node.categoryName,
+          id: node.deptId,
+          label: node.deptName,
           children: node.children
         };
       },
@@ -152,6 +154,16 @@
         this.updateDlgOption.isVisible = true;
         this.updateDlgOption.initData = Object.assign({}, row);
       },
+
+      /** 删除按钮操作 */
+      handleDelete(row) {
+        this.$modal.confirm('是否确认删除名称为"' + row.deptName + '"的数据项？').then(function() {
+          return delDept(row.deptId);
+        }).then(() => {
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => {});
+      }
 
     }
   };
