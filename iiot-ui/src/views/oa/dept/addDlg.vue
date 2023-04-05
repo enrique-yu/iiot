@@ -17,8 +17,8 @@
         <el-form-item label="部门负责人邮箱" prop="email">
           <el-input v-model="form.email" placeholder="请输入部门负责人邮箱" :maxlength="60" />
         </el-form-item>
-        <el-form-item label="显示顺序" prop="orderNum">
-          <el-input v-model="form.orderNum" placeholder="请输入显示顺序" :maxlength="6" />
+        <el-form-item label="部门排序" prop="orderNum">
+          <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -76,8 +76,9 @@ export default {
           }
         ],
         orderNum: [
-          {required: true, message: "排序序号不能为空", trigger: "blur"},
-          {required: true, pattern: /^\d{1,5}(\.\d{1,2})?$|^[0-9]{1,3}$/, message: "排序序号格式不正确，整数部分长度不超过3位，最多两位小数。", trigger: "blur"},
+          {required: true, message: "部门排序不能为空", trigger: "blur"},
+          {required: true, pattern: /^[0-9]{1,3}$/, message: "部门排序不正确，整数且长度不超过3位。", trigger: "blur"}
+         // {required: true, pattern: /^\d{1,5}(\.\d{1,2})?$|^[0-9]{1,3}$/, message: "排序序号格式不正确，整数部分长度不超过3位，最多两位小数。", trigger: "blur"},
         ],
       }
     };

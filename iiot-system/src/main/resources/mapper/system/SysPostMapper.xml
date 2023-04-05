@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="SysPost" id="SysPostResult">
 		<id     property="postId"        column="post_id"       />
+		<result property="domainId"      column="domain_id"     />
 		<result property="postCode"      column="post_code"     />
 		<result property="postName"      column="post_name"     />
 		<result property="postSort"      column="post_sort"     />
@@ -18,21 +19,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectPostVo">
-        select post_id, post_code, post_name, post_sort, status, create_by, create_time, remark 
-		from sys_post
+        select p.post_id, p.domain_id, p.post_code, p.post_name, p.post_sort, p.status, p.create_by, p.create_time, p.remark
+		from sys_post p
     </sql>
 	
 	<select id="selectPostList" parameterType="SysPost" resultMap="SysPostResult">
 	    <include refid="selectPostVo"/>
 		<where>
 			<if test="postCode != null and postCode != ''">
-				AND post_code like concat('%', #{postCode}, '%')
+				AND p.post_code like concat('%', #{postCode}, '%')
 			</if>
 			<if test="status != null and status != ''">
-				AND status = #{status}
+				AND p.status = #{status}
 			</if>
 			<if test="postName != null and postName != ''">
-				AND post_name like concat('%', #{postName}, '%')
+				AND p.post_name like concat('%', #{postName}, '%')
+			</if>
+			<if test="domainId != null and domainId != ''">
+				AND p.domain_id = #{domainId}
 			</if>
 		</where>
 	</select>
@@ -43,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectPostById" parameterType="String" resultMap="SysPostResult">
 		<include refid="selectPostVo"/>
-		where post_id = #{postId}
+		where p.post_id = #{postId}
 	</select>
 	
 	<select id="selectPostListByUserId" parameterType="String" resultType="String">
@@ -69,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="checkPostCodeUnique" parameterType="String" resultMap="SysPostResult">
 		<include refid="selectPostVo"/>
-		 where post_code=#{postCode} limit 1
+		 where p.post_code=#{postCode} limit 1
 	</select>
 	
 	<update id="updatePost" parameterType="SysPost">
@@ -88,7 +92,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<insert id="insertPost" parameterType="SysPost" useGeneratedKeys="true" keyProperty="postId">
  		insert into sys_post(
- 			<if test="postId != null and postId != 0">post_id,</if>
+ 			<if test="postId != null and postId != ''">post_id,</if>
+			<if test="domainId != null and domainId != ''">domain_id,</if>
  			<if test="postCode != null and postCode != ''">post_code,</if>
  			<if test="postName != null and postName != ''">post_name,</if>
  			<if test="postSort != null">post_sort,</if>
@@ -97,7 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			create_time
  		)values(
- 			<if test="postId != null and postId != 0">#{postId},</if>
+ 			<if test="postId != null and postId != ''">#{postId},</if>
+			<if test="domainId != null and domainId != ''">#{domainId},</if>
  			<if test="postCode != null and postCode != ''">#{postCode},</if>
  			<if test="postName != null and postName != ''">#{postName},</if>
  			<if test="postSort != null">#{postSort},</if>
@@ -111,12 +117,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deletePostById" parameterType="String">
 		delete from sys_post where post_id = #{postId}
 	</delete>
-	
-	<delete id="deletePostByIds" parameterType="String">
- 		delete from sys_post where post_id in
- 		<foreach collection="array" item="postId" open="(" separator="," close=")">
- 			#{postId}
-        </foreach> 
- 	</delete>
 
 </mapper> 

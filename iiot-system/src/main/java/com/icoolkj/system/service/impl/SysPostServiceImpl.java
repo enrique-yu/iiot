@@ -131,28 +131,14 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public int deletePostById(String postId)
     {
+        SysPost post = selectPostById(postId);
+        if (countUserPostById(postId) > 0)
+        {
+            throw new ServiceException(String.format("%1$s已分配,不能删除", post.getPostName()));
+        }
         return postMapper.deletePostById(postId);
     }
 
-    /**
-     * 批量删除岗位信息
-     * 
-     * @param postIds 需要删除的岗位ID
-     * @return 结果
-     */
-    @Override
-    public int deletePostByIds(String[] postIds)
-    {
-        for (String postId : postIds)
-        {
-            SysPost post = selectPostById(postId);
-            if (countUserPostById(postId) > 0)
-            {
-                throw new ServiceException(String.format("%1$s已分配,不能删除", post.getPostName()));
-            }
-        }
-        return postMapper.deletePostByIds(postIds);
-    }
 
     /**
      * 新增保存岗位信息

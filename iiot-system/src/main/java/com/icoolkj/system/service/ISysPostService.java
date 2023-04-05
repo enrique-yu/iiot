@@ -73,13 +73,6 @@ public interface ISysPostService
      */
     public int deletePostById(String postId);
 
-    /**
-     * 批量删除岗位信息
-     * 
-     * @param postIds 需要删除的岗位ID
-     * @return 结果
-     */
-    public int deletePostByIds(String[] postIds);
 
     /**
      * 新增保存岗位信息

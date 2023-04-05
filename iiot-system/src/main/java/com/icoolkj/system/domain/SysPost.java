@@ -22,6 +22,9 @@ public class SysPost extends BaseEntity
     @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
     private String postId;
 
+    /** 岗位所属组织 */
+    private String domainId;
+
     /** 岗位编码 */
     @Excel(name = "岗位编码")
     private String postCode;
@@ -49,6 +52,14 @@ public class SysPost extends BaseEntity
     public void setPostId(String postId)
     {
         this.postId = postId;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 
     @NotBlank(message = "岗位编码不能为空")

@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id     property="deptId"     column="dept_id"     />
 		<result property="parentId"   column="parent_id"   />
 		<result property="ancestors"  column="ancestors"   />
-		<result property="domainId"       column="domain_id"      />
+		<result property="domainId"   column="domain_id"   />
 		<result property="deptName"   column="dept_name"   />
 		<result property="orderNum"   column="order_num"   />
 		<result property="leader"     column="leader"      />

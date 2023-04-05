@@ -111,10 +111,10 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:remove')")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{postIds}")
-    public AjaxResult remove(@PathVariable String[] postIds)
+    @DeleteMapping("/{postId}")
+    public AjaxResult remove(@PathVariable String postId)
     {
-        return toAjax(postService.deletePostByIds(postIds));
+        return toAjax(postService.deletePostById(postId));
     }
 
     /**
