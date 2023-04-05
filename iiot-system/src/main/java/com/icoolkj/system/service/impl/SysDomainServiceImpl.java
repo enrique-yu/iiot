@@ -80,8 +80,9 @@ public class SysDomainServiceImpl implements ISysDomainService
         sysDomain.setDomainId(IdWorker.nextId().toString());
         sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setCreateTime(DateUtils.getNowDate());
+        int count = sysDomainMapper.insertSysDomain(sysDomain);
         createDomainAccount(sysDomain);
-        return sysDomainMapper.insertSysDomain(sysDomain);
+        return count;
     }
 
     /**
@@ -96,7 +97,6 @@ public class SysDomainServiceImpl implements ISysDomainService
     {
         sysDomain.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setUpdateTime(DateUtils.getNowDate());
-        createDomainAccount(sysDomain);
         return sysDomainMapper.updateSysDomain(sysDomain);
     }
 
