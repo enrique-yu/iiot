@@ -86,6 +86,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
     public int insertDcCompBasic(DcCompBasic dcCompBasic)
     {
         dcCompBasic.setCompBasicId(IdWorker.nextId().toString());
+        dcCompBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         dcCompBasic.setCreateTime(DateUtils.getNowDate());
         createCompAccount(dcCompBasic);
         return dcCompBasicMapper.insertDcCompBasic(dcCompBasic);
@@ -149,7 +150,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         dept.setParentId(SysConstants.DEPT_DOMAIN_COMP);
         dept.setAncestors("0,"+SysConstants.DEPT_DOMAIN_COMP);
         dept.setDomainId(domainId);
-        dept.setDeptName("企业默认部门"); //部门名称
+        dept.setDeptName(dcCompBasic.getCompName()); //部门名称【企业名称作为部门名称】
         dept.setOrderNum(1); //显示顺序
         dept.setSysDeptFlag("1");
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName()); //创建者

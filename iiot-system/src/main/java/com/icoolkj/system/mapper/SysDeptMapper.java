@@ -75,7 +75,7 @@ public interface SysDeptMapper
      * @param parentId 父部门ID
      * @return 结果
      */
-    public SysDept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") String parentId);
+    public SysDept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") String parentId, @Param("domainId") String domainId);
 
     /**
      * 新增部门信息

@@ -121,12 +121,13 @@ public class SysDomainServiceImpl implements ISysDomainService
         if(SysConstants.DOMAIN_ROLE_SYSTEM.equals(sysDomain.getDrolesId())){  /** 系统组织角色 */
             dept.setParentId(SysConstants.DEPT_DOMAIN_SYSTEM); /** 系统根部门 */
             dept.setAncestors("0,"+SysConstants.DEPT_DOMAIN_SYSTEM);
+            dept.setDeptName("系统默认部门"); //部门名称
         }
         if(SysConstants.DOMAIN_ROLE_COMP.equals(sysDomain.getDrolesId())){    /** 企业组织角色 */
             dept.setParentId(SysConstants.DEPT_DOMAIN_COMP);   /** 企业根部门 */
             dept.setAncestors("0,"+SysConstants.DEPT_DOMAIN_COMP);
+            dept.setDeptName("企业默认部门"); //部门名称
         }
-        dept.setDeptName("默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
         dept.setSysDeptFlag("1");
         dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName()); //创建者
