@@ -56,7 +56,7 @@ public class FileRecordDetailServiceImpl implements IFileRecordDetailService
     public int insertFileRecordDetail(FileRecordDetail fileRecordDetail)
     {
         fileRecordDetail.setFileRecordDetailId(IdWorker.nextId().toString());
-        fileRecordDetail.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileRecordDetail.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileRecordDetail.setCreateTime(DateUtils.getNowDate());
         return fileRecordDetailMapper.insertFileRecordDetail(fileRecordDetail);
     }
@@ -70,7 +70,7 @@ public class FileRecordDetailServiceImpl implements IFileRecordDetailService
     @Override
     public int updateFileRecordDetail(FileRecordDetail fileRecordDetail)
     {
-        fileRecordDetail.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileRecordDetail.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileRecordDetail.setUpdateTime(DateUtils.getNowDate());
         return fileRecordDetailMapper.updateFileRecordDetail(fileRecordDetail);
     }

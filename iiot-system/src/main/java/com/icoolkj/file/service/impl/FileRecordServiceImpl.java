@@ -56,7 +56,7 @@ public class FileRecordServiceImpl implements IFileRecordService
     public int insertFileRecord(FileRecord fileRecord)
     {
         fileRecord.setFileRecordId(IdWorker.nextId().toString());
-        fileRecord.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileRecord.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileRecord.setCreateTime(DateUtils.getNowDate());
         return fileRecordMapper.insertFileRecord(fileRecord);
     }
@@ -70,7 +70,7 @@ public class FileRecordServiceImpl implements IFileRecordService
     @Override
     public int updateFileRecord(FileRecord fileRecord)
     {
-        fileRecord.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileRecord.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileRecord.setUpdateTime(DateUtils.getNowDate());
         return fileRecordMapper.updateFileRecord(fileRecord);
     }

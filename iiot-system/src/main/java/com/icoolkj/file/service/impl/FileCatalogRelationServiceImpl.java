@@ -56,7 +56,7 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     public int insertFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
         fileCatalogRelation.setFileCatalogRelationId(IdWorker.nextId().toString());
-        fileCatalogRelation.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileCatalogRelation.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileCatalogRelation.setCreateTime(DateUtils.getNowDate());
         return fileCatalogRelationMapper.insertFileCatalogRelation(fileCatalogRelation);
     }
@@ -70,7 +70,7 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     @Override
     public int updateFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
-        fileCatalogRelation.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileCatalogRelation.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileCatalogRelation.setUpdateTime(DateUtils.getNowDate());
         return fileCatalogRelationMapper.updateFileCatalogRelation(fileCatalogRelation);
     }

@@ -78,7 +78,7 @@ public class SysDomainServiceImpl implements ISysDomainService
     public int insertSysDomain(SysDomain sysDomain)
     {
         sysDomain.setDomainId(IdWorker.nextId().toString());
-        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setCreateTime(DateUtils.getNowDate());
         createDomainAccount(sysDomain);
         return sysDomainMapper.insertSysDomain(sysDomain);
@@ -94,7 +94,7 @@ public class SysDomainServiceImpl implements ISysDomainService
     @Transactional
     public int updateSysDomain(SysDomain sysDomain)
     {
-        sysDomain.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomain.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setUpdateTime(DateUtils.getNowDate());
         createDomainAccount(sysDomain);
         return sysDomainMapper.updateSysDomain(sysDomain);
@@ -114,7 +114,7 @@ public class SysDomainServiceImpl implements ISysDomainService
         dept.setDomainId(sysDomain.getDomainId());
         dept.setDeptName("默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
-        dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
+        dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName()); //创建者
         dept.setCreateTime(DateUtils.getNowDate());//创建时间
         sysDeptMapper.insertDept(dept);
 
@@ -132,7 +132,7 @@ public class SysDomainServiceImpl implements ISysDomainService
         sysUser.setPassword(SecurityUtils.encryptPassword(password));
         String pass = AESUtils.encryptAES(password, AESUtils.KEY, AESUtils.IV);
         sysUser.setPasswordCleartext(pass);
-        sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysUser.setCreateTime(DateUtils.getNowDate());  //手机号码
         sysUser.setPhonenumber(sysDomain.getDomainPhone());   //用户邮箱
         sysUser.setEmail(sysDomain.getDomainEmail());

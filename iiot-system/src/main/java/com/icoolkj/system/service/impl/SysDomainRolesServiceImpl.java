@@ -57,7 +57,7 @@ public class SysDomainRolesServiceImpl implements ISysDomainRolesService
     public int insertSysDomainRoles(SysDomainRoles sysDomainRoles)
     {
         sysDomainRoles.setDrolesId(IdWorker.nextId().toString());
-        sysDomainRoles.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomainRoles.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomainRoles.setCreateTime(DateUtils.getNowDate());
         return sysDomainRolesMapper.insertSysDomainRoles(sysDomainRoles);
     }
@@ -71,7 +71,7 @@ public class SysDomainRolesServiceImpl implements ISysDomainRolesService
     @Override
     public int updateSysDomainRoles(SysDomainRoles sysDomainRoles)
     {
-        sysDomainRoles.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomainRoles.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomainRoles.setUpdateTime(DateUtils.getNowDate());
         return sysDomainRolesMapper.updateSysDomainRoles(sysDomainRoles);
     }

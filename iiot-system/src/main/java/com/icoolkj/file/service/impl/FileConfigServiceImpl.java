@@ -54,7 +54,7 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int insertFileConfig(FileConfig fileConfig)
     {
-        fileConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileConfig.setCreateTime(DateUtils.getNowDate());
         return fileConfigMapper.insertFileConfig(fileConfig);
     }
@@ -68,7 +68,7 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int updateFileConfig(FileConfig fileConfig)
     {
-        fileConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileConfig.setUpdateTime(DateUtils.getNowDate());
         return fileConfigMapper.updateFileConfig(fileConfig);
     }

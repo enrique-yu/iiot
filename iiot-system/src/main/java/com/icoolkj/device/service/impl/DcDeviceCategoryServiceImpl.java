@@ -84,7 +84,7 @@ public class DcDeviceCategoryServiceImpl implements IDcDeviceCategoryService
     @Override
     public int updateDcDeviceCategory(DcDeviceCategory dcDeviceCategory)
     {
-        dcDeviceCategory.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        dcDeviceCategory.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         dcDeviceCategory.setUpdateTime(DateUtils.getNowDate());
         return dcDeviceCategoryMapper.updateDcDeviceCategory(dcDeviceCategory);
     }

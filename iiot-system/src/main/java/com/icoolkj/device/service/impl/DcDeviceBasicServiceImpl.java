@@ -61,7 +61,7 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
         dcDeviceBasic.setDeviceBasicId(IdWorker.nextId().toString());
         dcDeviceBasic.setCompBasicId(SecurityUtils.getUserRelationId());
         dcDeviceBasic.setDomainId(SecurityUtils.getDomainId());
-        dcDeviceBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        dcDeviceBasic.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         dcDeviceBasic.setCreateTime(DateUtils.getNowDate());
         return dcDeviceBasicMapper.insertDcDeviceBasic(dcDeviceBasic);
     }
@@ -75,7 +75,7 @@ public class DcDeviceBasicServiceImpl implements IDcDeviceBasicService
     @Override
     public int updateDcDeviceBasic(DcDeviceBasic dcDeviceBasic)
     {
-        dcDeviceBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        dcDeviceBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         dcDeviceBasic.setUpdateTime(DateUtils.getNowDate());
         return dcDeviceBasicMapper.updateDcDeviceBasic(dcDeviceBasic);
     }

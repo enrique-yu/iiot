@@ -101,7 +101,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
     @Transactional
     public int updateDcCompBasic(DcCompBasic dcCompBasic)
     {
-        dcCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        dcCompBasic.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         dcCompBasic.setUpdateTime(DateUtils.getNowDate());
         return dcCompBasicMapper.updateDcCompBasic(dcCompBasic);
     }
@@ -138,7 +138,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysDomain.setDomainPhone(dcCompBasic.getCompLxrPhone());
         sysDomain.setDomainEmail(dcCompBasic.getCompLxrEmail());
         sysDomain.setDomainRelationId(dcCompBasic.getCompBasicId()); //组织账号与业务关系ID
-        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysDomain.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysDomain.setCreateTime(DateUtils.getNowDate());
         sysDomainMapper.insertSysDomain(sysDomain);
 
@@ -149,7 +149,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         dept.setDomainId(domainId);
         dept.setDeptName("企业默认部门"); //部门名称
         dept.setOrderNum(1); //显示顺序
-        dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId()); //创建者
+        dept.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName()); //创建者
         dept.setCreateTime(DateUtils.getNowDate());//创建时间
         sysDeptMapper.insertDept(dept);
 
@@ -168,7 +168,7 @@ public class DcCompBasicServiceImpl implements IDcCompBasicService
         sysUser.setPassword(SecurityUtils.encryptPassword(password));
         String pass = AESUtils.encryptAES(password, AESUtils.KEY, AESUtils.IV);
         sysUser.setPasswordCleartext(pass);
-        sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        sysUser.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         sysUser.setCreateTime(DateUtils.getNowDate());  //手机号码
         sysUser.setPhonenumber(dcCompBasic.getCompLxrPhone());   //用户邮箱
         sysUser.setEmail(dcCompBasic.getCompLxrEmail());

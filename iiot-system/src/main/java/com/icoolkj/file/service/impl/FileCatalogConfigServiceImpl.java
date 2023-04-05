@@ -54,7 +54,7 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int insertFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
-        fileCatalogConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileCatalogConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileCatalogConfig.setCreateTime(DateUtils.getNowDate());
         return fileCatalogConfigMapper.insertFileCatalogConfig(fileCatalogConfig);
     }
@@ -68,7 +68,7 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int updateFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
-        fileCatalogConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserId());
+        fileCatalogConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
         fileCatalogConfig.setUpdateTime(DateUtils.getNowDate());
         return fileCatalogConfigMapper.updateFileCatalogConfig(fileCatalogConfig);
     }
