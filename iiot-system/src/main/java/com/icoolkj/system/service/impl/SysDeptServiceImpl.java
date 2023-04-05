@@ -176,7 +176,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     @Override
     public boolean checkDeptNameUnique(SysDept dept)
     {
-        String deptId = StringUtils.isNull(dept.getDeptId()) ? SysConstants.DEPT_HOME : dept.getDeptId();
+        String deptId = StringUtils.isNull(dept.getDeptId()) ? SysConstants.DEPT_DOMAIN_SYSTEM : dept.getDeptId();
         SysDept info = deptMapper.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
         if (StringUtils.isNotNull(info) && !info.getDeptId().equals(deptId))
         {

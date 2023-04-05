@@ -60,7 +60,7 @@ public class SysDeptController extends BaseController
     public AjaxResult getDeptHome()
     {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("deptHome", SysConstants.DEPT_HOME);
+        map.put("deptHome", SysConstants.DEPT_DOMAIN_SYSTEM);
         return success(map);
     }
 
