@@ -31,6 +31,7 @@ public interface SysLogininforMapper
      * @param infoIds 需要删除的登录日志ID
      * @return 结果
      */
+    public int insertHisByIds(String[] infoIds);
     public int deleteLogininforByIds(String[] infoIds);
 
     /**
@@ -38,5 +39,9 @@ public interface SysLogininforMapper
      * 
      * @return 结果
      */
+    public int insertHisAll();
     public int cleanLogininfor();
+
+    public int insertHisByDomain(String domainId);
+    public int cleanLogininforByDomain(String domainId);
 }

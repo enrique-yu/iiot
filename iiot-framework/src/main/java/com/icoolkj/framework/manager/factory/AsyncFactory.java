@@ -29,12 +29,13 @@ public class AsyncFactory
      * 记录登录信息
      * 
      * @param username 用户名
+     * @param domainId 组织ID
      * @param status 状态
      * @param message 消息
      * @param args 列表
      * @return 任务task
      */
-    public static TimerTask recordLogininfor(final String username, final String status, final String message,
+    public static TimerTask recordLogininfor(final String username, final String domainId, final String status, final String message,
             final Object... args)
     {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
@@ -60,6 +61,7 @@ public class AsyncFactory
                 // 封装对象
                 SysLogininfor logininfor = new SysLogininfor();
                 logininfor.setUserName(username);
+                logininfor.setDomainId(domainId);
                 logininfor.setIpaddr(ip);
                 logininfor.setLoginLocation(address);
                 logininfor.setBrowser(browser);

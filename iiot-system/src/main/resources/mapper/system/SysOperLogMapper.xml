@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="errorMsg"       column="error_msg"      />
 		<result property="operTime"       column="oper_time"      />
 		<result property="costTime"       column="cost_time"      />
+		<result property="domainId"       column="domain_id"      />
 	</resultMap>
 
 	<sql id="selectOperLogVo">
@@ -30,8 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
 	<insert id="insertOperlog" parameterType="SysOperLog">
-		insert into sys_oper_log(oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time)
-        values (#{operId}, #{title}, #{businessType}, #{method}, #{requestMethod}, #{operatorType}, #{operName}, #{deptName}, #{operUrl}, #{operIp}, #{operLocation}, #{operParam}, #{jsonResult}, #{status}, #{errorMsg}, #{costTime}, sysdate())
+		insert into sys_oper_log(oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id)
+        values (#{operId}, #{title}, #{businessType}, #{method}, #{requestMethod}, #{operatorType}, #{operName}, #{deptName}, #{operUrl}, #{operIp}, #{operLocation}, #{operParam}, #{jsonResult}, #{status}, #{errorMsg}, #{costTime}, sysdate(), #{domainId})
 	</insert>
 	
 	<select id="selectOperLogList" parameterType="SysOperLog" resultMap="SysOperLogResult">
@@ -64,6 +65,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		order by oper_id desc
 	</select>
+
+	<select id="selectOperLogById" parameterType="String" resultMap="SysOperLogResult">
+		<include refid="selectOperLogVo"/>
+		where oper_id = #{operId}
+	</select>
+
+	<delete id="insertHisByIds" parameterType="String">
+		insert into sys_oper_log_his(oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id)
+		select oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id
+		from sys_oper_log where oper_id in
+		<foreach collection="array" item="operId" open="(" separator="," close=")">
+			#{operId}
+		</foreach>
+	</delete>
 	
 	<delete id="deleteOperLogByIds" parameterType="String">
  		delete from sys_oper_log where oper_id in
@@ -71,14 +86,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{operId}
         </foreach> 
  	</delete>
- 	
- 	<select id="selectOperLogById" parameterType="String" resultMap="SysOperLogResult">
-		<include refid="selectOperLogVo"/>
-		where oper_id = #{operId}
-	</select>
-	
+
+	<update id="insertHisAll">
+       insert into sys_oper_log_his(oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id)
+	   select oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id
+	   from sys_oper_log
+    </update>
+
 	<update id="cleanOperLog">
         truncate table sys_oper_log
+    </update>
+
+	<update id="insertHisByDomain"  parameterType="String">
+       insert into sys_oper_log_his(oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id)
+	   select oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, cost_time, oper_time, domain_id
+	   from sys_oper_log where domain_id=#{domainId}
+    </update>
+
+	<update id="cleanLogininforByDomain" parameterType="String">
+        delete from sys_oper_log where domain_id=#{domainId}
     </update>
 
 </mapper> 

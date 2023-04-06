@@ -2,12 +2,15 @@ package com.icoolkj.system.service.impl;
 
 import java.util.List;
 
+import com.icoolkj.common.constant.SysConstants;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.domain.SysLogininfor;
 import com.icoolkj.system.mapper.SysLogininforMapper;
 import com.icoolkj.system.service.ISysLogininforService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统访问日志情况信息 服务层处理
@@ -52,8 +55,10 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteLogininforByIds(String[] infoIds)
     {
+        logininforMapper.insertHisByIds(infoIds);
         return logininforMapper.deleteLogininforByIds(infoIds);
     }
 
@@ -61,8 +66,16 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * 清空系统登录日志
      */
     @Override
+    @Transactional
     public void cleanLogininfor()
     {
-        logininforMapper.cleanLogininfor();
+        String domainId = SecurityUtils.getDomainId();
+        if(SysConstants.DOMAIN_SYSTEM.equals(domainId)){
+            logininforMapper.insertHisAll();
+            logininforMapper.cleanLogininfor();
+        } else {
+            logininforMapper.insertHisByDomain(domainId);
+            logininforMapper.cleanLogininforByDomain(domainId);
+        }
     }
 }

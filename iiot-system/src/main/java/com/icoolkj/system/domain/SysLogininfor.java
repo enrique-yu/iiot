@@ -47,6 +47,10 @@ public class SysLogininfor extends BaseEntity
     @Excel(name = "提示消息")
     private String msg;
 
+    /** 组织ID */
+    @Excel(name = "组织ID")
+    private String domainId;
+
     /** 访问时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "访问时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
@@ -140,5 +144,13 @@ public class SysLogininfor extends BaseEntity
     public void setLoginTime(Date loginTime)
     {
         this.loginTime = loginTime;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 }

@@ -2,12 +2,15 @@ package com.icoolkj.system.service.impl;
 
 import java.util.List;
 
+import com.icoolkj.common.constant.SysConstants;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.system.domain.SysOperLog;
 import com.icoolkj.system.mapper.SysOperLogMapper;
 import com.icoolkj.system.service.ISysOperLogService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 操作日志 服务层处理
@@ -45,20 +48,8 @@ public class SysOperLogServiceImpl implements ISysOperLogService
     }
 
     /**
-     * 批量删除系统操作日志
-     * 
-     * @param operIds 需要删除的操作日志ID
-     * @return 结果
-     */
-    @Override
-    public int deleteOperLogByIds(String[] operIds)
-    {
-        return operLogMapper.deleteOperLogByIds(operIds);
-    }
-
-    /**
      * 查询操作日志详细
-     * 
+     *
      * @param operId 操作ID
      * @return 操作日志对象
      */
@@ -69,11 +60,34 @@ public class SysOperLogServiceImpl implements ISysOperLogService
     }
 
     /**
+     * 批量删除系统操作日志
+     * 
+     * @param operIds 需要删除的操作日志ID
+     * @return 结果
+     */
+    @Override
+    @Transactional
+    public int deleteOperLogByIds(String[] operIds)
+    {
+        operLogMapper.insertHisByIds(operIds);
+        return operLogMapper.deleteOperLogByIds(operIds);
+    }
+
+
+    /**
      * 清空操作日志
      */
     @Override
+    @Transactional
     public void cleanOperLog()
     {
-        operLogMapper.cleanOperLog();
+        String domainId = SecurityUtils.getDomainId();
+        if(SysConstants.DOMAIN_SYSTEM.equals(domainId)){
+            operLogMapper.insertHisAll();
+            operLogMapper.cleanOperLog();
+        } else {
+            operLogMapper.insertHisByDomain(domainId);
+            operLogMapper.cleanOperLogByDomain(domainId);
+        }
     }
 }

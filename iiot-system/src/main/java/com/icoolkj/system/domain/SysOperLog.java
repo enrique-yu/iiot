@@ -87,6 +87,10 @@ public class SysOperLog extends BaseEntity
     @Excel(name = "消耗时间", suffix = "毫秒")
     private Long costTime;
 
+    /** 组织ID */
+    @Excel(name = "组织ID")
+    private String domainId;
+
     public String getOperId()
     {
         return operId;
@@ -265,5 +269,13 @@ public class SysOperLog extends BaseEntity
     public void setCostTime(Long costTime)
     {
         this.costTime = costTime;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 }

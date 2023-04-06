@@ -96,6 +96,8 @@ public class LogAspect
             if (loginUser != null)
             {
                 operLog.setOperName(loginUser.getUsername());
+                operLog.setDeptName(loginUser.getUser().getDept().getDeptName());
+                operLog.setDomainId(loginUser.getDomainId());
             }
 
             if (e != null)

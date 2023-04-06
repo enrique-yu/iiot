@@ -14,11 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="os"            column="os"                />
 		<result property="msg"           column="msg"               />
 		<result property="loginTime"     column="login_time"        />
+		<result property="domainId"      column="domain_id"         />
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="SysLogininfor">
-		insert into sys_logininfor (info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time)
-		values (#{infoId}, #{userName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
+		insert into sys_logininfor (info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id)
+		values (#{infoId}, #{userName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate(), #{domainId})
 	</insert>
 	
 	<select id="selectLogininforList" parameterType="SysLogininfor" resultMap="SysLogininforResult">
@@ -42,6 +43,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		order by info_id desc
 	</select>
+
+	<delete id="insertHisByIds" parameterType="String">
+		insert into sys_logininfor_his (info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id)
+		select info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id from sys_logininfor
+		where info_id in
+		<foreach collection="array" item="infoId" open="(" separator="," close=")">
+			#{infoId}
+		</foreach>
+	</delete>
 	
 	<delete id="deleteLogininforByIds" parameterType="String">
  		delete from sys_logininfor where info_id in
@@ -49,9 +59,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{infoId}
         </foreach> 
  	</delete>
+
+	<update id="insertHisAll">
+        insert into sys_logininfor_his (info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id)
+		select info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id from sys_logininfor
+    </update>
     
     <update id="cleanLogininfor">
         truncate table sys_logininfor
+    </update>
+
+	<update id="insertHisByDomain" parameterType="String">
+        insert into sys_logininfor_his (info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id)
+		select info_id, user_name, status, ipaddr, login_location, browser, os, msg, login_time, domain_id from sys_logininfor
+		where domain_id=#{domainId}
+    </update>
+
+	<update id="cleanLogininforByDomain" parameterType="String">
+        delete from sys_logininfor where domain_id=#{domainId}
     </update>
     
 </mapper> 
