@@ -3,6 +3,7 @@ package com.icoolkj.web.controller.monitor;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.icoolkj.common.constant.SysConstants;
 import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,7 +43,10 @@ public class SysLogininforController extends BaseController
     public TableDataInfo list(SysLogininfor logininfor)
     {
         startPage();
-        logininfor.setDomainId(SecurityUtils.getDomainId());
+        String domainId = SecurityUtils.getDomainId();
+        if(!SysConstants.DOMAIN_SYSTEM.equals(domainId)) {
+            logininfor.setDomainId(domainId);
+        }
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
         return getDataTable(list);
     }
@@ -52,7 +56,10 @@ public class SysLogininforController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysLogininfor logininfor)
     {
-        logininfor.setDomainId(SecurityUtils.getDomainId());
+        String domainId = SecurityUtils.getDomainId();
+        if(!SysConstants.DOMAIN_SYSTEM.equals(domainId)) {
+            logininfor.setDomainId(domainId);
+        }
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
         ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
         util.exportExcel(response, list, "登录日志");
