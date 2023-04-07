@@ -2,6 +2,8 @@ package com.icoolkj.web.controller.monitor;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.icoolkj.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,7 @@ public class SysOperlogController extends BaseController
     public TableDataInfo list(SysOperLog operLog)
     {
         startPage();
+        operLog.setDomainId(SecurityUtils.getDomainId());
         List<SysOperLog> list = operLogService.selectOperLogList(operLog);
         return getDataTable(list);
     }
@@ -45,6 +48,7 @@ public class SysOperlogController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysOperLog operLog)
     {
+        operLog.setDomainId(SecurityUtils.getDomainId());
         List<SysOperLog> list = operLogService.selectOperLogList(operLog);
         ExcelUtil<SysOperLog> util = new ExcelUtil<SysOperLog>(SysOperLog.class);
         util.exportExcel(response, list, "操作日志");

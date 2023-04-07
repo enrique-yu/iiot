@@ -31,6 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status != null and status != ''">
 				AND status = #{status}
 			</if>
+			<if test="domainId != null and domainId != ''">
+				AND domain_id = #{domainId}
+			</if>
 			<if test="userName != null and userName != ''">
 				AND user_name like concat('%', #{userName}, '%')
 			</if>
