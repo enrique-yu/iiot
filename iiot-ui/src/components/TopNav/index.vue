@@ -134,6 +134,10 @@ export default {
         } else {
           this.$router.push({ path: key });
         }
+        this.$store.dispatch('app/toggleSideBarHide', true);
+      } else {
+        // 显示左侧联动菜单
+        this.activeRoutes(key);
         this.$store.dispatch('app/toggleSideBarHide', false);
       }
     },
