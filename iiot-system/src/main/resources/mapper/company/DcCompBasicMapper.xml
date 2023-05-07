@@ -35,7 +35,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDcCompBasicVo">
-        select comp_basic_id, comp_name, comp_credit_code, comp_type, comp_fr, comp_fr_phone, comp_area, comp_addr, comp_lng, comp_lat, comp_reg_date, comp_business_term, comp_manage_status, comp_approve_date, comp_approve_office, comp_reg_capital, comp_paid_capital, comp_manage_scope, comp_lxr, comp_lxr_phone, comp_lxr_email, comp_status, del_flag, create_by, create_time, update_by, update_time from dc_comp_basic
+        select comp_basic_id, comp_name, comp_credit_code, comp_type, comp_fr, comp_fr_phone, comp_area, comp_addr, comp_lng, comp_lat, comp_reg_date, comp_business_term, comp_manage_status, comp_approve_date, comp_approve_office, comp_reg_capital, comp_paid_capital, comp_manage_scope, comp_lxr, comp_lxr_phone, comp_lxr_email, comp_status, del_flag, create_by, create_time, update_by, update_time
+          from dc_comp_basic
     </sql>
 
     <select id="selectDcCompBasicList" parameterType="DcCompBasic" resultMap="DcCompBasicResult">

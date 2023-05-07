@@ -1,17 +1,18 @@
 package com.icoolkj.system.service.impl;
 
-import java.util.List;
-
-import com.icoolkj.common.utils.uuid.IdWorker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.icoolkj.common.constant.UserConstants;
 import com.icoolkj.common.exception.ServiceException;
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
+import com.icoolkj.common.utils.uuid.IdWorker;
 import com.icoolkj.system.domain.SysPost;
 import com.icoolkj.system.mapper.SysPostMapper;
 import com.icoolkj.system.mapper.SysUserPostMapper;
 import com.icoolkj.system.service.ISysPostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 岗位信息 服务层处理
@@ -40,14 +41,16 @@ public class SysPostServiceImpl implements ISysPostService
     }
 
     /**
-     * 查询所有岗位
+     * 查询组织所有岗位
      * 
      * @return 岗位列表
      */
     @Override
-    public List<SysPost> selectPostAll()
+    public List<SysPost> selectDomainPostAll()
     {
-        return postMapper.selectPostAll();
+        SysPost post = new SysPost();
+        post.setDomainId(SecurityUtils.getDomainId());
+        return postMapper.selectPostList(post);
     }
 
     /**

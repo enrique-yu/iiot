@@ -40,11 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	
-	<select id="selectPostAll" resultMap="SysPostResult">
-		<include refid="selectPostVo"/>
-	</select>
-	
+
 	<select id="selectPostById" parameterType="String" resultMap="SysPostResult">
 		<include refid="selectPostVo"/>
 		where p.post_id = #{postId}

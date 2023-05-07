@@ -215,6 +215,8 @@ public class SysDeptServiceImpl implements ISysDeptService
     public int insertDept(SysDept dept)
     {
         dept.setDeptId(IdWorker.nextId().toString());
+        dept.setDomainId(SecurityUtils.getDomainId());
+        dept.setCreateBy(SecurityUtils.getUsername());
         SysDept info = deptMapper.selectDeptById(dept.getParentId());
         // 如果父节点不为正常状态,则不允许新增子节点
         if (!UserConstants.DEPT_NORMAL.equals(info.getStatus()))
@@ -234,6 +236,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     @Override
     public int updateDept(SysDept dept)
     {
+        dept.setUpdateBy(SecurityUtils.getUsername());
         SysDept newParentDept = deptMapper.selectDeptById(dept.getParentId());
         SysDept oldDept = deptMapper.selectDeptById(dept.getDeptId());
         if (StringUtils.isNotNull(newParentDept) && StringUtils.isNotNull(oldDept))

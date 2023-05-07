@@ -123,7 +123,7 @@ public class SysPostController extends BaseController
     @GetMapping("/optionselect")
     public AjaxResult optionselect()
     {
-        List<SysPost> posts = postService.selectPostAll();
+        List<SysPost> posts = postService.selectDomainPostAll();
         return success(posts);
     }
 }

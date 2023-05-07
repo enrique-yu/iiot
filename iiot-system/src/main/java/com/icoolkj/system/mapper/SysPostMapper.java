@@ -19,11 +19,11 @@ public interface SysPostMapper
     public List<SysPost> selectPostList(SysPost post);
 
     /**
-     * 查询所有岗位
+     * 查询组织下所有岗位
      * 
      * @return 岗位列表
      */
-    public List<SysPost> selectPostAll();
+    public List<SysPost> selectDomainPostAll();
 
     /**
      * 通过岗位ID查询岗位信息

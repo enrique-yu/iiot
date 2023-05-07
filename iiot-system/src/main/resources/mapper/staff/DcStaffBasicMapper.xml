@@ -33,7 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDcStaffBasicVo">
-        select staff_basic_id, staff_name, staff_card_type, staff_card_no, staff_card_fzdate, staff_card_fzunit, staff_card_status, staff_card_sdate, staff_card_edate, staff_sex, staff_age, staff_nation, staff_birthdate, staff_birthplace, staff_addr, staff_phone, staff_email, staff_politics_status, staff_remark, staff_status, del_flag, create_by, create_time, update_by, update_time from dc_staff_basic
+        select staff_basic_id, staff_name, staff_card_type, staff_card_no, staff_card_fzdate, staff_card_fzunit, staff_card_status, staff_card_sdate, staff_card_edate, staff_sex, staff_age, staff_nation, staff_birthdate, staff_birthplace, staff_addr, staff_phone, staff_email, staff_politics_status, staff_remark, staff_status, del_flag, create_by, create_time, update_by, update_time
+          from dc_staff_basic
     </sql>
 
     <select id="selectDcStaffBasicList" parameterType="DcStaffBasic" resultMap="DcStaffBasicResult">

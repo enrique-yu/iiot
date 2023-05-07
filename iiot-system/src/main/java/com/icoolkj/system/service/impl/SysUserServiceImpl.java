@@ -260,6 +260,9 @@ public class SysUserServiceImpl implements ISysUserService
     {
         // 新增用户信息
         user.setUserId(IdWorker.nextId().toString());
+        user.setDomainId(SecurityUtils.getDomainId());
+        user.setCreateBy(SecurityUtils.getUsername());
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         int rows = userMapper.insertUser(user);
         // 新增用户岗位关联
         insertUserPost(user);
@@ -290,6 +293,7 @@ public class SysUserServiceImpl implements ISysUserService
     @Transactional
     public int updateUser(SysUser user)
     {
+        user.setUpdateBy(SecurityUtils.getUsername());
         String userId = user.getUserId();
         // 删除用户与角色关联
         userRoleMapper.deleteUserRoleByUserId(userId);
