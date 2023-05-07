@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.company.mapper.DcCompStaffRelationMapper">
+    
+    <resultMap type="DcCompStaffRelation" id="DcCompStaffRelationResult">
+        <result property="compStaffRelationId"    column="comp_staff_relation_id"    />
+        <result property="compBasicId"    column="comp_basic_id"    />
+        <result property="staffBasicId"    column="staff_basic_id"    />
+        <association property="compBasicId"    column="compBasicId" javaType="DcCompBasic" resultMap="DcCompBasicResult" />
+        <association property="staffBasicId"    column="staffBasicId" javaType="DcStaffBasic" resultMap="DcStaffBasicResult" />
+    </resultMap>
+
+    <resultMap type="DcCompBasic" id="DcCompBasicResult">
+        <result property="compBasicId"    column="comp_basic_id"    />
+        <result property="compName"    column="comp_name"    />
+        <result property="compCreditCode"    column="comp_credit_code"    />
+        <result property="compType"    column="comp_type"    />
+        <result property="compFr"    column="comp_fr"    />
+        <result property="compFrPhone"    column="comp_fr_phone"    />
+        <result property="compArea"    column="comp_area"    />
+        <result property="compAddr"    column="comp_addr"    />
+        <result property="compLng"    column="comp_lng"    />
+        <result property="compLat"    column="comp_lat"    />
+        <result property="compRegDate"    column="comp_reg_date"    />
+        <result property="compBusinessTerm"    column="comp_business_term"    />
+        <result property="compManageStatus"    column="comp_manage_status"    />
+        <result property="compApproveDate"    column="comp_approve_date"    />
+        <result property="compApproveOffice"    column="comp_approve_office"    />
+        <result property="compRegCapital"    column="comp_reg_capital"    />
+        <result property="compPaidCapital"    column="comp_paid_capital"    />
+        <result property="compManageScope"    column="comp_manage_scope"    />
+        <result property="compLxr"    column="comp_lxr"    />
+        <result property="compLxrPhone"    column="comp_lxr_phone"    />
+        <result property="compLxrEmail"    column="comp_lxr_email"    />
+        <result property="compStatus"    column="comp_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <resultMap type="DcStaffBasic" id="DcStaffBasicResult">
+        <result property="staffBasicId"    column="staff_basic_id"    />
+        <result property="staffName"    column="staff_name"    />
+        <result property="staffCardType"    column="staff_card_type"    />
+        <result property="staffCardNo"    column="staff_card_no"    />
+        <result property="staffCardFzdate"    column="staff_card_fzdate"    />
+        <result property="staffCardFzunit"    column="staff_card_fzunit"    />
+        <result property="staffCardStatus"    column="staff_card_status"    />
+        <result property="staffCardSdate"    column="staff_card_sdate"    />
+        <result property="staffCardEdate"    column="staff_card_edate"    />
+        <result property="staffSex"    column="staff_sex"    />
+        <result property="staffAge"    column="staff_age"    />
+        <result property="staffNation"    column="staff_nation"    />
+        <result property="staffBirthdate"    column="staff_birthdate"    />
+        <result property="staffBirthplace"    column="staff_birthplace"    />
+        <result property="staffAddr"    column="staff_addr"    />
+        <result property="staffPhone"    column="staff_phone"    />
+        <result property="staffEmail"    column="staff_email"    />
+        <result property="staffPoliticsStatus"    column="staff_politics_status"    />
+        <result property="staffRemark"    column="staff_remark"    />
+        <result property="staffStatus"    column="staff_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDcCompStaffRelationVo">
+        select rn.comp_staff_relation_id, rn.comp_basic_id, rn.staff_basic_id,
+               c.comp_name, c.comp_credit_code, c.comp_fr, c.comp_addr,
+               s.staff_name
+          from dc_comp_staff_relation rn
+          inner join dc_comp_basic c on c.comp_basic_id = rn.comp_basic_id
+          inner join dc_staff_basic s on s.staff_basic_id = rn.staff_basic_id
+    </sql>
+
+    <select id="selectDcCompStaffRelationList" parameterType="DcCompStaffRelation" resultMap="DcCompStaffRelationResult">
+        <include refid="selectDcCompStaffRelationVo"/>
+        <where>  
+            <if test="compBasicId != null  and compBasicId != ''"> and rn.comp_basic_id = #{compBasicId}</if>
+            <if test="staffBasicId != null  and staffBasicId != ''"> and rn.staff_basic_id = #{staffBasicId}</if>
+        </where>
+    </select>
+    
+    <select id="selectDcCompStaffRelationByCompStaffRelationId" parameterType="String" resultMap="DcCompStaffRelationResult">
+        <include refid="selectDcCompStaffRelationVo"/>
+        where rn.comp_staff_relation_id = #{compStaffRelationId}
+    </select>
+        
+    <insert id="insertDcCompStaffRelation" parameterType="DcCompStaffRelation">
+        insert into dc_comp_staff_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="compStaffRelationId != null">comp_staff_relation_id,</if>
+            <if test="compBasicId != null">comp_basic_id,</if>
+            <if test="staffBasicId != null">staff_basic_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="compStaffRelationId != null">#{compStaffRelationId},</if>
+            <if test="compBasicId != null">#{compBasicId},</if>
+            <if test="staffBasicId != null">#{staffBasicId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDcCompStaffRelation" parameterType="DcCompStaffRelation">
+        update dc_comp_staff_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compBasicId != null">comp_basic_id = #{compBasicId},</if>
+            <if test="staffBasicId != null">staff_basic_id = #{staffBasicId},</if>
+        </trim>
+        where comp_staff_relation_id = #{compStaffRelationId}
+    </update>
+
+    <delete id="deleteDcCompStaffRelationByCompStaffRelationId" parameterType="String">
+        delete from dc_comp_staff_relation where comp_staff_relation_id = #{compStaffRelationId}
+    </delete>
+
+    <delete id="deleteDcCompStaffRelationByCompStaffRelationIds" parameterType="String">
+        delete from dc_comp_staff_relation where comp_staff_relation_id in 
+        <foreach item="compStaffRelationId" collection="array" open="(" separator="," close=")">
+            #{compStaffRelationId}
+        </foreach>
+    </delete>
+</mapper>
