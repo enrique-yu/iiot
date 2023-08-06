@@ -13,7 +13,7 @@
   [eladmin-web](https://github.com/elunez/eladmin-web)，
   [vue-baidu-map](https://dafrok.github.io/vue-baidu-map)，
   [vue icon](https://www.vue365.cn/vue-v-svg-icons)，
-  [vue-codemirror](https://www.npmjs.com/package/vue-codemirror)。
+  [vue-codemirror](https://www.npmjs.com/package/vue-codemirror)，
   [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)。
 
 ## 原始内置功能
