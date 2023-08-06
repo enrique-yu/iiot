@@ -57,10 +57,6 @@ CREATE TABLE `dc_comp_basic`  (
 -- ----------------------------
 -- Records of dc_comp_basic
 -- ----------------------------
-INSERT INTO `dc_comp_basic` VALUES ('552543924565049344', '安徽建工集团有限公司', '91340000148940170G', '有限责任公司(非自然人投资或控股的法人独资)', '赵时运', '15888888888', '3401', '安徽省合肥市包河区芜湖路325号', '117.324911', '31.869924', '1989-04-23', '1989-05-06 至 无固定期限', '注销', '2018-07-30', '安徽省市场监督管理局', '52,000万(元)', '52,000万(元)', '各类工程建设项目总承包；房屋建筑、公路、市政公用、水利水电、矿山、铁路、冶炼、石油化工（不含危险品）、港口与航道、城市园林绿化；各类工程专业承包；建筑装修装饰、公路路基、公路路面、桥梁、隧道、炉窑、建筑幕墙、消防设施、钢结构、机电设备安装、河湖整治、起重设备安装；对外工程承包和劳务合作、国际国内商贸服务；交通建设投资；建筑材料的生产与销售，建筑机械制造、经销与租赁，建筑工程勘察设计，建筑和交通研发、咨询、检测、监理（以上范围涉及许可和资质证的凭许可和资质证经营）。', '戴国华', '15888888888', '158@qq.com', '0', '0', '133555608539361280', '2023-03-08 17:32:17', 'COMP#91340000148940170G', '2023-04-05 15:58:24');
-INSERT INTO `dc_comp_basic` VALUES ('552544230317228032', '安徽大学资产经营有限公司', '913401007529530585', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '方强国', '15999999999', '159@qq.com', '0', '0', '133555608539361280', '2023-03-08 17:33:30', '133555608539361280', '2023-03-12 08:48:41');
-INSERT INTO `dc_comp_basic` VALUES ('554428458738909184', '安徽省建设监理有限公司', '91340000148947612F', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '王庆国', '13666666666', '136@qq.com', '0', '0', '133555608539361280', '2023-03-10 22:20:45', '133555608539361280', '2023-03-12 08:48:45');
-INSERT INTO `dc_comp_basic` VALUES ('554445566969380864', '安徽建筑大学资产经营有限公司', '91340111MA2UC77U2R', NULL, NULL, NULL, '3401', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '徐卫国', '15777777777', '157@qq.com', '0', '0', '133555608539361280', '2023-03-10 23:28:44', '133555608539361280', '2023-03-12 08:48:48');
 
 -- ----------------------------
 -- Table structure for dc_device_basic
@@ -176,9 +172,6 @@ CREATE TABLE `file_catalog_config`  (
 -- ----------------------------
 -- Records of file_catalog_config
 -- ----------------------------
-INSERT INTO `file_catalog_config` VALUES ('CC', '测试目录', NULL, '0', '0', '133555608539361280', '2023-03-26 13:13:10', NULL, NULL);
-INSERT INTO `file_catalog_config` VALUES ('COMP_BASIC', '企业基本信息', 'cccc', '1', '0', '133555608539361280', '2023-03-19 20:59:50', '133555608539361280', '2023-03-25 22:21:03');
-INSERT INTO `file_catalog_config` VALUES ('CS', '测试目录2', NULL, '0', '0', '133555608539361280', '2023-03-26 16:48:23', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for file_catalog_relation
@@ -211,8 +204,6 @@ CREATE TABLE `file_catalog_relation`  (
 -- ----------------------------
 -- Records of file_catalog_relation
 -- ----------------------------
-INSERT INTO `file_catalog_relation` VALUES ('560125272167284736', 'COMP_BASIC', 'COMP_001', 'pdf,png,rar', '3', 2, 2, 2, 2, 2.00, '0', '0', '133555608539361280', '2023-03-26 15:37:52', NULL, NULL);
-INSERT INTO `file_catalog_relation` VALUES ('560131938535342080', 'COMP_BASIC', 'COMP_001', 'pdf,xls,png', '5', 6, 7, 8, 8, 8.00, '0', '0', '133555608539361280', '2023-03-26 16:04:21', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for file_config
@@ -235,8 +226,6 @@ CREATE TABLE `file_config`  (
 -- ----------------------------
 -- Records of file_config
 -- ----------------------------
-INSERT INTO `file_config` VALUES ('CC', '企业营业执照', '企业', NULL, '1', '0', '133555608539361280', '2023-03-19 20:22:40', '133555608539361280', '2023-03-25 11:11:18');
-INSERT INTO `file_config` VALUES ('COMP_001', '企业营业执照', '企业', NULL, '0', '0', '133555608539361280', '2023-03-19 20:22:40', '133555608539361280', '2023-03-25 11:10:06');
 
 -- ----------------------------
 -- Table structure for file_record
@@ -593,8 +582,6 @@ CREATE TABLE `sys_area`  (
 INSERT INTO `sys_area` VALUES ('00', '全国', '', '全国', '0', '0');
 INSERT INTO `sys_area` VALUES ('11', '北京市', '00', '北京市', '0', '0');
 INSERT INTO `sys_area` VALUES ('34', '安徽省', '00', NULL, '0', '0');
-INSERT INTO `sys_area` VALUES ('3401', '合肥市', '34', NULL, '0', '0');
-INSERT INTO `sys_area` VALUES ('340102', '瑶海区', '3401', NULL, '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -1068,13 +1055,6 @@ INSERT INTO `sys_menu` VALUES ('560081998085881856', '设备分类信息删除',
 INSERT INTO `sys_menu` VALUES ('560082247911211008', '设备分类信息导出', '559864041741221888', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:category:export', '#', 'admin', '2023-04-01 13:46:49', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('562674295445127168', '设备活动预警', '556932471489298432', 3, 'warning', 'device/warning/activityIndex', NULL, 1, 0, 'C', '0', '0', 'device:warning:list', 'time-range', 'admin', '2023-04-02 16:26:45', 'admin', '2023-04-02 16:36:24', '');
 INSERT INTO `sys_menu` VALUES ('562675372496257024', '设备基础查询', '562674295445127168', 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'device:warning:query', '#', 'admin', '2023-04-02 16:31:02', 'admin', '2023-04-02 16:44:36', '');
-INSERT INTO `sys_menu` VALUES ('563100396843696128', '部门修改', '563699546626981888', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'oa:dept:edit', '#', 'admin', '2023-04-05 13:22:30', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('563699546626981888', '部门架构', '563713038318829568', 1, 'dept', 'oa/dept/index', NULL, 1, 0, 'C', '0', '0', 'oa:dept:list', 'tree-table', 'admin', '2023-04-05 13:22:30', 'admin', '2023-04-05 13:23:57', '部门菜单');
-INSERT INTO `sys_menu` VALUES ('563702086886227968', '部门导出', '563699546626981888', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'oa:dept:export', '#', 'admin', '2023-04-05 13:22:30', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('563706689988067328', '部门删除', '563699546626981888', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'oa:dept:remove', '#', 'admin', '2023-04-05 13:22:30', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('563713038318829568', '人力资源', '133698244612976640', 7, 'hr', NULL, NULL, 1, 0, 'M', '0', '0', '', 'user', 'admin', '2023-04-05 13:14:21', 'admin', '2023-04-05 13:14:58', '');
-INSERT INTO `sys_menu` VALUES ('563713587449692160', '部门查询', '563699546626981888', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'oa:dept:query', '#', 'admin', '2023-04-05 13:22:30', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('563713607485882368', '部门新增', '563699546626981888', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'oa:dept:add', '#', 'admin', '2023-04-05 13:22:30', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1097,7 +1077,6 @@ CREATE TABLE `sys_notice`  (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('553237921977597952', 'ce', '2', 0x3C703E6365663C2F703E, '0', 'admin', '2023-03-07 15:29:59', 'admin', '2023-04-02 17:35:30', NULL);
 
 -- ----------------------------
 -- Table structure for sys_oper_log
@@ -1324,14 +1303,7 @@ CREATE TABLE `sys_user_role`  (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('133555608539361280', '133700983795478528');
-INSERT INTO `sys_user_role` VALUES ('554743409269538816', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('554743424868155392', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('554948857633439744', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('554948868307943424', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('554948887014539264', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('554948898368520192', '554451769334169600');
 INSERT INTO `sys_user_role` VALUES ('555092004397121536', '554451769334169600');
-INSERT INTO `sys_user_role` VALUES ('563785612117671936', '554451769334169600');
 
 -- ----------------------------
 -- Function structure for getDeviceCategoryChildList
