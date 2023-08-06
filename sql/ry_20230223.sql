@@ -1,19 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : 47.97.100.149
- Source Server Type    : MySQL
- Source Server Version : 80011
- Source Host           : 47.97.100.149:3306
- Source Schema         : ry-vue
-
- Target Server Type    : MySQL
- Target Server Version : 80011
- File Encoding         : 65001
-
- Date: 05/04/2023 18:13:34
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -141,49 +125,6 @@ CREATE TABLE `gen_table_column`  (
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gen_table_column
--- ----------------------------
-INSERT INTO `gen_table_column` VALUES ('563713580734611456', '563713580441010176', 'dept_id', '部门id', 'varchar(20)', 'String', 'deptId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-04-05 13:16:30', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713580914966528', '563713580441010176', 'parent_id', '父部门id', 'varchar(20)', 'String', 'parentId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2023-04-05 13:16:30', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581078544384', '563713580441010176', 'ancestors', '祖级列表', 'varchar(50)', 'String', 'ancestors', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2023-04-05 13:16:30', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581237927936', '563713580441010176', 'domain_id', '部门所属组织', 'varchar(20)', 'String', 'domainId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2023-04-05 13:16:30', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581397311488', '563713580441010176', 'dept_name', '部门名称', 'varchar(30)', 'String', 'deptName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 5, 'admin', '2023-04-05 13:16:30', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581556695040', '563713580441010176', 'order_num', '显示顺序', 'int(4)', 'Integer', 'orderNum', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581711884288', '563713580441010176', 'leader', '负责人', 'varchar(20)', 'String', 'leader', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713581871267840', '563713580441010176', 'phone', '联系电话', 'varchar(11)', 'String', 'phone', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582026457088', '563713580441010176', 'email', '邮箱', 'varchar(50)', 'String', 'email', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582190034944', '563713580441010176', 'status', '部门状态（0正常 1停用）', 'char(1)', 'String', 'status', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'radio', '', 10, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582349418496', '563713580441010176', 'del_flag', '删除标志（0代表存在 2代表删除）', 'char(1)', 'String', 'delFlag', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582504607744', '563713580441010176', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 12, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582663991296', '563713580441010176', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 13, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582823374848', '563713580441010176', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 14, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713582982758400', '563713580441010176', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 15, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713583397994496', '563713583142141952', 'user_id', '用户ID', 'varchar(20)', 'String', 'userId', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713583557378048', '563713583142141952', 'domain_id', '组织编号', 'varchar(20)', 'String', 'domainId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713583716761600', '563713583142141952', 'dept_id', '部门ID', 'varchar(20)', 'String', 'deptId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713583880339456', '563713583142141952', 'user_name', '用户账号', 'varchar(30)', 'String', 'userName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584035528704', '563713583142141952', 'nick_name', '用户昵称', 'varchar(30)', 'String', 'nickName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 5, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584194912256', '563713583142141952', 'user_type', '用户类型（00系统用户）', 'varchar(2)', 'String', 'userType', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'select', '', 6, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584350101504', '563713583142141952', 'email', '用户邮箱', 'varchar(50)', 'String', 'email', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584509485056', '563713583142141952', 'phonenumber', '手机号码', 'varchar(11)', 'String', 'phonenumber', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584668868608', '563713583142141952', 'sex', '用户性别（0男 1女 2未知）', 'char(1)', 'String', 'sex', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'select', '', 9, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584824057856', '563713583142141952', 'avatar', '头像地址', 'varchar(100)', 'String', 'avatar', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713584983441408', '563713583142141952', 'theme', '系统主题', 'varchar(255)', 'String', 'theme', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 11, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585138630656', '563713583142141952', 'password', '密码', 'varchar(100)', 'String', 'password', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 12, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585293819904', '563713583142141952', 'password_cleartext', '密码明文', 'varchar(255)', 'String', 'passwordCleartext', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585449009152', '563713583142141952', 'user_relation_id', '用户账号与业务关系ID', 'varchar(20)', 'String', 'userRelationId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 14, 'admin', '2023-04-05 13:16:31', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585604198400', '563713583142141952', 'status', '帐号状态（0正常 1停用）', 'char(1)', 'String', 'status', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'radio', '', 15, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585759387648', '563713583142141952', 'del_flag', '删除标志（0代表存在 2代表删除）', 'char(1)', 'String', 'delFlag', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 16, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713585914576896', '563713583142141952', 'login_num', '登录次数', 'int(11)', 'Long', 'loginNum', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 17, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586069766144', '563713583142141952', 'login_ip', '最后登录IP', 'varchar(128)', 'String', 'loginIp', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 18, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586224955392', '563713583142141952', 'login_date', '最后登录时间', 'datetime', 'Date', 'loginDate', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'datetime', '', 19, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586384338944', '563713583142141952', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 20, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586539528192', '563713583142141952', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 21, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586694717440', '563713583142141952', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 22, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713586849906688', '563713583142141952', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 23, 'admin', '2023-04-05 13:16:32', '', NULL);
-INSERT INTO `gen_table_column` VALUES ('563713587009290240', '563713583142141952', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 24, 'admin', '2023-04-05 13:16:32', '', NULL);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -438,7 +379,6 @@ CREATE TABLE `sys_dept`  (
 -- Records of sys_dept
 -- ----------------------------
 INSERT INTO `sys_dept` VALUES ('133702242296393728', '00', '00', '553672938461593600', '系统根部门', 1, '', '', '', '1', '0', '0', 'admin', '2022-05-08 20:08:58', 'admin', '2023-04-05 17:07:37');
-INSERT INTO `sys_dept` VALUES ('563785611970871296', '00', '00', '553692142187315200', '企业根部门', 1, NULL, NULL, NULL, '1', '0', '0', 'admin', '2023-04-05 18:02:44', '', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_data
@@ -500,15 +440,6 @@ INSERT INTO `sys_dict_data` VALUES ('557671014528450560', 3, '回族', 'NATION_0
 INSERT INTO `sys_dict_data` VALUES ('557672836861263872', 4, '满族', 'NATION_04', 'sys_nation', NULL, 'default', 'N', '0', 'admin', '2023-03-20 21:41:47', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES ('557677512562311168', 5, '维吾尔族', 'NATION_05', 'sys_nation', NULL, 'default', 'N', '0', 'admin', '2023-03-20 21:42:07', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES ('557684310711205888', 6, '苗族', 'NATION_06', 'sys_nation', NULL, 'default', 'N', '0', 'admin', '2023-03-20 21:42:35', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560081997322518528', 1, 'doc', 'doc', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:45:54', 'admin', '2023-03-26 12:47:59', NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082048342032384', 2, 'pdf', 'pdf', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:46:06', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082097969037312', 3, 'txt', 'txt', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:46:17', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082141757571072', 4, 'png', 'png', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:46:28', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082192798056448', 5, 'jpg', 'jpg', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:46:40', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082247181402112', 6, 'xls', 'xls', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:46:53', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082330887127040', 8, 'rar', 'rar', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:47:13', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082378987405312', 9, 'gif', 'gif', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:47:24', '', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES ('560082483735953408', 9, 'zip', 'zip', 'file_type', NULL, 'default', 'N', '0', 'admin', '2023-03-26 12:47:49', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -543,7 +474,6 @@ INSERT INTO `sys_dict_type` VALUES ('552960164257333248', '通知类型', 'sys_n
 INSERT INTO `sys_dict_type` VALUES ('552963908386684928', '通知状态', 'sys_notice_status', '0', 'admin', '2023-02-28 09:46:13', '', NULL, '通知状态列表');
 INSERT INTO `sys_dict_type` VALUES ('553140831784009728', '操作类型', 'sys_oper_type', '0', 'admin', '2023-02-28 09:46:13', '', NULL, '操作类型列表');
 INSERT INTO `sys_dict_type` VALUES ('557608236312690688', '民族', 'sys_nation', '0', 'admin', '2023-03-20 21:35:35', '', NULL, '民族字典列表');
-INSERT INTO `sys_dict_type` VALUES ('560081676273713152', '文件类型', 'file_type', '0', 'admin', '2023-03-26 12:44:37', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_domain
@@ -576,7 +506,6 @@ CREATE TABLE `sys_domain`  (
 -- Records of sys_domain
 -- ----------------------------
 INSERT INTO `sys_domain` VALUES ('553672938461593600', NULL, '553592170506878976', '系统组织域', 'DOMAIN_SYSTEM', '2023-03-09 00:00:00', '00', '', NULL, NULL, NULL, '0', '0', 'admin', '2023-03-08 21:48:03', 'admin', '2023-04-05 18:10:20');
-INSERT INTO `sys_domain` VALUES ('553692142187315200', NULL, '553519200858013696', '企业组织域', 'DOMAIN_COMP', '2058-08-08 00:00:00', '00', NULL, NULL, NULL, NULL, '0', '0', 'admin', '2023-04-05 18:02:44', 'admin', '2023-04-05 18:10:24');
 
 -- ----------------------------
 -- Table structure for sys_domain_roles
@@ -598,7 +527,6 @@ CREATE TABLE `sys_domain_roles`  (
 -- ----------------------------
 -- Records of sys_domain_roles
 -- ----------------------------
-INSERT INTO `sys_domain_roles` VALUES ('553519200858013696', '企业组织角色', 'DOMAIN_TYPE_COMP', '0', '0', '133555608539361280', '2023-03-19 16:29:16', '133555608539361280', '2023-04-05 12:20:54');
 INSERT INTO `sys_domain_roles` VALUES ('553592170506878976', '系统组织角色', 'DOMAIN_TYPE_SYSTEM', '0', '0', '133555608539361280', '2023-03-19 16:29:19', '133555608539361280', '2023-04-04 20:11:44');
 
 -- ----------------------------
@@ -774,13 +702,6 @@ INSERT INTO `sys_menu` VALUES ('446013329207459840', '区域配置新增', '2594
 INSERT INTO `sys_menu` VALUES ('446013329207459841', '区域配置修改', '259435333274300436', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:area:edit', '#', 'admin', '2023-03-05 09:26:04', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('446013329207459842', '区域配置删除', '259435333274300436', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:area:remove', '#', 'admin', '2023-03-05 09:26:04', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('446013329207459843', '区域配置导出', '259435333274300436', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:area:export', '#', 'admin', '2023-03-05 09:26:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459844', '企业基本信息', '446013329207459850', 1, 'basic', 'company/basic/index', NULL, 1, 0, 'C', '0', '0', 'company:basic:list', 'education', 'admin', '2023-03-05 14:26:46', 'admin', '2023-03-05 14:38:08', '企业基本信息菜单');
-INSERT INTO `sys_menu` VALUES ('446013329207459845', '企业基本信息查询', '446013329207459844', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'company:basic:query', '#', 'admin', '2023-03-05 14:26:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459846', '企业基本信息新增', '446013329207459844', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'company:basic:add', '#', 'admin', '2023-03-05 14:26:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459847', '企业基本信息修改', '446013329207459844', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'company:basic:edit', '#', 'admin', '2023-03-05 14:26:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459848', '企业基本信息删除', '446013329207459844', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'company:basic:remove', '#', 'admin', '2023-03-05 14:26:47', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459849', '企业基本信息导出', '446013329207459844', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'company:basic:export', '#', 'admin', '2023-03-05 14:26:47', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('446013329207459850', '企业管理', '133698244612976640', 4, 'company', NULL, NULL, 1, 0, 'M', '0', '0', '', 'star', 'admin', '2023-03-05 14:30:08', 'admin', '2023-03-05 14:36:57', '');
 INSERT INTO `sys_menu` VALUES ('446013329207459851', '系统工具', '133698244612976640', 3, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2023-02-28 09:46:12', '', NULL, '系统工具目录');
 INSERT INTO `sys_menu` VALUES ('446013329207459856', '操作日志', '259435333274300399', 1, 'operlog', 'monitor/operlog/index', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list', 'form', 'admin', '2023-02-28 09:46:12', '', NULL, '操作日志菜单');
 INSERT INTO `sys_menu` VALUES ('446013329207459857', '登录日志', '259435333274300399', 2, 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor', 'admin', '2023-02-28 09:46:12', '', NULL, '登录日志菜单');
@@ -795,8 +716,6 @@ INSERT INTO `sys_menu` VALUES ('553592219697676288', '系统组织角色查询',
 INSERT INTO `sys_menu` VALUES ('553671576646582272', '系统组织角色新增', '553569065323462656', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:droles:add', '#', 'admin', '2023-03-08 20:30:37', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('553671586813575168', '系统组织角色修改', '553569065323462656', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:droles:edit', '#', 'admin', '2023-03-08 20:30:37', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('553671624952381440', '系统组织角色删除', '553569065323462656', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'system:droles:remove', '#', 'admin', '2023-03-08 20:30:37', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('554758523754381312', '企业信息完善', '446013329207459850', 1, 'perfectInfo', 'company/perfectInfo', NULL, 1, 0, 'C', '0', '0', '/company/basic/getCompUserInfo', 'form', 'admin', '2023-03-11 20:12:17', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('554943120207249408', '企业信息完善', '554758523754381312', 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'company:basic:perfectInfo', '#', 'admin', '2023-03-12 08:25:48', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('554947205169938432', '区域信息', '554758523754381312', 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'system:area:list', '#', 'admin', '2023-03-12 08:42:02', 'admin', '2023-03-12 08:42:20', '');
 INSERT INTO `sys_menu` VALUES ('556929805367377920', '设备基础查询', '556929833750233088', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:basic:query', '#', 'admin', '2023-03-17 20:02:26', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('556929833750233088', '设备基础信息', '556932471489298432', 2, 'basic', 'device/basic/index', NULL, 1, 0, 'C', '0', '0', 'device:basic:list', 'dict', 'admin', '2023-03-17 20:02:26', 'admin', '2023-04-02 11:48:12', '设备基础菜单');
@@ -804,45 +723,7 @@ INSERT INTO `sys_menu` VALUES ('556929848983945216', '设备基础新增', '5569
 INSERT INTO `sys_menu` VALUES ('556929895641382912', '设备基础修改', '556929833750233088', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:basic:edit', '#', 'admin', '2023-03-17 20:02:26', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('556929947403288576', '设备基础删除', '556929833750233088', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:basic:remove', '#', 'admin', '2023-03-17 20:02:26', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('556930012918317056', '设备基础导出', '556929833750233088', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:basic:export', '#', 'admin', '2023-03-17 20:02:27', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556930463650807808', '人员基本信息', '556932188893872128', 1, 'basic', 'staff/basic/index', NULL, 1, 0, 'C', '0', '0', 'staff:basic:list', 'peoples', 'admin', '2023-03-17 20:07:08', 'admin', '2023-04-02 11:48:21', '人员基本信息菜单');
-INSERT INTO `sys_menu` VALUES ('556930533515329536', '人员基本信息查询', '556930463650807808', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'staff:basic:query', '#', 'admin', '2023-03-17 20:07:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556930937296781312', '人员基本信息新增', '556930463650807808', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'staff:basic:add', '#', 'admin', '2023-03-17 20:07:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556930964245184512', '人员基本信息修改', '556930463650807808', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'staff:basic:edit', '#', 'admin', '2023-03-17 20:07:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556930985581608960', '人员基本信息删除', '556930463650807808', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'staff:basic:remove', '#', 'admin', '2023-03-17 20:07:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556930997954805760', '人员基本信息导出', '556930463650807808', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'staff:basic:export', '#', 'admin', '2023-03-17 20:07:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('556932188893872128', '人员信息管理', '133698244612976640', 5, 'staff', NULL, NULL, 1, 0, 'M', '0', '0', '', 'peoples', 'admin', '2023-03-17 20:09:37', 'admin', '2023-03-17 20:09:53', '');
 INSERT INTO `sys_menu` VALUES ('556932471489298432', '设备信息管理', '133698244612976640', 6, 'device', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'dict', 'admin', '2023-03-17 20:10:44', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564113560010752', '目录配置', '557575721661235200', 2, 'catalog', 'file/catalog/index', NULL, 1, 0, 'C', '0', '0', 'file:catalog:list', 'education', 'admin', '2023-03-19 15:02:56', 'admin', '2023-03-21 20:58:38', '文件目录配置菜单');
-INSERT INTO `sys_menu` VALUES ('557564136670625792', '文件目录配置查询', '557564113560010752', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:catalog:query', '#', 'admin', '2023-03-19 15:02:56', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564171655315456', '文件配置导出', '557564753375920128', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:config:export', '#', 'admin', '2023-03-19 15:15:09', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564239154249728', '文件配置删除', '557564753375920128', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:config:remove', '#', 'admin', '2023-03-19 15:15:09', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564287623626752', '文件目录配置新增', '557564113560010752', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:catalog:add', '#', 'admin', '2023-03-19 15:02:56', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564303801057280', '文件目录配置修改', '557564113560010752', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:catalog:edit', '#', 'admin', '2023-03-19 15:02:56', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564315389919232', '文件目录配置删除', '557564113560010752', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:catalog:remove', '#', 'admin', '2023-03-19 15:02:56', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564335405137920', '文件目录配置导出', '557564113560010752', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:catalog:export', '#', 'admin', '2023-03-19 15:02:56', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564363498586112', '文件记录', '557575721661235200', 4, 'record', 'file/record/index', NULL, 1, 0, 'C', '0', '0', 'file:record:list', 'dict', 'admin', '2023-03-19 15:07:31', 'admin', '2023-03-19 15:21:40', '文件记录菜单');
-INSERT INTO `sys_menu` VALUES ('557564375922114560', '文件记录查询', '557564363498586112', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:record:query', '#', 'admin', '2023-03-19 15:07:31', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564388584718336', '文件记录新增', '557564363498586112', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:record:add', '#', 'admin', '2023-03-19 15:07:31', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564479135547392', '文件记录修改', '557564363498586112', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:record:edit', '#', 'admin', '2023-03-19 15:07:31', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564494574780416', '文件记录删除', '557564363498586112', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:record:remove', '#', 'admin', '2023-03-19 15:07:31', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564505400279040', '文件记录导出', '557564363498586112', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:record:export', '#', 'admin', '2023-03-19 15:07:31', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564544172425216', '文件目录', '557575721661235200', 3, 'relation', 'file/relation/index', NULL, 1, 0, 'C', '0', '0', 'file:relation:list', 'row', 'admin', '2023-03-19 15:10:01', 'admin', '2023-03-21 20:59:03', '文件与目录关系菜单');
-INSERT INTO `sys_menu` VALUES ('557564674216820736', '文件与目录关系查询', '557564544172425216', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:relation:query', '#', 'admin', '2023-03-19 15:10:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564692717895680', '文件与目录关系新增', '557564544172425216', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:relation:add', '#', 'admin', '2023-03-19 15:10:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564706768814080', '文件与目录关系修改', '557564544172425216', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:relation:edit', '#', 'admin', '2023-03-19 15:10:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564717254574080', '文件与目录关系删除', '557564544172425216', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:relation:remove', '#', 'admin', '2023-03-19 15:10:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564728377868288', '文件与目录关系导出', '557564544172425216', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:relation:export', '#', 'admin', '2023-03-19 15:10:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557564753375920128', '文件配置', '557575721661235200', 1, 'config', 'file/config/index', NULL, 1, 0, 'C', '0', '0', 'file:config:list', 'form', 'admin', '2023-03-19 15:15:08', 'admin', '2023-03-19 15:20:59', '文件配置菜单');
-INSERT INTO `sys_menu` VALUES ('557564763945566208', '文件配置查询', '557564753375920128', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:config:query', '#', 'admin', '2023-03-19 15:15:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557574399050383360', '文件配置新增', '557564753375920128', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:config:add', '#', 'admin', '2023-03-19 15:15:09', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557574411041898496', '文件配置修改', '557564753375920128', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:config:edit', '#', 'admin', '2023-03-19 15:15:09', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557575721661235200', '文件管理', '133697708996161536', 12, 'file', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'documentation', 'admin', '2023-03-19 14:46:51', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557583428774526976', '记录明细', '557575721661235200', 5, 'detail', 'file/detail/index', NULL, 1, 0, 'C', '0', '0', 'file:detail:list', 'log', 'admin', '2023-03-19 15:18:57', 'admin', '2023-03-21 20:59:17', '文件记录明细菜单');
-INSERT INTO `sys_menu` VALUES ('557583442087247872', '文件记录明细查询', '557583428774526976', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:detail:query', '#', 'admin', '2023-03-19 15:18:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557583465738928128', '文件记录明细新增', '557583428774526976', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:detail:add', '#', 'admin', '2023-03-19 15:18:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557583501851885568', '文件记录明细修改', '557583428774526976', 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:detail:edit', '#', 'admin', '2023-03-19 15:18:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557583522978594816', '文件记录明细删除', '557583428774526976', 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:detail:remove', '#', 'admin', '2023-03-19 15:18:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES ('557583532667437056', '文件记录明细导出', '557583428774526976', 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'file:detail:export', '#', 'admin', '2023-03-19 15:18:57', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('558393465218531328', '设备分类信息新增', '559864041741221888', 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:category:add', '#', 'admin', '2023-04-01 13:46:49', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('558394072104960000', '设备分类信息查询', '559864041741221888', 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'device:category:query', '#', 'admin', '2023-04-01 13:46:49', '', NULL, '');
 INSERT INTO `sys_menu` VALUES ('559864041741221888', '设备分类信息', '556932471489298432', 1, 'category', 'device/category/index', NULL, 1, 0, 'C', '0', '0', 'device:category:list', 'date-range', 'admin', '2023-04-01 13:45:52', 'admin', '2023-04-02 11:48:02', '设备分类信息菜单');
@@ -953,7 +834,6 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('133700983795478528', '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2023-02-28 09:46:12', 'admin', '2023-03-07 09:04:26', '超级管理员');
 INSERT INTO `sys_role` VALUES ('448462665975595008', '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-02-28 09:46:12', 'admin', '2023-03-07 13:30:29', '普通角色');
-INSERT INTO `sys_role` VALUES ('554451769334169600', '企业角色', 'comp', 3, '4', 1, 1, '0', '0', 'admin', '2023-03-10 23:53:23', 'admin', '2023-04-05 15:37:09', NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -974,58 +854,6 @@ CREATE TABLE `sys_role_menu`  (
   `menu_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_role_menu
--- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '133697708996161536');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '133697709000355856');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '133697709004550167');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300372');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300373');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300381');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300382');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300383');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300384');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300389');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300399');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300417');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300424');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '259435333274300431');
-INSERT INTO `sys_role_menu` VALUES ('448462665975595008', '446013329207459851');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '446013329207459850');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '554758523754381312');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '554943120207249408');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '554947205169938432');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556929805367377920');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556929833750233088');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556929848983945216');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556929895641382912');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556929947403288576');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930012918317056');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930463650807808');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930533515329536');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930937296781312');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930964245184512');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930985581608960');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556930997954805760');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556932188893872128');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '556932471489298432');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '558393465218531328');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '558394072104960000');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '559864041741221888');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '560081676743475200');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '560081998085881856');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '560082247911211008');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '562674295445127168');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '562675372496257024');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563100396843696128');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563699546626981888');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563702086886227968');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563706689988067328');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563713038318829568');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563713587449692160');
-INSERT INTO `sys_role_menu` VALUES ('554451769334169600', '563713607485882368');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1068,7 +896,6 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('133555608539361280', '553672938461593600', '133702242296393728', 'admin', '系统管理员', '00', 'icoolkj@163.com', '15888888888', '1', '', 'black', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', NULL, NULL, '0', '0', 0, '127.0.0.1', '2023-04-05 18:09:33', 'admin', '2023-02-28 09:46:12', '', '2023-04-05 18:09:33', '管理员');
-INSERT INTO `sys_user` VALUES ('563785612117671936', '553692142187315200', '563785611970871296', 'DOMAIN_COMP', 'DOMAIN_COMP管理员', '00', '', '', '0', '', 'black', '$2a$10$4wqpDVkLsdOrcvPHIDuzYeZCOn6G1896klyOespqS2eIZOPTVeddO', 'wQBRGQsUgenaYPLmExiTRm9MZ8XhcTmDHu4BAIzRJj8=', NULL, '0', '0', 0, '', NULL, 'admin', '2023-04-05 18:02:44', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1099,7 +926,6 @@ CREATE TABLE `sys_user_role`  (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('133555608539361280', '133700983795478528');
-INSERT INTO `sys_user_role` VALUES ('555092004397121536', '554451769334169600');
 
 -- ----------------------------
 -- Function structure for getDeviceCategoryChildList
