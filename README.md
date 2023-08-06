@@ -8,7 +8,6 @@
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 特别鸣谢：
-  [vue-baidu-map](https://dafrok.github.io/vue-baidu-map)，
   [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)。
 
 ## 原始内置功能
