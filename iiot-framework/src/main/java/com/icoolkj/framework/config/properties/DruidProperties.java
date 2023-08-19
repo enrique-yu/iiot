@@ -12,6 +12,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 @Configuration
 public class DruidProperties
 {
+
     @Value("${spring.datasource.druid.initialSize}")
     private int initialSize;
 
@@ -51,6 +52,15 @@ public class DruidProperties
     @Value("${spring.datasource.druid.testOnReturn}")
     private boolean testOnReturn;
 
+    @Value("${spring.datasource.druid.connectionErrorRetryAttempts}")
+    private int connectionErrorRetryAttempts;
+
+    @Value("${spring.datasource.druid.breakAfterAcquireFailure}")
+    private boolean breakAfterAcquireFailure;
+
+    @Value("${spring.datasource.druid.timeBetweenConnectErrorMillis}")
+    private int timeBetweenConnectErrorMillis;
+
     public DruidDataSource dataSource(DruidDataSource datasource)
     {
         /** 配置初始化大小、最小、最大 */
@@ -84,6 +94,13 @@ public class DruidProperties
         datasource.setTestOnBorrow(testOnBorrow);
         /** 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 */
         datasource.setTestOnReturn(testOnReturn);
+
+        /** 连接出错后再尝试连接三次。 */
+        datasource.setConnectionErrorRetryAttempts(connectionErrorRetryAttempts);
+        /** 数据库服务宕机自动重连机制。 */
+        datasource.setBreakAfterAcquireFailure(breakAfterAcquireFailure);
+        /** 连接出错后重试时间间隔。 */
+        datasource.setTimeBetweenConnectErrorMillis(timeBetweenConnectErrorMillis);
         return datasource;
     }
 }
