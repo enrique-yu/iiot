@@ -24,14 +24,12 @@ public class SysUser extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
-    @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private String userId;
 
     /** 组织编号 */
     private String domainId;
 
     /** 部门ID */
-    @Excel(name = "部门编号", type = Type.IMPORT)
     private String deptId;
 
     /** 用户账号 */

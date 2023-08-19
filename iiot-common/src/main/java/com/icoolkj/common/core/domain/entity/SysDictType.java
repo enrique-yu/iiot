@@ -22,6 +22,9 @@ public class SysDictType extends BaseEntity
     @Excel(name = "字典主键", cellType = ColumnType.NUMERIC)
     private String dictId;
 
+    /** 组织编号 */
+    private String domainId;
+
     /** 字典名称 */
     @Excel(name = "字典名称")
     private String dictName;
@@ -42,6 +45,14 @@ public class SysDictType extends BaseEntity
     public void setDictId(String dictId)
     {
         this.dictId = dictId;
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 
     @NotBlank(message = "字典名称不能为空")

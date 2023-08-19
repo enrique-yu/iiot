@@ -7,6 +7,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.icoolkj.common.annotation.Excel;
 
 /**
  * Entity基类
@@ -34,6 +35,9 @@ public class BaseEntity implements Serializable
     /** 更新时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
+    /** 版本 */
+    private String version;
 
     /** 备注 */
     private String remark;
@@ -91,6 +95,10 @@ public class BaseEntity implements Serializable
     {
         this.updateTime = updateTime;
     }
+
+    public void setVersion(String version) { this.version = version; }
+
+    public String getVersion() { return version; }
 
     public String getRemark()
     {
