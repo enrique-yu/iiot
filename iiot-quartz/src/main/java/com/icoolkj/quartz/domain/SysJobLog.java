@@ -13,11 +13,11 @@ import com.icoolkj.common.core.domain.BaseEntity;
  */
 public class SysJobLog extends BaseEntity
 {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     /** ID */
     @Excel(name = "日志序号")
-    private Long jobLogId;
+    private String jobLogId;
 
     /** 任务名称 */
     @Excel(name = "任务名称")
@@ -49,12 +49,12 @@ public class SysJobLog extends BaseEntity
     /** 停止时间 */
     private Date stopTime;
 
-    public Long getJobLogId()
+    public String getJobLogId()
     {
         return jobLogId;
     }
 
-    public void setJobLogId(Long jobLogId)
+    public void setJobLogId(String jobLogId)
     {
         this.jobLogId = jobLogId;
     }

@@ -1,6 +1,8 @@
 package com.icoolkj.quartz.util;
 
 import java.util.Date;
+
+import com.icoolkj.common.utils.uuid.IdWorker;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -74,6 +76,7 @@ public abstract class AbstractQuartzJob implements Job
         threadLocal.remove();
 
         final SysJobLog sysJobLog = new SysJobLog();
+        sysJobLog.setJobLogId(IdWorker.nextId().toString());
         sysJobLog.setJobName(sysJob.getJobName());
         sysJobLog.setJobGroup(sysJob.getJobGroup());
         sysJobLog.setInvokeTarget(sysJob.getInvokeTarget());

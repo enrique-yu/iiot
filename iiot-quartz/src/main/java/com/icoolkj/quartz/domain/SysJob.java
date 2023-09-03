@@ -20,11 +20,11 @@ import com.icoolkj.quartz.util.CronUtils;
  */
 public class SysJob extends BaseEntity
 {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     /** 任务ID */
     @Excel(name = "任务序号", cellType = ColumnType.NUMERIC)
-    private Long jobId;
+    private String jobId;
 
     /** 任务名称 */
     @Excel(name = "任务名称")
@@ -54,12 +54,12 @@ public class SysJob extends BaseEntity
     @Excel(name = "任务状态", readConverterExp = "0=正常,1=暂停")
     private String status;
 
-    public Long getJobId()
+    public String getJobId()
     {
         return jobId;
     }
 
-    public void setJobId(Long jobId)
+    public void setJobId(String jobId)
     {
         this.jobId = jobId;
     }
