@@ -17,52 +17,69 @@
 </template>
 
 <script>
-import { updateUserPwd } from "@/api/system/user";
-
-export default {
-  data() {
-    const equalToPassword = (rule, value, callback) => {
-      if (this.user.newPassword !== value) {
-        callback(new Error("两次输入的密码不一致"));
-      } else {
-        callback();
-      }
-    };
-    return {
-      user: {
-        oldPassword: undefined,
-        newPassword: undefined,
-        confirmPassword: undefined
-      },
-      // 表单校验
-      rules: {
-        oldPassword: [
-          { required: true, message: "旧密码不能为空", trigger: "blur" }
-        ],
-        newPassword: [
-          { required: true, message: "新密码不能为空", trigger: "blur" },
-          { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" }
-        ],
-        confirmPassword: [
-          { required: true, message: "确认密码不能为空", trigger: "blur" },
-          { required: true, validator: equalToPassword, trigger: "blur" }
-        ]
-      }
-    };
-  },
-  methods: {
-    submit() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          updateUserPwd(this.user.oldPassword, this.user.newPassword).then(response => {
-            this.$modal.msgSuccess("修改成功");
-          });
+  import { updateUserPwd } from "@/api/system/user";
+  import { getPublicKey } from '@/api/login';
+  import { encrypt } from '@/utils/jsencrypt';
+  export default {
+    data() {
+      const equalToPassword = (rule, value, callback) => {
+        if (this.user.newPassword !== value) {
+          callback(new Error("两次输入的密码不一致"));
+        } else {
+          callback();
         }
-      });
+      };
+      return {
+        user: {
+          oldPassword: undefined,
+          newPassword: undefined,
+          confirmPassword: undefined
+        },
+        // 表单校验
+        rules: {
+          oldPassword: [
+            { required: true, message: "旧密码不能为空", trigger: "blur" }
+          ],
+          newPassword: [
+            { required: true, message: "新密码不能为空", trigger: "blur" },
+            { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" }
+          ],
+          confirmPassword: [
+            { required: true, message: "确认密码不能为空", trigger: "blur" },
+            { required: true, validator: equalToPassword, trigger: "blur" }
+          ]
+        }
+      };
     },
-    close() {
-      this.$tab.closePage();
+    methods: {
+      getPublicKey() {
+        return new Promise((resolve, reject) => {
+          getPublicKey()
+            .then(res => {
+              resolve(res)
+            })
+            .catch(error => {
+              reject(error)
+            })
+        })
+      },
+      submit() {
+        this.$refs["form"].validate(valid => {
+          if (valid) {
+            this.getPublicKey().then(res=> {
+              let publicKey = res;
+              const oldPassword = encrypt(this.user.oldPassword, publicKey)
+              const newPassword = encrypt(this.user.newPassword, publicKey)
+              updateUserPwd(oldPassword, newPassword).then(response => {
+                this.$modal.msgSuccess("修改成功");
+              });
+            })
+          }
+        });
+      },
+      close() {
+        this.$tab.closePage();
+      }
     }
-  }
-};
+  };
 </script>

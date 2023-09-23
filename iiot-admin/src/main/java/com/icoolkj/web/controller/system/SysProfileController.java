@@ -1,5 +1,6 @@
 package com.icoolkj.web.controller.system;
 
+import com.icoolkj.common.security.keys.RsaKeyPairHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ import com.icoolkj.system.service.ISysUserService;
 
 /**
  * 个人信息 业务处理
- * 
+ *
  * @author icoolkj
  */
 @RestController
@@ -60,27 +61,22 @@ public class SysProfileController extends BaseController
     public AjaxResult updateProfile(@RequestBody SysUser user)
     {
         LoginUser loginUser = getLoginUser();
-        SysUser sysUser = loginUser.getUser();
-        user.setUserName(sysUser.getUserName());
-        if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user))
+        SysUser currentUser = loginUser.getUser();
+        currentUser.setNickName(user.getNickName());
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPhonenumber(user.getPhonenumber());
+        currentUser.setSex(user.getSex());
+        if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(currentUser))
         {
             return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
         }
-        if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user))
+        if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(currentUser))
         {
             return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        user.setUserId(sysUser.getUserId());
-        user.setPassword(null);
-        user.setAvatar(null);
-        user.setDeptId(null);
-        if (userService.updateUserProfile(user) > 0)
+        if (userService.updateUserProfile(currentUser) > 0)
         {
             // 更新缓存用户信息
-            sysUser.setNickName(user.getNickName());
-            sysUser.setPhonenumber(user.getPhonenumber());
-            sysUser.setEmail(user.getEmail());
-            sysUser.setSex(user.getSex());
             tokenService.setLoginUser(loginUser);
             return success();
         }
@@ -94,6 +90,8 @@ public class SysProfileController extends BaseController
     @PutMapping("/updatePwd")
     public AjaxResult updatePwd(String oldPassword, String newPassword)
     {
+        oldPassword = RsaKeyPairHolder.decryptByPrivateKey(oldPassword);
+        newPassword = RsaKeyPairHolder.decryptByPrivateKey(newPassword);
         LoginUser loginUser = getLoginUser();
         String userName = loginUser.getUsername();
         String password = loginUser.getPassword();

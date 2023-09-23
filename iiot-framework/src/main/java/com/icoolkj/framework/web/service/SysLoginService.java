@@ -1,12 +1,5 @@
 package com.icoolkj.framework.web.service;
 
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import com.icoolkj.common.constant.CacheConstants;
 import com.icoolkj.common.constant.Constants;
 import com.icoolkj.common.constant.UserConstants;
@@ -14,11 +7,8 @@ import com.icoolkj.common.core.domain.entity.SysUser;
 import com.icoolkj.common.core.domain.model.LoginUser;
 import com.icoolkj.common.core.redis.RedisCache;
 import com.icoolkj.common.exception.ServiceException;
-import com.icoolkj.common.exception.user.BlackListException;
-import com.icoolkj.common.exception.user.CaptchaException;
-import com.icoolkj.common.exception.user.CaptchaExpireException;
-import com.icoolkj.common.exception.user.UserNotExistsException;
-import com.icoolkj.common.exception.user.UserPasswordNotMatchException;
+import com.icoolkj.common.exception.user.*;
+import com.icoolkj.common.security.keys.RsaKeyPairHolder;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.MessageUtils;
 import com.icoolkj.common.utils.StringUtils;
@@ -28,10 +18,18 @@ import com.icoolkj.framework.manager.factory.AsyncFactory;
 import com.icoolkj.framework.security.context.AuthenticationContextHolder;
 import com.icoolkj.system.service.ISysConfigService;
 import com.icoolkj.system.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 登录校验方法
- * 
+ *
  * @author icoolkj
  */
 @Component
@@ -45,7 +43,7 @@ public class SysLoginService
 
     @Autowired
     private RedisCache redisCache;
-    
+
     @Autowired
     private ISysUserService userService;
 
@@ -54,7 +52,7 @@ public class SysLoginService
 
     /**
      * 登录验证
-     * 
+     *
      * @param username 用户名
      * @param password 密码
      * @param code 验证码
@@ -63,6 +61,7 @@ public class SysLoginService
      */
     public String login(String username, String password, String code, String uuid)
     {
+        password = RsaKeyPairHolder.decryptByPrivateKey(password);
         // 验证码校验
         validateCaptcha(username, code, uuid);
         // 登录前置校验
@@ -102,7 +101,7 @@ public class SysLoginService
 
     /**
      * 校验验证码
-     * 
+     *
      * @param username 用户名
      * @param code 验证码
      * @param uuid 唯一标识

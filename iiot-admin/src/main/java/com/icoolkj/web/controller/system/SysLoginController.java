@@ -1,21 +1,25 @@
 package com.icoolkj.web.controller.system;
 
-import java.util.List;
-import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import com.icoolkj.common.constant.Constants;
 import com.icoolkj.common.core.domain.AjaxResult;
 import com.icoolkj.common.core.domain.entity.SysMenu;
 import com.icoolkj.common.core.domain.entity.SysUser;
 import com.icoolkj.common.core.domain.model.LoginBody;
+import com.icoolkj.common.security.keys.RSAUtils;
+import com.icoolkj.common.security.keys.RsaKeyPairHolder;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.framework.web.service.SysLoginService;
 import com.icoolkj.framework.web.service.SysPermissionService;
 import com.icoolkj.system.service.ISysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.PublicKey;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 登录验证
@@ -33,6 +37,17 @@ public class SysLoginController
 
     @Autowired
     private SysPermissionService permissionService;
+
+    /**
+     * 获取公钥 前端用来密码加密
+     *
+     * @return
+     */
+    @GetMapping("/publicKey")
+    public String publicKey() {
+        PublicKey publicKey = RsaKeyPairHolder.getPublicKey();
+        return RSAUtils.publicKeyToBase64(publicKey);
+    }
 
     /**
      * 登录方法

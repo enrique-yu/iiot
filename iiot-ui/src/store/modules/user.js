@@ -1,6 +1,6 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout, getInfo, getPublicKey } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-
+import { encrypt } from '@/utils/jsencrypt';
 const user = {
   state: {
     token: getToken(),
@@ -29,19 +29,34 @@ const user = {
   },
 
   actions: {
-    // 登录
-    Login({ commit }, userInfo) {
-      const username = userInfo.username.trim()
-      const password = userInfo.password
-      const code = userInfo.code
-      const uuid = userInfo.uuid
+    getPublicKey() {
       return new Promise((resolve, reject) => {
-        login(username, password, code, uuid).then(res => {
-          setToken(res.token)
-          commit('SET_TOKEN', res.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
+        getPublicKey()
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    // 登录
+    Login({ commit, dispatch }, userInfo) {
+      return new Promise((resolve, reject) => {
+        dispatch('getPublicKey').then(res => {
+          let publicKey = res;
+          const username = userInfo.username.trim();
+          //调用加密方法(传密码和公钥)
+          const password = encrypt(userInfo.password, publicKey);
+          const code = userInfo.code;
+          const uuid = userInfo.uuid;
+          login(username, password, code, uuid).then(res => {
+            setToken(res.token);
+            commit('SET_TOKEN', res.token);
+            resolve()
+          }).catch(error => {
+            reject(error)
+          })
         })
       })
     },
