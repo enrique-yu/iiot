@@ -107,6 +107,20 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/oa/user-auth',
+    component: Layout,
+    hidden: true,
+    permissions: ['oa:user:edit'],
+    children: [
+      {
+        path: 'role/:userId(\\d+)',
+        component: () => import('@/views/oa/user/authRole'),
+        name: 'AuthRole',
+        meta: { title: '分配角色', activeMenu: '/oa/user' }
+      }
+    ]
+  },
+  {
     path: '/system/role-auth',
     component: Layout,
     hidden: true,
@@ -185,7 +199,7 @@ Router.prototype.push = function push(location) {
 }
 
 export default new Router({
-  mode: 'history', // 去掉url中的#
+  mode: 'hash', // 去掉url中的#
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

@@ -1,6 +1,6 @@
 <script>
   export default {
-    props: ["value", "data"], // * 父组件传来的value(v-model="xxx")值
+    props: ["value", "data"], // * 父组件传来的value(v-param="xxx")值
     data() {
       return {
         lngat: [],
@@ -17,7 +17,7 @@
         if (this.data[0] && this.data[1]) return true;
         if (!this.data[0] || !this.data[1]) return false;
       },
-      // ! 计算更新父组件传来的value(v-model="xxx")值,控制对话框显示隐藏
+      // ! 计算更新父组件传来的value(v-param="xxx")值,控制对话框显示隐藏
       dialogVisible: {
         get: function () {
           return this.value;
@@ -139,7 +139,7 @@
 
       // 关闭窗口
       handleClose() {
-        // * 通过默认事件"input",传递参数更新父组件v-model="xxx"绑定的值
+        // * 通过默认事件"input",传递参数更新父组件v-param="xxx"绑定的值
         this.$emit("input", false);
       },
     },

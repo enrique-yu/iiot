@@ -43,21 +43,21 @@ const user = {
     // 登录
     Login({ commit, dispatch }, userInfo) {
       return new Promise((resolve, reject) => {
-        dispatch('getPublicKey').then(res => {
-          let publicKey = res;
-          const username = userInfo.username.trim();
-          //调用加密方法(传密码和公钥)
-          const password = encrypt(userInfo.password, publicKey);
-          const code = userInfo.code;
-          const uuid = userInfo.uuid;
-          login(username, password, code, uuid).then(res => {
-            setToken(res.token);
-            commit('SET_TOKEN', res.token);
-            resolve()
-          }).catch(error => {
-            reject(error)
+          dispatch('getPublicKey').then(res => {
+            let publicKey = res;
+            const username = userInfo.username.trim();
+            //调用加密方法(传密码和公钥)
+            const password = encrypt(userInfo.password, publicKey);
+            const code = userInfo.code;
+            const uuid = userInfo.uuid;
+            login(username, password, code, uuid).then(res => {
+              setToken(res.token);
+              commit('SET_TOKEN', res.token);
+              resolve()
+            }).catch(error => {
+              reject(error)
+            })
           })
-        })
       })
     },
 
