@@ -66,7 +66,7 @@ public class CreditCodeValidator {
      */
     public static boolean CodeValidate(String value) {
         if (StringUtils.isEmpty(value)) {
-            return true;
+            return false;
         }
         // 长度验证
         if (value.length() != 18) {

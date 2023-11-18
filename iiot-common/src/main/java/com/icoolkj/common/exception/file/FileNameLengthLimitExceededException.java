@@ -11,6 +11,6 @@ public class FileNameLengthLimitExceededException extends FileException
 
     public FileNameLengthLimitExceededException(int defaultFileNameLength)
     {
-        super("upload.filename.exceed.length", new Object[] { defaultFileNameLength });
+        super("upload.filename.length.exceed.limit", new Object[] { defaultFileNameLength });
     }
 }

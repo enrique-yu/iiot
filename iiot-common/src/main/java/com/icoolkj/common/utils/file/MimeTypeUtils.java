@@ -56,4 +56,9 @@ public class MimeTypeUtils
                 return "";
         }
     }
+
+    public static boolean isImageFile(String contentType) {
+        return contentType != null && contentType.startsWith("image/");
+    }
+
 }

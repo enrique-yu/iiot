@@ -1,35 +1,27 @@
 package com.icoolkj.framework.web.service;
 
-import java.util.Set;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
+import com.icoolkj.common.constant.Constants;
 import com.icoolkj.common.core.domain.entity.SysRole;
 import com.icoolkj.common.core.domain.model.LoginUser;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.framework.security.context.PermissionContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Set;
 
 /**
  * IcoolKj首创 自定义权限实现，ss取自SpringSecurity首字母
- * 
+ *
  * @author icoolkj
  */
 @Service("ss")
 public class PermissionService
 {
-    /** 所有权限标识 */
-    private static final String ALL_PERMISSION = "*:*:*";
-
-    /** 管理员角色权限标识 */
-    private static final String SUPER_ADMIN = "admin";
-
-    private static final String ROLE_DELIMETER = ",";
-
-    private static final String PERMISSION_DELIMETER = ",";
-
     /**
      * 验证用户是否具备某权限
-     * 
+     *
      * @param permission 权限字符串
      * @return 用户是否具备某权限
      */
@@ -62,7 +54,7 @@ public class PermissionService
     /**
      * 验证用户是否具有以下任意一个权限
      *
-     * @param permissions 以 PERMISSION_NAMES_DELIMETER 为分隔符的权限列表
+     * @param permissions 以 PERMISSION_DELIMETER 为分隔符的权限列表
      * @return 用户是否具有以下任意一个权限
      */
     public boolean hasAnyPermi(String permissions)
@@ -78,7 +70,7 @@ public class PermissionService
         }
         PermissionContextHolder.setContext(permissions);
         Set<String> authorities = loginUser.getPermissions();
-        for (String permission : permissions.split(PERMISSION_DELIMETER))
+        for (String permission : permissions.split(Constants.PERMISSION_DELIMETER))
         {
             if (permission != null && hasPermissions(authorities, permission))
             {
@@ -90,7 +82,7 @@ public class PermissionService
 
     /**
      * 判断用户是否拥有某个角色
-     * 
+     *
      * @param role 角色字符串
      * @return 用户是否具备某角色
      */
@@ -108,7 +100,7 @@ public class PermissionService
         for (SysRole sysRole : loginUser.getUser().getRoles())
         {
             String roleKey = sysRole.getRoleKey();
-            if (SUPER_ADMIN.equals(roleKey) || roleKey.equals(StringUtils.trim(role)))
+            if (Constants.SUPER_ADMIN.equals(roleKey) || roleKey.equals(StringUtils.trim(role)))
             {
                 return true;
             }
@@ -144,7 +136,7 @@ public class PermissionService
         {
             return false;
         }
-        for (String role : roles.split(ROLE_DELIMETER))
+        for (String role : roles.split(Constants.ROLE_DELIMETER))
         {
             if (hasRole(role))
             {
@@ -156,13 +148,14 @@ public class PermissionService
 
     /**
      * 判断是否包含权限
-     * 
+     *
      * @param permissions 权限列表
      * @param permission 权限字符串
      * @return 用户是否具备某权限
      */
     private boolean hasPermissions(Set<String> permissions, String permission)
     {
-        return permissions.contains(ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
+        return permissions.contains(Constants.ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
     }
 }
+
