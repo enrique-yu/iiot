@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '工业物联网平台',
+      title: 'Icoolkj物联网平台',
       logo: logoImg
     }
   }

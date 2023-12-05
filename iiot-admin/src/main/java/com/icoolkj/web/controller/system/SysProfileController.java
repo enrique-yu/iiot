@@ -1,15 +1,5 @@
 package com.icoolkj.web.controller.system;
 
-import com.icoolkj.common.security.keys.RsaKeyPairHolder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import com.icoolkj.common.annotation.Log;
 import com.icoolkj.common.config.IcoolKjConfig;
 import com.icoolkj.common.core.controller.BaseController;
@@ -17,12 +7,16 @@ import com.icoolkj.common.core.domain.AjaxResult;
 import com.icoolkj.common.core.domain.entity.SysUser;
 import com.icoolkj.common.core.domain.model.LoginUser;
 import com.icoolkj.common.enums.BusinessType;
+import com.icoolkj.common.security.keys.RsaKeyPairHolder;
 import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.file.FileUploadUtils;
 import com.icoolkj.common.utils.file.MimeTypeUtils;
 import com.icoolkj.framework.web.service.TokenService;
 import com.icoolkj.system.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 个人信息 业务处理
@@ -68,11 +62,11 @@ public class SysProfileController extends BaseController
         currentUser.setSex(user.getSex());
         if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(currentUser))
         {
-            return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
+            return error("修改用户'" + loginUser.getUsername() + "'失败，手机号码已存在");
         }
         if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(currentUser))
         {
-            return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
+            return error("修改用户'" + loginUser.getUsername() + "'失败，邮箱账号已存在");
         }
         if (userService.updateUserProfile(currentUser) > 0)
         {
@@ -103,10 +97,11 @@ public class SysProfileController extends BaseController
         {
             return error("新密码不能与旧密码相同");
         }
-        if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0)
+        newPassword = SecurityUtils.encryptPassword(newPassword);
+        if (userService.resetUserPwd(userName, newPassword) > 0)
         {
             // 更新缓存用户密码
-            loginUser.getUser().setPassword(SecurityUtils.encryptPassword(newPassword));
+            loginUser.getUser().setPassword(newPassword);
             tokenService.setLoginUser(loginUser);
             return success();
         }

@@ -95,8 +95,8 @@
       <el-table-column label="字典编码" align="center" prop="dictCode" />
       <el-table-column label="字典标签" align="center" prop="dictLabel">
         <template slot-scope="scope">
-          <span v-if="scope.row.listClass == '' || scope.row.listClass == 'default'">{{scope.row.dictLabel}}</span>
-          <el-tag v-else :type="scope.row.listClass == 'primary' ? '' : scope.row.listClass">{{scope.row.dictLabel}}</el-tag>
+          <span v-if="(scope.row.listClass == '' || scope.row.listClass == 'default') && (scope.row.cssClass == '' || scope.row.cssClass == null)">{{ scope.row.dictLabel }}</span>
+          <el-tag v-else :type="scope.row.listClass == 'primary' ? '' : scope.row.listClass" :class="scope.row.cssClass">{{ scope.row.dictLabel }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="字典键值" align="center" prop="dictValue" />
@@ -141,8 +141,8 @@
     />
 
     <!-- 添加或修改参数配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="字典类型">
           <el-input v-model="form.dictType" :disabled="true" />
         </el-form-item>
@@ -179,6 +179,24 @@
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item label="字典扩展项值1" prop="dictExtendValue1">
+          <el-input v-model="form.dictExtendValue1" placeholder="请输入字典扩展项值1" />
+        </el-form-item>
+        <el-form-item label="字典扩展项值2" prop="dictExtendValue2">
+          <el-input v-model="form.dictExtendValue2" placeholder="请输入字典扩展项值2" />
+        </el-form-item>
+        <el-form-item label="字典扩展项值3" prop="dictExtendValue3">
+          <el-input v-model="form.dictExtendValue3" placeholder="请输入字典扩展项值3" />
+        </el-form-item>
+        <el-form-item label="字典扩展项值4" prop="dictExtendValue4">
+          <el-input v-model="form.dictExtendValue4" placeholder="请输入字典扩展项值4" />
+        </el-form-item>
+        <el-form-item label="字典扩展项值5" prop="dictExtendValue5">
+          <el-input v-model="form.dictExtendValue5" placeholder="请输入字典扩展项值5" />
+        </el-form-item>
+        <el-form-item label="字典扩展项值6" prop="dictExtendValue6">
+          <el-input v-model="form.dictExtendValue6" placeholder="请输入字典扩展项值6" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -251,8 +269,8 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        dictName: undefined,
         dictType: undefined,
+        dictLabel: undefined,
         status: undefined
       },
       // 表单参数

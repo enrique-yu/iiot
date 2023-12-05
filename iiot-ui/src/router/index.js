@@ -189,7 +189,21 @@ export const dynamicRoutes = [
         meta: { title: '配置文件目录', activeMenu: '/file/catalog' }
       }
     ]
-  }
+  },
+  {
+    path: '/project/project-kanban',
+    component: Layout,
+    hidden: true,
+    permissions: ['card:project:view'],
+    children: [
+      {
+        path: 'view/:projectId(\\d+)',
+        component: () => import('@/views/card/project/projectIndex'),
+        name: 'projectKanban',
+        meta: { title: '项目看板' }
+      }
+    ]
+  },
 ]
 
 // 防止连续点击多次路由报错

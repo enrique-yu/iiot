@@ -20,7 +20,7 @@ import com.icoolkj.system.service.ISysAreaService;
 
 /**
  * 系统区域配置Controller
- * 
+ *
  * @author icoolkj
  * @date 2023-03-05
  */
@@ -38,7 +38,6 @@ public class SysAreaController extends BaseController
     @GetMapping("/list")
     public AjaxResult list(SysArea sysArea)
     {
-        startPage();
         List<SysArea> areas = sysAreaService.selectSysAreaList(sysArea);
         return success(areas);
     }

@@ -263,7 +263,7 @@
           ],
           domainAccount: [
             { required: true, message: "组织账号不能为空", trigger: "blur" },
-            { min: 2, max: 20, message: '组织账号长度必须介于 2 和 20 之间', trigger: 'blur' }
+            { min: 2, max: 30, message: '组织账号长度必须介于 2 和 30 之间', trigger: 'blur' }
           ],
           domainStatus: [
             { required: true, message: "组织账号有效状态不能为空", trigger: "blur" }
