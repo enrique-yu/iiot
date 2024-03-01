@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileUploadRequestMapper">
+
+    <resultMap type="FileUploadRequest" id="FileUploadRequestResult">
+        <result property="fileCatalogRelationId"    column="file_catalog_relation_id"    />
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigTemplate"    column="file_config_template"    />
+        <result property="fileConfigSuffixName"    column="file_config_suffix_name"    />
+        <result property="fileConfigContentType"    column="file_config_content_type"    />
+        <result property="fileConfigMust"    column="file_config_must"    />
+        <result property="fileConfigMinNum"    column="file_config_min_num"    />
+        <result property="fileConfigMaxNum"    column="file_config_max_num"    />
+        <result property="fileConfigMinSize"    column="file_config_min_size"    />
+        <result property="fileConfigMaxSize"    column="file_config_max_size"    />
+        <result property="fileConfigSortNum"    column="file_config_sort_num"    />
+    </resultMap>
+
+    <select id="getConfigDataListByCataLogCode" parameterType="String" resultMap="FileUploadRequestResult">
+        select cl.file_catalog_code, cl.file_catalog_name, cl.file_catalog_desc,
+               cf.file_config_code, cf.file_config_name, cf.file_config_template, cf.file_config_desc,
+               rl.file_catalog_relation_id, rl.file_config_suffix_name, rl.file_config_content_type, rl.file_config_must, rl.file_config_min_num, rl.file_config_max_num, rl.file_config_min_size, rl.file_config_max_size, rl.file_config_sort_num
+        from file_catalog_config cl
+        inner join file_catalog_relation rl on rl.file_catalog_code = cl.file_catalog_code
+        inner join file_config cf on cf.file_config_code = rl.file_config_code
+        where cl.file_catalog_status = "0" and cl.del_flag = "0"
+        and rl.file_catalog_relation_status = "0" and rl.del_flag = "0"
+        and cf.file_config_status = "0" and cf.del_flag = "0"
+        and cl.file_catalog_code = #{fileCatalogCode}
+        order by rl.file_config_sort_num
+    </select>
+
+</mapper>

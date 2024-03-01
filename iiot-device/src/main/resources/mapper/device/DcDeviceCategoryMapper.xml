@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.device.mapper.DcDeviceCategoryMapper">
+    
+    <resultMap type="DcDeviceCategory" id="DcDeviceCategoryResult">
+        <result property="deviceCategoryId"    column="device_category_id"    />
+        <result property="categoryParentId"    column="category_parent_id"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="categorySn"    column="category_sn"    />
+        <result property="categoryLevel"    column="category_level"    />
+        <result property="categorySortNum"    column="category_sort_num"    />
+        <result property="categoryDesc"    column="category_desc"    />
+        <result property="domainId"    column="domain_id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDcDeviceCategoryVo">
+        select device_category_id, category_parent_id, category_name, category_sn, category_level, category_sort_num, category_desc, domain_id, del_flag, create_by, create_time, update_by, update_time from dc_device_category
+    </sql>
+
+    <select id="selectDcDeviceCategoryList" parameterType="DcDeviceCategory" resultMap="DcDeviceCategoryResult">
+        <include refid="selectDcDeviceCategoryVo"/>
+        <where>  
+            <if test="categoryParentId != null  and categoryParentId != ''"> and category_parent_id = #{categoryParentId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categorySn != null  and categorySn != ''"> and category_sn = #{categorySn}</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="categorySortNum != null "> and category_sort_num = #{categorySortNum}</if>
+            <if test="categoryDesc != null  and categoryDesc != ''"> and category_desc = #{categoryDesc}</if>
+            <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
+        </where>
+    </select>
+
+    <select id="selectDcDeviceCategoryExcludeChildList" parameterType="DcDeviceCategory" resultMap="DcDeviceCategoryResult">
+        <include refid="selectDcDeviceCategoryVo"/>
+        <where>
+            NOT FIND_IN_SET(device_category_id, getDeviceCategoryChildList(#{deviceCategoryId}))
+            <if test="categoryParentId != null  and categoryParentId != ''"> and category_parent_id = #{categoryParentId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categorySn != null  and categorySn != ''"> and category_sn = #{categorySn}</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="categorySortNum != null "> and category_sort_num = #{categorySortNum}</if>
+            <if test="categoryDesc != null  and categoryDesc != ''"> and category_desc = #{categoryDesc}</if>
+            <if test="domainId != null  and domainId != ''"> and domain_id = #{domainId}</if>
+        </where>
+    </select>
+    
+    <select id="selectDcDeviceCategoryByDeviceCategoryId" parameterType="String" resultMap="DcDeviceCategoryResult">
+        <include refid="selectDcDeviceCategoryVo"/>
+        where device_category_id = #{deviceCategoryId}
+    </select>
+        
+    <insert id="insertDcDeviceCategory" parameterType="DcDeviceCategory">
+        insert into dc_device_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceCategoryId != null">device_category_id,</if>
+            <if test="categoryParentId != null">category_parent_id,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="categorySn != null">category_sn,</if>
+            <if test="categoryLevel != null">category_level,</if>
+            <if test="categorySortNum != null">category_sort_num,</if>
+            <if test="categoryDesc != null">category_desc,</if>
+            <if test="domainId != null">domain_id,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceCategoryId != null">#{deviceCategoryId},</if>
+            <if test="categoryParentId != null">#{categoryParentId},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="categorySn != null">#{categorySn},</if>
+            <if test="categoryLevel != null">#{categoryLevel},</if>
+            <if test="categorySortNum != null">#{categorySortNum},</if>
+            <if test="categoryDesc != null">#{categoryDesc},</if>
+            <if test="domainId != null">#{domainId},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDcDeviceCategory" parameterType="DcDeviceCategory">
+        update dc_device_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryParentId != null">category_parent_id = #{categoryParentId},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="categorySn != null">category_sn = #{categorySn},</if>
+            <if test="categoryLevel != null">category_level = #{categoryLevel},</if>
+            <if test="categorySortNum != null">category_sort_num = #{categorySortNum},</if>
+            <if test="categoryDesc != null">category_desc = #{categoryDesc},</if>
+            <if test="domainId != null">domain_id = #{domainId},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where device_category_id = #{deviceCategoryId}
+    </update>
+
+    <delete id="deleteDcDeviceCategoryByDeviceCategoryId" parameterType="String">
+        delete from dc_device_category where device_category_id = #{deviceCategoryId}
+    </delete>
+
+    <select id="hasChildById" parameterType="String" resultType="int">
+		select count(1) from dc_device_category
+		where del_flag = '0' and category_parent_id = #{deviceCategoryId} limit 1
+	</select>
+
+    <select id="checkDeviceById" parameterType="String" resultType="int">
+		select count(1) from dc_device_basic where device_category_id = #{deviceCategoryId} and del_flag = '0'
+	</select>
+
+
+</mapper>

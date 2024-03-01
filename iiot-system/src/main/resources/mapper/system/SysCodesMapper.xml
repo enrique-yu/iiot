@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.system.mapper.SysCodesMapper">
+    
+    <resultMap type="SysCodes" id="SysCodesResult">
+        <result property="id"    column="id"    />
+        <result property="prefix"    column="prefix"    />
+        <result property="code"    column="code"    />
+        <result property="increment"    column="increment"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectSysCodesVo">
+        select id, prefix, code, increment, create_time from sys_codes
+    </sql>
+
+    <select id="selectSysCodesList" parameterType="SysCodes" resultMap="SysCodesResult">
+        <include refid="selectSysCodesVo"/>
+        <where>  
+            <if test="prefix != null  and prefix != ''"> and prefix = #{prefix}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="increment != null "> and increment = #{increment}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysCodesById" parameterType="Long" resultMap="SysCodesResult">
+        <include refid="selectSysCodesVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectMaxIncrementByPrefix" parameterType="String" resultType="Long">
+        select max(increment) from sys_codes where prefix = #{prefix}
+    </select>
+        
+    <insert id="insertSysCodes" parameterType="SysCodes" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_codes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prefix != null and prefix != ''">prefix,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="increment != null">increment,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prefix != null and prefix != ''">#{prefix},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="increment != null">#{increment},</if>
+            sysdate()
+         </trim>
+    </insert>
+
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileDetailMapper">
+    
+    <resultMap type="FileDetail" id="FileDetailResult">
+        <result property="fileDetailId"    column="file_detail_id"    />
+        <result property="fileCatalogRelationId"    column="file_catalog_relation_id"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="uploadName"    column="upload_name"    />
+        <result property="uploadOriginalName"    column="upload_original_name"    />
+        <result property="uploadSuffixName"    column="upload_suffix_name"    />
+        <result property="uploadContentType"    column="upload_content_type"    />
+        <result property="uploadSize"    column="upload_size"    />
+        <result property="uploadParentPath"    column="upload_parent_path"    />
+        <result property="uploadPath"    column="upload_path"    />
+        <result property="uploadThumbnailPath"    column="upload_thumbnail_path"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="uploadDesc"    column="upload_desc"    />
+        <result property="uploadSortNum"    column="upload_sort_num"    />
+        <result property="uploadStatus"    column="upload_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileDetailVo">
+        select file_detail_id, file_catalog_relation_id, file_catalog_name, file_catalog_code, file_config_name, file_config_code,
+               upload_name, upload_original_name, upload_suffix_name, upload_content_type, upload_size, upload_parent_path, upload_path, upload_thumbnail_path,
+               upload_time, upload_desc, upload_sort_num,
+               upload_status, del_flag, create_by, create_time, update_by, update_time
+          from file_detail
+    </sql>
+
+    <select id="selectFileDetailList" parameterType="FileDetail" resultMap="FileDetailResult">
+        <include refid="selectFileDetailVo"/>
+        <where>  
+            <if test="fileCatalogRelationId != null  and fileCatalogRelationId != ''"> and file_catalog_relation_id = #{fileCatalogRelationId}</if>
+            <if test="fileCatalogName != null  and fileCatalogName != ''"> and file_catalog_name like concat('%', #{fileCatalogName}, '%')</if>
+            <if test="fileCatalogCode != null  and fileCatalogCode != ''"> and file_catalog_code = #{fileCatalogCode}</if>
+            <if test="fileConfigName != null  and fileConfigName != ''"> and file_config_name like concat('%', #{fileConfigName}, '%')</if>
+            <if test="fileConfigCode != null  and fileConfigCode != ''"> and file_config_code = #{fileConfigCode}</if>
+            <if test="uploadName != null  and uploadName != ''"> and upload_name like concat('%', #{uploadName}, '%')</if>
+            <if test="uploadOriginalName != null  and uploadOriginalName != ''"> and upload_original_name like concat('%', #{uploadOriginalName}, '%')</if>
+            <if test="uploadSuffixName != null  and uploadSuffixName != ''"> and upload_suffix_name like concat('%', #{uploadSuffixName}, '%')</if>
+            <if test="uploadContentType != null  and uploadContentType != ''"> and upload_content_type = #{uploadContentType}</if>
+            <if test="uploadSize != null "> and upload_size = #{uploadSize}</if>
+            <if test="uploadParentPath != null  and uploadParentPath != ''"> and upload_parent_path = #{uploadParentPath}</if>
+            <if test="uploadPath != null  and uploadPath != ''"> and upload_path = #{uploadPath}</if>
+            <if test="uploadThumbnailPath != null  and uploadThumbnailPath != ''"> and upload_thumbnail_path = #{uploadThumbnailPath}</if>
+            <if test="uploadTime != null "> and upload_time = #{uploadTime}</if>
+            <if test="uploadDesc != null  and uploadDesc != ''"> and upload_desc = #{uploadDesc}</if>
+            <if test="uploadSortNum != null "> and upload_sort_num = #{uploadSortNum}</if>
+            <if test="uploadStatus != null  and uploadStatus != ''"> and upload_status = #{uploadStatus}</if>
+        </where>
+        order by upload_time desc
+    </select>
+    
+    <select id="selectFileDetailByFileDetailId" parameterType="String" resultMap="FileDetailResult">
+        <include refid="selectFileDetailVo"/>
+        where file_detail_id = #{fileDetailId}
+    </select>
+        
+    <insert id="insertFileDetail" parameterType="FileDetail">
+        insert into file_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileDetailId != null">file_detail_id,</if>
+            <if test="fileCatalogRelationId != null and fileCatalogRelationId != ''">file_catalog_relation_id,</if>
+            <if test="fileCatalogName != null and fileCatalogName != ''">file_catalog_name,</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code,</if>
+            <if test="fileConfigName != null and fileConfigName != ''">file_config_name,</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">file_config_code,</if>
+            <if test="uploadName != null and uploadName != ''">upload_name,</if>
+            <if test="uploadOriginalName != null and uploadOriginalName != ''">upload_original_name,</if>
+            <if test="uploadSuffixName != null and uploadSuffixName != ''">upload_suffix_name,</if>
+            <if test="uploadContentType != null and uploadContentType != ''">upload_content_type,</if>
+            <if test="uploadSize != null">upload_size,</if>
+            <if test="uploadParentPath != null and uploadParentPath != ''">upload_parent_path,</if>
+            <if test="uploadPath != null and uploadPath != ''">upload_path,</if>
+            <if test="uploadThumbnailPath != null">upload_thumbnail_path,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="uploadDesc != null">upload_desc,</if>
+            <if test="uploadSortNum != null">upload_sort_num,</if>
+            <if test="uploadStatus != null and uploadStatus != ''">upload_status,</if>
+            <if test="delFlag != null and delFlag != ''">del_flag,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileDetailId != null">#{fileDetailId},</if>
+            <if test="fileCatalogRelationId != null and fileCatalogRelationId != ''">#{fileCatalogRelationId},</if>
+            <if test="fileCatalogName != null and fileCatalogName != ''">#{fileCatalogName},</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">#{fileCatalogCode},</if>
+            <if test="fileConfigName != null and fileConfigName != ''">#{fileConfigName},</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">#{fileConfigCode},</if>
+            <if test="uploadName != null and uploadName != ''">#{uploadName},</if>
+            <if test="uploadOriginalName != null and uploadOriginalName != ''">#{uploadOriginalName},</if>
+            <if test="uploadSuffixName != null and uploadSuffixName != ''">#{uploadSuffixName},</if>
+            <if test="uploadContentType != null and uploadContentType != ''">#{uploadContentType},</if>
+            <if test="uploadSize != null">#{uploadSize},</if>
+            <if test="uploadParentPath != null and uploadParentPath != ''">#{uploadParentPath},</if>
+            <if test="uploadPath != null and uploadPath != ''">#{uploadPath},</if>
+            <if test="uploadThumbnailPath != null">#{uploadThumbnailPath},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="uploadDesc != null">#{uploadDesc},</if>
+            <if test="uploadSortNum != null">#{uploadSortNum},</if>
+            <if test="uploadStatus != null and uploadStatus != ''">#{uploadStatus},</if>
+            <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileDetail" parameterType="FileDetail">
+        update file_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileCatalogRelationId != null and fileCatalogRelationId != ''">file_catalog_relation_id = #{fileCatalogRelationId},</if>
+            <if test="fileCatalogName != null and fileCatalogName != ''">file_catalog_name = #{fileCatalogName},</if>
+            <if test="fileCatalogCode != null and fileCatalogCode != ''">file_catalog_code = #{fileCatalogCode},</if>
+            <if test="fileConfigName != null and fileConfigName != ''">file_config_name = #{fileConfigName},</if>
+            <if test="fileConfigCode != null and fileConfigCode != ''">file_config_code = #{fileConfigCode},</if>
+            <if test="uploadName != null and uploadName != ''">upload_name = #{uploadName},</if>
+            <if test="uploadOriginalName != null and uploadOriginalName != ''">upload_original_name = #{uploadOriginalName},</if>
+            <if test="uploadSuffixName != null and uploadSuffixName != ''">upload_suffix_name = #{uploadSuffixName},</if>
+            <if test="uploadContentType != null and uploadContentType != ''">upload_content_type = #{uploadContentType},</if>
+            <if test="uploadSize != null">upload_size = #{uploadSize},</if>
+            <if test="uploadParentPath != null and uploadParentPath != ''">upload_parent_path = #{uploadParentPath},</if>
+            <if test="uploadPath != null and uploadPath != ''">upload_path = #{uploadPath},</if>
+            <if test="uploadThumbnailPath != null">upload_thumbnail_path = #{uploadThumbnailPath},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="uploadDesc != null">upload_desc = #{uploadDesc},</if>
+            <if test="uploadSortNum != null">upload_sort_num = #{uploadSortNum},</if>
+            <if test="uploadStatus != null and uploadStatus != ''">upload_status = #{uploadStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where file_detail_id = #{fileDetailId}
+    </update>
+
+    <delete id="deleteFileDetailByFileDetailId" parameterType="String">
+        delete from file_detail where file_detail_id = #{fileDetailId}
+    </delete>
+
+    <delete id="deleteFileDetailByFileDetailIds" parameterType="String">
+        delete from file_detail where file_detail_id in 
+        <foreach item="fileDetailId" collection="array" open="(" separator="," close=")">
+            #{fileDetailId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileUploadResponseMapper">
+
+    <resultMap type="FileUploadResponse" id="FileUploadResponseResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="fileConfRelId"    column="file_conf_rel_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="fileSuffixName"    column="file_suffix_name"    />
+    </resultMap>
+
+    <select id="selectFileByRelationIdAndBizId" resultMap="FileUploadResponseResult">
+        select r.file_detail_id as file_id,
+               f.file_catalog_relation_id as file_conf_rel_id,
+               f.upload_name as file_name,
+               f.upload_suffix_name as file_suffix_name
+        from file_relation_record r
+          left join file_detail f on r.file_detail_id = f.file_detail_id
+        where r.del_flag = '0' and f.del_flag = '0'
+        and f.file_catalog_relation_id = #{fileCatalogRelationId}
+        and r.business_record_id = #{businessRecordId}
+    </select>
+
+</mapper>

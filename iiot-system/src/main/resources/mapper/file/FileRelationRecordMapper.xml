@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.file.mapper.FileRelationRecordMapper">
+
+    <resultMap type="FileRelationRecord" id="FileRelationRecordResult">
+        <result property="fileRelationRecordId"    column="file_relation_record_id"    />
+        <result property="businessRecordId"    column="business_record_id"    />
+        <result property="fileDetailId"    column="file_detail_id"    />
+        <result property="recordStatus"    column="record_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <association property="fileDetail"    column="file_detail_id" javaType="FileDetail" resultMap="fileDetailResult" />
+    </resultMap>
+
+    <resultMap type="FileDetail" id="fileDetailResult">
+        <result property="fileDetailId"    column="file_detail_id"    />
+        <result property="fileCatalogRelationId"    column="file_catalog_relation_id"    />
+        <result property="fileCatalogName"    column="file_catalog_name"    />
+        <result property="fileCatalogCode"    column="file_catalog_code"    />
+        <result property="fileConfigName"    column="file_config_name"    />
+        <result property="fileConfigCode"    column="file_config_code"    />
+        <result property="uploadName"    column="upload_name"    />
+        <result property="uploadOriginalName"    column="upload_original_name"    />
+        <result property="uploadSuffixName"    column="upload_suffix_name"    />
+        <result property="uploadContentType"    column="upload_content_type"    />
+        <result property="uploadSize"    column="upload_size"    />
+        <result property="uploadParentPath"    column="upload_parent_path"    />
+        <result property="uploadPath"    column="upload_path"    />
+        <result property="uploadThumbnailPath"    column="upload_thumbnail_path"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="uploadDesc"    column="upload_desc"    />
+        <result property="uploadSortNum"    column="upload_sort_num"    />
+        <result property="uploadStatus"    column="upload_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFileRelationRecordVo">
+        select r.file_relation_record_id, r.business_record_id, r.file_detail_id, r.record_status, r.del_flag, r.create_by, r.create_time, r.update_by, r.update_time,
+               f.file_catalog_relation_id, f.file_catalog_name, f.file_catalog_code, f.file_config_name, f.file_config_code,
+               f.upload_name, f.upload_original_name, f.upload_suffix_name, f.upload_content_type, f.upload_size, f.upload_parent_path, f.upload_path, f.upload_thumbnail_path,
+               f.upload_time, f.upload_desc, f.upload_sort_num,
+               f.upload_status, f.del_flag, f.create_by, f.create_time, f.update_by, f.update_time
+          from file_relation_record r
+          left join file_detail f on r.file_detail_id = f.file_detail_id
+    </sql>
+
+    <select id="selectFileRelationRecordList" parameterType="FileRelationRecord" resultMap="FileRelationRecordResult">
+        <include refid="selectFileRelationRecordVo"/>
+        <where>
+            r.del_flag = '0' and f.del_flag = '0'
+            <if test="businessRecordId != null  and businessRecordId != ''"> and r.business_record_id = #{businessRecordId}</if>
+            <if test="fileDetailId != null  and fileDetailId != ''"> and r.file_detail_id = #{fileDetailId}</if>
+            <if test="recordStatus != null  and recordStatus != ''"> and r.record_status = #{recordStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectFileRelationRecordByFileRelationRecordId" parameterType="String" resultMap="FileRelationRecordResult">
+        <include refid="selectFileRelationRecordVo"/>
+        where r.del_flag = '0' and f.del_flag = '0'
+          and r.file_relation_record_id = #{fileRelationRecordId}
+    </select>
+
+    <insert id="insertFileRelationRecord" parameterType="FileRelationRecord">
+        insert into file_relation_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileRelationRecordId != null">file_relation_record_id,</if>
+            <if test="businessRecordId != null and businessRecordId != ''">business_record_id,</if>
+            <if test="fileDetailId != null and fileDetailId != ''">file_detail_id,</if>
+            <if test="recordStatus != null and recordStatus != ''">record_status,</if>
+            <if test="delFlag != null and delFlag != ''">del_flag,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileRelationRecordId != null">#{fileRelationRecordId},</if>
+            <if test="businessRecordId != null and businessRecordId != ''">#{businessRecordId},</if>
+            <if test="fileDetailId != null and fileDetailId != ''">#{fileDetailId},</if>
+            <if test="recordStatus != null and recordStatus != ''">#{recordStatus},</if>
+            <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileRelRecByBizId" parameterType="FileRelationRecord">
+        update file_relation_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordStatus != null and recordStatus != ''">record_status = #{recordStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where business_record_id = #{businessRecordId}
+    </update>
+
+    <update id="updateFileRelRecByBizIdAndFileId" parameterType="FileRelationRecord">
+        update file_relation_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordStatus != null and recordStatus != ''">record_status = #{recordStatus},</if>
+            <if test="delFlag != null and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where business_record_id = #{businessRecordId}
+          and file_detail_id = #{fileDetailId}
+    </update>
+
+</mapper>
