@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="SysDictType" id="SysDictTypeResult">
 		<id     property="dictId"     column="dict_id"     />
+		<result property="domainId"   column="domain_id"   />
 		<result property="dictName"   column="dict_name"   />
 		<result property="dictType"   column="dict_type"   />
 		<result property="status"     column="status"      />
@@ -16,13 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDictTypeVo">
-        select dict_id, dict_name, dict_type, status, create_by, create_time, remark 
+        select dict_id, domain_id, dict_name, dict_type, status, create_by, create_time, remark
 		from sys_dict_type
     </sql>
 
 	<select id="selectDictTypeList" parameterType="SysDictType" resultMap="SysDictTypeResult">
 	    <include refid="selectDictTypeVo"/>
 		<where>
+			<if test="domainId != null and domainId != ''">
+				AND domain_id = #{domainId}
+			</if>
 		    <if test="dictName != null and dictName != ''">
 				AND dict_name like concat('%', #{dictName}, '%')
 			</if>
@@ -74,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="updateDictType" parameterType="SysDictType">
  		update sys_dict_type
  		<set>
+			<!--<if test="domainId != null and domainId != ''">domain_id = #{domainId},</if>-->
  			<if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
  			<if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
  			<if test="status != null">status = #{status},</if>
@@ -87,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<insert id="insertDictType" parameterType="SysDictType">
  		insert into sys_dict_type(
 		    <if test="dictId != null and dictId != ''">dict_id,</if>
+			<if test="domainId != null and domainId != ''">domain_id,</if>
  			<if test="dictName != null and dictName != ''">dict_name,</if>
  			<if test="dictType != null and dictType != ''">dict_type,</if>
  			<if test="status != null">status,</if>
@@ -95,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			create_time
  		)values(
 		    <if test="dictId != null and dictId != ''">#{dictId},</if>
+			<if test="domainId != null and domainId != ''">#{domainId},</if>
  			<if test="dictName != null and dictName != ''">#{dictName},</if>
  			<if test="dictType != null and dictType != ''">#{dictType},</if>
  			<if test="status != null">#{status},</if>

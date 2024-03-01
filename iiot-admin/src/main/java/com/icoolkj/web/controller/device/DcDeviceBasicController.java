@@ -25,7 +25,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
 
 /**
  * 设备基础Controller
- * 
+ *
  * @author icoolkj
  * @date 2023-03-17
  */

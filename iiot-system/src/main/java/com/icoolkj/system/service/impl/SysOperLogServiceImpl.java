@@ -66,7 +66,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteOperLogByIds(String[] operIds)
     {
         operLogMapper.insertHisByIds(operIds);

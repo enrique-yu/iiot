@@ -3,6 +3,7 @@ package com.icoolkj.file.service.impl;
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileCatalogConfigMapper;
@@ -54,8 +55,10 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int insertFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
-        fileCatalogConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileCatalogConfig.setCreateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileCatalogConfig.getCreateBy())){  // 创建信息不存在，则生成
+            fileCatalogConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileCatalogConfig.setCreateTime(DateUtils.getNowDate());
+        }
         return fileCatalogConfigMapper.insertFileCatalogConfig(fileCatalogConfig);
     }
 
@@ -68,8 +71,10 @@ public class FileCatalogConfigServiceImpl implements IFileCatalogConfigService
     @Override
     public int updateFileCatalogConfig(FileCatalogConfig fileCatalogConfig)
     {
-        fileCatalogConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileCatalogConfig.setUpdateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileCatalogConfig.getUpdateBy())){  // 更新信息不存在，则生成
+            fileCatalogConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileCatalogConfig.setUpdateTime(DateUtils.getNowDate());
+        }
         return fileCatalogConfigMapper.updateFileCatalogConfig(fileCatalogConfig);
     }
 

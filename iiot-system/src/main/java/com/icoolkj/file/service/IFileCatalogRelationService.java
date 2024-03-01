@@ -1,7 +1,8 @@
 package com.icoolkj.file.service;
 
-import java.util.List;
 import com.icoolkj.file.domain.FileCatalogRelation;
+
+import java.util.List;
 
 /**
  * 文件与目录关系Service接口
@@ -57,6 +58,5 @@ public interface IFileCatalogRelationService
      * @return
      */
     public List<FileCatalogRelation> selectUnallocatedFileList(FileCatalogRelation fileCatalogRelation);
-
 
 }

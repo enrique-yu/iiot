@@ -1,9 +1,12 @@
 package com.icoolkj.common.exception.file;
 
+import com.icoolkj.common.constant.FileErrorCode;
+
 /**
- * 文件名大小限制异常类
- * 
  * @author icoolkj
+ * @version 1.0
+ * @description FileSizeLimitExceededException  文件大小限制异常类
+ * @createDate 2023/09/23
  */
 public class FileSizeLimitExceededException extends FileException
 {
@@ -11,6 +14,6 @@ public class FileSizeLimitExceededException extends FileException
 
     public FileSizeLimitExceededException(long defaultMaxSize)
     {
-        super("upload.filesize.exceed.limit", new Object[] { defaultMaxSize });
+        super(FileErrorCode.FILE_SIZE_LIMIT_EXCEEDED.getCode(), new Object[] { defaultMaxSize });
     }
 }

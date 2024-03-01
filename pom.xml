@@ -18,18 +18,22 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <druid.version>1.2.20</druid.version>
+        <druid.version>1.2.16</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
-        <fastjson.version>2.0.43</fastjson.version>
-        <oshi.version>6.4.8</oshi.version>
+        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+        <fastjson.version>2.0.41</fastjson.version>
+        <oshi.version>6.4.6</oshi.version>
         <commons.io.version>2.13.0</commons.io.version>
         <commons.collections.version>3.2.2</commons.collections.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <jSerialComm.version>2.9.3</jSerialComm.version>
+        <redission.starter.version>3.16.6</redission.starter.version>
+        <hutool.version>5.8.20</hutool.version>
+        <fastdfs.client.version>1.27.2</fastdfs.client.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -135,6 +139,24 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redission.starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.tobato</groupId>
+                <artifactId>fastdfs-client</artifactId>
+                <version>${fastdfs.client.version}</version>
+            </dependency>
+
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.icoolkj</groupId>
@@ -170,6 +192,27 @@
                 <version>${iiot.version}</version>
             </dependency>
 
+            <!-- mqtt server 模块-->
+            <dependency>
+                <groupId>com.icoolkj</groupId>
+                <artifactId>iiot-mqtt</artifactId>
+                <version>${iiot.version}</version>
+            </dependency>
+
+            <!-- 物联网模块-->
+            <dependency>
+                <groupId>com.icoolkj</groupId>
+                <artifactId>iiot-core</artifactId>
+                <version>${iiot.version}</version>
+            </dependency>
+
+            <!-- 设备信息模块-->
+            <dependency>
+                <groupId>com.icoolkj</groupId>
+                <artifactId>iiot-device</artifactId>
+                <version>${iiot.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -180,13 +223,11 @@
         <module>iiot-quartz</module>
         <module>iiot-generator</module>
         <module>iiot-common</module>
+        <module>iiot-mqtt</module>
+        <module>iiot-core</module>
+        <module>iiot-device</module>
     </modules>
     <packaging>pom</packaging>
-
-
-    <dependencies>
-
-    </dependencies>
 
     <build>
         <plugins>

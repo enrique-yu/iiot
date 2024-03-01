@@ -1,5 +1,7 @@
 import Vue from 'vue';
 
+import './mock'
+
 import Cookies from 'js-cookie';
 
 import Element from 'element-ui';
@@ -30,7 +32,9 @@ import FileUpload from "@/components/FileUpload";
 // 图片上传组件
 import ImageUpload from "@/components/ImageUpload";
 // 图片预览组件
-import ImagePreview from "@/components/ImagePreview"
+import ImagePreview from "@/components/ImagePreview";
+// 文件上传组件
+import FilesUpload from "@/components/FilesUpload";
 // 字典标签组件
 import DictTag from '@/components/DictTag';
 // 头部标签组件
@@ -58,6 +62,7 @@ Vue.component('Editor', Editor);
 Vue.component('FileUpload', FileUpload);
 Vue.component('ImageUpload', ImageUpload);
 Vue.component('ImagePreview', ImagePreview);
+Vue.component('FilesUpload', FilesUpload);
 Vue.use(directive);
 Vue.use(plugins);
 Vue.use(VueMeta);

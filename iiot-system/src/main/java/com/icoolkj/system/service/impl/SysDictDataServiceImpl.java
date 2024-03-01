@@ -2,6 +2,7 @@ package com.icoolkj.system.service.impl;
 
 import java.util.List;
 
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     public int insertDictData(SysDictData data)
     {
         data.setDictCode(IdWorker.nextId().toString());
+        data.setDomainId(SecurityUtils.getDomainId());
         int row = dictDataMapper.insertDictData(data);
         if (row > 0)
         {

@@ -169,7 +169,7 @@
 
       // 返回按钮
       handleClose() {
-        const obj = {path: "/file/catalog"};
+        const obj = {path: "/system/file/catalog"};
         this.$tab.closeOpenPage(obj);
       },
 

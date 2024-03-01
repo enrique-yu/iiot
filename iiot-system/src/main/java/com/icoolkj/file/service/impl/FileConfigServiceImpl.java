@@ -3,6 +3,7 @@ package com.icoolkj.file.service.impl;
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.icoolkj.file.mapper.FileConfigMapper;
@@ -54,8 +55,10 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int insertFileConfig(FileConfig fileConfig)
     {
-        fileConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileConfig.setCreateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileConfig.getCreateBy())){  // 创建信息不存在，则生成
+            fileConfig.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileConfig.setCreateTime(DateUtils.getNowDate());
+        }
         return fileConfigMapper.insertFileConfig(fileConfig);
     }
 
@@ -68,8 +71,10 @@ public class FileConfigServiceImpl implements IFileConfigService
     @Override
     public int updateFileConfig(FileConfig fileConfig)
     {
-        fileConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileConfig.setUpdateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileConfig.getUpdateBy())){  // 更新信息不存在，则生成
+            fileConfig.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileConfig.setUpdateTime(DateUtils.getNowDate());
+        }
         return fileConfigMapper.updateFileConfig(fileConfig);
     }
 

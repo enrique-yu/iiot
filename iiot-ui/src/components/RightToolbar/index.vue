@@ -8,18 +8,12 @@
         <el-button size="mini" circle icon="el-icon-refresh" @click="refresh()" />
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="显隐列" placement="top" v-if="columns">
-        <el-button size="mini" circle icon="el-icon-menu" @click="showColumn()" v-if="showColumnsType == 'transfer'"/>
-        <el-dropdown trigger="click" :hide-on-click="false" style="padding-left: 12px" v-if="showColumnsType == 'checkbox'">
-          <el-button size="mini" circle icon="el-icon-menu" />
-          <el-dropdown-menu slot="dropdown">
-            <template v-for="item in columns">
-              <el-dropdown-item :key="item.key">
-                <el-checkbox :checked="item.visible" @change="checkboxChange($event, item.label)" :label="item.label" />
-              </el-dropdown-item>
-            </template>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-button size="mini" circle icon="el-icon-menu" @click="showColumn()" />
       </el-tooltip>
+      <div class="top-right-btn top-table-toggle" v-if="toggleCard">
+        <el-button size="mini" icon="el-icon-s-unfold" :disabled="!showCard" @click="changeCard(false)" />
+        <el-button size="mini" icon="el-icon-menu" :disabled="showCard" @click="changeCard(true)" />
+      </div>
     </el-row>
     <el-dialog :title="title" :visible.sync="open" append-to-body>
       <el-transfer
@@ -45,29 +39,28 @@ export default {
     };
   },
   props: {
-    /* 是否显示检索条件 */
     showSearch: {
       type: Boolean,
       default: true,
     },
-    /* 显隐列信息 */
     columns: {
       type: Array,
     },
-    /* 是否显示检索图标 */
     search: {
       type: Boolean,
       default: true,
     },
-    /* 显隐列类型（transfer穿梭框、checkbox复选框） */
-    showColumnsType: {
-      type: String,
-      default: "checkbox",
-    },
-    /* 右外边距 */
     gutter: {
       type: Number,
       default: 10,
+    },
+    toggleCard: {
+      type: Boolean,
+      default: false,
+    },
+    showCard: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -80,12 +73,10 @@ export default {
     }
   },
   created() {
-    if (this.showColumnsType == 'transfer') {
-      // 显隐列初始默认隐藏列
-      for (let item in this.columns) {
-        if (this.columns[item].visible === false) {
-          this.value.push(parseInt(item));
-        }
+    // 显隐列初始默认隐藏列
+    for (let item in this.columns) {
+      if (this.columns[item].visible === false) {
+        this.value.push(parseInt(item));
       }
     }
   },
@@ -109,10 +100,10 @@ export default {
     showColumn() {
       this.open = true;
     },
-    // 勾选
-    checkboxChange(event, label) {
-      this.columns.filter(item => item.label == label)[0].visible = event;
-    }
+    // 切换列表卡片展示
+    changeCard(show) {
+      this.$emit("update:showCard", show);
+    },
   },
 };
 </script>
@@ -125,5 +116,14 @@ export default {
 }
 ::v-deep .el-transfer__button:first-child {
   margin-bottom: 10px;
+}
+.top-table-toggle {
+  float: right;
+  margin-left: 1em;
+}
+.top-table-toggle button {
+  margin: auto -1px;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
 }
 </style>

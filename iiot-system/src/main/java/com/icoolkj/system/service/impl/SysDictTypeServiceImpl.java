@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
+import com.icoolkj.common.utils.SecurityUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -177,6 +178,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
     public int insertDictType(SysDictType dict)
     {
         dict.setDictId(IdWorker.nextId().toString());
+        dict.setDomainId(SecurityUtils.getDomainId());
         int row = dictTypeMapper.insertDictType(dict);
         if (row > 0)
         {

@@ -1,61 +1,19 @@
 package com.icoolkj.common.exception.file;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
+import com.icoolkj.common.constant.FileErrorCode;
 
 /**
- * 文件上传异常类
- * 
  * @author icoolkj
+ * @version 1.0
+ * @description FileUploadException 文件上传异常类
+ * @createDate 2023/09/23 17:55
  */
-public class FileUploadException extends Exception
+public class FileUploadException extends FileException
 {
-
     private static final long serialVersionUID = 1L;
 
-    private final Throwable cause;
-
-    public FileUploadException()
+    public FileUploadException(String defaultMessage)
     {
-        this(null, null);
-    }
-
-    public FileUploadException(final String msg)
-    {
-        this(msg, null);
-    }
-
-    public FileUploadException(String msg, Throwable cause)
-    {
-        super(msg);
-        this.cause = cause;
-    }
-
-    @Override
-    public void printStackTrace(PrintStream stream)
-    {
-        super.printStackTrace(stream);
-        if (cause != null)
-        {
-            stream.println("Caused by:");
-            cause.printStackTrace(stream);
-        }
-    }
-
-    @Override
-    public void printStackTrace(PrintWriter writer)
-    {
-        super.printStackTrace(writer);
-        if (cause != null)
-        {
-            writer.println("Caused by:");
-            cause.printStackTrace(writer);
-        }
-    }
-
-    @Override
-    public Throwable getCause()
-    {
-        return cause;
+        super(FileErrorCode.FILE_UPLOAD_ERROR.getCode(), new Object[] { defaultMessage });
     }
 }

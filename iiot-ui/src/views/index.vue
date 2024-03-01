@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       // 版本号
-      version: "3.8.5"
+      version: "3.8.6"
     };
   },
   methods: {

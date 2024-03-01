@@ -61,6 +61,26 @@
             <artifactId>iiot-generator</artifactId>
         </dependency>
 
+        <!-- mqtt server 模块-->
+        <dependency>
+            <groupId>com.icoolkj</groupId>
+            <artifactId>iiot-mqtt</artifactId>
+            <version>${iiot.version}</version>
+        </dependency>
+
+        <!-- 物联网-->
+        <dependency>
+            <groupId>com.icoolkj</groupId>
+            <artifactId>iiot-core</artifactId>
+        </dependency>
+
+        <!-- 设备信息模块-->
+        <dependency>
+            <groupId>com.icoolkj</groupId>
+            <artifactId>iiot-device</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>

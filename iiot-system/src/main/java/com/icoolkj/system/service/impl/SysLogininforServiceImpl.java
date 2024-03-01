@@ -66,7 +66,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * 清空系统登录日志
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void cleanLogininfor()
     {
         String domainId = SecurityUtils.getDomainId();

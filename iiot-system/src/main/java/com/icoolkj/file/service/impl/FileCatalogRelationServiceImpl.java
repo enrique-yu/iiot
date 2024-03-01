@@ -3,6 +3,7 @@ package com.icoolkj.file.service.impl;
 import java.util.List;
 import com.icoolkj.common.utils.DateUtils;
 import com.icoolkj.common.utils.SecurityUtils;
+import com.icoolkj.common.utils.StringUtils;
 import com.icoolkj.common.utils.uuid.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,9 +56,13 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     @Override
     public int insertFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
-        fileCatalogRelation.setFileCatalogRelationId(IdWorker.nextId().toString());
-        fileCatalogRelation.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileCatalogRelation.setCreateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileCatalogRelation.getFileCatalogRelationId())) { // 主键不存在，则生成
+            fileCatalogRelation.setFileCatalogRelationId(IdWorker.nextId().toString());
+        }
+        if (StringUtils.isEmpty(fileCatalogRelation.getCreateBy())){  // 创建信息不存在，则生成
+            fileCatalogRelation.setCreateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileCatalogRelation.setCreateTime(DateUtils.getNowDate());
+        }
         return fileCatalogRelationMapper.insertFileCatalogRelation(fileCatalogRelation);
     }
 
@@ -70,8 +75,10 @@ public class FileCatalogRelationServiceImpl implements IFileCatalogRelationServi
     @Override
     public int updateFileCatalogRelation(FileCatalogRelation fileCatalogRelation)
     {
-        fileCatalogRelation.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
-        fileCatalogRelation.setUpdateTime(DateUtils.getNowDate());
+        if (StringUtils.isEmpty(fileCatalogRelation.getUpdateBy())){  // 更新信息不存在，则生成
+            fileCatalogRelation.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
+            fileCatalogRelation.setUpdateTime(DateUtils.getNowDate());
+        }
         return fileCatalogRelationMapper.updateFileCatalogRelation(fileCatalogRelation);
     }
 

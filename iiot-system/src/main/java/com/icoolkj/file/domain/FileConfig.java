@@ -1,9 +1,8 @@
 package com.icoolkj.file.domain;
 
+import com.icoolkj.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.icoolkj.common.annotation.Excel;
-import com.icoolkj.common.core.domain.BaseEntity;
 
 /**
  * 文件配置对象 file_config
@@ -19,19 +18,15 @@ public class FileConfig extends BaseEntity
     private String fileConfigCode;
 
     /** 文件配置名称 */
-    @Excel(name = "文件配置名称")
     private String fileConfigName;
 
     /** 文件配置模板 */
-    @Excel(name = "文件配置模板")
     private String fileConfigTemplate;
 
     /** 文件配置备注信息 */
-    @Excel(name = "文件配置备注信息")
     private String fileConfigDesc;
 
     /** 状态（0正常 1停用） */
-    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String fileConfigStatus;
 
     /** 删除标记（0代表存在 2代表删除） */

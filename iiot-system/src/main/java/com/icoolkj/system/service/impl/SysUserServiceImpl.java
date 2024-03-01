@@ -255,7 +255,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertUser(SysUser user)
     {
         // 新增用户信息
@@ -313,7 +313,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @param roleIds 角色组
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insertUserAuth(String userId, String[] roleIds)
     {
         userRoleMapper.deleteUserRoleByUserId(userId);
@@ -445,7 +445,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteUserById(String userId)
     {
         // 删除用户与角色关联
@@ -462,7 +462,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteUserByIds(String[] userIds)
     {
         for (String userId : userIds)

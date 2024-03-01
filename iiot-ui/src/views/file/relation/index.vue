@@ -72,8 +72,8 @@
     <el-table v-loading="loading" :data="relationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="状态" align="center" prop="fileCatalogRelationStatus" />
-      <el-table-column label="文件目录名称" align="center" prop="fileCatalogName" />
-      <el-table-column label="文件名称" align="center" prop="fileConfigName" />
+      <el-table-column label="文件目录名称" align="center" prop="fileCatalogConfig.fileCatalogName" />
+      <el-table-column label="文件名称" align="center" prop="fileConfig.fileConfigName" />
       <el-table-column label="文件类型" align="center" prop="fileConfigType" />
       <el-table-column label="是否必传【0非必须 1必须】" align="center" prop="fileConfigMust" />
       <el-table-column label="最小文件数量" align="center" prop="fileConfigMinNum" />

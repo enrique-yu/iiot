@@ -98,7 +98,7 @@ public class SysDomainServiceImpl implements ISysDomainService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateSysDomain(SysDomain sysDomain)
     {
         sysDomain.setUpdateBy(SecurityUtils.getLoginUser().getUser().getUserName());
