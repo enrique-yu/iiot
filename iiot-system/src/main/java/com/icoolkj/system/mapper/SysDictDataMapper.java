@@ -7,7 +7,7 @@ import com.icoolkj.common.core.domain.entity.SysDictData;
 /**
  * 字典表 数据层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface SysDictDataMapper
 {

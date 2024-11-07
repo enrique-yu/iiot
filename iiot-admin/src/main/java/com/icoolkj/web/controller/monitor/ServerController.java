@@ -10,7 +10,7 @@ import com.icoolkj.framework.web.domain.Server;
 /**
  * 服务器监控
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/monitor/server")

@@ -16,7 +16,7 @@ import org.tio.core.ChannelContext;
  * 消息监听
  * 优点：性能损失小
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class MqttServerMessageListener implements IMqttMessageListener , SmartInitializingSingleton {

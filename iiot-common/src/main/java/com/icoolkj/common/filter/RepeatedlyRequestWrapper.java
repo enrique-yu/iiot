@@ -15,7 +15,7 @@ import com.icoolkj.common.constant.Constants;
 /**
  * 构建可重复读取inputStream的request
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper
 {

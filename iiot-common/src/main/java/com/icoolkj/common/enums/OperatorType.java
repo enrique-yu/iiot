@@ -3,7 +3,7 @@ package com.icoolkj.common.enums;
 /**
  * 操作人类别
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public enum OperatorType
 {

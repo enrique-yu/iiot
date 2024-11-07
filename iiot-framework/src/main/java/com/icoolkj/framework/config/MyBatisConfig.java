@@ -27,7 +27,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * Mybatis支持*匹配扫描包
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration
 public class MyBatisConfig

@@ -1,7 +1,7 @@
 package com.icoolkj.common.exception;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description 业务异常封装类
  * @createDate 2023/05/03 11:29

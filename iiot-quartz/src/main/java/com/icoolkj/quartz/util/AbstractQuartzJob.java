@@ -21,7 +21,7 @@ import com.icoolkj.quartz.service.ISysJobLogService;
 /**
  * 抽象quartz调用
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public abstract class AbstractQuartzJob implements Job
 {

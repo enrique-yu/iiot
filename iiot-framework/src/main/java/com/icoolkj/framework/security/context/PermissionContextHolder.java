@@ -7,7 +7,7 @@ import com.icoolkj.common.core.text.Convert;
 /**
  * 权限信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class PermissionContextHolder
 {

@@ -6,7 +6,7 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 /**
  * 验证码文本生成器
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class KaptchaTextCreator extends DefaultTextCreator
 {

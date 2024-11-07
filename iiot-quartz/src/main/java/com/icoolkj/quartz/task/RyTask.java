@@ -6,7 +6,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 定时任务调度测试
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component("ryTask")
 public class RyTask

@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysPost;
 /**
  * 岗位信息 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysPostService
 {

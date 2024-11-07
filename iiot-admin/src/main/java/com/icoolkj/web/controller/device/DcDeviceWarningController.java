@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description 设备预警管理
  * @createDate 2023/04/02 16:34

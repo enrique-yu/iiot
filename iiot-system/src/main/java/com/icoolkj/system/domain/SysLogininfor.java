@@ -9,7 +9,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 系统访问记录表 sys_logininfor
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysLogininfor extends BaseEntity
 {

@@ -3,7 +3,7 @@ package com.icoolkj.common.utils.file;
 /**
  * 媒体类型工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class MimeTypeUtils
 {

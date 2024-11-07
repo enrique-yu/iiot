@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 设备分类信息Controller
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-01
  */
 @RestController

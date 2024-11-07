@@ -6,7 +6,7 @@ import com.icoolkj.common.core.domain.entity.SysUser;
 /**
  * 用户 业务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysUserService
 {

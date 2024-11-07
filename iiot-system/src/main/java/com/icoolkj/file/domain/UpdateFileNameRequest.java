@@ -1,7 +1,7 @@
 package com.icoolkj.file.domain;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description UpdateFileNameRequest
  * @createDate 2023/09/24

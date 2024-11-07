@@ -12,7 +12,7 @@ import com.icoolkj.system.service.ISysNoticeService;
 /**
  * 公告 服务层实现
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService

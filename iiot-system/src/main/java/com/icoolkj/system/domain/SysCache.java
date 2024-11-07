@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 缓存信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysCache
 {

@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * 文件目录配置对象 file_catalog_config
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 public class FileCatalogConfig extends BaseEntity

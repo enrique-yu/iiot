@@ -16,7 +16,7 @@ import com.icoolkj.quartz.util.CronUtils;
 /**
  * 定时任务调度表 sys_job
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysJob extends BaseEntity
 {

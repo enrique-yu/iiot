@@ -3,7 +3,7 @@ package com.icoolkj.system.domain;
 /**
  * 当前在线会话
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysUserOnline
 {

@@ -7,7 +7,7 @@ import com.icoolkj.common.utils.spring.SpringUtils;
 /**
  * 获取i18n资源文件
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class MessageUtils
 {

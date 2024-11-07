@@ -12,7 +12,7 @@ import com.icoolkj.common.annotation.Excel;
 /**
  * Entity基类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class BaseEntity implements Serializable
 {

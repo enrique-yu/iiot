@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 文件明细Service接口
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-09-17
  */
 public interface IFileDetailService

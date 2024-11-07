@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysConfig;
 /**
  * 参数配置 数据层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface SysConfigMapper
 {

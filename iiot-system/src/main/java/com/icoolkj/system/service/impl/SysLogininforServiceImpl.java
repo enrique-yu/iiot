@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 系统访问日志情况信息 服务层处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysLogininforServiceImpl implements ISysLogininforService

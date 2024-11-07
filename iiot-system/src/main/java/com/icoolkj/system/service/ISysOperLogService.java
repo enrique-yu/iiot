@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysOperLog;
 /**
  * 操作日志 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysOperLogService
 {

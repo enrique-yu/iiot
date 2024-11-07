@@ -10,7 +10,7 @@ import com.icoolkj.common.xss.Xss;
 /**
  * 通知公告表 sys_notice
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysNotice extends BaseEntity
 {

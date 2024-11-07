@@ -22,7 +22,7 @@ import com.icoolkj.quartz.service.ISysJobLogService;
 /**
  * 调度日志操作处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/monitor/jobLog")

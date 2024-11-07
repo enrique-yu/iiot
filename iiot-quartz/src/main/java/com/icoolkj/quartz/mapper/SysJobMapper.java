@@ -6,7 +6,7 @@ import com.icoolkj.quartz.domain.SysJob;
 /**
  * 调度任务信息 数据层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface SysJobMapper
 {

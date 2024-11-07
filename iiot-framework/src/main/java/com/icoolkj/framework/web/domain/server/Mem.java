@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.Arith;
 /**
  * 內存相关信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class Mem
 {

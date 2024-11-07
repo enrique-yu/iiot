@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysConfig;
 /**
  * 参数配置 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysConfigService
 {

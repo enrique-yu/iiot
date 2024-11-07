@@ -25,7 +25,7 @@ import com.icoolkj.system.service.ISysConfigService;
 /**
  * 参数配置 信息操作处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/system/config")

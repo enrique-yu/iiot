@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description FileUploadResponseMapper
  * @createDate 2023/09/29

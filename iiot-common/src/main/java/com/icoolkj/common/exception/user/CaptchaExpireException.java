@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.user;
 /**
  * 验证码失效异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class CaptchaExpireException extends UserException
 {

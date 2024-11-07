@@ -9,7 +9,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 操作日志记录表 oper_log
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysOperLog extends BaseEntity
 {

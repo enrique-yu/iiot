@@ -24,7 +24,7 @@ import com.icoolkj.framework.config.ServerConfig;
 /**
  * 通用请求处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/common")

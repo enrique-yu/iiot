@@ -7,7 +7,7 @@ import com.icoolkj.common.core.domain.entity.SysDictType;
 /**
  * 字典 业务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysDictTypeService
 {

@@ -6,7 +6,7 @@ import com.icoolkj.file.domain.FileCatalogConfig;
 /**
  * 文件目录配置Service接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 public interface IFileCatalogConfigService 

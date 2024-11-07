@@ -6,7 +6,7 @@ import com.icoolkj.file.domain.FileRecordDetail;
 /**
  * 文件记录明细Service接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 public interface IFileRecordDetailService 

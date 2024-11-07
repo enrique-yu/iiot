@@ -7,7 +7,7 @@ import com.icoolkj.device.domain.DcDeviceBasic;
 /**
  * 设备基础Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-17
  */
 public interface DcDeviceBasicMapper 

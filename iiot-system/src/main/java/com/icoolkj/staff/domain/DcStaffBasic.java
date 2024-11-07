@@ -10,7 +10,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 人员基本信息对象 dc_staff_basic
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-17
  */
 public class DcStaffBasic extends BaseEntity

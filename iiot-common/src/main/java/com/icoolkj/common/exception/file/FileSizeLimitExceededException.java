@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.file;
 import com.icoolkj.common.constant.FileErrorCode;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description FileSizeLimitExceededException  文件大小限制异常类
  * @createDate 2023/09/23

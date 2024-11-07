@@ -15,7 +15,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 角色表 sys_role
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysRole extends BaseEntity
 {

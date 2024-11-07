@@ -23,7 +23,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
 /**
  * 系统组织权限Controller
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-08
  */
 @RestController

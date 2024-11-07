@@ -12,7 +12,7 @@ import org.tio.core.ChannelContext;
  * 订阅校验，
  * 按照求和业务进行扩展
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration(proxyBeanMethods = false)
 public class MqttSubscribeValidator implements IMqttServerSubscribeValidator {

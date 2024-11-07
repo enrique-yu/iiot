@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysRoleMenu;
 /**
  * 角色与菜单关联表 数据层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface SysRoleMenuMapper
 {

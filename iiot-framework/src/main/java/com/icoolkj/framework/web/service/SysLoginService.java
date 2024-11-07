@@ -30,7 +30,7 @@ import javax.annotation.Resource;
 /**
  * 登录校验方法
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component
 public class SysLoginService

@@ -14,7 +14,7 @@ import com.alibaba.fastjson2.filter.Filter;
 /**
  * Redis使用FastJson序列化
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>
 {

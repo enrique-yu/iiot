@@ -7,7 +7,7 @@ import com.icoolkj.common.utils.ServletUtils;
 /**
  * 服务相关配置
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component
 public class ServerConfig

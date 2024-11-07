@@ -22,7 +22,7 @@ import com.icoolkj.quartz.util.ScheduleUtils;
 /**
  * 定时任务调度信息 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysJobServiceImpl implements ISysJobService

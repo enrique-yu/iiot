@@ -18,7 +18,7 @@ import com.icoolkj.framework.interceptor.RepeatSubmitInterceptor;
 /**
  * 通用配置
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration
 public class ResourcesConfig implements WebMvcConfigurer

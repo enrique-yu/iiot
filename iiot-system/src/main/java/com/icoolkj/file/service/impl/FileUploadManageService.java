@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Date;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description IFileUploadManageServiceImpl
  * @createDate 2023/09/10

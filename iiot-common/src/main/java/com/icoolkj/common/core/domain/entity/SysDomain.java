@@ -11,7 +11,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 系统组织账户对象 sys_domain
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-08
  */
 public class SysDomain extends BaseEntity

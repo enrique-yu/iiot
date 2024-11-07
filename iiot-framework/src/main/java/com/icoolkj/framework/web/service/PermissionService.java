@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * IcoolKj首创 自定义权限实现，ss取自SpringSecurity首字母
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service("ss")
 public class PermissionService

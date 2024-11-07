@@ -14,7 +14,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * Repeatable 过滤器
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class RepeatableFilter implements Filter
 {

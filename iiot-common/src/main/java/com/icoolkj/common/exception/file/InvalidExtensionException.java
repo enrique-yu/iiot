@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 文件上传 误异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class InvalidExtensionException extends FileUploadException
 {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * 读取项目相关配置
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component
 @ConfigurationProperties(prefix = "icoolkj")

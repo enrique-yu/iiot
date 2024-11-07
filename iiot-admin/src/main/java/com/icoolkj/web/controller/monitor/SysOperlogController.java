@@ -25,7 +25,7 @@ import com.icoolkj.system.service.ISysOperLogService;
 /**
  * 操作日志记录
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/monitor/operlog")

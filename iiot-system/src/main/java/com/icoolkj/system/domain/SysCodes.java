@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 编码生成记录对象 sys_codes
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-11-11
  */
 public class SysCodes implements Serializable

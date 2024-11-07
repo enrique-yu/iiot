@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 文件明细对象 file_detail
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-09-17
  */
 public class FileDetail extends BaseEntity

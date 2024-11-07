@@ -6,7 +6,7 @@ import com.icoolkj.generator.domain.GenTableColumn;
 /**
  * 业务字段 数据层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface GenTableColumnMapper
 {

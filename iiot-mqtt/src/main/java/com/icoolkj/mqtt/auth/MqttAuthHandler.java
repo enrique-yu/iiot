@@ -10,7 +10,7 @@ import org.tio.core.ChannelContext;
  * mqtt tcp、websocket 认证，
  * 按照需求和业务进行扩展
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration(proxyBeanMethods = false)
 public class MqttAuthHandler implements IMqttServerAuthHandler {

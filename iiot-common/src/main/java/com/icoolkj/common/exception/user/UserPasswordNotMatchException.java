@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.user;
 /**
  * 用户密码不正确或不符合规范异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class UserPasswordNotMatchException extends UserException
 {

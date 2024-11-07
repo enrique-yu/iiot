@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.file;
 import com.icoolkj.common.constant.FileErrorCode;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description FileTypeNotAllowedException 文件类型限制上传异常类
  * @createDate 2023/09/23

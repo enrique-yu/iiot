@@ -11,7 +11,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 业务表 gen_table
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class GenTable extends BaseEntity
 {

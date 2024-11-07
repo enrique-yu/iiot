@@ -17,7 +17,7 @@ import com.icoolkj.common.xss.Xss;
 /**
  * 用户对象 sys_user
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysUser extends BaseEntity
 {

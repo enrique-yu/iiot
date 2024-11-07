@@ -9,7 +9,7 @@ import org.tio.core.ChannelContext;
 /**
  * mqtt 连接状态
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class MqttConnectStatusListener implements IMqttConnectStatusListener {

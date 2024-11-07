@@ -7,7 +7,7 @@ import com.icoolkj.common.utils.DateUtils;
 /**
  * JVM相关信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class Jvm
 {

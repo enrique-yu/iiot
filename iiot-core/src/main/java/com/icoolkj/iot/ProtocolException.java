@@ -4,7 +4,7 @@ package com.icoolkj.iot;
 /**
  * 协议类异常
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class ProtocolException extends FrameworkException {
 

@@ -6,7 +6,7 @@ import com.icoolkj.staff.domain.DcStaffBasic;
 /**
  * 人员基本信息Service接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-17
  */
 public interface IDcStaffBasicService 

@@ -9,7 +9,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * AES加密工具类
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  **/
 public class AESUtils {
 
@@ -52,7 +52,7 @@ public class AESUtils {
      * @param key  密钥，长度16
      * @param iv   偏移量，长度16
      * @return 明文
-     * @author icoolkj
+     * @author:haiwei.yu01
      * AES算法解密密文
      */
     public static String decryptAES(String data, String key, String iv) {
@@ -77,7 +77,7 @@ public class AESUtils {
      * @param key  密钥，长度16
      * @param iv   偏移量，长度16
      * @return 密文
-     * @author icoolkj
+     * @author:haiwei.yu01
      * AES算法加密明文
      */
     public static String encryptAES(String data, String key, String iv) {

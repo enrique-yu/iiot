@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.job;
 /**
  * 计划策略异常
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class TaskException extends Exception
 {

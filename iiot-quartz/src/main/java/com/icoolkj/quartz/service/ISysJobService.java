@@ -8,7 +8,7 @@ import com.icoolkj.quartz.domain.SysJob;
 /**
  * 定时任务调度信息信息 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysJobService
 {

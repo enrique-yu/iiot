@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 /**
  * 设备分类信息对象 dc_device_category
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-01
  */
 public class DcDeviceCategory extends BaseEntity

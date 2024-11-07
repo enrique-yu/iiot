@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 数据视觉中心Controller
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-17
  */
 @RestController

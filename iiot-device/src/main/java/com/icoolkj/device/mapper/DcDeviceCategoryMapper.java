@@ -6,7 +6,7 @@ import com.icoolkj.device.domain.DcDeviceCategory;
 /**
  * 设备分类信息Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-01
  */
 public interface DcDeviceCategoryMapper 

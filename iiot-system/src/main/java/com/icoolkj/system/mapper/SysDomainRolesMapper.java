@@ -6,7 +6,7 @@ import com.icoolkj.common.core.domain.entity.SysDomainRoles;
 /**
  * 系统组织权限Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-08
  */
 public interface SysDomainRolesMapper 

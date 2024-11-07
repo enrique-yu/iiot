@@ -16,7 +16,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 认证失败处理类 返回未授权
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable

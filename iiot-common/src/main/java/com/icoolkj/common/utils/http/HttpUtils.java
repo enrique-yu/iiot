@@ -25,7 +25,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 通用http发送方法
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class HttpUtils
 {

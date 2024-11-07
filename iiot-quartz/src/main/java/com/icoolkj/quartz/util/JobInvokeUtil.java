@@ -11,7 +11,7 @@ import com.icoolkj.quartz.domain.SysJob;
 /**
  * 任务执行工具
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class JobInvokeUtil
 {

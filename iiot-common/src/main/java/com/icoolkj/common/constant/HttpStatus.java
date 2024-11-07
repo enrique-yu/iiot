@@ -3,7 +3,7 @@ package com.icoolkj.common.constant;
 /**
  * 返回状态码
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class HttpStatus
 {

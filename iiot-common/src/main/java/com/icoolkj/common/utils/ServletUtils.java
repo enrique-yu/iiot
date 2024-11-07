@@ -20,7 +20,7 @@ import com.icoolkj.common.core.text.Convert;
 /**
  * 客户端工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class ServletUtils
 {

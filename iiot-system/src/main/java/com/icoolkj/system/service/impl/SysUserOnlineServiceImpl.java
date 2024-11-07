@@ -9,7 +9,7 @@ import com.icoolkj.system.service.ISysUserOnlineService;
 /**
  * 在线用户 服务层处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService

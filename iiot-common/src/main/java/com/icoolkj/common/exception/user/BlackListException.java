@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.user;
 /**
  * 黑名单IP异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class BlackListException extends UserException
 {

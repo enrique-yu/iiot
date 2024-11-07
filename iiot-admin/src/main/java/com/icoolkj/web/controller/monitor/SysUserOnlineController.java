@@ -26,7 +26,7 @@ import com.icoolkj.system.service.ISysUserOnlineService;
 /**
  * 在线用户监控
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/monitor/online")

@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.user;
 /**
  * 用户错误最大次数异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class UserPasswordRetryLimitExceedException extends UserException
 {

@@ -23,7 +23,7 @@ import com.icoolkj.framework.security.handle.LogoutSuccessHandlerImpl;
 /**
  * spring security配置
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter

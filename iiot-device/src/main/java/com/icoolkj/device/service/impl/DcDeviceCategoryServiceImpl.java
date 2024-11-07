@@ -13,7 +13,7 @@ import com.icoolkj.device.service.IDcDeviceCategoryService;
 /**
  * 设备分类信息Service业务层处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-01
  */
 @Service

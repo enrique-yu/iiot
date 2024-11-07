@@ -3,7 +3,7 @@ package com.icoolkj.file.domain;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description StorePathExtended
  * @createDate 2023/09/24

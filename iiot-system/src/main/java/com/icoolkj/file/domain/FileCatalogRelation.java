@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 /**
  * 文件与目录关系对象 file_catalog_relation
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-09-16
  */
 public class FileCatalogRelation extends BaseEntity

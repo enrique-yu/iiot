@@ -31,7 +31,7 @@ import com.icoolkj.generator.service.IGenTableService;
 /**
  * 代码生成 操作处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/tool/gen")

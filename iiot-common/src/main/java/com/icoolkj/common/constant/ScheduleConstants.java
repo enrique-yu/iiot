@@ -3,7 +3,7 @@ package com.icoolkj.common.constant;
 /**
  * 任务调度通用常量
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class ScheduleConstants
 {

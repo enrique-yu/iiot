@@ -38,7 +38,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 角色信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/system/role")

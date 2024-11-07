@@ -20,7 +20,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 /**
  * 全局异常处理器
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

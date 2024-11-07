@@ -6,7 +6,7 @@ import com.icoolkj.file.domain.FileRecord;
 /**
  * 文件记录Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 public interface FileRecordMapper 

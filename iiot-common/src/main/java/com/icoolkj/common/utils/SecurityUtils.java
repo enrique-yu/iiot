@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * 安全服务工具类
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SecurityUtils
 {

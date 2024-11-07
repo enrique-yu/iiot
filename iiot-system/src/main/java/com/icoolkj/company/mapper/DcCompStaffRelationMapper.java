@@ -6,7 +6,7 @@ import com.icoolkj.company.domain.DcCompStaffRelation;
 /**
  * 企业人员关系Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-22
  */
 public interface DcCompStaffRelationMapper 

@@ -28,7 +28,7 @@ import com.icoolkj.system.service.ISysMenuService;
 /**
  * 菜单信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/system/menu")

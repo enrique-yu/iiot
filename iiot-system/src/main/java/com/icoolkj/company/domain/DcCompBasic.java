@@ -10,7 +10,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 企业基本信息对象 dc_comp_basic
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-10
  */
 public class DcCompBasic extends BaseEntity

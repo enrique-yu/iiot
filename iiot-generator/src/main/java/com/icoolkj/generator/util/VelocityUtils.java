@@ -16,7 +16,7 @@ import com.icoolkj.generator.domain.GenTableColumn;
 /**
  * 模板处理工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class VelocityUtils
 {

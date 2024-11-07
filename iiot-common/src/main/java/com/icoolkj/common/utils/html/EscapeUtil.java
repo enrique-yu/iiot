@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 转义和反转义工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class EscapeUtil
 {

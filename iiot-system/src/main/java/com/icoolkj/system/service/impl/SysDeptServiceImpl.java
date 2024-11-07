@@ -27,7 +27,7 @@ import com.icoolkj.system.service.ISysDeptService;
 /**
  * 部门管理 服务实现
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysDeptServiceImpl implements ISysDeptService

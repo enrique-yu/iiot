@@ -11,7 +11,7 @@ import com.icoolkj.common.enums.LimitType;
 /**
  * 限流注解
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

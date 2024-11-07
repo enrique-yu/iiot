@@ -16,7 +16,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 图片处理工具类
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class ImageUtils
 {

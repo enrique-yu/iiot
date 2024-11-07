@@ -27,7 +27,7 @@ import com.icoolkj.common.core.page.TableDataInfo;
 /**
  * 文件目录配置Controller
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 @RestController

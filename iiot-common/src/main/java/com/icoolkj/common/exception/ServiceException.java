@@ -3,7 +3,7 @@ package com.icoolkj.common.exception;
 /**
  * 业务异常
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public final class ServiceException extends RuntimeException
 {

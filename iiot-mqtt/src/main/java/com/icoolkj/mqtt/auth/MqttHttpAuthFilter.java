@@ -15,7 +15,7 @@ import org.tio.http.common.HttpResponse;
  * mqtt http 接口认证，
  * 按照需求和业务进行扩展
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration(proxyBeanMethods = false)
 public class MqttHttpAuthFilter implements HttpFilter, InitializingBean {

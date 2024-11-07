@@ -18,7 +18,7 @@ import com.icoolkj.common.utils.uuid.Seq;
 /**
  * 文件上传工具类
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class FileUploadUtils
 {

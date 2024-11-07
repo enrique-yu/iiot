@@ -12,7 +12,7 @@ import com.icoolkj.common.utils.http.HttpUtils;
 /**
  * 获取地址类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class AddressUtils
 {

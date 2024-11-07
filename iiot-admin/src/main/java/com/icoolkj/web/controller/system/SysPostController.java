@@ -25,7 +25,7 @@ import com.icoolkj.system.service.ISysPostService;
 /**
  * 岗位信息操作处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/system/post")

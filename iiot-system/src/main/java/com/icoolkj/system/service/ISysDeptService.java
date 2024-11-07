@@ -7,7 +7,7 @@ import com.icoolkj.common.core.domain.entity.SysDept;
 /**
  * 部门管理 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysDeptService
 {

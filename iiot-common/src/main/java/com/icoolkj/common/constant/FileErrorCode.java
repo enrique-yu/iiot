@@ -1,7 +1,7 @@
 package com.icoolkj.common.constant;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description FileErrorCode  文件异常代码（枚举类）
  * @createDate 2023/09/23

@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.file;
 import com.icoolkj.common.exception.base.BaseException;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description  FileException
  * @createDate 2023/09/23

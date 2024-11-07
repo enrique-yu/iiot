@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 编码生成记录Service接口
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-11-11
  */
 public interface ISysCodesService

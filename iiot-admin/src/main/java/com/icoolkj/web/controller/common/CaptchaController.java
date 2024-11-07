@@ -23,7 +23,7 @@ import com.icoolkj.system.service.ISysConfigService;
 /**
  * 验证码操作处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 public class CaptchaController

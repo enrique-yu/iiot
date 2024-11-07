@@ -7,7 +7,7 @@ import com.icoolkj.quartz.domain.SysJob;
 /**
  * 定时任务处理（禁止并发执行）
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  *
  */
 @DisallowConcurrentExecution

@@ -3,7 +3,7 @@ package com.icoolkj.common.enums;
 /**
  * 用户状态
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public enum UserStatus
 {

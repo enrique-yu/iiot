@@ -6,7 +6,7 @@ import com.icoolkj.common.utils.ServletUtils;
 /**
  * 表格数据处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class TableSupport
 {

@@ -21,7 +21,7 @@ import com.icoolkj.quartz.domain.SysJob;
 /**
  * 定时任务工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  *
  */
 public class ScheduleUtils

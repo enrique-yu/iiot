@@ -3,7 +3,7 @@ package com.icoolkj.file.domain;
 import java.util.Date;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description FileUploadResponse
  * @createDate 2023/09/20 20:05

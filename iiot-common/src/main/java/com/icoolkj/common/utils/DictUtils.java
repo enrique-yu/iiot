@@ -11,7 +11,7 @@ import com.icoolkj.common.utils.spring.SpringUtils;
 /**
  * 字典工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class DictUtils
 {

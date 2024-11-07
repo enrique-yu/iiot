@@ -3,7 +3,7 @@ package com.icoolkj.common.exception.user;
 /**
  * 用户不存在异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class UserNotExistsException extends UserException
 {

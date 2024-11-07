@@ -5,7 +5,7 @@ import com.icoolkj.common.exception.base.BaseException;
 /**
  * 用户信息异常类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class UserException extends BaseException
 {

@@ -6,7 +6,7 @@ import com.icoolkj.system.domain.SysUserOnline;
 /**
  * 在线用户 服务层
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public interface ISysUserOnlineService
 {

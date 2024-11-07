@@ -42,7 +42,7 @@ import com.icoolkj.generator.util.VelocityUtils;
 /**
  * 业务 服务层实现
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class GenTableServiceImpl implements IGenTableService

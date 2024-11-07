@@ -9,7 +9,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 首页
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 public class SysIndexController

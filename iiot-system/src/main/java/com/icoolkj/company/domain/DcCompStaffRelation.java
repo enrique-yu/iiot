@@ -9,7 +9,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 企业人员关系对象 dc_comp_staff_relation
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-04-22
  */
 public class DcCompStaffRelation extends BaseEntity

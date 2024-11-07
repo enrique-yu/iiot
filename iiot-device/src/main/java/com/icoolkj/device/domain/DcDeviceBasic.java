@@ -10,7 +10,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 设备基础对象 dc_device_basic
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-17
  */
 public class DcDeviceBasic extends BaseEntity

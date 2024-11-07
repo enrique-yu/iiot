@@ -8,7 +8,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 系统组织权限对象 sys_domain_roles
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-08
  */
 public class SysDomainRoles extends BaseEntity

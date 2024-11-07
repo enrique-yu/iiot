@@ -13,7 +13,7 @@ import com.icoolkj.system.service.ISysRoleService;
 /**
  * 用户权限处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Component
 public class SysPermissionService

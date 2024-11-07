@@ -27,7 +27,7 @@ import com.icoolkj.system.service.ISysUserService;
 /**
  * 个人信息 业务处理
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @RestController
 @RequestMapping("/system/user/profile")

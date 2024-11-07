@@ -6,7 +6,7 @@ import com.icoolkj.company.domain.DcCompBasic;
 /**
  * 企业基本信息Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-10
  */
 public interface DcCompBasicMapper 

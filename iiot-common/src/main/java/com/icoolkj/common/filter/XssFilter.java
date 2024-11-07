@@ -17,7 +17,7 @@ import com.icoolkj.common.enums.HttpMethod;
 /**
  * 防止XSS攻击的过滤器
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class XssFilter implements Filter
 {

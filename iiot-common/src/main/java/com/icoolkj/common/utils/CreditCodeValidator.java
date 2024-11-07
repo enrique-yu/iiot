@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * 统一社会信用代码规则验证器
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class CreditCodeValidator {
 

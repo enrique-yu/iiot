@@ -14,7 +14,7 @@ import com.icoolkj.system.service.ISysDictDataService;
 /**
  * 字典 业务层处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService

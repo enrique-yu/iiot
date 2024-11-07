@@ -13,7 +13,7 @@ import com.icoolkj.file.service.IFileRecordDetailService;
 /**
  * 文件记录明细Service业务层处理
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 @Service

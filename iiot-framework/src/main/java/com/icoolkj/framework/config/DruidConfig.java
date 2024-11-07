@@ -27,7 +27,7 @@ import com.icoolkj.framework.datasource.DynamicDataSource;
 /**
  * druid 配置多数据源
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration
 public class DruidConfig

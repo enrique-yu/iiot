@@ -15,7 +15,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * Filter配置
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 @Configuration
 public class FilterConfig

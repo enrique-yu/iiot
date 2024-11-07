@@ -5,7 +5,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 路由显示信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class MetaVo
 {

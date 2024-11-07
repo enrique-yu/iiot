@@ -6,7 +6,7 @@ import com.icoolkj.file.domain.FileConfig;
 /**
  * 文件配置Mapper接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-18
  */
 public interface FileConfigMapper 

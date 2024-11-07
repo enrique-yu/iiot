@@ -3,7 +3,7 @@ package com.icoolkj.common.utils;
 /**
  * 处理并记录日志文件
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class LogUtils
 {

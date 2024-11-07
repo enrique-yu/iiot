@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * 文件业务记录对象 file_relation_record
  *
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-09-17
  */
 public class FileRelationRecord extends BaseEntity

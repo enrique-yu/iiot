@@ -6,7 +6,7 @@ import com.icoolkj.common.core.domain.entity.SysArea;
 /**
  * 系统区域配置Service接口
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  * @date 2023-03-05
  */
 public interface ISysAreaService 

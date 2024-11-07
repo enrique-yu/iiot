@@ -3,7 +3,7 @@ package com.icoolkj.common.constant;
 /**
  * 用户常量信息
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class UserConstants
 {

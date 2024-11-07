@@ -12,7 +12,7 @@ import com.icoolkj.common.core.domain.BaseEntity;
 /**
  * 菜单权限表 sys_menu
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class SysMenu extends BaseEntity
 {

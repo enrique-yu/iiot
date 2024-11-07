@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 /**
  * web容器中进行部署
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class IcoolKjServletInitializer extends SpringBootServletInitializer
 {

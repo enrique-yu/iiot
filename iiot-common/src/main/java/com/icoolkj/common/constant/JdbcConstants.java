@@ -1,7 +1,7 @@
 package com.icoolkj.common.constant;
 
 /**
- * @author icoolkj
+ * @author:haiwei.yu01
  * @version 1.0
  * @description 数据源常量
  * @createDate 2023/04/29 17:20

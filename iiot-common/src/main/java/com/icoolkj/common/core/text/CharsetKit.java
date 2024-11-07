@@ -7,7 +7,7 @@ import com.icoolkj.common.utils.StringUtils;
 /**
  * 字符集工具类
  * 
- * @author icoolkj
+ * @author:haiwei.yu01
  */
 public class CharsetKit
 {
